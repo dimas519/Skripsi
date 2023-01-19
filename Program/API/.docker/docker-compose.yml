@@ -1,0 +1,19 @@
+version: '5.1.3'
+services:
+  db:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test_db
+    ports:
+      - "9926:3306"
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:5.1.3
+    restart: always
+    environment:
+      PMA_HOST: db
+      PMA_USER: root
+      PMA_PASSWORD: root
+    ports:
+      - "9927:80"
