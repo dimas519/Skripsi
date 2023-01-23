@@ -7,17 +7,12 @@ class Configuration:
         print("getting configuration")
         self.config = configparser.ConfigParser()
         self.config.read("Config/serverConf.ini")
-        
-        print(self.config)
-        # if type(self.config) is None:
-        #     print("not found config file")
-        #     print(type(self.config))
+        if type(self.config) is None:
+            print("not found config file")
+            print(type(self.config))
 
     def getDataBase(self):
         database=self.config['Database']
-       
-
-
         return database
 
     def getServer(self):

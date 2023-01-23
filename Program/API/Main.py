@@ -7,39 +7,19 @@ from fastapi.security import OAuth2PasswordBearer
 
 
 from ConfigurationAPI import Configuration
-from DatabaseAPI import Database
-
-databaseAPI=None;
 
 
-if __name__ == "__main__":
-    from ConfigurationAPI import Configuration
-    from DatabaseAPI import Database
 
-
-    print("initializing")
-    Config=Configuration()
-    serverConf=Config.getServer();
-    print("initializing Done")
-  
-    uvicorn.run("Main:api", 
-                host=serverConf['iPAddress'], 
-                port=int(serverConf['port']), 
-                reload=serverConf['reload'],
-                workers=int(serverConf['worker'])
-                )
-                
-
-
+#configurasi db dll
 from ConfigurationAPI import Configuration
-from DatabaseAPI import Database
-
+from Controller.databaseController import DataBaseContoller
+from InitializingConfiguration import Initialization
 
 print("initializing")
 Config=Configuration()
 databaseConf=Config.getDataBase();
 
-databaseAPI=Database(
+databaseAPI=DataBaseContoller(
             databaseConf['iPAddress'],
             int(databaseConf['port']),
             databaseConf['database'],
@@ -49,9 +29,36 @@ databaseAPI=Database(
 
 
 
+init = Initialization(databaseAPI)
 
 
 
+
+print("initializing Done")
+
+
+
+
+
+
+
+#start api
+if __name__ == "__main__":
+    from ConfigurationAPI import Configuration
+
+    print("initializing api")
+    Config=Configuration()
+    serverConf=Config.getServer();
+  
+    uvicorn.run("Main:api", 
+                host=serverConf['iPAddress'], 
+                port=int(serverConf['port']), 
+                reload=serverConf['reload'],
+                workers=int(serverConf['worker'])
+                )
+    print("initializing api done")
+    # api=FastAPI()
+                
 
 
 
@@ -96,19 +103,19 @@ async def signUp(value: Request):
 @api.get("/kota")
 async def getKota():
     result=databaseAPI.getKota()
-    return result;
+    return {"result":result}
 
 @api.post("/kota")
 async def insertKota(value: Request):
     data= await value.json()
     result=databaseAPI.insertKota(data['kota'])
-    return {"success":result}
+    return {"result":result}
 
 @api.get("/lokasi")
 async def getLocation(value: Request):
     data= await value.json()
     result=databaseAPI.getLocation(data['idKota'])
-    return result
+    return {"result":result}
 
 @api.post("/lokasi")
 async def insertLocation(value: Request):
@@ -120,37 +127,37 @@ async def insertLocation(value: Request):
         ,data['indoor']
         ,data['fk']
         )
-    return {"success":result}
+    return {"result":result}
 
 
 @api.get("/bs")
 async def getBaseStasion(value: Request):
     data= await value.json()
     result=databaseAPI.getBaseStasion(data['idLokasi'])
-    return result
+    return {"result":result}
 
 
 @api.post("/bs")
 async def insertBaseStasion(value: Request):
     data= await value.json()
-    result=databaseAPI.insertBaseStasion(data['idLokasi'])
+    result=databaseAPI.insertBaseStasion(data['identifier'].lower(),data['idLokasi'],data['interval'])
 
     
-    if(result[0]):
+    if(result):
         res={
             "success":True,
             "token":result[1]
         }
-        return res
+        return {"result":res}
     else:
-        return {"success":False}
+        return {"result":False}
 
 
 @api.get("/node")
 async def getNode(value: Request):
     data= await value.json()
-    result=databaseAPI.getNodeSensor(data['idBaseStasion'])
-    return {"success":result}
+    result=databaseAPI.getNodeSensor(data['idBaseStasion'].lower())
+    return {"result":result}
 
 
 @api.post("/node")
@@ -158,11 +165,34 @@ async def insertNodeSensor(value: Request):
     data= await value.json()
     result=databaseAPI.insertNodeSensor(
         data['tipeSensor']
-        ,data['interval']
-        ,data['idBaseStasion']
+        ,data['idBaseStasion'].lower()
         )
+    return {"result":result}
+
+
+
+@api.post("/update")
+async def insertNodeSensor(value: Request):
+    data= await value.json()
+    result=init.insertNewQueue(data['baseId'].lower()
+                                ,data['command'])
+    return {"result":result}
+
+@api.post("/sensing")
+async def insertSensingdata(value: Request):
+    data= await value.json()
+    try:
+        time=data['time']
+        identifier=data['baseId'].lower()
+        sensingData=data['result']
+    except :
+        return "wrong arguments"
     
-    return {"success":result}
+    init(identifier,time)
+    result=databaseAPI.insertSensing(time,identifier,sensingData)
+    
+    return {"result":result}
+    
 
 
 
