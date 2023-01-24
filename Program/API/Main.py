@@ -195,7 +195,7 @@ async def insertBaseStasion(value: Request):
 async def getNode(value: Request):
     data= await value.json()
     try:
-        identifier=data['idBaseStasion'].lower()
+        identifier=data['idBS'].lower()
     except:
         return "wrong arguments"
 
@@ -208,7 +208,7 @@ async def insertNodeSensor(value: Request):
     data= await value.json()
     try :
         tipeSensor=data['tipeSensor']
-        identifier=data['idBaseStasion'].lower()
+        identifier=data['idBS'].lower()
     except:
         return "wrong arguments"    
 
@@ -222,7 +222,7 @@ async def insertNodeSensor(value: Request):
 async def insertNodeSensor(value: Request):
     data= await value.json()
     try:
-        identifier=data['idBaseStasion'].lower()
+        identifier=data['idBS'].lower()
         command=data['command']
     except:
         return "wrong arguments"
@@ -236,7 +236,7 @@ async def insertSensingdata(value: Request):
     data= await value.json()
     try:
         time=data['time']
-        identifier=data['baseId'].lower()
+        identifier=data['idBS'].lower()
         sensingData=data['result']
     except :
         return "wrong arguments"
