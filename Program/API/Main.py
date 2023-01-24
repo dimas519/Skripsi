@@ -90,13 +90,26 @@ async def Test():
 @api.post("/login")
 async def login(value: Request):
     data= await value.json()
-    result=databaseAPI.Login(data['username'],data['password'])
+    try:
+        username=data['username']
+        password=data['password']
+    except:
+        return "wrong arguments"
+
+    result=databaseAPI.Login(username,password)
     return {"result": result}
 
 
 @api.post("/signup")
 async def signUp(value: Request):
     data= await value.json()
+    try :
+        username=data['username']
+        password=data['password']
+        email=data['email']
+    except:
+        return "wrong arguments"
+
     result=databaseAPI.signUP(data['username'],data['password'],data['email'])
     return {"result": result}
 
@@ -108,39 +121,64 @@ async def getKota():
 @api.post("/kota")
 async def insertKota(value: Request):
     data= await value.json()
-    result=databaseAPI.insertKota(data['kota'])
+    try:
+        nama=data['kota']
+    except:
+        return "wrong arguments"
+
+    result=databaseAPI.insertKota(nama)
     return {"result":result}
 
 @api.get("/lokasi")
 async def getLocation(value: Request):
     data= await value.json()
-    result=databaseAPI.getLocation(data['idKota'])
+    try:
+        idKota=data['idKota']
+    except:
+        return "wrong arguments"
+
+    result=databaseAPI.getLocation(idKota)
     return {"result":result}
 
 @api.post("/lokasi")
 async def insertLocation(value: Request):
     data= await value.json()
-    result=databaseAPI.insertLocation(
-        data['nama']
-        ,data['latitude']
-        ,data['longtitude']
-        ,data['indoor']
-        ,data['fk']
-        )
+    try:
+        nama=data['nama']
+        latitude=data['latitude']
+        longtitude=data['longtitude']
+        indoor=data['indoor']
+        idKota=data['idKota']
+    except:
+        return "wrong arguments"
+
+    result=databaseAPI.insertLocation(nama,latitude,longtitude,indoor,idKota)
     return {"result":result}
 
 
 @api.get("/bs")
 async def getBaseStasion(value: Request):
     data= await value.json()
-    result=databaseAPI.getBaseStasion(data['idLokasi'])
+    try:
+        idLokasi=data['idLokasi']
+    except:
+        return "wrong arguments"
+
+    result=databaseAPI.getBaseStasion(idLokasi)
     return {"result":result}
 
 
 @api.post("/bs")
 async def insertBaseStasion(value: Request):
     data= await value.json()
-    result=databaseAPI.insertBaseStasion(data['identifier'].lower(),data['idLokasi'],data['interval'])
+    try:
+        identifier=data['identifier'].lower()
+        idLokasi=data['idLokasi']
+        interval=data['interval']
+    except:
+        return "wrong arguments"
+    
+    result=databaseAPI.insertBaseStasion(identifier,idLokasi,interval)
 
     
     if(result):
@@ -156,17 +194,26 @@ async def insertBaseStasion(value: Request):
 @api.get("/node")
 async def getNode(value: Request):
     data= await value.json()
-    result=databaseAPI.getNodeSensor(data['idBaseStasion'].lower())
+    try:
+        identifier=data['idBaseStasion'].lower()
+    except:
+        return "wrong arguments"
+
+    result=databaseAPI.getNodeSensor(identifier)
     return {"result":result}
 
 
 @api.post("/node")
 async def insertNodeSensor(value: Request):
     data= await value.json()
-    result=databaseAPI.insertNodeSensor(
-        data['tipeSensor']
-        ,data['idBaseStasion'].lower()
-        )
+    try :
+        tipeSensor=data['tipeSensor']
+        identifier=data['idBaseStasion'].lower()
+    except:
+        return "wrong arguments"    
+
+
+    result=databaseAPI.insertNodeSensor(tipeSensor,identifier)
     return {"result":result}
 
 
@@ -174,8 +221,14 @@ async def insertNodeSensor(value: Request):
 @api.post("/update")
 async def insertNodeSensor(value: Request):
     data= await value.json()
-    result=init.insertNewQueue(data['baseId'].lower()
-                                ,data['command'])
+    try:
+        identifier=data['idBaseStasion'].lower()
+        command=data['command']
+    except:
+        return "wrong arguments"
+
+
+    result=init.insertNewQueue(identifier.lower(),data['command'])
     return {"result":result}
 
 @api.post("/sensing")
