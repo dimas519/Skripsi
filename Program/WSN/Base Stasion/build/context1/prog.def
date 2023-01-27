@@ -1,0 +1,142 @@
+name Prog
+import [
+	rt
+]
+header {
+	importPoolOffset 48
+	importCount 1
+	classPoolOffset 64
+	interfacePoolOffset 72
+	implementsPoolOffset 72
+	methodPoolOffset 72
+	codePoolOffset 128
+	stringPoolOffset 96
+	mainMethodIndex 0
+	staticPrimitiveFieldCount 0
+	staticReferenceFieldCount 0
+	classCount 1
+	interfaceCount 0
+	implementsCount 0
+	methodCount 2
+	codePoolSize 34
+	stringCount 2
+}
+classes [
+	{
+		index 0
+		name com/dimas519/Prog
+		interfaceCount 0
+		superIndex 60
+		superImportIndex 0
+		implementsStart -1
+		methodCount 2
+		methodStart 0
+		superName java/lang/Object
+		instanceFieldCount 0
+		flags 33
+		srcFile Prog.java
+		implements [
+		]
+		instanceFields [
+		]
+	}
+]
+interfaces [
+]
+implements [
+]
+methods [
+	{
+		index 0
+		signature "<init>()V"
+		definedIn com/dimas519/Prog
+		signatureHash 10657
+		maxStack 1
+		maxLocals 1
+		exceptionCount 0
+		argsFieldCount 1
+		flags 192
+		codeLength 6
+		codeOffset 0
+		getter1For -1
+		getter2For -1
+		localVars [
+			{
+				startPC 0
+				length 5
+				name this
+				descriptor Lcom/dimas519/Prog;
+				index 0
+			}
+		]
+		pcToLine {
+			0 2
+		}
+		pcTranslation {
+			0 0
+			1 1
+			4 5
+		}
+	}
+	{
+		index 1
+		signature "main([Ljava/lang/String;)V"
+		definedIn com/dimas519/Prog
+		signatureHash 65044
+		maxStack 2
+		maxLocals 1
+		exceptionCount 0
+		argsFieldCount 1
+		flags 2
+		codeLength 28
+		codeOffset 6
+		getter1For -1
+		getter2For -1
+		localVars [
+			{
+				startPC 0
+				length 23
+				name args
+				descriptor "[Ljava/lang/String;"
+				index 0
+			}
+		]
+		pcToLine {
+			0 4
+			10 5
+			17 6
+			27 8
+		}
+		pcTranslation {
+			0 0
+			3 4
+			5 7
+			8 10
+			11 14
+			14 17
+			17 21
+			19 24
+			22 27
+		}
+	}
+]
+abstractMethods [
+]
+interfaceMethods [
+]
+staticPrimitiveFields [
+]
+staticReferenceFields [
+]
+strings [
+	{
+		index 0
+		string "Hello World! 2"
+	}
+	{
+		index 1
+		string "Hello World! 1"
+	}
+]
+importedNativeMethods [
+]
