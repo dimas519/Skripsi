@@ -115,8 +115,7 @@ class DataBaseContoller:
         tahun=time[2:4]
         bulan=time[5:7]
         sql="INSERT INTO `{}`(`timeStamp`,`suhu`,`kelembapan`,`tekanan`,`akselerasi`,`idBS`) VALUES".format(str(identifier)+"-"+bulan+"-"+tahun)
-
-        sql+="('{}',{},{},{},'{}','{}')".format(time,result['0'],result['1'],result['2'],result['3'],identifier)
+        sql+="('{}',{},{},{},'{}','{}')".format(time,result['s'],result['t'],result['k'],result['a'],identifier)
 
         row=self.db.executeNonSelectQuery(sql)
         return bool(row)

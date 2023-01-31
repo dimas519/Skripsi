@@ -9,7 +9,7 @@ header {
 	interfacePoolOffset 72
 	implementsPoolOffset 72
 	methodPoolOffset 72
-	codePoolOffset 128
+	codePoolOffset 112
 	stringPoolOffset 96
 	mainMethodIndex 0
 	staticPrimitiveFieldCount 0
@@ -18,8 +18,8 @@ header {
 	interfaceCount 0
 	implementsCount 0
 	methodCount 2
-	codePoolSize 34
-	stringCount 2
+	codePoolSize 63
+	stringCount 1
 }
 classes [
 	{
@@ -70,7 +70,7 @@ methods [
 			}
 		]
 		pcToLine {
-			0 2
+			0 7
 		}
 		pcTranslation {
 			0 0
@@ -83,40 +83,67 @@ methods [
 		signature "main([Ljava/lang/String;)V"
 		definedIn com/dimas519/Prog
 		signatureHash 65044
-		maxStack 2
-		maxLocals 1
+		maxStack 4
+		maxLocals 4
 		exceptionCount 0
 		argsFieldCount 1
 		flags 2
-		codeLength 28
+		codeLength 57
 		codeOffset 6
 		getter1For -1
 		getter2For -1
 		localVars [
 			{
 				startPC 0
-				length 23
+				length 46
 				name args
 				descriptor "[Ljava/lang/String;"
 				index 0
 			}
+			{
+				startPC 9
+				length 38
+				name time
+				descriptor Lcom/virtenio/vm/Time;
+				index 1
+			}
+			{
+				startPC 17
+				length 32
+				name currTime
+				descriptor J
+				index 2
+			}
 		]
 		pcToLine {
-			0 4
-			10 5
-			17 6
-			27 8
+			0 9
+			9 10
+			17 11
+			49 12
+			56 19
 		}
 		pcTranslation {
 			0 0
-			3 4
-			5 7
-			8 10
-			11 14
+			3 0
+			4 4
+			7 8
+			8 9
+			9 10
+			10 11
+			13 15
 			14 17
 			17 21
-			19 24
-			22 27
+			20 21
+			21 25
+			24 29
+			26 32
+			29 36
+			30 38
+			33 42
+			36 46
+			39 49
+			42 53
+			45 56
 		}
 	}
 ]
@@ -131,11 +158,7 @@ staticReferenceFields [
 strings [
 	{
 		index 0
-		string "Hello World! 2"
-	}
-	{
-		index 1
-		string "Hello World! 1"
+		string "Hello World"
 	}
 ]
 importedNativeMethods [

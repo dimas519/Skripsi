@@ -233,13 +233,27 @@ async def insertNodeSensor(value: Request):
 
 @api.post("/sensing")
 async def insertSensingdata(value: Request):
+    import time as Time
     data= await value.json()
     try:
-        time=data['time']
         identifier=data['idBS'].lower()
         sensingData=data['result']
     except :
         return "wrong arguments"
+
+    second=Time.time()
+    Ltime=Time.localtime(second)
+
+    year=Ltime.tm_year
+    month=Ltime.tm_mon
+    day=Ltime.tm_mday
+
+    hour=Ltime.tm_hour
+    min=Ltime.tm_min
+    sec=Ltime.tm_sec
+
+    time=str(year)+"-"+str(month)+"-"+str(day)+"-"+str(hour)+"-"+str(min)+"-"+str(sec)
+
     
     init(identifier,time)
     result=databaseAPI.insertSensing(time,identifier,sensingData)
