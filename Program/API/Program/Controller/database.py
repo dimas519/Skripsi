@@ -1,4 +1,12 @@
-import mysql.connector 
+while True:
+    try:
+        import mysql.connector
+        break 
+    except:
+        import subprocess
+        subprocess.call("pip install mysql-connector-python==8.0.29")
+        continue
+
 
 class mysqlDB:
     def __init__(self,ip,port,database,username,password) :
