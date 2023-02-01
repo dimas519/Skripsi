@@ -1,15 +1,20 @@
 
 import configparser
-
+import os
 class Configuration:
 
     def __init__(self) :
         print("getting configuration")
+
+        cwd = os.getcwd()
+        print(os.path)
+
+
         self.config = configparser.ConfigParser()
         self.config.read("Config/serverConf.ini")
+
         if type(self.config) is None:
             print("not found config file")
-            print(type(self.config))
 
     def getDataBase(self):
         database=self.config['Database']

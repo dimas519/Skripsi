@@ -1,12 +1,11 @@
-#include <Arduino.h>
-#line 1 "d:\\SKRIPSI\\Github\\Skripsi\\Program\\WSN\\Node_Sensor\\Node_Sensor.ino"
+# 1 "d:\\SKRIPSI\\Github\\Skripsi\\Program\\WSN\\Node_Sensor\\Node_Sensor.ino"
 
-#include <stdio.h>
-#include <string.h>
-#include <ESP8266HTTPClient.h>
-#include <WiFiClient.h>
-#include <ESP8266WiFi.h>
-#include <ArduinoJson.h>
+# 3 "d:\\SKRIPSI\\Github\\Skripsi\\Program\\WSN\\Node_Sensor\\Node_Sensor.ino" 2
+# 4 "d:\\SKRIPSI\\Github\\Skripsi\\Program\\WSN\\Node_Sensor\\Node_Sensor.ino" 2
+# 5 "d:\\SKRIPSI\\Github\\Skripsi\\Program\\WSN\\Node_Sensor\\Node_Sensor.ino" 2
+# 6 "d:\\SKRIPSI\\Github\\Skripsi\\Program\\WSN\\Node_Sensor\\Node_Sensor.ino" 2
+# 7 "d:\\SKRIPSI\\Github\\Skripsi\\Program\\WSN\\Node_Sensor\\Node_Sensor.ino" 2
+# 8 "d:\\SKRIPSI\\Github\\Skripsi\\Program\\WSN\\Node_Sensor\\Node_Sensor.ino" 2
 
 const char *ssid= "your ssid";
 const char *pass= "123456789abcd";
@@ -20,28 +19,23 @@ int interval=60000;
 HTTPClient http;
 WiFiClient client;
 
-#line 21 "d:\\SKRIPSI\\Github\\Skripsi\\Program\\WSN\\Node_Sensor\\Node_Sensor.ino"
-void setup();
-#line 40 "d:\\SKRIPSI\\Github\\Skripsi\\Program\\WSN\\Node_Sensor\\Node_Sensor.ino"
-void loop();
-#line 21 "d:\\SKRIPSI\\Github\\Skripsi\\Program\\WSN\\Node_Sensor\\Node_Sensor.ino"
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
     delay(10);
-               
+
        Serial.println("Connecting to ");
-       Serial.println(ssid); 
- 
-       WiFi.begin(ssid, pass); 
-       while (WiFi.status() != WL_CONNECTED) 
+       Serial.println(ssid);
+
+       WiFi.begin(ssid, pass);
+       while (WiFi.status() != WL_CONNECTED)
           {
-            
+
             delay(500);
             Serial.print(".");
           }
       Serial.println("");
-      Serial.println("WiFi connected on ip:"+WiFi.localIP().toString()); 
+      Serial.println("WiFi connected on ip:"+WiFi.localIP().toString());
 }
 
 void loop() {
@@ -62,10 +56,10 @@ void loop() {
 
   serializeJson(JSONbuffer, Serial);
 
-  
+
   char jsonChar[300];
   serializeJson(JSONbuffer,jsonChar);
-  
+
   Serial.println("sending get");
   String req=ipAddressServer+"/sensing";
   http.begin(client,req);
@@ -83,4 +77,3 @@ void loop() {
 
   delay(interval);
 }
-

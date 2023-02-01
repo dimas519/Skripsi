@@ -134,6 +134,6 @@ d:\SKRIPSI\Github\Skripsi\Program\WSN\ArduinoOutput\sketch\Node_Sensor.ino.cpp.o
  C:\Users\Kurni\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\3.1.1\cores\esp8266/FS.h \
  C:\Users\Kurni\Documents\Arduino\libraries\ESP8266WiFi\src/WiFiServerSecureBearSSL.h \
  C:\Users\Kurni\Documents\Arduino\libraries\ESP8266WiFi\src/WiFiClientSecure.h \
- C:\Users\Kurni\Documents\Arduino\libraries\Arduino_JSON\src/Arduino_JSON.h \
- C:\Users\Kurni\Documents\Arduino\libraries\Arduino_JSON\src/JSON.h \
- C:\Users\Kurni\Documents\Arduino\libraries\Arduino_JSON\src/JSONVar.h
+ C:\Users\Kurni\Documents\Arduino\libraries\ArduinoJson\src/ArduinoJson.h \
+ C:\Users\Kurni\Documents\Arduino\libraries\ArduinoJson\src/ArduinoJson.hpp \
+ C:\Users\Kurni\Documents\Arduino\libraries\ArduinoJson\src/ArduinoJson/Configuration.hpp
