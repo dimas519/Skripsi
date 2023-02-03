@@ -1,23 +1,9 @@
-while True:
-    try:
-        import uvicorn 
-        break
-    except:
-        import subprocess
-        subprocess.call("pip install uvicorn==0.20.0") #dilakukan agar pip terinstall di containernya, bukan python global
-        continue
 
-while True:
-    try:
-        from fastapi import FastAPI,Request
-        from starlette.middleware.cors import CORSMiddleware
-        from fastapi import FastAPI
-        from fastapi.security import OAuth2PasswordBearer
-        break
-    except:
-        import subprocess
-        subprocess.call("pip install fastapi==0.87.0")
-        continue
+import uvicorn 
+from fastapi import FastAPI,Request
+from starlette.middleware.cors import CORSMiddleware
+from fastapi import FastAPI
+from fastapi.security import OAuth2PasswordBearer
 
 
 
