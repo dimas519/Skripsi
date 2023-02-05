@@ -15,6 +15,7 @@ const char *ssid= "your ssid";
 const char *pass= "123456789abcd";
 const String ipAddressServer="http://103.150.196.40:5001";
 const char *identifier="AAAC";
+const char *token="nNOGdEmMjT"
 
 int interval=60000;
 // int interval=1000;

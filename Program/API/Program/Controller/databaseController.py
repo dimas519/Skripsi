@@ -95,7 +95,7 @@ class DataBaseContoller:
 
 
     def getNodeSensor(self,id):
-        sql="SELECT `id`, `tipeSensor`, `interval` FROM `nodesensor` WHERE `idBaseStasion`={}".format(id) 
+        sql="SELECT , `tipeSensor`, `interval` FROM `nodesensor` WHERE `identifier`='{}'".format(id) 
         result=self.db.executeSelectQuery(sql)
         return result
 
