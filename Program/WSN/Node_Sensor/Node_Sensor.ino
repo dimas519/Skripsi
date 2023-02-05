@@ -6,10 +6,14 @@
 #include <ESP8266WiFi.h>
 #include <ArduinoJson.h>
 
+#include <DHT.h> //library sensor yang telah diimportkan
+#define DHTPIN 4     //Pin apa yang digunakan
+#define DHTTYPE DHT11   // DHT 11
+DHT dht(DHTPIN, DHTTYPE);
+
 const char *ssid= "your ssid";
 const char *pass= "123456789abcd";
-const String ipAddressServer="http://192.168.101.100";
-const int destPort=5000;
+const String ipAddressServer="http://103.150.196.40:5001";
 const char *identifier="AAAC";
 
 int interval=60000;

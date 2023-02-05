@@ -54,7 +54,7 @@ class DataBaseContoller:
         return result
 
     def insertKota(self,namaKota):
-        sql="INSERT INTO `kota`(`id`,`nama`) VALUES('','{}')".format(namaKota)
+        sql="INSERT INTO `kota`(`nama`) VALUES('{}')".format(namaKota)
         row=self.db.executeNonSelectQuery(sql)
         return bool(row)
 
@@ -64,7 +64,7 @@ class DataBaseContoller:
         return result
     
     def insertLocation(self,nama,latitude,longtitude,indoor,fk):
-        sql="INSERT INTO `lokasi`(`id`,`nama`,`latitude`,`longtitude`,`indoor`,`idKota`) VALUES('','{}','{}',{},{},{})".format(nama,latitude,longtitude,indoor,fk)
+        sql="INSERT INTO `lokasi`(`nama`,`latitude`,`longtitude`,`indoor`,`idKota`) VALUES('{}','{}',{},{},{})".format(nama,latitude,longtitude,indoor,fk)
         row=self.db.executeNonSelectQuery(sql)
         return bool(row)
 
@@ -101,12 +101,12 @@ class DataBaseContoller:
 
 
     def insertNodeSensor(self,tipeSensor,idBaseStasion):
-        sql="INSERT INTO `nodesensor`(`id`,`tipeSensor`,`idBS`) VALUES"
+        sql="INSERT INTO `nodesensor`(`tipeSensor`,`idBS`) VALUES"
 
         for i in range(0,len(tipeSensor),1):
             if(i!=0):
                 sql+=","
-            sql+="('','{}','{}')".format(tipeSensor[i],idBaseStasion)
+            sql+="('{}','{}')".format(tipeSensor[i],idBaseStasion)
         row=self.db.executeNonSelectQuery(sql)
         return bool(row)
         
@@ -127,7 +127,7 @@ class DataBaseContoller:
         return result
     
     def insertQueue(self,indentifier,command):
-        sql="INSERT INTO `queue_update`(`id`,`command`,`idBS`)  VALUES('','{}','{}')".format(command,indentifier)
+        sql="INSERT INTO `queue_update`(`command`,`idBS`)  VALUES('{}','{}')".format(command,indentifier)
 
         row=self.db.executeNonSelectQuery(sql)
         return row

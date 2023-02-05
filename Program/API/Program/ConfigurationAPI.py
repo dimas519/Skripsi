@@ -8,10 +8,11 @@ class Configuration:
 
         cwd = os.getcwd()
         print(os.path)
-
+        
 
         self.config = configparser.ConfigParser()
         self.config.read("Config/serverConf.ini")
+        server=self.config['API_SERVER']
 
         if type(self.config) is None:
             print("not found config file")
