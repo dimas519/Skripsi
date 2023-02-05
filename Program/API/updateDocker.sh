@@ -1,3 +1,5 @@
+docker container stop apimain
+
 docker container rm apimain
 
 docker image rm main-api:1.0.0
