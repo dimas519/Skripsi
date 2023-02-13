@@ -1,3 +1,4 @@
+
 docker network create skripsi_network
 
 docker-compose -f .docker/docker-compose.yml up -d
@@ -5,6 +6,10 @@ docker-compose -f .docker/docker-compose.yml up -d
 docker network connect skripsi_network skripsi-db
 
 docker network connect skripsi_network skripsi-phpmyadmin
+
+sleep 30
+
+docker exec -i skripsi-db mysql -uroot -proot --database="skripsi" < "Template/databaseCreate.sql"
 
 docker build --tag main-api:1.0.0 . -f .docker/Dockerfile
 

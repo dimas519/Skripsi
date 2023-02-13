@@ -2,14 +2,14 @@
 -- version 5.1.3
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Waktu pembuatan: 01 Feb 2023 pada 05.53
--- Versi server: 10.4.24-MariaDB
--- Versi PHP: 7.4.29
+-- Host: db
+-- Waktu pembuatan: 08 Feb 2023 pada 11.42
+-- Versi server: 8.0.32
+-- Versi PHP: 8.0.15
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
-SET time_zone = "+00:00";
+SET time_zone = "+07:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -18,10 +18,6 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `skripsi`
---
-
--- --------------------------------------------------------
 
 --
 -- Struktur dari tabel `basestasion`
@@ -30,12 +26,11 @@ SET time_zone = "+00:00";
 CREATE TABLE `basestasion` (
   `identifier` varchar(4) NOT NULL,
   `token` varchar(20) NOT NULL,
-  `addedTimeStamp` datetime NOT NULL DEFAULT current_timestamp(),
+  `addedTimeStamp` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `lastEditTimeStamp` datetime DEFAULT NULL,
-  `interval` int(11) NOT NULL,
-  `idLokasi` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
+  `interval` int NOT NULL,
+  `idLokasi` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 -- --------------------------------------------------------
 
 --
@@ -43,10 +38,9 @@ CREATE TABLE `basestasion` (
 --
 
 CREATE TABLE `kota` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `nama` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 -- --------------------------------------------------------
 
 --
@@ -54,14 +48,13 @@ CREATE TABLE `kota` (
 --
 
 CREATE TABLE `lokasi` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `nama` varchar(50) NOT NULL,
   `latitude` varchar(20) NOT NULL,
   `longtitude` varchar(20) NOT NULL,
   `indoor` tinyint(1) NOT NULL COMMENT '0= false, 1=true',
-  `idKota` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
+  `idKota` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 -- --------------------------------------------------------
 
 --
@@ -69,11 +62,10 @@ CREATE TABLE `lokasi` (
 --
 
 CREATE TABLE `nodesensor` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `tipeSensor` varchar(10) NOT NULL,
-  `IdBS` varchar(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
+  `identifier` varchar(4) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 -- --------------------------------------------------------
 
 --
@@ -81,11 +73,10 @@ CREATE TABLE `nodesensor` (
 --
 
 CREATE TABLE `queue_update` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `command` varchar(50) NOT NULL,
   `idBS` varchar(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 -- --------------------------------------------------------
 
 --
@@ -93,16 +84,13 @@ CREATE TABLE `queue_update` (
 --
 
 CREATE TABLE `user` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `username` varchar(10) NOT NULL,
   `password` varchar(100) NOT NULL,
   `email` varchar(30) NOT NULL,
-  `role` smallint(6) NOT NULL COMMENT '0 = user, 1 untuk admin'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `role` smallint NOT NULL COMMENT '0 = user, 1 untuk admin'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
---
--- Indexes for dumped tables
---
 
 --
 -- Indeks untuk tabel `basestasion`
@@ -129,7 +117,7 @@ ALTER TABLE `lokasi`
 --
 ALTER TABLE `nodesensor`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `IdBS` (`IdBS`);
+  ADD KEY `IdBS` (`identifier`);
 
 --
 -- Indeks untuk tabel `queue_update`
@@ -153,35 +141,32 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT untuk tabel `kota`
 --
 ALTER TABLE `kota`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `lokasi`
 --
 ALTER TABLE `lokasi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `nodesensor`
 --
 ALTER TABLE `nodesensor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `queue_update`
 --
 ALTER TABLE `queue_update`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
---
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
---
 
 --
 -- Ketidakleluasaan untuk tabel `basestasion`
@@ -199,7 +184,7 @@ ALTER TABLE `lokasi`
 -- Ketidakleluasaan untuk tabel `nodesensor`
 --
 ALTER TABLE `nodesensor`
-  ADD CONSTRAINT `nodesensor_ibfk_1` FOREIGN KEY (`IdBS`) REFERENCES `basestasion` (`identifier`);
+  ADD CONSTRAINT `nodesensor_ibfk_1` FOREIGN KEY (`identifier`) REFERENCES `basestasion` (`identifier`);
 
 --
 -- Ketidakleluasaan untuk tabel `queue_update`

@@ -95,13 +95,13 @@ class DataBaseContoller:
 
 
     def getNodeSensor(self,id):
-        sql="SELECT , `tipeSensor`, `interval` FROM `nodesensor` WHERE `identifier`='{}'".format(id) 
+        sql="SELECT `tipeSensor` FROM `nodesensor` WHERE `identifier`='{}'".format(id) 
         result=self.db.executeSelectQuery(sql)
         return result
 
 
     def insertNodeSensor(self,tipeSensor,idBaseStasion):
-        sql="INSERT INTO `nodesensor`(`tipeSensor`,`idBS`) VALUES"
+        sql="INSERT INTO `nodesensor`(`tipeSensor`,`identifier`) VALUES"
 
         for i in range(0,len(tipeSensor),1):
             if(i!=0):
