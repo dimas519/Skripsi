@@ -95,11 +95,7 @@ class DataBaseContoller:
 
 
     def getNodeSensor(self,id):
-<<<<<<< HEAD
-        sql="SELECT `tipeSensor` FROM `nodesensor` WHERE `identifier`='{}'".format(id) 
-=======
         sql="SELECT `tipeSensor` FROM `nodesensor` WHERE `idBS`='{}'".format(id) 
->>>>>>> ee561acae2165edc460f0d5466d26aae2edd1f8a
         result=self.db.executeSelectQuery(sql)
         return result
 

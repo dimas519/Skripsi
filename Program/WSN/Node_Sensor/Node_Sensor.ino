@@ -1,16 +1,16 @@
 
-#include <stdio.h>
-#include <string.h>
+// #include <stdio.h>
+// #include <string.h>
 #include <ESP8266HTTPClient.h>
 #include <WiFiClient.h>
 #include <ESP8266WiFi.h>
 #include <ArduinoJson.h>
 
-#include <DHT.h> //library sensor yang telah diimportkan
-#define DHTPIN 10    //Pin apa yang digunakan
-#define DHTTYPE DHT11   // DHT 11
+#include <DHT.h> //libary sensor dht 11(sensor suhu dan kelembapan)
+#define DHTPIN 14  
+#define DHTTYPE DHT11
 
-#include <Adafruit_BMP085.h>
+#include <Adafruit_BMP085.h>  //libary sensor tekanan
 #define seaLevelPressure_hPa 1013.25
 
 
@@ -19,11 +19,11 @@ Adafruit_BMP085 bmp;
 
 const char *ssid= "your ssid";
 const char *pass= "123456789abcd";
-const String ipAddressServer="http://103.150.196.40:5001";
+const String ipAddressServer="http://192.168.101.101:5000/sensing";
 const char *identifier="AAAC";
 const char *token="nNOGdEmMjT";
 
-int interval=300000;
+int interval=100;
 // int interval=1000;
 
 HTTPClient http;
@@ -55,6 +55,50 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
 
+  String responseMSG=doSensingAndSend();
+  processResponse(responseMSG);
+
+  delay(interval);
+}
+
+
+void processResponse(String responseMSG){
+  String action=getAction(responseMSG);
+  if(action.equalsIgnoreCase("result")){
+    int i=2;
+  }else if(action.equalsIgnoreCase("setInterval")){
+    setInterval(responseMSG);
+  }
+}
+
+
+void setInterval(String responseMSG){
+  String intervalStr=responseMSG.substring(15,responseMSG.length()-1); //15 untuk membuang action dan length -2 untuk membuang }
+  interval=intervalStr.toInt();
+}
+
+
+
+String getAction(String responseMSG){
+  int posisi=0;
+  bool valid=false; //untuk mengecek apakah formatnya valid
+
+  for (int i=0; i<responseMSG.length();i++){  
+    if(responseMSG.charAt(i)==':'){
+      valid=true;
+      break;
+    }
+  posisi++;
+  }
+
+  if(valid){
+    return responseMSG.substring(2,posisi-1); //mulai dari 2 untuk membuang {" dan posisi -1 untuk membuang "
+  }
+  return "0";
+}
+
+
+String doSensingAndSend(){
   StaticJsonDocument<300> JSONbuffer;
 
   JSONbuffer["idBS"]=identifier;
@@ -66,28 +110,19 @@ void loop() {
   std::string akselerasi="["+std::to_string(rand()%10)+","+std::to_string(rand()%10)+","+std::to_string(rand()%10)+"]";
   result["a"]=akselerasi;
 
-  char JSONmessageBuffer[300];
 
-  serializeJson(JSONbuffer, Serial);
+  char JsonString[300];
+  serializeJson(JSONbuffer,JsonString);
+  
 
-  
-  char jsonChar[300];
-  serializeJson(JSONbuffer,jsonChar);
-  
+
   Serial.println("sending get");
-  String req=ipAddressServer+"/sensing";
-  http.begin(client,req);
+  http.begin(client,ipAddressServer);
   http.addHeader("Content-Type", "text/plain");
 
 
-  int httpResponseCode = http.POST(jsonChar);
-  String payload = http.getString();
-  Serial.println("code get:"+payload);
-
-
-
-
-
-
-  delay(interval);
+  http.POST(JsonString);
+  String response= http.getString();
+  
+  return response;
 }
