@@ -25,6 +25,11 @@ class WSN:
     def setQueue(self, queue):
         self.queue=queue
 
+
+
+
+
+
     def getIdentifier(self):
         return self.identifier
 

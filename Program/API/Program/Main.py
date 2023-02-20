@@ -252,8 +252,9 @@ async def insertNodeSensor(value: Request):
     except:
         raiseWrongArguments()
 
+    result=wsnController.updateQueue(databaseAPI,identifier.lower(),command)
 
-    result=init.insertNewQueue(identifier.lower(),data['command'])
+   
     return {"result":result}
 
 
@@ -266,11 +267,6 @@ async def insertSensingdata(value: Request):
     except :
         raiseWrongArguments()
 
-    
-
-
-
-    
     result=wsnController.sensingProcedure(databaseAPI,identifier,sensingData)
     
     return result

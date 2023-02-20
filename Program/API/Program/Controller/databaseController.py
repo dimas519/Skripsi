@@ -118,7 +118,7 @@ class DataBaseContoller:
 
     def getQueue(self):
         sql="SELECT `id`,`command`,`idBS` FROM `queue_update`"
-        result=self.db.executeSelectQuery(sql,False)
+        result=self.db.executeSelectQuery(sql,True)
         return result
     
     def insertQueue(self,indentifier,command):

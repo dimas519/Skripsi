@@ -5,21 +5,6 @@ class ServerQueue:
         self.queue=database.getQueue() #id,command,idbs
         print("update queue done ",self.queue)
 
-    def isCreated(self,name,time):
-        tableCreated=False
-        tahun=time[2:4]
-        bulan=time[5:7]
-        namaTabel=(str(name)+"-"+str(bulan)+"-"+str(tahun))
-        for table in self.sensingTables:
-  
-            if(table[0]==namaTabel):
-                tableCreated=True
-                break
-        
-
-        if (not tableCreated):
-            query=self.__createNewTable(namaTabel)
-            self.database.executeDb(query)
 
 
     def getQueue(self,identifier):
@@ -55,15 +40,3 @@ class ServerQueue:
                     return temp
 
         return 0
-    
-    def __createNewTable(self,name):
-        sql="""CREATE TABLE `{}` (
-            `timeStamp` datetime NOT NULL DEFAULT current_timestamp(),
-            `suhu` float NOT NULL,
-            `kelembapan` int(11) NOT NULL,
-            `tekanan` int(11) NOT NULL,
-            `akselerasi` varchar(20) NOT NULL,
-            `idBS` VARCHAR(4) NOT NULL,
-            PRIMARY KEY(`timeStamp`)
-            )""".format(name)
-        return sql

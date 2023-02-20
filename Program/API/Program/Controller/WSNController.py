@@ -60,7 +60,7 @@ class WSNController:
         print("sql test",sql)
         return sql
     
-    def sensingProcedure(self,dbController,identifier,sensingData):
+    def sensingProcedure(self, dbController, identifier, sensingData):
         selectedWSN=self.__searchWSN(identifier)
         time=ServerVariable.getTime(selectedWSN.getOffsetHour(), selectedWSN.getOffsetMinutes())
         
@@ -75,6 +75,35 @@ class WSNController:
         if(selectedWSN.getQueue()==None):
             return {"result":result}
         else:
-            return selectedWSN.getQueue();
+            queue=selectedWSN.getQueue();
+
+            # hapus lagi queue
+            dbController.deleteQueue(selectedWSN.getQueue()['id'])
+            selectedWSN.setQueue(None)
+            
+
+
+            return queue;
+
+    def updateQueue(self, dbController, identifier, command):
+        selectedWSN=self.__searchWSN(identifier)
+        newID=dbController.insertQueue(identifier,command)
+
+
+        if(selectedWSN.getQueue()==None):
+
+            newQueue={
+                "id":newID
+                ,"command":command
+                ,"idBS":identifier
+            }
+            selectedWSN.setQueue(newQueue)
+        else:
+            queue=selectedWSN.getQueue()
+            dbController.deleteQueue(selectedWSN.getQueue()['id'])
+            queue['id']=newID
+            queue['command']=command
+        
+        return True
         
 

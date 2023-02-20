@@ -36,7 +36,8 @@ def initWSN(databaseControler):
 
         queuedWSN=None;
         for queue in allQueue:
-            if(queue['idBS']==currWSN['identifier']):
+
+            if queue['idBS']==currWSN['identifier']:
                 queuedWSN=queue
 
         newWSN=WSN(currWSN['identifier'], currWSN["token"]
