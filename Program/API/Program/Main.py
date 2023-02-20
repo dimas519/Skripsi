@@ -1,42 +1,41 @@
 
 import uvicorn 
-from fastapi import FastAPI,Request
+from fastapi import FastAPI ,Request, status, HTTPException
 from starlette.middleware.cors import CORSMiddleware
 from fastapi import FastAPI
 from fastapi.security import OAuth2PasswordBearer
 
 
 
-
-
-
-from ConfigurationAPI import Configuration
-
-
-
 #configurasi db dll
 from ConfigurationAPI import Configuration
-from Controller.databaseController import DataBaseContoller
-from InitializingConfiguration import Initialization
 
+
+import Initialization
+from Controller.WSNController import WSNController
+
+# server 
+from ServerQueue import ServerQueue
+import ServerVariable
+
+
+# INITIALIZING
 print("initializing")
+
+print("getting Configuration")
 Config=Configuration()
-databaseConf=Config.getDataBase();
 
-databaseAPI=DataBaseContoller(
-            databaseConf['iPAddress'],
-            int(databaseConf['port']),
-            databaseConf['database'],
-            databaseConf['username'],
-            databaseConf['password']
-        )
+# INTIALIZING DB
+databaseAPI=Initialization.initDatabase(Config)
+
+# INITALIZING WSN
+WSN=Initialization.initWSN(databaseAPI)
+wsnController=WSNController(WSN)
 
 
 
-init = Initialization(databaseAPI)
 
-
-
+queueServer = ServerQueue(databaseAPI)
 
 print("initializing Done")
 
@@ -61,7 +60,7 @@ if __name__ == "__main__":
                 workers=int(serverConf['worker'])
                 )
     print("initializing api done")
-    # api=FastAPI()
+
                 
 
 
@@ -85,10 +84,24 @@ allow_methods=["*"],
 allow_headers=['Content-Type, Authorization, Content-Length, X-Requested-With, Accept'],
 )
 
+def raiseWrongArguments():
+    raise HTTPException(
+        status_code=status.HTTP_400_BAD_REQUEST,
+        detail="wrong arguments",
+        )
+
+
+
+
+
+
+
+
+
+
 @api.get("/")
 async def Test():
     return {"Hello": "World"}
-
 
 
 @api.post("/login")
@@ -98,7 +111,7 @@ async def login(value: Request):
         username=data['username']
         password=data['password']
     except:
-        return "wrong arguments"
+        raiseWrongArguments()
 
     result=databaseAPI.Login(username,password)
     return {"result": result}
@@ -112,26 +125,31 @@ async def signUp(value: Request):
         password=data['password']
         email=data['email']
     except:
-        return "wrong arguments"
+        raiseWrongArguments()
 
-    result=databaseAPI.signUP(data['username'],data['password'],data['email'])
+    result=databaseAPI.signUP(username,password,email)
     return {"result": result}
+
 
 @api.get("/kota")
 async def getKota():
     result=databaseAPI.getKota()
     return {"result":result}
 
+
 @api.post("/kota")
 async def insertKota(value: Request):
     data= await value.json()
     try:
         nama=data['kota']
+        offsetHour=data['offsetHour']
+        offsetMinutes=data['offsetMinutes']
     except:
-        return "wrong arguments"
+        raiseWrongArguments()
 
-    result=databaseAPI.insertKota(nama)
+    result=databaseAPI.insertKota(nama, offsetHour, offsetMinutes)
     return {"result":result}
+
 
 @api.get("/lokasi")
 async def getLocation(value: Request):
@@ -139,10 +157,11 @@ async def getLocation(value: Request):
     try:
         idKota=data['idKota']
     except:
-        return "wrong arguments"
+        raiseWrongArguments()
 
     result=databaseAPI.getLocation(idKota)
     return {"result":result}
+
 
 @api.post("/lokasi")
 async def insertLocation(value: Request):
@@ -154,7 +173,7 @@ async def insertLocation(value: Request):
         indoor=data['indoor']
         idKota=data['idKota']
     except:
-        return "wrong arguments"
+        raiseWrongArguments()
 
     result=databaseAPI.insertLocation(nama,latitude,longtitude,indoor,idKota)
     return {"result":result}
@@ -166,7 +185,7 @@ async def getBaseStasion(value: Request):
     try:
         idLokasi=data['idLokasi']
     except:
-        return "wrong arguments"
+        raiseWrongArguments()
 
     result=databaseAPI.getBaseStasion(idLokasi)
     return {"result":result}
@@ -180,7 +199,7 @@ async def insertBaseStasion(value: Request):
         idLokasi=data['idLokasi']
         interval=data['interval']
     except:
-        return "wrong arguments"
+        raiseWrongArguments()
     
     result=databaseAPI.insertBaseStasion(identifier,idLokasi,interval)
 
@@ -201,7 +220,7 @@ async def getNode(value: Request):
     try:
         identifier=data['idBS'].lower()
     except:
-        return "wrong arguments"
+        raiseWrongArguments()
 
     result=databaseAPI.getNodeSensor(identifier)
     return {"result":result}
@@ -214,11 +233,13 @@ async def insertNodeSensor(value: Request):
         tipeSensor=data['tipeSensor']
         identifier=data['idBS'].lower()
     except:
-        return "wrong arguments"    
+        raiseWrongArguments()    
 
 
     result=databaseAPI.insertNodeSensor(tipeSensor,identifier)
     return {"result":result}
+
+
 
 
 
@@ -229,44 +250,40 @@ async def insertNodeSensor(value: Request):
         identifier=data['idBS'].lower()
         command=data['command']
     except:
-        return "wrong arguments"
+        raiseWrongArguments()
 
 
     result=init.insertNewQueue(identifier.lower(),data['command'])
     return {"result":result}
 
+
 @api.post("/sensing")
 async def insertSensingdata(value: Request):
-    import time as Time
     data= await value.json()
     try:
         identifier=data['idBS'].lower()
         sensingData=data['result']
     except :
-        return "wrong arguments"
-
-    second=Time.time()
-    Ltime=Time.localtime(second)
-
-    year=Ltime.tm_year
-    month=Ltime.tm_mon
-    day=Ltime.tm_mday
-
-    hour=Ltime.tm_hour
-    min=Ltime.tm_min
-    sec=Ltime.tm_sec
-
-    time=str(year)+"-"+str(month)+"-"+str(day)+"-"+str(hour)+"-"+str(min)+"-"+str(sec)
+        raiseWrongArguments()
 
     
-    init(identifier,time)
-    result=databaseAPI.insertSensing(time,identifier,sensingData)
+
+
+
     
-    return {"result":result}
+    result=wsnController.sensingProcedure(databaseAPI,identifier,sensingData)
     
+    return result
+    
+@api.post("/interval")
+async def insertSensingdata(value: Request):
+    data= await value.json()
+    try:
+        identifier=data['idBS'].lower()
+    except :
+        raiseWrongArguments()
 
-
-
+    
 
 
 

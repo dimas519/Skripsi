@@ -30,7 +30,7 @@ CREATE TABLE `basestasion` (
   `lastEditTimeStamp` datetime DEFAULT NULL,
   `interval` int NOT NULL,
   `idLokasi` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 -- --------------------------------------------------------
 
 --
@@ -40,7 +40,7 @@ CREATE TABLE `basestasion` (
 CREATE TABLE `kota` (
   `id` int NOT NULL,
   `nama` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 -- --------------------------------------------------------
 
 --
@@ -54,7 +54,7 @@ CREATE TABLE `lokasi` (
   `longtitude` varchar(20) NOT NULL,
   `indoor` tinyint(1) NOT NULL COMMENT '0= false, 1=true',
   `idKota` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 -- --------------------------------------------------------
 
 --
@@ -64,8 +64,8 @@ CREATE TABLE `lokasi` (
 CREATE TABLE `nodesensor` (
   `id` int NOT NULL,
   `tipeSensor` varchar(10) NOT NULL,
-  `identifier` varchar(4) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `identifier` varchar(4) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 -- --------------------------------------------------------
 
 --
@@ -76,7 +76,7 @@ CREATE TABLE `queue_update` (
   `id` int NOT NULL,
   `command` varchar(50) NOT NULL,
   `idBS` varchar(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 -- --------------------------------------------------------
 
 --
@@ -89,7 +89,7 @@ CREATE TABLE `user` (
   `password` varchar(100) NOT NULL,
   `email` varchar(30) NOT NULL,
   `role` smallint NOT NULL COMMENT '0 = user, 1 untuk admin'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 
 --

@@ -6,16 +6,17 @@ class Configuration:
     def __init__(self) :
         print("getting configuration")
 
-        cwd = os.getcwd()
-        print(os.path)
-        
+
+        dir = os.path.dirname(__file__)
+        filename = os.path.join(dir, 'Config/serverConf.ini')
 
         self.config = configparser.ConfigParser()
-        self.config.read("Config/serverConf.ini")
-        server=self.config['API_SERVER']
-
+        self.config.read(filename)
         if type(self.config) is None:
             print("not found config file")
+        server=self.config['API_SERVER']
+
+        
 
     def getDataBase(self):
         database=self.config['Database']

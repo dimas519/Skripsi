@@ -7,7 +7,7 @@ docker network connect skripsi_network skripsi-db
 
 docker network connect skripsi_network skripsi-phpmyadmin
 
-sleep 30
+sleep 30 #sleep untuk memastikan mysql sudah start
 
 docker exec -i skripsi-db mysql -uroot -proot --database="skripsi" < "Template/databaseCreate.sql"
 
