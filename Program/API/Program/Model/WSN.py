@@ -1,20 +1,25 @@
 class WSN:
     def __init__(self, identifier:str, token:str 
                  ,offsetHour:int, offsetMinutes:int 
-                 ,sensorType:list, latitude:str
-                 ,longtitude:str, kota:str
-                 ,queue:dict):
+                 ,sensorType:list, interval:int
+                 ,latitude:str ,longtitude:str
+                 , kota:str, queue:dict):
        
        
        
        
         self.identifier=identifier
         self.token=token
+
         self.offsetHour=offsetHour
         self.offsetMinutes=offsetMinutes
+
         self.sensorType=sensorType
+        self.interval=interval;
+
         self.latitude=latitude
         self.longtitude=longtitude
+
         self.kota=kota
         self.queue=queue
 
@@ -59,3 +64,6 @@ class WSN:
     
     def getQueue(self):
         return self.queue
+    
+    def getInterval(self):
+        return self.interval

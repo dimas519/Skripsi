@@ -18,13 +18,14 @@ DHT dht(DHTPIN, DHTTYPE);
 Adafruit_BMP085 bmp;
 
 const char *ssid= "your ssid";
-const char *pass= "123456789abcd";
-const String ipAddressServer="http://192.168.101.101:5000/sensing";
-const char *identifier="AAAC";
-const char *token="nNOGdEmMjT";
+const char *pass= "<example password>";
 
-int interval=100;
-// int interval=1000;
+const String ipAddressServer="http://192.168.101.11:5000";
+const char *identifier="AAAA";
+const char *token="0KTjKCgtda";
+
+int interval=300000; //tidak pakai PROGMEM dan EEPROM karena keduanya hanya memiliki limit tulis 10.000 dan 100.000 saja
+
 
 HTTPClient http;
 WiFiClient client;
@@ -50,6 +51,24 @@ void setup() {
 
       Serial.println("");
       Serial.println("WiFi connected on ip:"+WiFi.localIP().toString()); 
+
+      Serial.println("Trying to getIntervalSensing");
+      
+      String takeConf="{\"idBS\":\"";
+      takeConf+=identifier;
+      takeConf+="\"}";
+      Serial.print("arguments ");
+      Serial.println(takeConf);
+
+      String endpoint=ipAddressServer+"/interval";
+      http.begin(client,endpoint);
+      http.addHeader("Content-Type", "text/plain");
+      http.POST(takeConf);
+      String responseMSG= http.getString();
+      processResponse(responseMSG);
+
+      
+
 }
 
 void loop() {
@@ -75,6 +94,9 @@ void processResponse(String responseMSG){
 void setInterval(String responseMSG){
   String intervalStr=responseMSG.substring(15,responseMSG.length()-1); //15 untuk membuang action dan length -2 untuk membuang }
   interval=intervalStr.toInt();
+  interval=interval*1000;
+  Serial.print("new Interval :");
+  Serial.println(interval);
 }
 
 
@@ -110,19 +132,20 @@ String doSensingAndSend(){
   std::string akselerasi="["+std::to_string(rand()%10)+","+std::to_string(rand()%10)+","+std::to_string(rand()%10)+"]";
   result["a"]=akselerasi;
 
-
   char JsonString[300];
   serializeJson(JSONbuffer,JsonString);
-  
+  Serial.print("sending get: ");
+  Serial.print(JsonString);
 
-
-  Serial.println("sending get");
-  http.begin(client,ipAddressServer);
+  String endpoint=ipAddressServer+"/sensing";
+  http.begin(client,endpoint);
   http.addHeader("Content-Type", "text/plain");
 
 
   http.POST(JsonString);
-  String response= http.getString();
-  
-  return response;
+  String responseMSG= http.getString();
+  Serial.print(" response: ");
+  Serial.println(responseMSG);
+
+  return responseMSG;
 }

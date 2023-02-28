@@ -40,11 +40,11 @@ def initWSN(databaseControler):
             if queue['idBS']==currWSN['identifier']:
                 queuedWSN=queue
 
-        newWSN=WSN(currWSN['identifier'], currWSN["token"]
-                ,currWSN['offsetHour'], currWSN['offsetMinutes']
-                ,listSensor, currWSN['latitude']
-                ,currWSN["longtitude"], currWSN["namaKota"]
-                ,queuedWSN)
+        newWSN=WSN(identifier= currWSN['identifier'], token=currWSN["token"]
+                ,offsetHour=currWSN['offsetHour'], offsetMinutes=currWSN['offsetMinutes']
+                ,sensorType=listSensor, interval=currWSN['interval']
+                ,latitude=currWSN['latitude'], longtitude=currWSN["longtitude"]
+                ,kota=currWSN["namaKota"],queue=queuedWSN)
 
 
         wsnSensingTable=[]

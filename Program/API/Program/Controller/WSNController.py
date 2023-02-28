@@ -80,10 +80,10 @@ class WSNController:
             # hapus lagi queue
             dbController.deleteQueue(selectedWSN.getQueue()['id'])
             selectedWSN.setQueue(None)
-            
+            command=queue['command'].split(":")
 
-
-            return queue;
+            return {str(command[0]):int(command[1])}
+   
 
     def updateQueue(self, dbController, identifier, command):
         selectedWSN=self.__searchWSN(identifier)
@@ -105,5 +105,9 @@ class WSNController:
             queue['command']=command
         
         return True
+    
+    def getInterval(self,identifier):
+        selectedWSN=self.__searchWSN(identifier)
+        return selectedWSN.getInterval()
         
 

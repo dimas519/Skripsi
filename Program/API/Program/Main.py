@@ -279,6 +279,10 @@ async def insertSensingdata(value: Request):
     except :
         raiseWrongArguments()
 
+    result=wsnController.getInterval(identifier)
+
+    return {"setInterval":result}
+
     
 
 
