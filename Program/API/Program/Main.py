@@ -101,6 +101,35 @@ def raiseWrongArguments():
 
 @api.get("/")
 async def Test():
+    from fastapi.responses import HTMLResponse
+    a= """
+    <!DOCTYPE html>
+<html>
+<body>
+
+<h1>The template Element</h1>
+
+<p>Click the button below to display the hidden content from the template element.</p>
+
+<button onclick="showContent()">Show hidden content</button>
+
+<template>
+  <h2>Flower</h2>
+  <img src="img_white_flower.jpg" width="214" height="204">
+</template>
+
+<script>
+function showContent() {
+  var temp = document.getElementsByTagName("template")[0];
+  var clon = temp.content.cloneNode(true);
+  document.body.appendChild(clon);
+}
+</script>
+
+</body>
+</html>
+    """
+    return HTMLResponse(content=a, status_code=200)
     return {"Hello": "World"}
 
 
