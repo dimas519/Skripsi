@@ -1,4 +1,4 @@
-from Controller.database import mysqlDB
+from Controller.Database import mysqlDB
 import bcrypt
 
 
