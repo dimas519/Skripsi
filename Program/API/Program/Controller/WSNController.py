@@ -57,7 +57,6 @@ class WSNController:
             PRIMARY KEY(`timeStamp`)
             )"""
 
-        print("sql test",sql)
         return sql
     
     def sensingProcedure(self, dbController, identifier, sensingData):

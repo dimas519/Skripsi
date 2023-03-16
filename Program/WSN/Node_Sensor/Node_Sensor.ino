@@ -20,7 +20,7 @@ Adafruit_BMP085 bmp;
 const char *ssid= "your ssid";
 const char *pass= "<example password>";
 
-const String ipAddressServer="http://192.168.101.11:5000";
+const String ipAddressServer="http://192.168.101.95:5000";
 const char *identifier="AAAA";
 const char *token="0KTjKCgtda";
 
