@@ -17,10 +17,10 @@
 
 package com.dimas519.Sensor;
 
+import com.dimas519.Radio.Misc;
 import com.virtenio.driver.device.MPL115A2;
 import com.virtenio.driver.gpio.GPIO;
 import com.virtenio.driver.gpio.NativeGPIO;
-import com.virtenio.driver.i2c.I2C;
 import com.virtenio.driver.i2c.NativeI2C;
 
 /**
@@ -33,7 +33,7 @@ import com.virtenio.driver.i2c.NativeI2C;
  * http://cache.freescale.com/files/sensors/doc/data_sheet/MPL115A2.pdf</a>
  * (Stand: 24.08.2011)
  */
-public class Barometer{
+public class Barometer extends Sensor{
 	private MPL115A2 pressureSensor;
 
 	public Barometer(NativeI2C i2c){
@@ -60,17 +60,20 @@ public class Barometer{
 		System.out.println("Done(Init)");
 	}
 
-	public float run()  {
+	public String run()  {
 		try {
 			pressureSensor.startBothConversion();
 			Thread.sleep(MPL115A2.BOTH_CONVERSION_TIME);
 			int pressurePr = pressureSensor.getPressureRaw();
 			int tempRaw = pressureSensor.getTemperatureRaw();
 			float pressure = pressureSensor.compensate(pressurePr, tempRaw);
-			return pressure;
+
+			String result="pressure:"+Misc.round(pressure);
+			return result;
 		} catch (Exception e) {
 			System.err.println("Barometer failed");
-			return Float.MIN_VALUE;
+			String result="pressure:null";
+			return result;
 		}
 
 	}

@@ -27,19 +27,16 @@ import com.virtenio.driver.spi.NativeSPI;
 /**
  * Example for the Triple Axis Accelerometer sensor ADXL345
  */
-public class Accelerometer{
+public class Accelerometer extends Sensor{
 	private ADXL345 accelerationSensor;
-	private GPIO accelIrqPin1;
-	private GPIO accelIrqPin2;
-	private GPIO accelCs;
 
 	public Accelerometer(){
 		try {
 			System.out.println("GPIO(Init)");
 
-			accelIrqPin1 = NativeGPIO.getInstance(37);
-			accelIrqPin2 = NativeGPIO.getInstance(25);
-			accelCs = NativeGPIO.getInstance(20);
+			GPIO accelIrqPin1 = NativeGPIO.getInstance(37);
+			GPIO accelIrqPin2 = NativeGPIO.getInstance(25);
+			GPIO accelCs = NativeGPIO.getInstance(20);
 
 			System.out.println("SPI(Init)");
 			NativeSPI spi = NativeSPI.getInstance(0);
@@ -59,16 +56,17 @@ public class Accelerometer{
 	}
 
 
-	public float run() {
+	public String run() {
 		try {
 			short[] values = new short[3];
 			accelerationSensor.getValuesRaw(values, 0);
-			System.out.println("ADXL345: " + Arrays.toString(values));
 
-			return Float.MAX_VALUE;
+			String result="accelerometer:"+Arrays.toString(values);
+			return result;
 		} catch (Exception e) {
-			System.err.println("temperature failed");
-			return Float.MIN_VALUE;
+			System.err.println("accelerometer failed");
+			String result="accelerometer:null";
+			return result;
 		}
 
 	}

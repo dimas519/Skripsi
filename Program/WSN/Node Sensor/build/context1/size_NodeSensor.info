@@ -386,6 +386,22 @@
 	7		<init>()V
 	2		size()I
 
+1532		java/io/BufferedReader
+	475		readLine()Ljava/lang/String;
+	226		skip(J)J
+	221		read([CII)I
+	155		fillBuf()I
+	86		read()I
+	74		mark(I)V
+	72		reset()V
+	66		ready()Z
+	50		close()V
+	38		<init>(Ljava/io/Reader;I)V
+	30		chompNewline()V
+	27		<init>(Ljava/io/Reader;)V
+	10		isClosed()Z
+	2		markSupported()Z
+
 1323		com/virtenio/driver/flash/GenericSPIFlash
 	173		read(I[BII)I
 	145		programPage(I[BII)V
@@ -422,6 +438,67 @@
 	2		getSectorSize()I
 	2		getBlockSize()I
 
+1058		com/virtenio/driver/device/ADXL345
+	122		reset()V
+	83		getValuesRaw([SI)V
+	59		readAddr(I[BII)V
+	57		readAddr(I)I
+	54		writeAddr(II)V
+	40		convertRaw([SI[FI)V
+	38		setDataFormat(I)V
+	37		<init>(Lcom/virtenio/driver/spi/SPI;Lcom/virtenio/driver/gpio/GPIO;)V
+	35		setAxisOffset(II)V
+	24		setDataRate(I)V
+	21		setPowerMode(I)V
+	20		isOpened()Z
+	17		isDataReady()Z
+	16		getTapThreshold()F
+	16		setTapThreshold(I)V
+	16		setTapLatency(I)V
+	16		setTapWindowTime(I)V
+	16		setActivityThreshold(I)V
+	16		setInactivityThreshold(I)V
+	16		setFreeFallThreshold(I)V
+	16		clearFifo()V
+	15		getAxisOffset(I)I
+	14		getTapLatency()F
+	14		getTapWindowTime()F
+	14		getActivityThreshold()F
+	14		getInactivityThreshold()F
+	14		getFreeFallThreshold()F
+	12		setTapDuration(I)V
+	11		getTapDuration()I
+	10		setFreeFallTime(I)V
+	9		getFreeFallTime()I
+	8		setOffsetX(I)V
+	8		setOffsetY(I)V
+	8		setOffsetZ(I)V
+	8		setInactivityTime(I)V
+	8		setActivityInactivityControl(I)V
+	8		setTapAxesControl(I)V
+	8		setPowerControl(I)V
+	8		setInterruptEnable(I)V
+	8		setInterruptMapping(I)V
+	8		setFifoControl(I)V
+	7		getOffsetX()I
+	7		getOffsetY()I
+	7		getOffsetZ()I
+	7		getInactivityTime()I
+	7		getActivityInactivityControl()I
+	7		getTapAxesControl()I
+	7		getActTapStatus()I
+	7		getPowerControl()I
+	7		getInterruptEnable()I
+	7		getInterruptMapping()I
+	7		getInterruptSource()I
+	7		getDataFormat()I
+	7		getFifoControl()I
+	7		getFifoStatus()I
+	6		getDevId()I
+	5		open()V
+	5		close()V
+	2		getConversionScale()F
+
 740		com/virtenio/misc/PropertyHelper
 	122		makeKey(Ljava/lang/String;ILjava/lang/String;)Ljava/lang/String;
 	114		getBool(Ljava/lang/String;)Z
@@ -439,6 +516,34 @@
 	14		getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
 	6		<init>()V
 
+650		com/virtenio/driver/device/ADT7410
+	121		readValue(II)I
+	74		writeValue(III)V
+	61		open()V
+	43		pollDataReady(I)Z
+	35		isOpened()Z
+	34		setTemperatureBoundRaw(II)V
+	34		getTemperatureBoundRaw(I)I
+	28		<init>(Lcom/virtenio/driver/i2c/I2C;ILcom/virtenio/driver/gpio/GPIO;Lcom/virtenio/driver/gpio/GPIO;)V
+	24		setMode(I)V
+	17		close()V
+	17		isDataReady()Z
+	16		isTempLow()Z
+	16		isTempHigh()Z
+	16		isTempCritical()Z
+	14		setTemperatureBoundCelsius(IF)V
+	13		convertRawTemperatureToCelsius(I)F
+	13		getTemperatureBoundCelsius(I)F
+	11		reset()V
+	9		setHysteresis(I)V
+	8		getTemperatureRaw()I
+	8		getTemperatureCelsius()F
+	8		setConfiguration(I)V
+	8		getHysteresis()I
+	8		getID()I
+	7		getConfiguration()I
+	7		getStatus()I
+
 639		com/virtenio/misc/StringUtils
 	116		split(Ljava/lang/String;Ljava/lang/String;)[Ljava/lang/String;
 	115		splitByChars(Ljava/lang/String;Ljava/lang/String;)[Ljava/lang/String;
@@ -449,6 +554,25 @@
 	46		indexOfChars(Ljava/lang/String;Ljava/lang/String;I)I
 	9		join(Ljava/util/List;Ljava/lang/String;)Ljava/lang/String;
 	6		<init>()V
+
+619		com/virtenio/driver/device/MPL115A2
+	275		compensate(II)F
+	69		getValueRaw(I)I
+	51		startConversion(I)V
+	35		isOpened()Z
+	30		getCoefficients()[B
+	29		open()V
+	24		<init>(Lcom/virtenio/driver/i2c/I2C;Lcom/virtenio/driver/gpio/GPIO;Lcom/virtenio/driver/gpio/GPIO;)V
+	19		convertRawTemperatureToCelsius(I)F
+	17		close()V
+	14		setReset(Z)V
+	14		setShutdown(Z)V
+	9		getTemperatureCelsius()F
+	7		startPressureConversion()V
+	7		startTemperatureConversion()V
+	7		startBothConversion()V
+	6		getPressureRaw()I
+	6		getTemperatureRaw()I
 
 596		com/virtenio/net/NetAddress
 	138		<init>(Ljava/lang/String;)V
@@ -575,6 +699,40 @@
 	4		getRevisionId()I
 	2		getRevision()Ljava/lang/String;
 
+371		com/virtenio/driver/device/SHT21
+	60		getValueRaw()I
+	54		setRegister(I)V
+	32		setResolution(I)V
+	27		enableHeater(Z)V
+	26		getRelativeHumidityRaw()I
+	25		getTemperatureRaw()I
+	18		convertRawRHToRHw(I)F
+	18		convertRawTemperatureToCelsius(I)F
+	17		open()V
+	16		<init>(Lcom/virtenio/driver/i2c/I2C;)V
+	16		getRegister()I
+	10		reset()V
+	10		startRelativeHumidityConversion()V
+	10		startTemperatureConversion()V
+	10		getBattStatus()I
+	8		getRelativeHumidityAboveWater()F
+	8		getTemperatureCelsius()F
+	5		isOpened()Z
+	1		close()V
+
+341		com/virtenio/io/Console
+	77		readLong(Ljava/lang/String;)J
+	67		readLine(Ljava/lang/String;)Ljava/lang/String;
+	37		<init>(Ljava/io/Reader;Ljava/io/PrintStream;)V
+	34		<init>()V
+	30		readInt(Ljava/lang/String;II)I
+	29		readLong(Ljava/lang/String;JJ)J
+	27		readBool(Ljava/lang/String;)Z
+	21		readLine(Ljava/lang/String;Z)Ljava/lang/String;
+	7		readInt(Ljava/lang/String;)I
+	6		print(Ljava/lang/String;)V
+	6		println(Ljava/lang/String;)V
+
 339		com/dimas519/Radio/RadioInit
 	184		<init>()V
 	118		initRadio()Lcom/virtenio/driver/device/at86rf231/AT86RF231;
@@ -591,6 +749,40 @@
 	10		set(ILjava/lang/Object;)Ljava/lang/Object;
 	3		size()I
 
+332		com/dimas519/NodeSensor
+	326		main([Ljava/lang/String;)V
+	6		<init>()V
+
+283		java/io/InputStreamReader
+	78		read()I
+	55		read([CII)I
+	49		ready()Z
+	47		close()V
+	29		<init>(Ljava/io/InputStream;Ljava/lang/String;)V
+	15		<init>(Ljava/io/InputStream;)V
+	10		isOpen()Z
+
+256		com/virtenio/driver/i2c/NativeI2C
+	32		getManager()Lcom/virtenio/driver/InstanceManager;
+	26		read(I[BII)I
+	23		write(I[BII)V
+	22		isOpened()Z
+	14		errorCheck()V
+	13		read(I)I
+	13		setRepeatedStart(Z)V
+	13		acquireLock()V
+	13		releaseLock()V
+	12		getInstance(I)Lcom/virtenio/driver/i2c/NativeI2C;
+	12		open(I)V
+	12		close()V
+	12		write(II)V
+	10		read(I[B)I
+	10		write(I[B)V
+	7		access$100(Lcom/virtenio/driver/i2c/NativeI2C;I)I
+	6		<init>(I)V
+	6		<init>(ILcom/virtenio/driver/i2c/NativeI2C$1;)V
+	0		command(Lcom/virtenio/driver/i2c/NativeI2C;I)I
+
 255		com/virtenio/vm/event/AsyncEvent
 	68		addHandler(Lcom/virtenio/vm/event/AsyncEventHandler;)V
 	29		removeHandler(Lcom/virtenio/vm/event/AsyncEventHandler;)V
@@ -603,6 +795,10 @@
 	9		bindTo(I)V
 	9		unbindTo(I)V
 	8		unbind()V
+
+243		com/dimas519/Radio/RadioSender
+	208		prog_sender(Ljava/lang/String;)V
+	35		<init>()V
 
 235		java/util/AbstractList$FullListIterator
 	76		add(Ljava/lang/Object;)V
@@ -662,6 +858,25 @@
 	8		getType()I
 	6		<init>()V
 
+203		com/dimas519/Sensor/Accelerometer
+	136		<init>()V
+	67		run()Ljava/lang/String;
+
+196		com/dimas519/Sensor/Barometer
+	92		run()Ljava/lang/String;
+	70		init(Lcom/virtenio/driver/i2c/NativeI2C;)V
+	34		<init>(Lcom/virtenio/driver/i2c/NativeI2C;)V
+
+188		com/dimas519/Sensor/Hygrometer
+	109		run()Ljava/lang/String;
+	45		init(Lcom/virtenio/driver/i2c/NativeI2C;)V
+	34		<init>(Lcom/virtenio/driver/i2c/NativeI2C;)V
+
+187		com/dimas519/Sensor/Thermometer
+	87		run()Ljava/lang/String;
+	55		<init>(Lcom/virtenio/driver/i2c/NativeI2C;)V
+	45		init(Lcom/virtenio/driver/i2c/NativeI2C;)V
+
 179		java/util/AbstractList$SimpleListIterator
 	83		remove()V
 	56		next()Ljava/lang/Object;
@@ -694,10 +909,6 @@
 	18		<init>(Lcom/virtenio/driver/flash/Flash;II)V
 	2		getAddress()I
 
-129		com/dimas519/Radio/Receiver$1
-	115		run()V
-	14		<init>(Lcom/dimas519/Radio/Receiver;Lcom/virtenio/driver/device/at86rf231/AT86RF231;)V
-
 122		com/virtenio/driver/flash/FlashOutputStream
 	52		write([BII)V
 	50		write(I)V
@@ -716,10 +927,6 @@
 	22		getValue()J
 	12		isLong()Z
 	10		toString()Ljava/lang/String;
-
-99		com/dimas519/Radio/Receiver
-	64		prog_receiver()V
-	35		<init>()V
 
 99		com/virtenio/driver/cpu/NativeCPU
 	33		getInstance()Lcom/virtenio/driver/cpu/NativeCPU;
@@ -795,10 +1002,6 @@
 	44		<init>(Lcom/virtenio/driver/spi/SPI;Lcom/virtenio/driver/gpio/GPIO;)V
 	6		eraseSector(I)V
 
-47		com/dimas519/Prog
-	41		main([Ljava/lang/String;)V
-	6		<init>()V
-
 30		com/virtenio/driver/NativeDeviceDriver
 	10		<init>(I)V
 	6		<init>()V
@@ -813,6 +1016,12 @@
 	6		<init>()V
 	0		compute(I[BIII)I
 	0		computeReverse(I[BIII)I
+
+27		com/virtenio/driver/i2c/NativeI2C$1
+	10		createInstance(I)Lcom/virtenio/driver/i2c/NativeI2C;
+	6		getInstanceCount()I
+	6		createInstance(I)Ljava/lang/Object;
+	5		<init>()V
 
 27		com/virtenio/driver/gpio/NativeGPIO$1
 	10		createInstance(I)Lcom/virtenio/driver/gpio/NativeGPIO;
@@ -868,15 +1077,19 @@
 	7		<init>(Ljava/lang/String;)V
 	6		<init>()V
 
+12		com/virtenio/driver/i2c/I2CException
+	6		<init>(I)V
+	6		<init>(Ljava/lang/Throwable;)V
+
+12		com/virtenio/driver/led/LEDException
+	6		<init>(I)V
+	6		<init>(Ljava/lang/Throwable;)V
+
 12		com/virtenio/driver/gpio/GPIOException
 	6		<init>(I)V
 	6		<init>(Ljava/lang/Throwable;)V
 
 12		com/virtenio/driver/spi/SPIException
-	6		<init>(I)V
-	6		<init>(Ljava/lang/Throwable;)V
-
-12		com/virtenio/driver/led/LEDException
 	6		<init>(I)V
 	6		<init>(Ljava/lang/Throwable;)V
 
@@ -894,4 +1107,7 @@
 
 8		java/util/AbstractList$SubAbstractListRandomAccess
 	8		<init>(Ljava/util/AbstractList;II)V
+
+6		com/dimas519/Sensor/Sensor
+	6		<init>()V
 

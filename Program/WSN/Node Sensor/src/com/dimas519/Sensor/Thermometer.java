@@ -17,8 +17,8 @@
 
 package com.dimas519.Sensor;
 
+import com.dimas519.Radio.Misc;
 import com.virtenio.driver.device.ADT7410;
-import com.virtenio.driver.i2c.I2C;
 import com.virtenio.driver.i2c.NativeI2C;
 
 /**
@@ -30,10 +30,10 @@ import com.virtenio.driver.i2c.NativeI2C;
  * http://www.analog.com/static/imported-files/data_sheets/ADT7410.pdf</a>
  * (Stand: 29.03.2011)
  */
-public class TemperatureSensor{
+public class Thermometer extends Sensor{
 	private ADT7410 temperatureSensor;
 
-	public TemperatureSensor(NativeI2C i2c){
+	public Thermometer(NativeI2C i2c){
 		try {
 			init(i2c);
 		} catch (Exception e) {
@@ -53,15 +53,16 @@ public class TemperatureSensor{
 		System.out.println("Done(Init)");
 	}
 
-	public float run() {
+	public String run() {
 		try {
-			if(!temperatureSensor.isOpened())temperatureSensor.open();
 			float celsius = temperatureSensor.getTemperatureCelsius();
-			temperatureSensor.close();
-			return celsius;
+
+			String result="humidity:"+ Misc.round(celsius);
+			return result;
 		} catch (Exception e) {
 			System.out.println("temperature failed sensing"+e.getMessage());
-			return Float.MIN_VALUE;
+			String result="temperature:null";
+			return result;
 		}
 
 	}

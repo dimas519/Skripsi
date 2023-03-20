@@ -17,8 +17,8 @@
 
 package com.dimas519.Sensor;
 
+import com.dimas519.Radio.Misc;
 import com.virtenio.driver.device.SHT21;
-import com.virtenio.driver.i2c.I2C;
 import com.virtenio.driver.i2c.NativeI2C;
 
 /**
@@ -31,10 +31,10 @@ import com.virtenio.driver.i2c.NativeI2C;
  * http://www.sensirion.com/en/pdf/product_information/Datasheet
  * -humidity-sensor-SHT21.pdf</a> (Stand: 29.03.2011)
  */
-public class HumiditySensor{
+public class Hygrometer extends Sensor{
 	private SHT21 sht21;
 
-	public HumiditySensor(NativeI2C i2c){
+	public Hygrometer(NativeI2C i2c){
 		try {
 			init(i2c);
 		} catch (Exception e) {
@@ -55,18 +55,19 @@ public class HumiditySensor{
 		System.out.println("Done(Init)");
 	}
 
-	public float run() {
+	public String run() {
 		try {
-			if(!sht21.isOpened())sht21.open();
 			sht21.startRelativeHumidityConversion();
 			Thread.sleep(100);
 			int rawRH = sht21.getRelativeHumidityRaw();
 			float rh = SHT21.convertRawRHToRHw(rawRH);
-			sht21.close() ;
-			return rh;
+
+			String result="humidity:"+ Misc.round(rh);
+			return result;
 		} catch (Exception e) {
 			System.err.println("Humidity failed sensing"+e.getMessage());
-			return Float.MIN_VALUE;
+			String result="humidity:null";
+			return result;
 		}
 	}
 
