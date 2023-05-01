@@ -1,0 +1,1 @@
+java -jar .\Node_Sensor_Run.jar

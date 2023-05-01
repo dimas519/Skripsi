@@ -11,7 +11,7 @@ class DataBaseContoller:
         result=self.db.executeSelectQuery(sql,dictionary=False)
         return result
 
-    def Login(self,username, password):
+    def Login(self,username, password, token):
         sql = "CALL login('{}')".format(username)
         result=self.db.executeSelectQuery(sql)
         if(len (result)==0):
@@ -21,6 +21,8 @@ class DataBaseContoller:
         if(not truePassword):
             return -9;
         else :
+            sql = "CALL loginSuccess('{}','{}')".format(token,username)
+            self.db.executeNonSelectQuery(sql)
             return result[0]['role']
 
     def signUP(self,username, password,email,role=0):
@@ -30,28 +32,26 @@ class DataBaseContoller:
             result=self.db.executeNonSelectQuery(sql)
         except:
             return False
-        if(result !=-1):
-            return True
-        else :
+        if(result == None):
             return False
-
-    def getKota(self):
-        sql="SELECT * FROM `kota`"
-        result=self.db.executeSelectQuery(sql)
-        return result
+        else :
+            return True
 
     def insertKota(self,namaKota,offsetHour,offsetMinutes):
-        sql="INSERT INTO `kota`(`nama`,`offsetHour`,`offsetMinutes`) VALUES('{}',{},{})".format(namaKota, offsetHour, offsetMinutes)
+        sql="call insertKota('{}',{},{})".format(namaKota, offsetHour, offsetMinutes)
         row=self.db.executeNonSelectQuery(sql)
         return bool(row)
 
-    def getLocation(self,id):
-        sql="SELECT `id`, `nama`, `latitude`, `longtitude`, `indoor`  FROM `lokasi` WHERE `idKota`={}".format(id)
-        result=self.db.executeSelectQuery(sql)
-        return result
+    def getLocation(self):
+        sql="call getKota()"
+        resultKota=self.db.executeSelectQuery(sql)
+        
+        sql="CALL getLocation()";
+        resultLokasi=self.db.executeSelectQuery(sql)
+        return {'kota':resultKota,"lokasi":resultLokasi}
     
     def insertLocation(self,nama,latitude,longtitude,indoor,fk):
-        sql="INSERT INTO `lokasi`(`nama`,`latitude`,`longtitude`,`indoor`,`idKota`) VALUES('{}','{}',{},{},{})".format(nama,latitude,longtitude,indoor,fk)
+        sql="CALL insertLocation('{}','{}','{}',{},{})".format(nama,latitude,longtitude,indoor,fk)
         row=self.db.executeNonSelectQuery(sql)
         return bool(row)
 
@@ -110,7 +110,7 @@ class DataBaseContoller:
         tahun=time[2:4]
         bulan=time[5:7]
         sql="INSERT INTO `{}`(`timeStamp`,`suhu`,`kelembapan`,`tekanan`,`akselerasi`,`idBS`) VALUES".format(str(identifier)+"-"+bulan+"-"+tahun)
-        sql+="('{}',{},{},{},'{}','{}')".format(time,result['s'],result['k'],result['t'],result['a'],identifier)
+        sql+="('{}',{},{},{},'{}','{}')".format(time,result['suhu'],result['kelembapan'],result['tekanan'],result['akselerasi'],identifier)
 
         row=self.db.executeNonSelectQuery(sql)
         return bool(row)
@@ -122,21 +122,27 @@ class DataBaseContoller:
         return result
     
     def insertQueue(self,indentifier,command):
-        sql="INSERT INTO `queue_update`(`command`,`idBS`)  VALUES('{}','{}')".format(command,indentifier)
+
+        sql="CALL insertQueue('{}','{}')".format(command,indentifier)
 
         row=self.db.executeNonSelectQuery(sql)
         return row
 
     def deleteQueue(self,id):
-        sql="DELETE FROM `queue_update` WHERE `id`={}".format(id)
+        sql="CALL deleteQueue('{}','{}')".format(id)
         self.db.executeNonSelectQuery(sql);
+        
+    def getSensingData(self,namaTable,start,end):      
+        sql="SELECT * FROM `{}` WHERE `timeStamp`>='{}' AND `timeStamp`<='{}' ORDER BY `timeStamp` ASC".format(namaTable,start,end)
+        # return sql
+        return self.db.executeSelectQuery(sql)
 
 
     def executeDb(self,query):
-        self.db.executeNonSelectQuery(query)
+        return self.db.executeSelectQuery(query)
    
 
-
+   
 
 
 

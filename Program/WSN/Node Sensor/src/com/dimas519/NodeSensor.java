@@ -14,7 +14,10 @@ public class NodeSensor {
 
 
 	public static void main(String[] args) throws Exception {
+		final String identifier="AAAA"; //ini public identifier, wajib unique
+
 		long interval=300000;
+		interval=1000;
 
 
 		System.out.println("sensor starting");
@@ -40,47 +43,21 @@ public class NodeSensor {
 
 		String sensing;
 		while (true){
-			sensing="{";
-
+			sensing="\"idBS\":\""+identifier+"\"";
 			for (Sensor sensor :sensors){
-				if(sensing.length()>1){
-					sensing+=",";
-				}
+				sensing+=",";
 				sensing+=sensor.run();
 
 			}
-			sensing+="}";
-
-
+			System.out.println(sensing);
 			sr.prog_sender(sensing);
 
 
-
-
-			System.out.println(sensing);
 			System.out.println("===================================");
 			System.out.println(" ");
 
 
 			System.out.flush();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 			Thread.sleep(interval);
 		}

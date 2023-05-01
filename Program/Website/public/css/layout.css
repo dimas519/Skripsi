@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Prata&family=Rokkitt:wght@300;400;500;600;700;800&display=swap');
+
+*{
+    margin: 0px;
+    padding: 0px;
+    font-family: rokkitt;
+}
+
+body{
+    background-color: #F0D1A2;
+
+}
+
+
+
+.menuAtas {
+    background-color: antiquewhite;
+
+}
+
+.debug{
+    border: 1px solid red;
+}
+
+#logo{
+    margin: -5px 0px;
+    width: 80px;
+}
+
+#title{
+    color: #555154;
+
+    line-height: 1.5;
+    font-weight: 500;
+    font-size: 38px;
+}

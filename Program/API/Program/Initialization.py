@@ -48,7 +48,7 @@ def initWSN(databaseControler):
 
 
         wsnSensingTable=[]
-
+        
         for sensingTable in allSensingTable:
             if(sensingTable[0].split("-")[0]==currWSN['identifier']):
                 wsnSensingTable.append(sensingTable[0])

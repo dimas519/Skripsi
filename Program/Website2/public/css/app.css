@@ -1,0 +1,30 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    font-family: rokkitt;
+    color: #555154;
+}
+
+body{
+    background-color: #F0D1A2;
+
+}
+
+
+
+.menuAtas {
+    background-color: antiquewhite;
+    margin: 0 px;
+    padding: 0 px;
+    
+    display: flex;
+}
+
+header{
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    background-color: blue;
+}

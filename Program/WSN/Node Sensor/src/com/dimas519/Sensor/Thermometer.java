@@ -32,6 +32,7 @@ import com.virtenio.driver.i2c.NativeI2C;
  */
 public class Thermometer extends Sensor{
 	private ADT7410 temperatureSensor;
+	private String name="suhu";
 
 	public Thermometer(NativeI2C i2c){
 		try {
@@ -57,11 +58,11 @@ public class Thermometer extends Sensor{
 		try {
 			float celsius = temperatureSensor.getTemperatureCelsius();
 
-			String result="humidity:"+ Misc.round(celsius);
+			String result="\""+name+"\":"+ Misc.round(celsius);
 			return result;
 		} catch (Exception e) {
-			System.out.println("temperature failed sensing"+e.getMessage());
-			String result="temperature:null";
+			System.out.println(name+" failed"+e.getMessage());
+			String result=name+":null";
 			return result;
 		}
 

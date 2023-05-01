@@ -1,0 +1,271 @@
+name autostart
+import [
+	rt
+]
+header {
+	importPoolOffset 48
+	importCount 1
+	classPoolOffset 64
+	interfacePoolOffset 72
+	implementsPoolOffset 76
+	methodPoolOffset 80
+	codePoolOffset 136
+	stringPoolOffset 128
+	mainMethodIndex 0
+	staticPrimitiveFieldCount 0
+	staticReferenceFieldCount 0
+	classCount 1
+	interfaceCount 1
+	implementsCount 1
+	methodCount 4
+	codePoolSize 78
+	stringCount 1
+}
+classes [
+	{
+		index 0
+		name com/dimas519/BaseStationMain
+		interfaceCount 1
+		superIndex 60
+		superImportIndex 0
+		implementsStart 0
+		methodCount 4
+		methodStart 0
+		superName java/lang/Object
+		instanceFieldCount 1
+		flags 33
+		srcFile BaseStationMain.java
+		implements [
+			com/dimas519/MainInterface
+		]
+		instanceFields [
+			{
+				index 0
+				name intervalResponse
+				descriptor I
+				className com/dimas519/BaseStationMain
+			}
+		]
+	}
+]
+interfaces [
+	{
+		index 0
+		name com/dimas519/MainInterface
+		superCount 0
+		implementsStart -1
+		flags 1537
+		extends [
+		]
+	}
+]
+implements [
+	{
+		index 0
+		interfaceIndex 0
+		interfaceName com/dimas519/MainInterface
+		typeId 2
+		importIndex -1
+		next false
+	}
+]
+methods [
+	{
+		index 0
+		signature "main([Ljava/lang/String;)V"
+		definedIn com/dimas519/BaseStationMain
+		signatureHash 65044
+		maxStack 2
+		maxLocals 1
+		exceptionCount 0
+		argsFieldCount 1
+		flags 66
+		codeLength 11
+		codeOffset 0
+		getter1For -1
+		getter2For -1
+		localVars [
+			{
+				startPC 0
+				length 11
+				name args
+				descriptor "[Ljava/lang/String;"
+				index 0
+			}
+		]
+		pcToLine {
+			0 19
+			10 20
+		}
+		pcTranslation {
+			0 0
+			3 0
+			4 4
+			7 7
+			10 10
+		}
+	}
+	{
+		index 1
+		signature "<init>()V"
+		definedIn com/dimas519/BaseStationMain
+		signatureHash 10657
+		maxStack 2
+		maxLocals 1
+		exceptionCount 0
+		argsFieldCount 1
+		flags 192
+		codeLength 12
+		codeOffset 11
+		getter1For -1
+		getter2For -1
+		localVars [
+			{
+				startPC 0
+				length 12
+				name this
+				descriptor Lcom/dimas519/BaseStationMain;
+				index 0
+			}
+		]
+		pcToLine {
+			0 30
+			5 26
+			11 35
+		}
+		pcTranslation {
+			0 0
+			1 1
+			4 5
+			5 6
+			8 9
+			11 11
+		}
+	}
+	{
+		index 2
+		signature run()V
+		definedIn com/dimas519/BaseStationMain
+		signatureHash 2844
+		maxStack 4
+		maxLocals 3
+		exceptionCount 0
+		argsFieldCount 1
+		flags 72
+		codeLength 54
+		codeOffset 23
+		getter1For -1
+		getter2For -1
+		localVars [
+			{
+				startPC 0
+				length 48
+				name this
+				descriptor Lcom/dimas519/BaseStationMain;
+				index 0
+			}
+			{
+				startPC 2
+				length 46
+				name identifier
+				descriptor I
+				index 1
+			}
+			{
+				startPC 4
+				length 44
+				name running
+				descriptor Z
+				index 2
+			}
+		]
+		pcToLine {
+			0 40
+			2 41
+			4 45
+			38 46
+			45 52
+		}
+		pcTranslation {
+			0 0
+			1 1
+			2 2
+			3 3
+			4 4
+			7 8
+			10 8
+			11 12
+			14 16
+			16 19
+			19 23
+			22 27
+			25 31
+			28 35
+			31 38
+			34 42
+			37 45
+			38 45
+			41 46
+			42 47
+			45 51
+		}
+	}
+	{
+		index 3
+		signature setTime(Lcom/virtenio/vm/Time;)V
+		definedIn com/dimas519/BaseStationMain
+		signatureHash 22773
+		maxStack 0
+		maxLocals 2
+		exceptionCount 0
+		argsFieldCount 2
+		flags 262144
+		codeLength 1
+		codeOffset 77
+		getter1For -1
+		getter2For -1
+		localVars [
+			{
+				startPC 0
+				length 1
+				name this
+				descriptor Lcom/dimas519/BaseStationMain;
+				index 0
+			}
+			{
+				startPC 0
+				length 1
+				name time
+				descriptor Lcom/virtenio/vm/Time;
+				index 1
+			}
+		]
+		pcToLine {
+			0 65
+		}
+		pcTranslation {
+			0 0
+		}
+	}
+]
+abstractMethods [
+]
+interfaceMethods [
+	{
+		signature setTime(Lcom/virtenio/vm/Time;)V
+		definedIn com/dimas519/MainInterface
+		flags 0
+	}
+]
+staticPrimitiveFields [
+]
+staticReferenceFields [
+]
+strings [
+	{
+		index 0
+		string time
+	}
+]
+importedNativeMethods [
+]

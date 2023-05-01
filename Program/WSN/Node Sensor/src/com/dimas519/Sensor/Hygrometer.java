@@ -33,6 +33,7 @@ import com.virtenio.driver.i2c.NativeI2C;
  */
 public class Hygrometer extends Sensor{
 	private SHT21 sht21;
+	private String name="kelembapan";
 
 	public Hygrometer(NativeI2C i2c){
 		try {
@@ -62,11 +63,11 @@ public class Hygrometer extends Sensor{
 			int rawRH = sht21.getRelativeHumidityRaw();
 			float rh = SHT21.convertRawRHToRHw(rawRH);
 
-			String result="humidity:"+ Misc.round(rh);
+			String result="\""+name+"\":"+ Misc.round(rh);
 			return result;
 		} catch (Exception e) {
-			System.err.println("Humidity failed sensing"+e.getMessage());
-			String result="humidity:null";
+			System.err.println(name+" failed"+e.getMessage());
+			String result=name+":null";
 			return result;
 		}
 	}

@@ -1,0 +1,6 @@
+78		com/dimas519/BaseStationMain
+	54		run()V
+	12		<init>()V
+	11		main([Ljava/lang/String;)V
+	1		setTime(Lcom/virtenio/vm/Time;)V
+

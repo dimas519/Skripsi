@@ -5,9 +5,6 @@ class WSN:
                  ,latitude:str ,longtitude:str
                  , kota:str, queue:dict):
        
-       
-       
-       
         self.identifier=identifier
         self.token=token
 
@@ -22,17 +19,17 @@ class WSN:
 
         self.kota=kota
         self.queue=queue
-
-
+        
+        
     def setSensingTable(self, sensingTable):
         self.sensingTable=sensingTable
+        print(self.sensingTable)
 
     def setQueue(self, queue):
         self.queue=queue
 
-
-
-
+    def addSensingTable(self,nameNewTable):
+        self.sensingTable.append(nameNewTable)
 
 
     def getIdentifier(self):

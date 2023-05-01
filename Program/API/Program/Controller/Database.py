@@ -26,10 +26,15 @@ class mysqlDB:
     def executeSelectQuery(self,query,dictionary=True):
         self.connect()
         mycursor = self.mydb.cursor( dictionary=dictionary)
-        mycursor.execute(query)
-        data=mycursor.fetchall()
-        self.closeConnect()
-        return data
+        try:
+            mycursor.execute(query)
+            data=mycursor.fetchall()
+            return data
+        except mysql.connector.IntegrityError as err:
+            return False
+        finally:
+            self.closeConnect()
+        
     
     def executeNonSelectQuery(self ,query):
         self.connect()
@@ -40,8 +45,8 @@ class mysqlDB:
             if mycursor.lastrowid == 0:
                 return 1
             return mycursor.lastrowid
-        except Exception as e:
-            print(e)
+        except mysql.connector.IntegrityError as err:
+            print(err)
             return None
         finally:
             self.closeConnect()

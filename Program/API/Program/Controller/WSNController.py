@@ -9,12 +9,16 @@ class WSNController:
                 return wsn
         return None
     
-    def __isTableCreated(self,identifier,time,selectedWSN):
-
-        tableCreated=False
+    def __nameTable(self,identifier,time,selectedWSN):
         tahun=time[2:4]
         bulan=time[5:7]
         namaTabel=(str(identifier)+"-"+str(bulan)+"-"+str(tahun))
+        print(namaTabel)
+        return namaTabel
+    
+    def __isTableCreated(self, namaTabel,selectedWSN):
+        
+        tableCreated=False
         for table in selectedWSN.getSensingTable():
             if(table==namaTabel):
                 tableCreated=True
@@ -59,15 +63,16 @@ class WSNController:
 
         return sql
     
-    def sensingProcedure(self, dbController, identifier, sensingData):
+    def sensingProcedure(self, dbController, identifier, time, sensingData):
         selectedWSN=self.__searchWSN(identifier)
-        time=ServerVariable.getTime(selectedWSN.getOffsetHour(), selectedWSN.getOffsetMinutes())
-        
-        isCreated=self.__isTableCreated(identifier,time,selectedWSN)
+        # time=ServerVariable.getTime(selectedWSN.getOffsetHour(), selectedWSN.getOffsetMinutes())
+        nameTable=self.__nameTable(identifier,time,selectedWSN)
+        isCreated=self.__isTableCreated(nameTable,selectedWSN)
         if(not isCreated):
             sql=self.__createTable(selectedWSN.getSensorType(), identifier
                                ,time)
             dbController.executeDb(sql)
+            selectedWSN.addSensingTable(nameTable)
         
         result=dbController.insertSensing(time,identifier,sensingData)
 
@@ -109,4 +114,64 @@ class WSNController:
         selectedWSN=self.__searchWSN(identifier)
         return selectedWSN.getInterval()
         
+    def getData(self, dbController,identifier,start,end,interval,clean):
+        selectedWSN=self.__searchWSN(identifier)
+        
+        nameTable=self.__nameTable(identifier,start,selectedWSN)
+        isCreated=self.__isTableCreated(nameTable,selectedWSN)
+        
+        if isCreated:
+            intervalWsn=selectedWSN.getInterval()
+            sensingData=dbController.getSensingData(nameTable,start,end)
+            sensingDataNumber=len(sensingData)
+            
+            currTime=sensingData[0]['timeStamp'];
+            currIntervalLeft=interval
+            
+            output=[]
+            tempTime=[sensingData[0]['timeStamp']]
+            tempSuhu=[sensingData[0]['suhu']]
+            tempkelembapan=[sensingData[0]['kelembapan']]
+            tempTekanan=[sensingData[0]['tekanan']]
+            for i in range(1,sensingDataNumber):
+                currData=sensingData[i]
+                
+                diffInterval=(currData['timeStamp']-currTime).total_seconds()
+                currIntervalLeft-=diffInterval
+  
+                currTime=currData['timeStamp']
+      
+                if(currIntervalLeft <=0 ):
+                    
+                    currIntervalLeft=interval
+                    cell={};
+                    cell['timeStamp']= tempTime[0]  
+                    cell['suhu']= round(sum(tempSuhu)/len(tempSuhu) ,2)
+                    cell['kelembapan']=round( sum(tempkelembapan)/len(tempkelembapan) ,2)
+                    cell['tekanan']= round (sum(tempTekanan)/len(tempTekanan),2)
+                    output.append(cell)
+                    tempTime=[currData['timeStamp']]
+                    tempSuhu=[currData['suhu']]
+                    tempkelembapan=[currData['kelembapan']]
+                    tempTekanan=[currData['tekanan']]
+                    
+                else:
+                    tempTime.append(currData['timeStamp'])
+                    tempSuhu.append(currData['suhu'])
+                    tempkelembapan.append(currData['kelembapan'])
+                    tempTekanan.append(currData['tekanan'])
+                                
+            
+            
+            return output
+        else:
+            return False
+        
+        
+        
+        
+        
+        
+    
+    
 

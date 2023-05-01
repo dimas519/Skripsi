@@ -29,6 +29,7 @@ import com.virtenio.driver.spi.NativeSPI;
  */
 public class Accelerometer extends Sensor{
 	private ADXL345 accelerationSensor;
+	private String name="akselerasi";
 
 	public Accelerometer(){
 		try {
@@ -51,7 +52,7 @@ public class Accelerometer extends Sensor{
 
 			System.out.println("Done(Init)");
 		} catch (Exception e) {
-			System.err.println("temperature failed");
+			System.err.println(name+" failed");
 		}
 	}
 
@@ -61,11 +62,11 @@ public class Accelerometer extends Sensor{
 			short[] values = new short[3];
 			accelerationSensor.getValuesRaw(values, 0);
 
-			String result="accelerometer:"+Arrays.toString(values);
+			String result="\""+name+"\":"+Arrays.toString(values);
 			return result;
 		} catch (Exception e) {
-			System.err.println("accelerometer failed");
-			String result="accelerometer:null";
+			System.err.println(name+" failed");
+			String result=name+":null";
 			return result;
 		}
 

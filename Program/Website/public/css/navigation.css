@@ -1,0 +1,24 @@
+
+svg {
+    color : #555154;
+
+    width: 30px;
+    height: 30px;
+}
+
+ul { 
+    list-style-type: ""; 
+}
+
+nav{
+    background-color: antiquewhite;
+}
+
+
+.selected{
+    background-color: #aaaaaa;
+}
+
+.nonClick{
+    margin-left: 2vw;
+}

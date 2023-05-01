@@ -35,6 +35,7 @@ import com.virtenio.driver.i2c.NativeI2C;
  */
 public class Barometer extends Sensor{
 	private MPL115A2 pressureSensor;
+	private String name="tekanan";
 
 	public Barometer(NativeI2C i2c){
 		try {
@@ -68,11 +69,11 @@ public class Barometer extends Sensor{
 			int tempRaw = pressureSensor.getTemperatureRaw();
 			float pressure = pressureSensor.compensate(pressurePr, tempRaw);
 
-			String result="pressure:"+Misc.round(pressure);
+			String result="\""+name+"\":"+Misc.round(pressure);
 			return result;
 		} catch (Exception e) {
-			System.err.println("Barometer failed");
-			String result="pressure:null";
+			System.err.println(name+" failed");
+			String result=name+":null";
 			return result;
 		}
 

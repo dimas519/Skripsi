@@ -72,8 +72,9 @@ api=FastAPI()
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 serverAlowed=[
-"http://www.google.com",
-"http://dimas519.com"
+"*"
+,"http://www.google.com"
+,"http://dimas519.com"
 ]
 
 api.add_middleware(
@@ -102,34 +103,34 @@ def raiseWrongArguments():
 @api.get("/")
 async def Test():
     from fastapi.responses import HTMLResponse
-    a= """
-    <!DOCTYPE html>
-<html>
-<body>
+#     a= """
+#     <!DOCTYPE html>
+# <html>
+# <body>
 
-<h1>The template Element</h1>
+# <h1>The template Element</h1>
 
-<p>Click the button below to display the hidden content from the template element.</p>
+# <p>Click the button below to display the hidden content from the template element.</p>
 
-<button onclick="showContent()">Show hidden content</button>
+# <button onclick="showContent()">Show hidden content</button>
 
-<template>
-  <h2>Flower</h2>
-  <img src="img_white_flower.jpg" width="214" height="204">
-</template>
+# <template>
+#   <h2>Flower</h2>
+#   <img src="img_white_flower.jpg" width="214" height="204">
+# </template>
 
-<script>
-function showContent() {
-  var temp = document.getElementsByTagName("template")[0];
-  var clon = temp.content.cloneNode(true);
-  document.body.appendChild(clon);
-}
-</script>
+# <script>
+# function showContent() {
+#   var temp = document.getElementsByTagName("template")[0];
+#   var clon = temp.content.cloneNode(true);
+#   document.body.appendChild(clon);
+# }
+# </script>
 
-</body>
-</html>
-    """
-    return HTMLResponse(content=a, status_code=200)
+# </body>
+# </html>
+#     """
+#     return HTMLResponse(content=a, status_code=200)
     return {"Hello": "World"}
 
 
@@ -139,10 +140,11 @@ async def login(value: Request):
     try:
         username=data['username']
         password=data['password']
+        token=data['token']
     except:
         raiseWrongArguments()
 
-    result=databaseAPI.Login(username,password)
+    result=databaseAPI.Login(username,password,token)
     return {"result": result}
 
 
@@ -158,12 +160,6 @@ async def signUp(value: Request):
 
     result=databaseAPI.signUP(username,password,email)
     return {"result": result}
-
-
-@api.get("/kota")
-async def getKota():
-    result=databaseAPI.getKota()
-    return {"result":result}
 
 
 @api.post("/kota")
@@ -182,13 +178,7 @@ async def insertKota(value: Request):
 
 @api.get("/lokasi")
 async def getLocation(value: Request):
-    data= await value.json()
-    try:
-        idKota=data['idKota']
-    except:
-        raiseWrongArguments()
-
-    result=databaseAPI.getLocation(idKota)
+    result=databaseAPI.getLocation()
     return {"result":result}
 
 
@@ -292,11 +282,12 @@ async def insertSensingdata(value: Request):
     data= await value.json()
     try:
         identifier=data['idBS'].lower()
+        time=data['time']
         sensingData=data['result']
     except :
         raiseWrongArguments()
 
-    result=wsnController.sensingProcedure(databaseAPI,identifier,sensingData)
+    result=wsnController.sensingProcedure(databaseAPI,identifier,time,sensingData)
     
     return result
     
@@ -311,6 +302,23 @@ async def insertSensingdata(value: Request):
     result=wsnController.getInterval(identifier)
 
     return {"setInterval":result}
+
+@api.post("/data")
+async def insertSensingdata(value: Request):
+    data= await value.json()
+    try:
+        identifier=data['idBS'].lower()
+        start=data['start']
+        end=data['end']
+        interval=data['interval']
+        cleanning=data['cleaning']
+    except :
+        raiseWrongArguments()
+
+    result=wsnController.getData(databaseAPI,identifier,start,end,interval,cleanning)
+
+    return {"result":result}
+
 
     
 
