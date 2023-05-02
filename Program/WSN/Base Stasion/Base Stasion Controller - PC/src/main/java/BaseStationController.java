@@ -81,13 +81,13 @@ public class BaseStationController {
 
                 String zigbeeReceive = in.readLine(); //bisa digunakan untuk cek apakah benar terkirim
 
-                if(zigbeeReceive!= null){
-                    System.out.println(zigbeeReceive);
-                    if( !zigbeeReceive.equals("connection made")) {
-                        String result=FormatMsg.formatToAPIFormat(zigbeeReceive);
-                        this.myApi.sendToServer(result);
-                    }
-                }
+//                if(zigbeeReceive!= null){
+//                    System.out.println(zigbeeReceive);
+//                    if( !zigbeeReceive.equals("connection made")) {
+//                        String result=FormatMsg.formatToAPIFormat(zigbeeReceive);
+//                        this.myApi.sendToServer(result);
+//                    }
+//                }
 
 
 

@@ -69,8 +69,7 @@ class WSNController:
         nameTable=self.__nameTable(identifier,time,selectedWSN)
         isCreated=self.__isTableCreated(nameTable,selectedWSN)
         if(not isCreated):
-            sql=self.__createTable(selectedWSN.getSensorType(), identifier
-                               ,time)
+            sql=self.__createTable(selectedWSN.getSensorType(), identifier,time)
             dbController.executeDb(sql)
             selectedWSN.addSensingTable(nameTable)
         

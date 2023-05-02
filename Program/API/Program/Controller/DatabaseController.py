@@ -129,7 +129,7 @@ class DataBaseContoller:
         return row
 
     def deleteQueue(self,id):
-        sql="CALL deleteQueue('{}','{}')".format(id)
+        sql="CALL deleteQueue('{}')".format(id)
         self.db.executeNonSelectQuery(sql);
         
     def getSensingData(self,namaTable,start,end):      

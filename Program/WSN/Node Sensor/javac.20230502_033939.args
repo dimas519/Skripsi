@@ -1,0 +1,17 @@
+-d
+"D:\\SKRIPSI\\Github\\Skripsi\\Program\\WSN\\Node Sensor\\build\\context1\\classes"
+-classpath
+"D:\\SKRIPSI\\Github\\Skripsi\\Program\\WSN\\Node Sensor\\build\\context1\\classes;D:\\SKRIPSI\\Github\\Skripsi\\Program\\WSN\\Node Sensor\\targets\\Preon32\\lib\\rtx.jar"
+-sourcepath
+"D:\\SKRIPSI\\Github\\Skripsi\\Program\\WSN\\Node Sensor\\src"
+-target
+1.8
+-bootclasspath
+"D:\\SKRIPSI\\Github\\Skripsi\\Program\\WSN\\Node Sensor\\targets\\Preon32\\lib\\rt.jar"
+-encoding
+ISO-8859-1
+-g:lines,vars,source
+-source
+1.8
+"D:\\SKRIPSI\\Github\\Skripsi\\Program\\WSN\\Node Sensor\\src\\com\\dimas519\\NodeSensor.java"
+"D:\\SKRIPSI\\Github\\Skripsi\\Program\\WSN\\Node Sensor\\src\\com\\dimas519\\Radio\\MyRadio.java"

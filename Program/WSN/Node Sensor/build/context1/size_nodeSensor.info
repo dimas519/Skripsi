@@ -615,14 +615,6 @@
 	17		size()I
 	6		iterator()Ljava/util/Iterator;
 
-496		com/dimas519/NodeSensor
-	235		<init>()V
-	175		sensing()V
-	34		run()V
-	29		processMsg(I[Ljava/lang/String;)V
-	13		main([Ljava/lang/String;)V
-	10		initializeTime()V
-
 496		java/util/AbstractCollection
 	109		toString()Ljava/lang/String;
 	64		toArray([Ljava/lang/Object;)[Ljava/lang/Object;
@@ -637,6 +629,14 @@
 	13		isEmpty()Z
 	9		add(Ljava/lang/Object;)Z
 	6		<init>()V
+
+477		com/dimas519/NodeSensor
+	231		<init>()V
+	170		sensing()V
+	29		run()V
+	24		processMsg(I[Ljava/lang/String;)V
+	13		main([Ljava/lang/String;)V
+	10		initializeTime()V
 
 452		java/util/AbstractList
 	89		equals(Ljava/lang/Object;)Z
@@ -785,8 +785,8 @@
 	3		capacity()I
 	2		size()I
 
-303		com/dimas519/Radio/MyRadio
-	136		sendMSG(ILjava/lang/String;)V
+288		com/dimas519/Radio/MyRadio
+	121		sendMSG(ILjava/lang/String;)V
 	85		<init>(Lcom/dimas519/Radio/RadioInterface;III)V
 	53		splitMSG(Ljava/lang/String;C)[Ljava/lang/String;
 	14		receive()V

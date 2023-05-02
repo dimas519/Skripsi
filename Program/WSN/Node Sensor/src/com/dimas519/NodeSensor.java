@@ -1,65 +1,123 @@
 package com.dimas519;
 
-//Sensor
 
-import com.dimas519.Radio.RadioSender;
+
+
+import com.dimas519.Radio.Misc;
+import com.dimas519.Radio.MyRadio;
+import com.dimas519.Radio.RadioInterface;
 import com.dimas519.Sensor.*;
-
-
 import com.virtenio.driver.i2c.I2C;
+import com.virtenio.driver.i2c.I2CException;
 import com.virtenio.driver.i2c.NativeI2C;
+import com.virtenio.vm.Time;
 
 
-public class NodeSensor {
+
+public class NodeSensor implements RadioInterface {
+	private final String identifier; //ini public identifier, wajib unique
+	private final int COMMON_CHANNEL;
+	private final int COMMON_PANID;
+	private final int myAddress;
+	private final int myBSAddress;
+//	private final long interval;
+	private final long interval;
+	private final Sensor[] sensors;
+	private final MyRadio myRadio;
+	private boolean timeSync=false;
 
 
-	public static void main(String[] args) throws Exception {
-		final String identifier="AAAA"; //ini public identifier, wajib unique
+	public static void main(String[] args)  {
+		NodeSensor node=new NodeSensor();
+		node.run();
+	}
 
-		long interval=300000;
-		interval=1000;
+	public NodeSensor() {
+
+		System.out.println("Variable initialization");
+		this.identifier="AAAA"; //ini public identifier, wajib unique
+		this.COMMON_CHANNEL =24;
+		this.COMMON_PANID =0xCAFE;
+		this.myAddress =0X0001;
+		this.myBSAddress=0x000;
+//		this.interval=300000;
+		this.interval=1000*60;
+		this.sensors=new Sensor[4];
+
+		System.out.println("Variable initialized");
 
 
-		System.out.println("sensor starting");
-		System.out.flush();
+
 
 		System.out.println("I2C(Init)");
 		NativeI2C i2c= NativeI2C.getInstance(1);
-		i2c.open(I2C.DATA_RATE_400);
+		try {
+			i2c.open(I2C.DATA_RATE_400);
+		} catch (I2CException e) {
+			System.out.println("failed i2c");
+		}
 
 		System.out.println("Sensors init");
-		Sensor[] sensors=new Sensor[4];
-		sensors[0] =new Thermometer(i2c);
-		sensors[1]=new Hygrometer(i2c);
-		sensors[2]=new Barometer(i2c);
-		sensors[3]=new Accelerometer();
+		this.sensors[0] =new Thermometer(i2c);
+		this.sensors[1]=new Hygrometer(i2c);
+		this.sensors[2]=new Barometer(i2c);
+		this.sensors[3]=new Accelerometer();
 		System.out.println("Sensor initialized");
 
 		System.out.println("Radio init");
-		RadioSender sr=new RadioSender();
+		this.myRadio=new MyRadio(this ,myAddress,COMMON_PANID,COMMON_CHANNEL);
 		System.out.println("Radio initialized");
+
 
 		System.out.flush();
 
-		String sensing;
-		while (true){
-			sensing="\"idBS\":\""+identifier+"\"";
-			for (Sensor sensor :sensors){
-				sensing+=",";
-				sensing+=sensor.run();
 
+
+	}
+
+		private void sensing(){
+			String sensing;
+			while (true){
+				if(this.timeSync) { //kalau time sudah di sync baru jalankan sensing
+					sensing = "data:\"time\":" + Time.currentTimeMillis() + ",\"idBS\":\"" + this.identifier + "\"";
+					for (Sensor sensor : this.sensors) {
+						sensing += ",";
+						sensing += sensor.run();
+
+					}
+					System.out.println(sensing);
+					this.myRadio.sendMSG(this.myBSAddress, sensing);
+
+
+					System.out.println("===================================");
+					System.out.println(" ");
+
+
+					System.out.flush();
+
+					Misc.sleep(this.interval);
+				}
 			}
-			System.out.println(sensing);
-			sr.prog_sender(sensing);
+	}
+
+	private void run(){
+		this.myRadio.receive();
+		System.out.println("getting time to Base Station");
+		initializeTime();
+		System.out.println("getting time to Base Station done");
+		sensing();
+	}
+
+	private void initializeTime(){
+		this.myRadio.sendMSG(this.myBSAddress,"timeRequest:timeRequest");
+	}
 
 
-			System.out.println("===================================");
-			System.out.println(" ");
-
-
-			System.out.flush();
-
-			Thread.sleep(interval);
+	@Override
+	public void processMsg(int address, String[] msg) {
+		if(msg[0].equals("setTime")){
+			this.timeSync=true;
+			Time.setCurrentTimeMillis(Long.parseLong(msg[1]));
 		}
 	}
 }
