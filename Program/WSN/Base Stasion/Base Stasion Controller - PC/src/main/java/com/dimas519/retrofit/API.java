@@ -1,10 +1,9 @@
-package com.dimas519.API.retrofit;
+package com.dimas519.retrofit;
 
-import com.dimas519.API.BaseStasionControllerInterface;
+import com.dimas519.BaseStasionControllerInterface;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
 
 
 public class API {

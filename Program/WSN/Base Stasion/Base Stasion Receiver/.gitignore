@@ -12,7 +12,7 @@
 .mtj.tmp/
 
 # Package Files #
-*.jar
+# *.jar biarkan jar karena ada jar(external libary yg mesti digunakan)
 *.war
 *.nar
 *.ear
@@ -166,3 +166,4 @@ examples/
 
 
 
+/target/

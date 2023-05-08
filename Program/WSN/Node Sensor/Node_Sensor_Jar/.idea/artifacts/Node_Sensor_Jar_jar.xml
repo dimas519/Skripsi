@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Node_Sensor_Jar:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Node_Sensor_Jar_jar</output-path>
+    <root id="archive" name="Node_Sensor_Jar.jar">
+      <element id="module-output" name="Node_Sensor_Jar" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/apache/ant/ant-launcher/1.10.13/ant-launcher-1.10.13.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/apache/ant/ant/1.10.13/ant-1.10.13.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="C:/Program Files/Java/jdk1.8.0_202/lib/tools.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

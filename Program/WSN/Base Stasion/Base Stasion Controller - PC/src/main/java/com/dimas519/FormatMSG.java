@@ -1,4 +1,4 @@
-package com.dimas519.API;
+package com.dimas519;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;

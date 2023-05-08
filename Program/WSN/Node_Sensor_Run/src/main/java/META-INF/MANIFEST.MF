@@ -1,4 +1,0 @@
-Manifest-Version: 1.0
-Main-Class: NodeSensor
-Class-Path: ant-1.10.13.jar ant-launcher-1.10.13.jar tools.jar
-

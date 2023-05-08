@@ -1,7 +1,7 @@
-package com.dimas519.API;
+package com.dimas519;
 
 
-import com.dimas519.API.retrofit.API;
+import com.dimas519.retrofit.API;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.DefaultLogger;
 import org.apache.tools.ant.Project;
@@ -29,12 +29,12 @@ public class BaseStationControllerUSART implements BaseStasionControllerInterfac
     private volatile boolean writing=false;
 
     public BaseStationControllerUSART(String[] args){
-        this.executeAtPreon(args[0],"context.set.1");//ubah ke context 1, atau context yg berisikan ant build untuk preon
+        this.executeAtPreon("buildUser.xml","context.set.1");//ubah ke context 1, atau context yg berisikan ant build untuk preon
 
 
 
         try{
-            this.executeAtPreon(args[1],"cmd.time.synchronize"); //time sync karena preon punya rtc tapi tidak ada battery untuk rtc jalan
+            this.executeAtPreon("build.xml","cmd.time.synchronize"); //time sync karena preon punya rtc tapi tidak ada battery untuk rtc jalan
 
         }catch(BuildException e){
             System.err.print("com to preon problem with msg:"+e.getMessage());
@@ -50,7 +50,7 @@ public class BaseStationControllerUSART implements BaseStasionControllerInterfac
             System.out.println("failed open connection to preon32");
         }
 
-        this.myApi=new API(args[2],this);
+        this.myApi=new API(args[0],this);
         this.runBaseStasionPC();
 
 

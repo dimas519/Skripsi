@@ -1,4 +1,4 @@
-package com.dimas519.API;
+package com.dimas519;
 
 public interface BaseStasionControllerInterface {
     void setApiResponse(String Source,String response);

@@ -1,9 +1,7 @@
-package com.dimas519.API.retrofit;
+package com.dimas519.retrofit;
 
 
 
-//import com.google.gson.Gson;
-//import com.google.gson.GsonBuilder;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import retrofit2.Retrofit;
