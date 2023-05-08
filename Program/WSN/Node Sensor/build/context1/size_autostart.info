@@ -601,6 +601,14 @@
 	0		getSourceCount()I
 	0		fire(I)V
 
+533		com/dimas519/NodeSensor
+	235		<init>()V
+	177		sensing()V
+	56		processMsg(J[Ljava/lang/String;)V
+	42		run()V
+	13		main([Ljava/lang/String;)V
+	10		initializeTime()V
+
 528		java/util/AbstractList$SubAbstractList
 	70		addAll(ILjava/util/Collection;)Z
 	64		add(ILjava/lang/Object;)V
@@ -614,14 +622,6 @@
 	27		<init>(Ljava/util/AbstractList;II)V
 	17		size()I
 	6		iterator()Ljava/util/Iterator;
-
-496		com/dimas519/NodeSensor
-	235		<init>()V
-	175		sensing()V
-	34		run()V
-	29		processMsg(I[Ljava/lang/String;)V
-	13		main([Ljava/lang/String;)V
-	10		initializeTime()V
 
 496		java/util/AbstractCollection
 	109		toString()Ljava/lang/String;
@@ -785,8 +785,8 @@
 	3		capacity()I
 	2		size()I
 
-303		com/dimas519/Radio/MyRadio
-	136		sendMSG(ILjava/lang/String;)V
+312		com/dimas519/Radio/MyRadio
+	145		sendMSG(ILjava/lang/String;)V
 	85		<init>(Lcom/dimas519/Radio/RadioInterface;III)V
 	53		splitMSG(Ljava/lang/String;C)[Ljava/lang/String;
 	14		receive()V
@@ -958,6 +958,10 @@
 	18		<init>(Lcom/virtenio/driver/flash/Flash;II)V
 	2		getAddress()I
 
+125		com/dimas519/Radio/MyRadio$1
+	115		run()V
+	10		<init>(Lcom/dimas519/Radio/MyRadio;)V
+
 122		com/virtenio/driver/flash/FlashOutputStream
 	52		write([BII)V
 	50		write(I)V
@@ -988,10 +992,6 @@
 	2		isOpened()Z
 	1		close()V
 	0		command(Lcom/virtenio/driver/cpu/NativeCPU;I)J
-
-93		com/dimas519/Radio/MyRadio$1
-	83		run()V
-	10		<init>(Lcom/dimas519/Radio/MyRadio;)V
 
 91		com/virtenio/radio/ieee_802_15_4/FrameControl
 	9		<init>(I)V

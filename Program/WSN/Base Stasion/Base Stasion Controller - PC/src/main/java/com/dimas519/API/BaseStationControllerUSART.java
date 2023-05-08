@@ -1,12 +1,13 @@
-import API.*;
+package com.dimas519.API;
+
+
+import com.dimas519.API.retrofit.API;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.DefaultLogger;
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.ProjectHelper;
 
 import java.io.*;
-
-import java.util.Scanner;
 
 import com.virtenio.commander.toolsets.preon32.Preon32Helper;
 import com.virtenio.commander.io.DataConnection;
@@ -19,12 +20,13 @@ import com.virtenio.commander.io.DataConnection;
  *  3 : API endpoint
  */
 
-public class BaseStationControllerUSART {
+public class BaseStationControllerUSART implements BaseStasionControllerInterface {
 
     private API myApi;
     private  Preon32Helper nodeHelper;
     private DataConnection dataConnection;
-    BufferedInputStream bufferedInputStream;
+    private BufferedInputStream bufferedInputStream;
+    private volatile boolean writing=false;
 
     public BaseStationControllerUSART(String[] args){
         this.executeAtPreon(args[0],"context.set.1");//ubah ke context 1, atau context yg berisikan ant build untuk preon
@@ -33,23 +35,22 @@ public class BaseStationControllerUSART {
 
         try{
             this.executeAtPreon(args[1],"cmd.time.synchronize"); //time sync karena preon punya rtc tapi tidak ada battery untuk rtc jalan
-//            this.executeAtPreon(args[1],"cmd.module.run"); //jalankan modulenya sudah diganti dengan run module
 
         }catch(BuildException e){
             System.err.print("com to preon problem with msg:"+e.getMessage());
         }
 
 
-
         try {
             this.nodeHelper = new Preon32Helper("COM8",115200);
             this.dataConnection = this.nodeHelper.runModule("autostart");
             bufferedInputStream = new BufferedInputStream(this.dataConnection.getInputStream());
+
         } catch (Exception e) {
             System.out.println("failed open connection to preon32");
         }
 
-        this.myApi=new API(args[2]);
+        this.myApi=new API(args[2],this);
         this.runBaseStasionPC();
 
 
@@ -60,76 +61,51 @@ public class BaseStationControllerUSART {
     private void runBaseStasionPC(){
         System.out.println("System ready to use");
 
-        PrintWriter out;
-        BufferedReader in;
-        Scanner sc=new Scanner(System.in);
 
 
         while(!false){
             try {
-                byte[] data=new byte[1024];
 
-                while(bufferedInputStream.available() > 0) {
+                while (bufferedInputStream.available() > 0) {
 
-                    bufferedInputStream.read(data);
-                    int i=0;
-                    while (i<1024){
-                        if(data[i]==0){
-                            break;
-                        }
-                        i++;
+                    byte[] data=new byte[1024];
+                    int x=bufferedInputStream.read(data);
+
+                    if(x==5 || x==6) { //5 adalah enq(enquiry) karakter yaitu katakter kontrol transmisi untuk mengecek apakah node yg berlawanan aktif
+                        break;
                     }
+
 
                     String usartMsg = new String(data);
-                    usartMsg=usartMsg.substring(0,i);
-                    usartMsg=usartMsg.replace("\n","");
 
-                    if( !usartMsg.equals("Base Radio Station ready")   ) {
-                        String result= FormatMSG.formatToAPIFormat(usartMsg);
-                        System.out.println(result);
-                        this.myApi.sendToServer(result);
+//                    usartMsg=usartMsg.substring(0,i);
+                    usartMsg=usartMsg.replace("\0",""); //buang yang null dibelakang
+                    usartMsg=usartMsg.replace("\n","");
+                    System.out.println(usartMsg);
+                    if(usartMsg.equals("null")){
+
+                        break;
                     }
+
+                    String[] msg=usartMsg.split(",",2);
+                    String[] source=msg[0].split(":",2);
+
+
+                    if(source[0].equals("source")){
+                        String format= FormatMSG.formatToAPIFormat(msg[1]);
+                        System.out.println(format);
+
+                        myApi.sendToServer(source[1],format);
+                    }
+
                 }
 
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                System.out.println(e.getMessage());
             }
-
-//            try {
-//
-//
-//
-//                in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream())); //ngebuang prompt terima, atau nanti bisa dimanfaatin buat check dia keterima gkString greeting = in.readLine();
-//
-//                String zigbeeReceive = in.readLine(); //bisa digunakan untuk cek apakah benar terkirim
-//
-//                if(zigbeeReceive!= null){
-//                    System.out.println(zigbeeReceive);
-//                    if( !zigbeeReceive.equals("connection made")) {
-//                        String result=FormatMsg.formatToAPIFormat(zigbeeReceive);
-//                        this.myApi.sendToServer(result);
-//                    }
-//                }
-//
-//
-//
-//
-//
-//
-////                greeting = in.readLine();
-////                System.out.println(greeting);
-//
-//            } catch (IOException e) {
-//                System.out.println("error");
-//            }
-
 
         }
     }
-
-
-
-
 
 
 
@@ -171,5 +147,41 @@ public class BaseStationControllerUSART {
     public static void main(String[] args) {
         new BaseStationControllerUSART(args);
     }
+
+    @Override
+    public void setApiResponse(String source,String response) {
+        try {
+            while (writing){} // karena proses push data sensing ke server dilakukan secara async (multi thread) maka ada kemungkinan 2 thread menulis secara bersamaan
+            writing=true;
+            String responseBS;
+            if(response.equals("{\"result\":false}")|| response.equals("{\"result\":true}")){
+                responseBS =(source+":ok");
+            }else{
+                response=response.replace("{","");
+                response=response.replace("}","");
+                response=response.replace("\"","");
+                response=source+":"+response;
+                responseBS=response;
+            }
+            System.out.println(response);
+            this.dataConnection.write(writeToBytes(responseBS),0,64);
+            writing=false;
+        } catch (IOException e) {
+            System.out.println("failed api response");
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    private byte[] writeToBytes(String msg){
+        byte[] result=new byte[64];
+        for(int i=0;i<msg.length();i++){
+            result[i]= (byte) msg.charAt(i);
+        }
+        return result;
+
+    }
+
+
 
 }

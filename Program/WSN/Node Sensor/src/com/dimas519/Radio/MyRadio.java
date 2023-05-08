@@ -76,7 +76,10 @@ public class MyRadio {
 				this.frameIO.transmit(frame);
 				isOK = true;
 			} catch (Exception e) {
-				System.out.println("failed send msg to"+sendAddress+" with msg :"+e.getMessage());
+				System.out.println("failed send msg to"+sendAddress+" with msg :"+e.getMessage() );
+				e.printStackTrace();
+				System.exit(0);
+				break;
 			}
 		}
 	}
@@ -101,8 +104,9 @@ public class MyRadio {
 					if (f != null) {
 						byte[] dg = f.getPayload();
 						String msg = new String(dg, 0, dg.length);
-						int sourceAddress =  (int) f.getSrcAddr(); //pengirimnya
+						long sourceAddress =  f.getSrcAddr(); //pengirimnya
 
+						System.out.println("Radio receive: "+msg);
 						String[] splittedMSG=splitMSG(msg,':');
 						mainInterface.processMsg(sourceAddress,splittedMSG);
 

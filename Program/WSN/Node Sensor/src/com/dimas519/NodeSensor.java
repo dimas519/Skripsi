@@ -20,8 +20,7 @@ public class NodeSensor implements RadioInterface {
 	private final int COMMON_PANID;
 	private final int myAddress;
 	private final int myBSAddress;
-//	private final long interval;
-	private final long interval;
+	private long interval;
 	private final Sensor[] sensors;
 	private final MyRadio myRadio;
 	private boolean timeSync=false;
@@ -35,13 +34,14 @@ public class NodeSensor implements RadioInterface {
 	public NodeSensor() {
 
 		System.out.println("Variable initialization");
-		this.identifier="AAAA"; //ini public identifier, wajib unique
+		this.identifier="AAAB"; //ini public identifier, wajib unique
 		this.COMMON_CHANNEL =24;
 		this.COMMON_PANID =0xCAFE;
 		this.myAddress =0X0001;
 		this.myBSAddress=0x000;
 //		this.interval=300000;
-		this.interval=1000*60;
+		this.interval=1000;
+//		this.interval=200;
 		this.sensors=new Sensor[4];
 
 		System.out.println("Variable initialized");
@@ -78,25 +78,20 @@ public class NodeSensor implements RadioInterface {
 		private void sensing(){
 			String sensing;
 			while (true){
-				if(this.timeSync) { //kalau time sudah di sync baru jalankan sensing
-					sensing = "data:\"time\":" + Time.currentTimeMillis() + ",\"idBS\":\"" + this.identifier + "\"";
-					for (Sensor sensor : this.sensors) {
-						sensing += ",";
-						sensing += sensor.run();
-
-					}
-					System.out.println(sensing);
-					this.myRadio.sendMSG(this.myBSAddress, sensing);
-
-
-					System.out.println("===================================");
-					System.out.println(" ");
-
-
-					System.out.flush();
-
-					Misc.sleep(this.interval);
+				sensing = "data:\"time\":" + Time.currentTimeMillis() + ",\"idBS\":\"" + this.identifier + "\"";
+				for (Sensor sensor : this.sensors) {
+					sensing += ",";
+					sensing += sensor.run();
 				}
+				System.out.println(sensing);
+				System.out.flush();
+				this.myRadio.sendMSG(this.myBSAddress, sensing);
+
+				System.out.println("===================================");
+				System.out.println(" ");
+
+				System.out.flush();
+				Misc.sleep(this.interval);
 			}
 	}
 
@@ -104,6 +99,7 @@ public class NodeSensor implements RadioInterface {
 		this.myRadio.receive();
 		System.out.println("getting time to Base Station");
 		initializeTime();
+		while(!timeSync){}
 		System.out.println("getting time to Base Station done");
 		sensing();
 	}
@@ -114,10 +110,13 @@ public class NodeSensor implements RadioInterface {
 
 
 	@Override
-	public void processMsg(int address, String[] msg) {
+	public void processMsg(long address, String[] msg) {
 		if(msg[0].equals("setTime")){
 			this.timeSync=true;
 			Time.setCurrentTimeMillis(Long.parseLong(msg[1]));
+		}
+		else if (msg[0].equals("setInterval")){
+			this.interval=Integer.parseInt(msg[1]);
 		}
 	}
 }

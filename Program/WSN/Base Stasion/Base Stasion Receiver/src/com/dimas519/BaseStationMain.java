@@ -2,11 +2,10 @@ package com.dimas519;
 
 
 import com.dimas519.Radio.MyRadio;
-import com.dimas519.Radio.RadioInterface;
 import com.dimas519.USART.MyUsart;
 import com.virtenio.vm.Time;
 
-public class BaseStationMain implements RadioInterface {
+public class BaseStationMain implements MainInterface {
 
 	private final MyUsart myUsart;
 	private final MyRadio myRadio;
@@ -14,7 +13,8 @@ public class BaseStationMain implements RadioInterface {
 	private final int COMMON_CHANNEL =24;
 	private final int COMMON_PANID =0xCAFE;
 	private final int myAddress =0X0000;
-	private int intervalResponse=200;
+
+	int p=1;
 
 	public static void main(String[] args)  {
 
@@ -27,42 +27,37 @@ public class BaseStationMain implements RadioInterface {
 
 
 	public BaseStationMain(){
-		this.myUsart=new MyUsart();
+		this.myUsart=new MyUsart(this);
 		this.myRadio=new MyRadio(this, myAddress, COMMON_PANID, COMMON_CHANNEL);
 
 	}
 
 	public void run() throws Exception  {
-//		OutputStream outputStream=myUsart.getOutputStream();
-
-		boolean running=true;
-
 		this.myRadio.receive();
-		while (true){
-			this.myUsart.run();
 
+		this.myUsart.run();
 
-			Thread.sleep(intervalResponse);
-		}
 	}
 
 	@Override
 	public void processMsg(long address, String[] msg) {
-		if(msg[0].equals("timeRequest")){
-			this.setTime(address);
-		}else if(msg[0].equals("data")){
-			this.data(msg[1]);
-		}
+//		if(msg[0]!=null && msg[1]!= null) {
+			if (msg[0].equals("timeRequest")) {
+				this.setTime(address);
+			} else if (msg[0].equals("data")) {
+				this.myUsart.send("source:" + address + "," + msg[1]);
+			} else  {
+				this.myRadio.send(address,msg[0]+":"+msg[1]);
+			}
+//		}
 	}
+
+
 
 
 	private void setTime(long address) {
 		String msg="setTime:"+ Time.currentTimeMillis();
 		this.myRadio.send(address,msg);
-	}
-
-	private void data(String msg) {
-		this.myUsart.send(msg);
 	}
 
 

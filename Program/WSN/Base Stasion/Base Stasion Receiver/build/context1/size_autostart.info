@@ -564,6 +564,13 @@
 	6		<init>(ILcom/virtenio/driver/spi/NativeSPI$1;)V
 	0		command(Lcom/virtenio/driver/spi/NativeSPI;I)I
 
+422		com/dimas519/USART/MyUsart
+	207		run()V
+	68		splitMSG(Ljava/lang/String;C)[Ljava/lang/String;
+	54		send(Ljava/lang/String;)V
+	48		configUSART()Lcom/virtenio/driver/usart/USART;
+	45		<init>(Lcom/dimas519/MainInterface;)V
+
 413		java/util/StringTokenizer
 	216		nextToken()Ljava/lang/String;
 	62		countTokens()I
@@ -675,14 +682,21 @@
 	3		capacity()I
 	2		size()I
 
-289		com/dimas519/Radio/MyRadio
+279		com/dimas519/Radio/MyRadio
 	122		send(JLjava/lang/String;)V
-	85		<init>(Lcom/dimas519/Radio/RadioInterface;III)V
+	75		<init>(Lcom/dimas519/MainInterface;III)V
 	53		splitMSG(Ljava/lang/String;C)[Ljava/lang/String;
 	14		receive()V
 	7		access$100(Lcom/dimas519/Radio/MyRadio;Ljava/lang/String;C)[Ljava/lang/String;
 	4		access$000(Lcom/dimas519/Radio/MyRadio;)Lcom/virtenio/radio/ieee_802_15_4/FrameIO;
-	4		access$200(Lcom/dimas519/Radio/MyRadio;)Lcom/dimas519/Radio/RadioInterface;
+	4		access$200(Lcom/dimas519/Radio/MyRadio;)Lcom/dimas519/MainInterface;
+
+259		com/dimas519/BaseStationMain
+	121		processMsg(J[Ljava/lang/String;)V
+	57		<init>()V
+	36		main([Ljava/lang/String;)V
+	36		setTime(J)V
+	9		run()V
 
 255		com/virtenio/vm/event/AsyncEvent
 	68		addHandler(Lcom/virtenio/vm/event/AsyncEventHandler;)V
@@ -776,14 +790,6 @@
 	8		getType()I
 	6		<init>()V
 
-198		com/dimas519/BaseStationMain
-	58		<init>()V
-	43		processMsg(J[Ljava/lang/String;)V
-	36		main([Ljava/lang/String;)V
-	36		setTime(J)V
-	19		run()V
-	6		data(Ljava/lang/String;)V
-
 191		com/virtenio/driver/usart/USARTParams
 	30		setDataBits(I)V
 	29		setStopBits(I)V
@@ -829,12 +835,6 @@
 	54		read()I
 	18		<init>(Lcom/virtenio/driver/flash/Flash;II)V
 	2		getAddress()I
-
-129		com/dimas519/USART/MyUsart
-	48		configUSART()Lcom/virtenio/driver/usart/USART;
-	37		<init>()V
-	35		run()V
-	9		send(Ljava/lang/String;)V
 
 122		com/virtenio/driver/flash/FlashOutputStream
 	52		write([BII)V

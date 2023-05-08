@@ -52,9 +52,7 @@ public class BaseStationController {
             this.runBaseStasionPC();
 
 
-
-
-
+            
         }catch(BuildException e){
             System.err.print("com to preon problem with msg:"+e.getMessage());
         }

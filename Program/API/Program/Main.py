@@ -166,7 +166,7 @@ async def signUp(value: Request):
 async def insertKota(value: Request):
     data= await value.json()
     try:
-        nama=data['kota']
+        nama=data['nama']
         offsetHour=data['offsetHour']
         offsetMinutes=data['offsetMinutes']
     except:

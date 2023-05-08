@@ -1,5 +1,5 @@
 package com.dimas519.Radio;
 
 public interface RadioInterface {
-    void processMsg(int address, String[] msg);
+    void processMsg(long address, String[] msg);
 }

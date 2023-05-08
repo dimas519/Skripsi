@@ -18,6 +18,7 @@
 package com.dimas519.Radio;
 
 
+import com.dimas519.MainInterface;
 import com.virtenio.driver.device.at86rf231.AT86RF231;
 
 import com.virtenio.driver.device.at86rf231.AT86RF231RadioDriver;
@@ -37,10 +38,10 @@ public class MyRadio {
 
 	private FrameIO frameIO;
 	private AT86RF231 radio;
-	private final RadioInterface mainInterface;
+	private final MainInterface mainInterface;
 
 
-	public MyRadio(RadioInterface mainInterface, int resv, int panID, int channel){
+	public MyRadio(MainInterface mainInterface, int resv, int panID, int channel){
 
 		this.mainInterface=mainInterface;
 
@@ -52,7 +53,6 @@ public class MyRadio {
 			this.radio.setShortAddress(resv);
 			RadioDriver driver = new AT86RF231RadioDriver(this.radio);
 			this.frameIO=new RadioDriverFrameIO(driver);
-			System.out.println("Base Radio Station ready");
 		} catch (Exception e) {
 			System.out.println("failed radio");
 		}
