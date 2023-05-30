@@ -62,26 +62,30 @@ public class MyRadio {
 
 
 	public void sendMSG(int sendAddress, String msg)  {
-		boolean isOK = false;
-		while (!isOK) {
-			try {
-				// ///////////////////////////////////////////////////////////////////////
-				Frame frame = new Frame(Frame.TYPE_DATA | Frame.ACK_REQUEST
-						| Frame.DST_ADDR_16 | Frame.INTRA_PAN | Frame.SRC_ADDR_16);
-				frame.setSrcAddr(this.radio.getShortAddress());
-				frame.setSrcPanId(this.radio.getPANId());
-				frame.setDestAddr(sendAddress);
-				frame.setDestPanId(this.radio.getPANId());// karena untuk berkomunikasi dia butuh dalam satu pan(personal network)
-				frame.setPayload(msg.getBytes());
-				this.frameIO.transmit(frame);
-				isOK = true;
-			} catch (Exception e) {
-				System.out.println("failed send msg to"+sendAddress+" with msg :"+e.getMessage() );
-				e.printStackTrace();
-				System.exit(0);
-				break;
+		for (int i = 0; i < 9; i++) {
+				try {
+					// ///////////////////////////////////////////////////////////////////////
+					Frame frame = new Frame(Frame.TYPE_DATA | Frame.ACK_REQUEST
+							| Frame.DST_ADDR_16 | Frame.INTRA_PAN | Frame.SRC_ADDR_16);
+					frame.setSrcAddr(this.radio.getShortAddress());
+					frame.setSrcPanId(this.radio.getPANId());
+					frame.setDestAddr(sendAddress);
+					frame.setDestPanId(this.radio.getPANId());// karena untuk berkomunikasi dia butuh dalam satu pan(personal network)
+					frame.setPayload(msg.getBytes());
+					this.frameIO.transmit(frame);
+					break;
+				} catch (Exception e) {
+
+				}
+
+				if(i==8){
+					System.out.println("**************************************************************");
+					System.out.println(" failed send msg to" + sendAddress );
+					System.out.println("**************************************************************");
+				}
+
 			}
-		}
+
 	}
 
 

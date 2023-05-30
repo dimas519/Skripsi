@@ -46,8 +46,17 @@ class MainPages extends Controller
         $start=$request->post('start');
         $end=$request->post('end');
         $interval=$request->post('interval');
-        $cleaning=false;
+        $graph=$request->post('graph');
+        if($graph=='box'){
+            $stat="raw";
+        }else{
+            $stat="avg";
+        }
+        
         $type=$request->post('type');
+
+
+        
 
         $map = array();
         $map['idBS']=$idBS;
@@ -55,15 +64,41 @@ class MainPages extends Controller
         $map['start']=$start;
         $map['end']=$end;
         $map['interval']=$interval;
-        $map['cleaning']=$cleaning;
+        $map['stat']=$stat;
         $result=API::POST('data',$map)['result'];
 
-        $waktu=array();
-        $value=array();
-        foreach ($result as $row){
-            array_push($waktu,$row['timeStamp']);
-            array_push($value,$row[$type]);
+        if (!$result){
+            return "{\"value\":\"noData\"}";
         }
+        
+
+        $waktu=array();
+        
+
+        if(strcmp($type,'akselerasi')==0){
+            
+            $arrX=array();
+            $arrY=array();
+            $arrZ=array();
+            foreach ($result as $row){
+                array_push($waktu,$row['timeStamp']);
+                array_push($arrX,$row[$type]['x']);
+                array_push($arrY,$row[$type]['y']);
+                array_push($arrZ,$row[$type]['z']);
+            }
+            $value=array("x"=>$arrX,"y"=>$arrY,"z"=>$arrZ);
+        }else{
+            $value=array();
+            foreach ($result as $row){
+                array_push($waktu,$row['timeStamp']);
+                array_push($value,$row[$type]);
+            }
+        }
+
+
+
+
+        
 
         $resultPlain=array("time"=>$waktu,"value"=>$value);
 

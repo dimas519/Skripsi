@@ -785,8 +785,8 @@
 	3		capacity()I
 	2		size()I
 
-312		com/dimas519/Radio/MyRadio
-	145		sendMSG(ILjava/lang/String;)V
+316		com/dimas519/Radio/MyRadio
+	149		sendMSG(ILjava/lang/String;)V
 	85		<init>(Lcom/dimas519/Radio/RadioInterface;III)V
 	53		splitMSG(Ljava/lang/String;C)[Ljava/lang/String;
 	14		receive()V

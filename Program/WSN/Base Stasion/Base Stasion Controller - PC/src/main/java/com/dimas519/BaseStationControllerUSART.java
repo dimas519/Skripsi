@@ -8,6 +8,8 @@ import org.apache.tools.ant.Project;
 import org.apache.tools.ant.ProjectHelper;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.virtenio.commander.toolsets.preon32.Preon32Helper;
 import com.virtenio.commander.io.DataConnection;
@@ -20,13 +22,14 @@ import com.virtenio.commander.io.DataConnection;
  *  3 : API endpoint
  */
 
-public class BaseStationControllerUSART implements BaseStasionControllerInterface {
+public class BaseStationControllerUSART {
 
     private API myApi;
     private  Preon32Helper nodeHelper;
     private DataConnection dataConnection;
     private BufferedInputStream bufferedInputStream;
     private volatile boolean writing=false;
+    private List<NodeQueue> queueNode;
 
     public BaseStationControllerUSART(String[] args){
         this.executeAtPreon("buildUser.xml","context.set.1");//ubah ke context 1, atau context yg berisikan ant build untuk preon
@@ -50,7 +53,9 @@ public class BaseStationControllerUSART implements BaseStasionControllerInterfac
             System.out.println("failed open connection to preon32");
         }
 
-        this.myApi=new API(args[0],this);
+        this.queueNode=new ArrayList<>();
+        this.myApi=new API(args[0],this.queueNode);
+
         this.runBaseStasionPC();
 
 
@@ -60,7 +65,7 @@ public class BaseStationControllerUSART implements BaseStasionControllerInterfac
 
     private void runBaseStasionPC(){
         System.out.println("System ready to use");
-
+        
 
 
         while(!false){
@@ -71,9 +76,9 @@ public class BaseStationControllerUSART implements BaseStasionControllerInterfac
                     byte[] data=new byte[1024];
                     int x=bufferedInputStream.read(data);
 
-                    if(x==5 || x==6) { //5 adalah enq(enquiry) karakter yaitu katakter kontrol transmisi untuk mengecek apakah node yg berlawanan aktif
-                        break;
-                    }
+//                    if(x==5 || x==6) { //5 adalah enq(enquiry) karakter yaitu katakter kontrol transmisi untuk mengecek apakah node yg berlawanan aktif
+//                        break;
+//                    }
 
 
                     String usartMsg = new String(data);
@@ -81,7 +86,7 @@ public class BaseStationControllerUSART implements BaseStasionControllerInterfac
 //                    usartMsg=usartMsg.substring(0,i);
                     usartMsg=usartMsg.replace("\0",""); //buang yang null dibelakang
                     usartMsg=usartMsg.replace("\n","");
-                    System.out.println(usartMsg);
+//                    System.out.println(usartMsg);
                     if(usartMsg.equals("null")){
 
                         break;
@@ -94,8 +99,9 @@ public class BaseStationControllerUSART implements BaseStasionControllerInterfac
                     if(source[0].equals("source")){
                         String format= FormatMSG.formatToAPIFormat(msg[1]);
                         System.out.println(format);
-
+                        this.setApiResponse(source[1]);
                         myApi.sendToServer(source[1],format);
+
                     }
 
                 }
@@ -148,22 +154,36 @@ public class BaseStationControllerUSART implements BaseStasionControllerInterfac
         new BaseStationControllerUSART(args);
     }
 
-    @Override
-    public void setApiResponse(String source,String response) {
+
+    public void setApiResponse(String source) {
         try {
             while (writing){} // karena proses push data sensing ke server dilakukan secara async (multi thread) maka ada kemungkinan 2 thread menulis secara bersamaan
             writing=true;
-            String responseBS;
-            if(response.equals("{\"result\":false}")|| response.equals("{\"result\":true}")){
-                responseBS =(source+":ok");
-            }else{
-                response=response.replace("{","");
-                response=response.replace("}","");
-                response=response.replace("\"","");
-                response=source+":"+response;
-                responseBS=response;
+            String responseBS="";
+            Long nodeAddess=Long.parseLong(source);
+            boolean existNode=false;
+            for (NodeQueue nodeQueue: this.queueNode){
+                if(nodeQueue.getAddress()==nodeAddess){
+                    existNode=true;
+                    if(nodeQueue.emptyQueue()){
+                        responseBS =(source+":ok");
+                    }else {
+                        String queueMsg=nodeQueue.getQueue();
+                        queueMsg=queueMsg.replace("{","");
+                        queueMsg=queueMsg.replace("}","");
+                        queueMsg=queueMsg.replace("\"","");
+                        queueMsg=source+":"+queueMsg;
+                        responseBS=queueMsg;
+                    }
+                    break;
+                }
             }
-            System.out.println(response);
+
+            if(!existNode){
+                responseBS =(source+":ok");
+            }
+            System.out.println(responseBS);
+
             this.dataConnection.write(writeToBytes(responseBS),0,64);
             writing=false;
         } catch (IOException e) {

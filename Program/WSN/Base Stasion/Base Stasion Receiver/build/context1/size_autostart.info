@@ -873,10 +873,6 @@
 	1		close()V
 	0		command(Lcom/virtenio/driver/cpu/NativeCPU;I)J
 
-94		com/dimas519/Radio/MyRadio$1
-	84		run()V
-	10		<init>(Lcom/dimas519/Radio/MyRadio;)V
-
 91		com/virtenio/radio/ieee_802_15_4/FrameControl
 	9		<init>(I)V
 	6		isSrcAddrMode(I)Z
@@ -896,6 +892,10 @@
 	5		getType()I
 	2		getFrameControlInt()I
 	2		getValue()I
+
+88		com/dimas519/Radio/MyRadio$1
+	78		run()V
+	10		<init>(Lcom/dimas519/Radio/MyRadio;)V
 
 72		com/virtenio/driver/spi/SPIOutputStream
 	32		write([BII)V
@@ -940,6 +940,10 @@
 50		com/virtenio/driver/device/M25P80
 	44		<init>(Lcom/virtenio/driver/spi/SPI;Lcom/virtenio/driver/gpio/GPIO;)V
 	6		eraseSector(I)V
+
+45		com/dimas519/Radio/MyRadio$1$1
+	26		run()V
+	19		<init>(Lcom/dimas519/Radio/MyRadio$1;Ljava/lang/String;J)V
 
 31		com/virtenio/radio/ieee_802_15_4/FrameIO
 	18		<init>()V

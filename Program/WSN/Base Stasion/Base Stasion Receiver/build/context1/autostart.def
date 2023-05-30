@@ -6,19 +6,19 @@ header {
 	importPoolOffset 48
 	importCount 1
 	classPoolOffset 64
-	interfacePoolOffset 680
-	implementsPoolOffset 720
-	methodPoolOffset 812
-	codePoolOffset 12488
-	stringPoolOffset 11660
+	interfacePoolOffset 688
+	implementsPoolOffset 728
+	methodPoolOffset 820
+	codePoolOffset 12520
+	stringPoolOffset 11692
 	mainMethodIndex 0
 	staticPrimitiveFieldCount 1
 	staticReferenceFieldCount 7
-	classCount 77
+	classCount 78
 	interfaceCount 20
 	implementsCount 23
-	methodCount 904
-	codePoolSize 38742
+	methodCount 906
+	codePoolSize 38781
 	stringCount 71
 }
 classes [
@@ -3074,13 +3074,85 @@ classes [
 	}
 	{
 		index 70
+		name com/dimas519/Radio/MyRadio$1$1
+		interfaceCount 0
+		superIndex 71
+		superImportIndex 0
+		implementsStart -1
+		methodCount 2
+		methodStart 846
+		superName java/lang/Thread
+		instanceFieldCount 10
+		flags 32
+		srcFile MyRadio.java
+		implements [
+		]
+		instanceFields [
+			{
+				index 0
+				name priority
+				descriptor I
+				className java/lang/Thread
+			}
+			{
+				index 1
+				name runnable
+				descriptor Ljava/lang/Runnable;
+				className java/lang/Thread
+			}
+			{
+				index 2
+				name name
+				descriptor Ljava/lang/String;
+				className java/lang/Thread
+			}
+			{
+				index 3
+				name tid
+				descriptor I
+				className java/lang/Thread
+			}
+			{
+				index 4
+				name localValues
+				descriptor Ljava/lang/Object;
+				className java/lang/Thread
+			}
+			{
+				index 5
+				name inheritableValues
+				descriptor Ljava/lang/Object;
+				className java/lang/Thread
+			}
+			{
+				index 6
+				name val$msg
+				descriptor Ljava/lang/String;
+				className com/dimas519/Radio/MyRadio$1$1
+			}
+			{
+				index 7
+				name val$sourceAddress
+				descriptor J
+				className com/dimas519/Radio/MyRadio$1$1
+			}
+			{
+				index 9
+				name this$1
+				descriptor Lcom/dimas519/Radio/MyRadio$1;
+				className com/dimas519/Radio/MyRadio$1$1
+			}
+		]
+	}
+	{
+		index 71
 		name com/dimas519/USART/MyUsart
 		interfaceCount 0
 		superIndex 60
 		superImportIndex 0
 		implementsStart -1
 		methodCount 5
-		methodStart 846
+		methodStart 848
 		superName java/lang/Object
 		instanceFieldCount 3
 		flags 33
@@ -3109,14 +3181,14 @@ classes [
 		]
 	}
 	{
-		index 71
+		index 72
 		name com/virtenio/driver/usart/USARTParams
 		interfaceCount 0
 		superIndex 60
 		superImportIndex 0
 		implementsStart -1
 		methodCount 14
-		methodStart 851
+		methodStart 853
 		superName java/lang/Object
 		instanceFieldCount 6
 		flags 33
@@ -3163,14 +3235,14 @@ classes [
 		]
 	}
 	{
-		index 72
+		index 73
 		name com/virtenio/driver/usart/USARTException
 		interfaceCount 0
 		superIndex 5
 		superImportIndex -1
 		implementsStart -1
 		methodCount 2
-		methodStart 865
+		methodStart 867
 		superName com/virtenio/driver/DriverException
 		instanceFieldCount 4
 		flags 33
@@ -3205,14 +3277,14 @@ classes [
 		]
 	}
 	{
-		index 73
+		index 74
 		name com/virtenio/driver/usart/NativeUSART
 		interfaceCount 1
 		superIndex 27
 		superImportIndex -1
 		implementsStart 22
 		methodCount 25
-		methodStart 867
+		methodStart 869
 		superName com/virtenio/driver/NativeDeviceDriver
 		instanceFieldCount 5
 		flags 49
@@ -3248,14 +3320,14 @@ classes [
 		]
 	}
 	{
-		index 74
+		index 75
 		name com/virtenio/driver/usart/USARTOutputStream
 		interfaceCount 0
 		superIndex 25
 		superImportIndex 0
 		implementsStart -1
 		methodCount 4
-		methodStart 892
+		methodStart 894
 		superName java/io/OutputStream
 		instanceFieldCount 1
 		flags 32
@@ -3272,14 +3344,14 @@ classes [
 		]
 	}
 	{
-		index 75
+		index 76
 		name com/virtenio/driver/usart/NativeUSART$1
 		interfaceCount 0
 		superIndex 31
 		superImportIndex -1
 		implementsStart -1
 		methodCount 4
-		methodStart 896
+		methodStart 898
 		superName com/virtenio/driver/InstanceManager
 		instanceFieldCount 1
 		flags 48
@@ -3296,14 +3368,14 @@ classes [
 		]
 	}
 	{
-		index 76
+		index 77
 		name com/virtenio/driver/usart/USARTInputStream
 		interfaceCount 0
 		superIndex 22
 		superImportIndex 0
 		implementsStart -1
 		methodCount 4
-		methodStart 900
+		methodStart 902
 		superName java/io/InputStream
 		instanceFieldCount 1
 		flags 32
@@ -4323,9 +4395,9 @@ methods [
 			}
 		]
 		pcToLine {
-			0 91
-			9 114
-			13 115
+			0 92
+			9 120
+			13 121
 		}
 		pcTranslation {
 			0 0
@@ -4383,14 +4455,14 @@ methods [
 			}
 		]
 		pcToLine {
-			0 118
-			9 119
-			19 120
-			29 121
-			40 122
-			45 120
-			46 118
-			51 126
+			0 124
+			9 125
+			19 126
+			29 127
+			40 128
+			45 126
+			46 124
+			51 132
 		}
 		pcTranslation {
 			0 0
@@ -47865,7 +47937,7 @@ methods [
 			}
 		]
 		pcToLine {
-			0 91
+			0 92
 		}
 		pcTranslation {
 			0 0
@@ -47881,72 +47953,65 @@ methods [
 		signature run()V
 		definedIn com/dimas519/Radio/MyRadio$1
 		signatureHash 2844
-		maxStack 5
-		maxLocals 7
+		maxStack 6
+		maxLocals 6
 		exceptionCount 1
 		argsFieldCount 1
 		flags 40
-		codeLength 74
+		codeLength 68
 		codeOffset 37437
 		getter1For -1
 		getter2For -1
 		localVars [
 			{
 				startPC 32
-				length 46
+				length 32
 				name dg
 				descriptor "[B"
 				index 2
 			}
 			{
 				startPC 45
-				length 34
+				length 20
 				name msg
 				descriptor Ljava/lang/String;
 				index 3
 			}
 			{
 				startPC 51
-				length 28
+				length 14
 				name sourceAddress
 				descriptor J
 				index 4
 			}
 			{
-				startPC 60
-				length 16
-				name splittedMSG
-				descriptor "[Ljava/lang/String;"
-				index 6
-			}
-			{
 				startPC 2
-				length 78
+				length 64
 				name f
 				descriptor Lcom/virtenio/radio/ieee_802_15_4/Frame;
 				index 1
 			}
 			{
 				startPC 0
-				length 83
+				length 69
 				name this
 				descriptor Lcom/dimas519/Radio/MyRadio$1;
 				index 0
 			}
 		]
 		pcToLine {
-			0 95
-			2 97
-			10 98
-			19 100
-			22 99
-			23 102
-			27 103
-			32 104
-			45 105
-			51 107
-			60 108
-			71 111
+			0 96
+			2 98
+			10 99
+			19 101
+			22 100
+			23 103
+			27 104
+			32 105
+			45 106
+			51 108
+			62 114
+			65 117
 		}
 		pcTranslation {
 			0 0
@@ -47979,22 +48044,120 @@ methods [
 			47 46
 			50 49
 			52 51
-			53 51
-			56 53
-			57 54
-			59 56
-			62 59
-			64 60
-			65 60
-			68 62
-			71 65
-			73 67
-			75 68
-			80 71
+			55 51
+			56 55
+			57 55
+			58 57
+			60 59
+			63 62
+			66 65
 		}
 	}
 	{
 		index 846
+		signature "<init>(Lcom/dimas519/Radio/MyRadio$1;Ljava/lang/String;J)V"
+		definedIn com/dimas519/Radio/MyRadio$1$1
+		signatureHash 38672
+		maxStack 3
+		maxLocals 5
+		exceptionCount 0
+		argsFieldCount 5
+		flags 192
+		codeLength 19
+		codeOffset 37505
+		getter1For -1
+		getter2For -1
+		localVars [
+			{
+				startPC 0
+				length 20
+				name this
+				descriptor Lcom/dimas519/Radio/MyRadio$1$1;
+				index 0
+			}
+			{
+				startPC 0
+				length 20
+				name this$1
+				descriptor Lcom/dimas519/Radio/MyRadio$1;
+				index 1
+			}
+		]
+		pcToLine {
+			0 108
+		}
+		pcTranslation {
+			0 0
+			1 0
+			2 2
+			5 4
+			6 4
+			7 6
+			10 8
+			11 9
+			12 11
+			15 13
+			16 14
+			19 18
+		}
+	}
+	{
+		index 847
+		signature run()V
+		definedIn com/dimas519/Radio/MyRadio$1$1
+		signatureHash 2844
+		maxStack 4
+		maxLocals 2
+		exceptionCount 0
+		argsFieldCount 1
+		flags 8
+		codeLength 26
+		codeOffset 37524
+		getter1For -1
+		getter2For -1
+		localVars [
+			{
+				startPC 0
+				length 38
+				name this
+				descriptor Lcom/dimas519/Radio/MyRadio$1$1;
+				index 0
+			}
+			{
+				startPC 12
+				length 21
+				name splittedMSG
+				descriptor "[Ljava/lang/String;"
+				index 1
+			}
+		]
+		pcToLine {
+			0 111
+			12 112
+			25 113
+		}
+		pcTranslation {
+			0 0
+			1 0
+			4 2
+			7 4
+			8 4
+			11 6
+			13 8
+			16 11
+			17 12
+			18 12
+			21 14
+			24 16
+			27 19
+			28 19
+			31 21
+			32 22
+			37 25
+		}
+	}
+	{
+		index 848
 		signature "<init>(Lcom/dimas519/MainInterface;)V"
 		definedIn com/dimas519/USART/MyUsart
 		signatureHash 4729
@@ -48004,7 +48167,7 @@ methods [
 		argsFieldCount 2
 		flags 224
 		codeLength 35
-		codeOffset 37521
+		codeOffset 37560
 		getter1For -1
 		getter2For -1
 		localVars [
@@ -48064,7 +48227,7 @@ methods [
 		}
 	}
 	{
-		index 847
+		index 849
 		signature configUSART()Lcom/virtenio/driver/usart/USART;
 		definedIn com/dimas519/USART/MyUsart
 		signatureHash 22526
@@ -48074,7 +48237,7 @@ methods [
 		argsFieldCount 1
 		flags 65632
 		codeLength 38
-		codeOffset 37566
+		codeOffset 37605
 		getter1For -1
 		getter2For -1
 		localVars [
@@ -48151,7 +48314,7 @@ methods [
 		}
 	}
 	{
-		index 848
+		index 850
 		signature run()V
 		definedIn com/dimas519/USART/MyUsart
 		signatureHash 2844
@@ -48161,7 +48324,7 @@ methods [
 		argsFieldCount 1
 		flags 104
 		codeLength 177
-		codeOffset 37634
+		codeOffset 37673
 		getter1For -1
 		getter2For -1
 		localVars [
@@ -48329,7 +48492,7 @@ methods [
 		}
 	}
 	{
-		index 849
+		index 851
 		signature send(Ljava/lang/String;)V
 		definedIn com/dimas519/USART/MyUsart
 		signatureHash 16656
@@ -48339,7 +48502,7 @@ methods [
 		argsFieldCount 2
 		flags 96
 		codeLength 44
-		codeOffset 37821
+		codeOffset 37860
 		getter1For -1
 		getter2For -1
 		localVars [
@@ -48404,7 +48567,7 @@ methods [
 		}
 	}
 	{
-		index 850
+		index 852
 		signature "splitMSG(Ljava/lang/String;C)[Ljava/lang/String;"
 		definedIn com/dimas519/USART/MyUsart
 		signatureHash 5194
@@ -48414,7 +48577,7 @@ methods [
 		argsFieldCount 3
 		flags 65536
 		codeLength 68
-		codeOffset 37865
+		codeOffset 37904
 		getter1For -1
 		getter2For -1
 		localVars [
@@ -48523,7 +48686,7 @@ methods [
 		}
 	}
 	{
-		index 851
+		index 853
 		signature "<init>(I)V"
 		definedIn com/virtenio/driver/usart/USARTParams
 		signatureHash 34633
@@ -48533,7 +48696,7 @@ methods [
 		argsFieldCount 2
 		flags 192
 		codeLength 9
-		codeOffset 37933
+		codeOffset 37972
 		getter1For -1
 		getter2For -1
 		pcToLine {
@@ -48551,7 +48714,7 @@ methods [
 		}
 	}
 	{
-		index 852
+		index 854
 		signature "<init>(IIII)V"
 		definedIn com/virtenio/driver/usart/USARTParams
 		signatureHash 54491
@@ -48561,7 +48724,7 @@ methods [
 		argsFieldCount 5
 		flags 192
 		codeLength 26
-		codeOffset 37942
+		codeOffset 37981
 		getter1For -1
 		getter2For -1
 		pcToLine {
@@ -48591,7 +48754,7 @@ methods [
 		}
 	}
 	{
-		index 853
+		index 855
 		signature getBaudrate()I
 		definedIn com/virtenio/driver/usart/USARTParams
 		signatureHash 9898
@@ -48601,7 +48764,7 @@ methods [
 		argsFieldCount 1
 		flags 64
 		codeLength 2
-		codeOffset 37968
+		codeOffset 38007
 		getter1For 0
 		getter2For -1
 		pcToLine {
@@ -48614,7 +48777,7 @@ methods [
 		}
 	}
 	{
-		index 854
+		index 856
 		signature setBaudrate(I)V
 		definedIn com/virtenio/driver/usart/USARTParams
 		signatureHash 53338
@@ -48624,7 +48787,7 @@ methods [
 		argsFieldCount 2
 		flags 64
 		codeLength 19
-		codeOffset 37970
+		codeOffset 38009
 		getter1For -1
 		getter2For -1
 		pcToLine {
@@ -48648,7 +48811,7 @@ methods [
 		}
 	}
 	{
-		index 855
+		index 857
 		signature getDataBits()I
 		definedIn com/virtenio/driver/usart/USARTParams
 		signatureHash 56557
@@ -48658,7 +48821,7 @@ methods [
 		argsFieldCount 1
 		flags 64
 		codeLength 2
-		codeOffset 37989
+		codeOffset 38028
 		getter1For 1
 		getter2For -1
 		pcToLine {
@@ -48671,7 +48834,7 @@ methods [
 		}
 	}
 	{
-		index 856
+		index 858
 		signature setDataBits(I)V
 		definedIn com/virtenio/driver/usart/USARTParams
 		signatureHash 18395
@@ -48681,7 +48844,7 @@ methods [
 		argsFieldCount 2
 		flags 64
 		codeLength 30
-		codeOffset 37991
+		codeOffset 38030
 		getter1For -1
 		getter2For -1
 		pcToLine {
@@ -48711,7 +48874,7 @@ methods [
 		}
 	}
 	{
-		index 857
+		index 859
 		signature getStopBits()I
 		definedIn com/virtenio/driver/usart/USARTParams
 		signatureHash 64297
@@ -48721,7 +48884,7 @@ methods [
 		argsFieldCount 1
 		flags 64
 		codeLength 2
-		codeOffset 38021
+		codeOffset 38060
 		getter1For 2
 		getter2For -1
 		pcToLine {
@@ -48734,7 +48897,7 @@ methods [
 		}
 	}
 	{
-		index 858
+		index 860
 		signature setStopBits(I)V
 		definedIn com/virtenio/driver/usart/USARTParams
 		signatureHash 9366
@@ -48744,7 +48907,7 @@ methods [
 		argsFieldCount 2
 		flags 64
 		codeLength 29
-		codeOffset 38023
+		codeOffset 38062
 		getter1For -1
 		getter2For -1
 		pcToLine {
@@ -48774,7 +48937,7 @@ methods [
 		}
 	}
 	{
-		index 859
+		index 861
 		signature getParity()I
 		definedIn com/virtenio/driver/usart/USARTParams
 		signatureHash 1221
@@ -48784,7 +48947,7 @@ methods [
 		argsFieldCount 1
 		flags 64
 		codeLength 2
-		codeOffset 38052
+		codeOffset 38091
 		getter1For 3
 		getter2For -1
 		pcToLine {
@@ -48797,7 +48960,7 @@ methods [
 		}
 	}
 	{
-		index 860
+		index 862
 		signature setParity(I)V
 		definedIn com/virtenio/driver/usart/USARTParams
 		signatureHash 59853
@@ -48807,7 +48970,7 @@ methods [
 		argsFieldCount 2
 		flags 64
 		codeLength 28
-		codeOffset 38054
+		codeOffset 38093
 		getter1For -1
 		getter2For -1
 		pcToLine {
@@ -48836,7 +48999,7 @@ methods [
 		}
 	}
 	{
-		index 861
+		index 863
 		signature getInputBufferSize()I
 		definedIn com/virtenio/driver/usart/USARTParams
 		signatureHash 56613
@@ -48846,7 +49009,7 @@ methods [
 		argsFieldCount 1
 		flags 64
 		codeLength 2
-		codeOffset 38082
+		codeOffset 38121
 		getter1For 4
 		getter2For -1
 		pcToLine {
@@ -48859,7 +49022,7 @@ methods [
 		}
 	}
 	{
-		index 862
+		index 864
 		signature setInputBufferSize(I)V
 		definedIn com/virtenio/driver/usart/USARTParams
 		signatureHash 17864
@@ -48869,7 +49032,7 @@ methods [
 		argsFieldCount 2
 		flags 64
 		codeLength 19
-		codeOffset 38084
+		codeOffset 38123
 		getter1For -1
 		getter2For -1
 		pcToLine {
@@ -48893,7 +49056,7 @@ methods [
 		}
 	}
 	{
-		index 863
+		index 865
 		signature getOutputBufferSize()I
 		definedIn com/virtenio/driver/usart/USARTParams
 		signatureHash 15113
@@ -48903,7 +49066,7 @@ methods [
 		argsFieldCount 1
 		flags 64
 		codeLength 2
-		codeOffset 38103
+		codeOffset 38142
 		getter1For 5
 		getter2For -1
 		pcToLine {
@@ -48916,7 +49079,7 @@ methods [
 		}
 	}
 	{
-		index 864
+		index 866
 		signature setOutputBufferSize(I)V
 		definedIn com/virtenio/driver/usart/USARTParams
 		signatureHash 49422
@@ -48926,7 +49089,7 @@ methods [
 		argsFieldCount 2
 		flags 0
 		codeLength 19
-		codeOffset 38105
+		codeOffset 38144
 		getter1For -1
 		getter2For -1
 		pcToLine {
@@ -48950,7 +49113,7 @@ methods [
 		}
 	}
 	{
-		index 865
+		index 867
 		signature "<init>(I)V"
 		definedIn com/virtenio/driver/usart/USARTException
 		signatureHash 34633
@@ -48960,7 +49123,7 @@ methods [
 		argsFieldCount 2
 		flags 192
 		codeLength 6
-		codeOffset 38124
+		codeOffset 38163
 		getter1For -1
 		getter2For -1
 		pcToLine {
@@ -48975,7 +49138,7 @@ methods [
 		}
 	}
 	{
-		index 866
+		index 868
 		signature "<init>(Ljava/lang/Throwable;)V"
 		definedIn com/virtenio/driver/usart/USARTException
 		signatureHash 47660
@@ -48985,7 +49148,7 @@ methods [
 		argsFieldCount 2
 		flags 128
 		codeLength 6
-		codeOffset 38130
+		codeOffset 38169
 		getter1For -1
 		getter2For -1
 		pcToLine {
@@ -49000,7 +49163,7 @@ methods [
 		}
 	}
 	{
-		index 867
+		index 869
 		signature command(Lcom/virtenio/driver/usart/NativeUSART;I)I
 		definedIn com/virtenio/driver/usart/NativeUSART
 		signatureHash 17504
@@ -49019,7 +49182,7 @@ methods [
 		}
 	}
 	{
-		index 868
+		index 870
 		signature getManager()Lcom/virtenio/driver/InstanceManager;
 		definedIn com/virtenio/driver/usart/NativeUSART
 		signatureHash 59513
@@ -49029,7 +49192,7 @@ methods [
 		argsFieldCount 0
 		flags 131139
 		codeLength 32
-		codeOffset 38136
+		codeOffset 38175
 		getter1For -1
 		getter2For -1
 		pcToLine {
@@ -49054,7 +49217,7 @@ methods [
 		}
 	}
 	{
-		index 869
+		index 871
 		signature getInstance(I)Lcom/virtenio/driver/usart/NativeUSART;
 		definedIn com/virtenio/driver/usart/NativeUSART
 		signatureHash 38775
@@ -49064,7 +49227,7 @@ methods [
 		argsFieldCount 1
 		flags 131138
 		codeLength 12
-		codeOffset 38168
+		codeOffset 38207
 		getter1For -1
 		getter2For -1
 		pcToLine {
@@ -49079,7 +49242,7 @@ methods [
 		}
 	}
 	{
-		index 870
+		index 872
 		signature "<init>(I)V"
 		definedIn com/virtenio/driver/usart/NativeUSART
 		signatureHash 34633
@@ -49089,7 +49252,7 @@ methods [
 		argsFieldCount 2
 		flags 196800
 		codeLength 10
-		codeOffset 38180
+		codeOffset 38219
 		getter1For -1
 		getter2For -1
 		pcToLine {
@@ -49108,7 +49271,7 @@ methods [
 		}
 	}
 	{
-		index 871
+		index 873
 		signature errorCheck()V
 		definedIn com/virtenio/driver/usart/NativeUSART
 		signatureHash 22025
@@ -49118,7 +49281,7 @@ methods [
 		argsFieldCount 1
 		flags 196672
 		codeLength 14
-		codeOffset 38190
+		codeOffset 38229
 		getter1For -1
 		getter2For -1
 		pcToLine {
@@ -49140,7 +49303,7 @@ methods [
 		}
 	}
 	{
-		index 872
+		index 874
 		signature open(Lcom/virtenio/driver/usart/USARTParams;)V
 		definedIn com/virtenio/driver/usart/NativeUSART
 		signatureHash 19910
@@ -49150,7 +49313,7 @@ methods [
 		argsFieldCount 2
 		flags 131136
 		codeLength 25
-		codeOffset 38204
+		codeOffset 38243
 		getter1For -1
 		getter2For -1
 		pcToLine {
@@ -49177,7 +49340,7 @@ methods [
 		}
 	}
 	{
-		index 873
+		index 875
 		signature isOpened()Z
 		definedIn com/virtenio/driver/usart/NativeUSART
 		signatureHash 1141
@@ -49187,7 +49350,7 @@ methods [
 		argsFieldCount 1
 		flags 131136
 		codeLength 22
-		codeOffset 38229
+		codeOffset 38268
 		getter1For -1
 		getter2For -1
 		pcToLine {
@@ -49211,7 +49374,7 @@ methods [
 		}
 	}
 	{
-		index 874
+		index 876
 		signature close()V
 		definedIn com/virtenio/driver/usart/NativeUSART
 		signatureHash 53782
@@ -49221,7 +49384,7 @@ methods [
 		argsFieldCount 1
 		flags 131136
 		codeLength 12
-		codeOffset 38251
+		codeOffset 38290
 		getter1For -1
 		getter2For -1
 		pcToLine {
@@ -49240,7 +49403,7 @@ methods [
 		}
 	}
 	{
-		index 875
+		index 877
 		signature read()I
 		definedIn com/virtenio/driver/usart/NativeUSART
 		signatureHash 47003
@@ -49250,7 +49413,7 @@ methods [
 		argsFieldCount 1
 		flags 131136
 		codeLength 13
-		codeOffset 38263
+		codeOffset 38302
 		getter1For -1
 		getter2For -1
 		pcToLine {
@@ -49270,7 +49433,7 @@ methods [
 		}
 	}
 	{
-		index 876
+		index 878
 		signature "read([BII)I"
 		definedIn com/virtenio/driver/usart/NativeUSART
 		signatureHash 16749
@@ -49280,7 +49443,7 @@ methods [
 		argsFieldCount 4
 		flags 131136
 		codeLength 26
-		codeOffset 38276
+		codeOffset 38315
 		getter1For -1
 		getter2For -1
 		pcToLine {
@@ -49309,7 +49472,7 @@ methods [
 		}
 	}
 	{
-		index 877
+		index 879
 		signature "read([B)I"
 		definedIn com/virtenio/driver/usart/NativeUSART
 		signatureHash 35517
@@ -49319,7 +49482,7 @@ methods [
 		argsFieldCount 2
 		flags 131136
 		codeLength 9
-		codeOffset 38302
+		codeOffset 38341
 		getter1For -1
 		getter2For -1
 		pcToLine {
@@ -49336,7 +49499,7 @@ methods [
 		}
 	}
 	{
-		index 878
+		index 880
 		signature "readFully([B)I"
 		definedIn com/virtenio/driver/usart/NativeUSART
 		signatureHash 12560
@@ -49346,7 +49509,7 @@ methods [
 		argsFieldCount 2
 		flags 131136
 		codeLength 9
-		codeOffset 38311
+		codeOffset 38350
 		getter1For -1
 		getter2For -1
 		pcToLine {
@@ -49363,7 +49526,7 @@ methods [
 		}
 	}
 	{
-		index 879
+		index 881
 		signature "readFully([BII)I"
 		definedIn com/virtenio/driver/usart/NativeUSART
 		signatureHash 40285
@@ -49373,7 +49536,7 @@ methods [
 		argsFieldCount 4
 		flags 131136
 		codeLength 26
-		codeOffset 38320
+		codeOffset 38359
 		getter1For -1
 		getter2For -1
 		pcToLine {
@@ -49402,7 +49565,7 @@ methods [
 		}
 	}
 	{
-		index 880
+		index 882
 		signature write(I)V
 		definedIn com/virtenio/driver/usart/NativeUSART
 		signatureHash 15824
@@ -49412,7 +49575,7 @@ methods [
 		argsFieldCount 2
 		flags 131136
 		codeLength 12
-		codeOffset 38346
+		codeOffset 38385
 		getter1For -1
 		getter2For -1
 		pcToLine {
@@ -49431,7 +49594,7 @@ methods [
 		}
 	}
 	{
-		index 881
+		index 883
 		signature "write([BII)V"
 		definedIn com/virtenio/driver/usart/NativeUSART
 		signatureHash 56054
@@ -49441,7 +49604,7 @@ methods [
 		argsFieldCount 4
 		flags 131136
 		codeLength 23
-		codeOffset 38358
+		codeOffset 38397
 		getter1For -1
 		getter2For -1
 		pcToLine {
@@ -49466,7 +49629,7 @@ methods [
 		}
 	}
 	{
-		index 882
+		index 884
 		signature "write([B)V"
 		definedIn com/virtenio/driver/usart/NativeUSART
 		signatureHash 17773
@@ -49476,7 +49639,7 @@ methods [
 		argsFieldCount 2
 		flags 131136
 		codeLength 9
-		codeOffset 38381
+		codeOffset 38420
 		getter1For -1
 		getter2For -1
 		pcToLine {
@@ -49494,7 +49657,7 @@ methods [
 		}
 	}
 	{
-		index 883
+		index 885
 		signature flush()V
 		definedIn com/virtenio/driver/usart/NativeUSART
 		signatureHash 33036
@@ -49504,7 +49667,7 @@ methods [
 		argsFieldCount 1
 		flags 131136
 		codeLength 13
-		codeOffset 38390
+		codeOffset 38429
 		getter1For -1
 		getter2For -1
 		pcToLine {
@@ -49523,7 +49686,7 @@ methods [
 		}
 	}
 	{
-		index 884
+		index 886
 		signature available()I
 		definedIn com/virtenio/driver/usart/NativeUSART
 		signatureHash 1663
@@ -49533,7 +49696,7 @@ methods [
 		argsFieldCount 1
 		flags 131136
 		codeLength 14
-		codeOffset 38403
+		codeOffset 38442
 		getter1For -1
 		getter2For -1
 		pcToLine {
@@ -49553,7 +49716,7 @@ methods [
 		}
 	}
 	{
-		index 885
+		index 887
 		signature pending()I
 		definedIn com/virtenio/driver/usart/NativeUSART
 		signatureHash 60310
@@ -49563,7 +49726,7 @@ methods [
 		argsFieldCount 1
 		flags 131136
 		codeLength 14
-		codeOffset 38417
+		codeOffset 38456
 		getter1For -1
 		getter2For -1
 		pcToLine {
@@ -49583,7 +49746,7 @@ methods [
 		}
 	}
 	{
-		index 886
+		index 888
 		signature setReceiveTimeout(I)V
 		definedIn com/virtenio/driver/usart/NativeUSART
 		signatureHash 23983
@@ -49593,7 +49756,7 @@ methods [
 		argsFieldCount 2
 		flags 131136
 		codeLength 17
-		codeOffset 38431
+		codeOffset 38470
 		getter1For -1
 		getter2For -1
 		pcToLine {
@@ -49616,7 +49779,7 @@ methods [
 		}
 	}
 	{
-		index 887
+		index 889
 		signature getReceiveTimeout()I
 		definedIn com/virtenio/driver/usart/NativeUSART
 		signatureHash 43274
@@ -49626,7 +49789,7 @@ methods [
 		argsFieldCount 1
 		flags 131136
 		codeLength 2
-		codeOffset 38448
+		codeOffset 38487
 		getter1For 4
 		getter2For -1
 		pcToLine {
@@ -49639,7 +49802,7 @@ methods [
 		}
 	}
 	{
-		index 888
+		index 890
 		signature getInputStream()Ljava/io/InputStream;
 		definedIn com/virtenio/driver/usart/NativeUSART
 		signatureHash 52582
@@ -49649,7 +49812,7 @@ methods [
 		argsFieldCount 1
 		flags 131136
 		codeLength 9
-		codeOffset 38450
+		codeOffset 38489
 		getter1For -1
 		getter2For -1
 		pcToLine {
@@ -49664,7 +49827,7 @@ methods [
 		}
 	}
 	{
-		index 889
+		index 891
 		signature getOutputStream()Ljava/io/OutputStream;
 		definedIn com/virtenio/driver/usart/NativeUSART
 		signatureHash 60629
@@ -49674,7 +49837,7 @@ methods [
 		argsFieldCount 1
 		flags 131136
 		codeLength 9
-		codeOffset 38459
+		codeOffset 38498
 		getter1For -1
 		getter2For -1
 		pcToLine {
@@ -49689,7 +49852,7 @@ methods [
 		}
 	}
 	{
-		index 890
+		index 892
 		signature "<init>(ILcom/virtenio/driver/usart/NativeUSART$1;)V"
 		definedIn com/virtenio/driver/usart/NativeUSART
 		signatureHash 34518
@@ -49699,7 +49862,7 @@ methods [
 		argsFieldCount 3
 		flags 131264
 		codeLength 6
-		codeOffset 38468
+		codeOffset 38507
 		getter1For -1
 		getter2For -1
 		pcToLine {
@@ -49713,7 +49876,7 @@ methods [
 		}
 	}
 	{
-		index 891
+		index 893
 		signature access$100(Lcom/virtenio/driver/usart/NativeUSART;I)I
 		definedIn com/virtenio/driver/usart/NativeUSART
 		signatureHash 23570
@@ -49723,7 +49886,7 @@ methods [
 		argsFieldCount 2
 		flags 131074
 		codeLength 7
-		codeOffset 38474
+		codeOffset 38513
 		getter1For -1
 		getter2For -1
 		pcToLine {
@@ -49737,7 +49900,7 @@ methods [
 		}
 	}
 	{
-		index 892
+		index 894
 		signature "<init>(Lcom/virtenio/driver/usart/USART;)V"
 		definedIn com/virtenio/driver/usart/USARTOutputStream
 		signatureHash 63910
@@ -49747,7 +49910,7 @@ methods [
 		argsFieldCount 2
 		flags 192
 		codeLength 10
-		codeOffset 38481
+		codeOffset 38520
 		getter1For -1
 		getter2For -1
 		pcToLine {
@@ -49765,7 +49928,7 @@ methods [
 		}
 	}
 	{
-		index 893
+		index 895
 		signature write(I)V
 		definedIn com/virtenio/driver/usart/USARTOutputStream
 		signatureHash 15824
@@ -49775,7 +49938,7 @@ methods [
 		argsFieldCount 2
 		flags 96
 		codeLength 20
-		codeOffset 38501
+		codeOffset 38540
 		getter1For -1
 		getter2For -1
 		pcToLine {
@@ -49801,7 +49964,7 @@ methods [
 		}
 	}
 	{
-		index 894
+		index 896
 		signature "write([BII)V"
 		definedIn com/virtenio/driver/usart/USARTOutputStream
 		signatureHash 56054
@@ -49811,7 +49974,7 @@ methods [
 		argsFieldCount 4
 		flags 96
 		codeLength 22
-		codeOffset 38531
+		codeOffset 38570
 		getter1For -1
 		getter2For -1
 		pcToLine {
@@ -49839,7 +50002,7 @@ methods [
 		}
 	}
 	{
-		index 895
+		index 897
 		signature flush()V
 		definedIn com/virtenio/driver/usart/USARTOutputStream
 		signatureHash 33036
@@ -49849,7 +50012,7 @@ methods [
 		argsFieldCount 1
 		flags 32
 		codeLength 19
-		codeOffset 38563
+		codeOffset 38602
 		getter1For -1
 		getter2For -1
 		pcToLine {
@@ -49874,7 +50037,7 @@ methods [
 		}
 	}
 	{
-		index 896
+		index 898
 		signature "<init>()V"
 		definedIn com/virtenio/driver/usart/NativeUSART$1
 		signatureHash 10657
@@ -49884,7 +50047,7 @@ methods [
 		argsFieldCount 1
 		flags 131264
 		codeLength 5
-		codeOffset 38582
+		codeOffset 38621
 		getter1For -1
 		getter2For -1
 		pcToLine {
@@ -49897,7 +50060,7 @@ methods [
 		}
 	}
 	{
-		index 897
+		index 899
 		signature createInstance(I)Lcom/virtenio/driver/usart/NativeUSART;
 		definedIn com/virtenio/driver/usart/NativeUSART$1
 		signatureHash 32528
@@ -49907,7 +50070,7 @@ methods [
 		argsFieldCount 2
 		flags 131136
 		codeLength 10
-		codeOffset 38587
+		codeOffset 38626
 		getter1For -1
 		getter2For -1
 		pcToLine {
@@ -49923,7 +50086,7 @@ methods [
 		}
 	}
 	{
-		index 898
+		index 900
 		signature getInstanceCount()I
 		definedIn com/virtenio/driver/usart/NativeUSART$1
 		signatureHash 1396
@@ -49933,7 +50096,7 @@ methods [
 		argsFieldCount 1
 		flags 131136
 		codeLength 6
-		codeOffset 38597
+		codeOffset 38636
 		getter1For -1
 		getter2For -1
 		pcToLine {
@@ -49947,7 +50110,7 @@ methods [
 		}
 	}
 	{
-		index 899
+		index 901
 		signature createInstance(I)Ljava/lang/Object;
 		definedIn com/virtenio/driver/usart/NativeUSART$1
 		signatureHash 24465
@@ -49957,7 +50120,7 @@ methods [
 		argsFieldCount 2
 		flags 131072
 		codeLength 6
-		codeOffset 38603
+		codeOffset 38642
 		getter1For -1
 		getter2For -1
 		pcToLine {
@@ -49971,7 +50134,7 @@ methods [
 		}
 	}
 	{
-		index 900
+		index 902
 		signature "<init>(Lcom/virtenio/driver/usart/USART;)V"
 		definedIn com/virtenio/driver/usart/USARTInputStream
 		signatureHash 63910
@@ -49981,7 +50144,7 @@ methods [
 		argsFieldCount 2
 		flags 192
 		codeLength 10
-		codeOffset 38609
+		codeOffset 38648
 		getter1For -1
 		getter2For -1
 		pcToLine {
@@ -49999,7 +50162,7 @@ methods [
 		}
 	}
 	{
-		index 901
+		index 903
 		signature read()I
 		definedIn com/virtenio/driver/usart/USARTInputStream
 		signatureHash 47003
@@ -50009,7 +50172,7 @@ methods [
 		argsFieldCount 1
 		flags 96
 		codeLength 16
-		codeOffset 38629
+		codeOffset 38668
 		getter1For -1
 		getter2For -1
 		pcToLine {
@@ -50031,7 +50194,7 @@ methods [
 		}
 	}
 	{
-		index 902
+		index 904
 		signature "read([BII)I"
 		definedIn com/virtenio/driver/usart/USARTInputStream
 		signatureHash 16749
@@ -50041,7 +50204,7 @@ methods [
 		argsFieldCount 4
 		flags 96
 		codeLength 61
-		codeOffset 38655
+		codeOffset 38694
 		getter1For -1
 		getter2For -1
 		pcToLine {
@@ -50087,7 +50250,7 @@ methods [
 		}
 	}
 	{
-		index 903
+		index 905
 		signature available()I
 		definedIn com/virtenio/driver/usart/USARTInputStream
 		signatureHash 1663
@@ -50097,7 +50260,7 @@ methods [
 		argsFieldCount 1
 		flags 32
 		codeLength 16
-		codeOffset 38726
+		codeOffset 38765
 		getter1For -1
 		getter2For -1
 		pcToLine {

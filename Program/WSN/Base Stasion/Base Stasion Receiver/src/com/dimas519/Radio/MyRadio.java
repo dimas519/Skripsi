@@ -88,6 +88,7 @@ public class MyRadio {
 	/** Ein Programme, dass �ber das Startmenu aufgerufen werden kann */
 
 	public void receive() throws Exception {
+
 		Thread receive = new Thread()  {
 			@Override
 			public void run() {
@@ -104,8 +105,13 @@ public class MyRadio {
 						String msg = new String(dg, 0, dg.length);
 						long sourceAddress =  f.getSrcAddr(); //pengirimnya
 
-						String[] splittedMSG=splitMSG(msg,':');
-						mainInterface.processMsg(sourceAddress,splittedMSG);
+						new Thread() {
+							@Override
+							public void run() {
+								String[] splittedMSG=splitMSG(msg,':');
+								mainInterface.processMsg(sourceAddress,splittedMSG);
+							}
+						}.start();
 
 					}
 				}

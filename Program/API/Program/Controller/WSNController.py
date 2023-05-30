@@ -113,7 +113,7 @@ class WSNController:
         selectedWSN=self.__searchWSN(identifier)
         return selectedWSN.getInterval()
         
-    def getData(self, dbController,identifier,start,end,interval,clean):
+    def getData(self, dbController,identifier,start,end,interval,statistics):
         selectedWSN=self.__searchWSN(identifier)
         
         nameTable=self.__nameTable(identifier,start,selectedWSN)
@@ -122,43 +122,18 @@ class WSNController:
         if isCreated:
             intervalWsn=selectedWSN.getInterval()
             sensingData=dbController.getSensingData(nameTable,start,end)
-            sensingDataNumber=len(sensingData)
             
-            currTime=sensingData[0]['timeStamp'];
-            currIntervalLeft=interval
+            if(len(sensingData)==0): #mengembalikan false kalau dia kosong
+                return False
             
-            output=[]
-            tempTime=[sensingData[0]['timeStamp']]
-            tempSuhu=[sensingData[0]['suhu']]
-            tempkelembapan=[sensingData[0]['kelembapan']]
-            tempTekanan=[sensingData[0]['tekanan']]
-            for i in range(1,sensingDataNumber):
-                currData=sensingData[i]
+            if(statistics=='raw'):
+                output=self.rawData(sensingData,interval)
+            elif (statistics=='median'):
+                output=self.medianData(sensingData,interval)
+            else:
+                output=self.averageData(sensingData,interval)
                 
-                diffInterval=(currData['timeStamp']-currTime).total_seconds()
-                currIntervalLeft-=diffInterval
-  
-                currTime=currData['timeStamp']
-      
-                if(currIntervalLeft <=0 ):
-                    
-                    currIntervalLeft=interval
-                    cell={};
-                    cell['timeStamp']= tempTime[0]  
-                    cell['suhu']= round(sum(tempSuhu)/len(tempSuhu) ,2)
-                    cell['kelembapan']=round( sum(tempkelembapan)/len(tempkelembapan) ,2)
-                    cell['tekanan']= round (sum(tempTekanan)/len(tempTekanan),2)
-                    output.append(cell)
-                    tempTime=[currData['timeStamp']]
-                    tempSuhu=[currData['suhu']]
-                    tempkelembapan=[currData['kelembapan']]
-                    tempTekanan=[currData['tekanan']]
-                    
-                else:
-                    tempTime.append(currData['timeStamp'])
-                    tempSuhu.append(currData['suhu'])
-                    tempkelembapan.append(currData['kelembapan'])
-                    tempTekanan.append(currData['tekanan'])
+            
                                 
             
             
@@ -169,8 +144,257 @@ class WSNController:
         
         
         
+    def averageData(self,sensingData,interval):
         
+        currTime=sensingData[0]['timeStamp'];
+        currIntervalLeft=interval
+        output=[]
+        tempTime=[sensingData[0]['timeStamp']]
+        tempSuhu=[sensingData[0]['suhu']]
+        tempkelembapan=[sensingData[0]['kelembapan']]
+        tempTekanan=[sensingData[0]['tekanan']]
         
+        akselerasiData=sensingData[0]['akselerasi']
+        akselerasiData=akselerasiData.replace("[","")
+        akselerasiData=akselerasiData.replace("]","")
+        
+        splitAkselerasi=akselerasiData.split(",")
+        tempX=[int(splitAkselerasi[0])]
+        tempY=[int(splitAkselerasi[1])]
+        tempZ=[int(splitAkselerasi[2])]
+
+        # tempAkselerasi=[sensingData[0]['alse;erasi']]
+        for i in range(1,len(sensingData)):
+            currData=sensingData[i]
+            
+            diffInterval=(currData['timeStamp']-currTime).total_seconds()
+            currIntervalLeft-=diffInterval
+
+            currTime=currData['timeStamp']
+
+            if(currIntervalLeft <=0 ): #kalau habis
+                
+                currIntervalLeft=interval
+                cell={};
+                cell['timeStamp']= tempTime[0]  
+                cell['suhu']= round(sum(tempSuhu)/len(tempSuhu) ,2)
+                cell['kelembapan']=round( sum(tempkelembapan)/len(tempkelembapan) ,2)
+                cell['tekanan']= round (sum(tempTekanan)/len(tempTekanan),2)
+                cell['akselerasi']={
+                    "x":round(sum(tempX)/len(tempX),2),
+                    "y":round(sum(tempY)/len(tempY),2),
+                    "z":round(sum(tempZ)/len(tempZ),2)
+                }
+                
+                output.append(cell)
+                tempTime=[currData['timeStamp']]
+                tempSuhu=[currData['suhu']]
+                tempkelembapan=[currData['kelembapan']]
+                tempTekanan=[currData['tekanan']]
+                
+                akselerasiData=currData['akselerasi']
+                akselerasiData=akselerasiData.replace("[","")
+                akselerasiData=akselerasiData.replace("]","")
+                
+                splitAkselerasi=akselerasiData.split(",")
+                
+                tempX=[int(splitAkselerasi[0])]
+                tempY=[int(splitAkselerasi[1])]
+                tempZ=[int(splitAkselerasi[2])]
+                
+            else:
+                tempTime.append(currData['timeStamp'])
+                tempSuhu.append(currData['suhu'])
+                tempkelembapan.append(currData['kelembapan'])
+                tempTekanan.append(currData['tekanan'])
+                
+                akselerasiData=currData['akselerasi']
+                akselerasiData=akselerasiData.replace("[","")
+                akselerasiData=akselerasiData.replace("]","")
+                
+                splitAkselerasi=akselerasiData.split(",")
+                
+                tempX.append(int(splitAkselerasi[0]))
+                tempY.append(int(splitAkselerasi[1]))
+                tempZ.append(int(splitAkselerasi[2]))
+                
+        return output
     
+    def medianData(self,sensingData,interval):
+        
+        currTime=sensingData[0]['timeStamp'];
+        currIntervalLeft=interval
+        output=[]
+        tempTime=[sensingData[0]['timeStamp']]
+        tempSuhu=[sensingData[0]['suhu']]
+        tempkelembapan=[sensingData[0]['kelembapan']]
+        tempTekanan=[sensingData[0]['tekanan']]
+        
+        akselerasiData=sensingData[0]['akselerasi']
+        akselerasiData=akselerasiData.replace("[","")
+        akselerasiData=akselerasiData.replace("]","")
+        
+        splitAkselerasi=akselerasiData.split(",")
+        tempX=[int(splitAkselerasi[0])]
+        tempY=[int(splitAkselerasi[1])]
+        tempZ=[int(splitAkselerasi[2])]
+
+        # tempAkselerasi=[sensingData[0]['alse;erasi']]
+        for i in range(1,len(sensingData)):
+            currData=sensingData[i]
+            
+            diffInterval=(currData['timeStamp']-currTime).total_seconds()
+            currIntervalLeft-=diffInterval
+
+            currTime=currData['timeStamp']
+
+            if(currIntervalLeft <=0 ): #kalau habis
+                
+                
+                currIntervalLeft=interval
+                cell={};
+                medPos=(int)(round((len(tempSuhu)+1)/2,0)) #kalau dia .5 maka +1
+                
+                print(medPos)
+                medSuhu=tempSuhu[medPos]
+                medKelembapan=tempkelembapan[medPos]
+                medTekanan=tempTekanan[medPos]
+                medX=tempX[medPos]
+                medY=tempY[medPos]
+                medZ=tempZ[medPos]
+                
+                if(len(tempSuhu)%2==1):
+                    medPos=(int)(len(tempSuhu)/2)
+                    
+                    medSuhu+=tempSuhu[medPos]
+                    medKelembapan+=tempkelembapan[medPos]
+                    medTekanan+=tempTekanan[medPos]
+                    medX+=tempX[medPos]
+                    medY+=tempY[medPos]
+                    medZ+=tempZ[medPos]
+                        
+                
+                cell['timeStamp']= tempTime[0]  
+                cell['suhu']= medSuhu
+                cell['kelembapan']=medKelembapan
+                cell['tekanan']= medTekanan
+                cell['akselerasi']={
+                    "x":medX,
+                    "y":medY,
+                    "z":medZ
+                }
+                
+                output.append(cell)
+                tempTime=[currData['timeStamp']]
+                tempSuhu=[currData['suhu']]
+                tempkelembapan=[currData['kelembapan']]
+                tempTekanan=[currData['tekanan']]
+                
+                akselerasiData=currData['akselerasi']
+                akselerasiData=akselerasiData.replace("[","")
+                akselerasiData=akselerasiData.replace("]","")
+                
+                splitAkselerasi=akselerasiData.split(",")
+                
+                tempX=[int(splitAkselerasi[0])]
+                tempY=[int(splitAkselerasi[1])]
+                tempZ=[int(splitAkselerasi[2])]
+                
+            else:
+                tempTime.append(currData['timeStamp'])
+                tempSuhu.append(currData['suhu'])
+                tempkelembapan.append(currData['kelembapan'])
+                tempTekanan.append(currData['tekanan'])
+                
+                akselerasiData=currData['akselerasi']
+                akselerasiData=akselerasiData.replace("[","")
+                akselerasiData=akselerasiData.replace("]","")
+                
+                splitAkselerasi=akselerasiData.split(",")
+                
+                tempX.append(int(splitAkselerasi[0]))
+                tempY.append(int(splitAkselerasi[1]))
+                tempZ.append(int(splitAkselerasi[2]))
+                
+        return output
+    
+
+    def rawData(self,sensingData,interval):
+        
+        currTime=sensingData[0]['timeStamp'];
+        currIntervalLeft=interval
+        output=[]
+        tempTime=[sensingData[0]['timeStamp']]
+        tempSuhu=[sensingData[0]['suhu']]
+        tempkelembapan=[sensingData[0]['kelembapan']]
+        tempTekanan=[sensingData[0]['tekanan']]
+        
+        akselerasiData=sensingData[0]['akselerasi']
+        akselerasiData=akselerasiData.replace("[","")
+        akselerasiData=akselerasiData.replace("]","")
+        
+        splitAkselerasi=akselerasiData.split(",")
+        tempX=[int(splitAkselerasi[0])]
+        tempY=[int(splitAkselerasi[1])]
+        tempZ=[int(splitAkselerasi[2])]
+
+        # tempAkselerasi=[sensingData[0]['alse;erasi']]
+        for i in range(1,len(sensingData)):
+            currData=sensingData[i]
+            
+            diffInterval=(currData['timeStamp']-currTime).total_seconds()
+            currIntervalLeft-=diffInterval
+
+            currTime=currData['timeStamp']
+
+            if(currIntervalLeft <=0 ): #kalau habis
+                
+                
+                currIntervalLeft=interval
+                cell={};
+                
+                cell['timeStamp']= str(tempTime[0])  
+                cell['suhu']= tempSuhu
+                cell['kelembapan']=tempkelembapan
+                cell['tekanan']= tempTekanan
+                cell['akselerasi']={
+                    "x":tempX,
+                    "y":tempY,
+                    "z":tempZ
+                }
+                
+                output.append(cell)
+                tempTime=[currData['timeStamp']]
+                tempSuhu=[currData['suhu']]
+                tempkelembapan=[currData['kelembapan']]
+                tempTekanan=[currData['tekanan']]
+                
+                akselerasiData=currData['akselerasi']
+                akselerasiData=akselerasiData.replace("[","")
+                akselerasiData=akselerasiData.replace("]","")
+                
+                splitAkselerasi=akselerasiData.split(",")
+                
+                tempX=[int(splitAkselerasi[0])]
+                tempY=[int(splitAkselerasi[1])]
+                tempZ=[int(splitAkselerasi[2])]
+                
+            else:
+                tempTime.append(currData['timeStamp'])
+                tempSuhu.append(currData['suhu'])
+                tempkelembapan.append(currData['kelembapan'])
+                tempTekanan.append(currData['tekanan'])
+                
+                akselerasiData=currData['akselerasi']
+                akselerasiData=akselerasiData.replace("[","")
+                akselerasiData=akselerasiData.replace("]","")
+                
+                splitAkselerasi=akselerasiData.split(",")
+                
+                tempX.append(int(splitAkselerasi[0]))
+                tempY.append(int(splitAkselerasi[1]))
+                tempZ.append(int(splitAkselerasi[2]))
+                
+        return output
     
 

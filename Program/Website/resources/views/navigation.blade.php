@@ -1,27 +1,33 @@
 
 <link rel="stylesheet" href="{{'css/navigation.css'}}">
 
-<div class="container-fluid">
-    <div class="row">
-      <nav id="sidebarMenu" class=" col-lg-2 d-md-block">
-        <div class="position-sticky pt-3"> 
+<div class="container-fluid" > 
+   <div class="row">
+      <nav id="sidebarMenu" class=" col-lg-2 d-md-block" style="min-height: 92vh;">
+        <div class="position-sticky pt-3 "> 
           <ul class="nav flex-column">
             <li class="nav-item">
-              <a class="nav-link active " aria-current="page" href="#">
+              <a class="nav-link active " aria-current="page" href="main">
                 <span>
                   <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="512" height="512" x="0" y="0" viewBox="0 0 463.937 463.937" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><path d="m460.414 216.518-85.6-73.1c.1-.5.2-1 .3-1.6v-95.6c-.1-5.7-4.6-10.3-10.3-10.5h-47.8c-5.5 0-10 4.9-10 10.5v39.6l-68.5-58.4c-3.7-3.2-9.2-3.2-13 0l-221.9 189c-4.3 3.5-4.8 9.8-1.3 14.1s9.8 4.8 14.1 1.3l.2-.2 215.4-183.4 77.1 65.7 46.1 39.2 92.3 78.6c4.2 3.6 10.5 3.1 14.1-1.1 3.5-4.2 3-10.5-1.2-14.1zm-105.4-90-28-23.6v-47.1h28v70.7z" fill="currentColor" data-original="#000000"></path><path d="m416.314 236.718-28.1-24-149.7-127.9c-3.7-3.2-9.2-3.2-13 0l-149.7 127.9-28.1 24c-4.2 3.6-4.7 9.9-1.1 14.1 3.5 4.2 9.7 4.7 13.8 1.2l.1-.1 12.5-10.8v187.5c.1 5.6 4.7 10.2 10.3 10.3h297.3c5.6-.1 10.2-4.6 10.3-10.3v-187.5l12.5 10.8c1.8 1.5 4 2.4 6.4 2.4 2.9 0 5.7-1.3 7.6-3.5 3.7-4.3 3.1-10.6-1.1-14.1zm-144.3 182.1h-80v-108h80v108zm20 0v-117.7c0-5.5-4.1-10.3-9.6-10.3h-100.8c-5.5 0-9.6 4.8-9.6 10.3v117.7h-79v-194.8l139-118.4 139 118.4v194.8h-79z" fill="#\currentColor" data-original="#000000"></path></g></svg>
                 </span>
                 Dashboard
               </a>
             </li>
-            <li class="nav-item" >
-              <span class=nonClick>
-                <span>
-                  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="512" height="512" x="0" y="0" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><path d="M341.476 338.285c54.483-85.493 47.634-74.827 49.204-77.056C410.516 233.251 421 200.322 421 166 421 74.98 347.139 0 256 0 165.158 0 91 74.832 91 166c0 34.3 10.704 68.091 31.19 96.446l48.332 75.84C118.847 346.227 31 369.892 31 422c0 18.995 12.398 46.065 71.462 67.159C143.704 503.888 198.231 512 256 512c108.025 0 225-30.472 225-90 0-52.117-87.744-75.757-139.524-83.715zm-194.227-92.34a15.57 15.57 0 0 0-.517-.758C129.685 221.735 121 193.941 121 166c0-75.018 60.406-136 135-136 74.439 0 135 61.009 135 136 0 27.986-8.521 54.837-24.646 77.671-1.445 1.906 6.094-9.806-110.354 172.918L147.249 245.945zM256 482c-117.994 0-195-34.683-195-60 0-17.016 39.568-44.995 127.248-55.901l55.102 86.463a14.998 14.998 0 0 0 25.298 0l55.101-86.463C411.431 377.005 451 404.984 451 422c0 25.102-76.313 60-195 60z" fill="currentColor" data-original="#000000" class=""></path><path d="M256 91c-41.355 0-75 33.645-75 75s33.645 75 75 75 75-33.645 75-75-33.645-75-75-75zm0 120c-24.813 0-45-20.187-45-45s20.187-45 45-45 45 20.187 45 45-20.187 45-45 45z" fill="currentColor" data-original="#000000" class=""></path></g></svg>
-                </span>
-                Location
-              </span>
-            </li>
+            @php
+            if($location){
+                echo '<li class="nav-item" >
+                        <span class=nonClick>
+                          <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="512" height="512" x="0" y="0" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><path d="M341.476 338.285c54.483-85.493 47.634-74.827 49.204-77.056C410.516 233.251 421 200.322 421 166 421 74.98 347.139 0 256 0 165.158 0 91 74.832 91 166c0 34.3 10.704 68.091 31.19 96.446l48.332 75.84C118.847 346.227 31 369.892 31 422c0 18.995 12.398 46.065 71.462 67.159C143.704 503.888 198.231 512 256 512c108.025 0 225-30.472 225-90 0-52.117-87.744-75.757-139.524-83.715zm-194.227-92.34a15.57 15.57 0 0 0-.517-.758C129.685 221.735 121 193.941 121 166c0-75.018 60.406-136 135-136 74.439 0 135 61.009 135 136 0 27.986-8.521 54.837-24.646 77.671-1.445 1.906 6.094-9.806-110.354 172.918L147.249 245.945zM256 482c-117.994 0-195-34.683-195-60 0-17.016 39.568-44.995 127.248-55.901l55.102 86.463a14.998 14.998 0 0 0 25.298 0l55.101-86.463C411.431 377.005 451 404.984 451 422c0 25.102-76.313 60-195 60z" fill="currentColor" data-original="#000000" class=""></path><path d="M256 91c-41.355 0-75 33.645-75 75s33.645 75 75 75 75-33.645 75-75-33.645-75-75-75zm0 120c-24.813 0-45-20.187-45-45s20.187-45 45-45 45 20.187 45 45-20.187 45-45 45z" fill="currentColor" data-original="#000000" class=""></path></g></svg>
+                          </span>
+                          Location
+                        </span>
+                      </li>';
+            }
+            @endphp
+
+            
 
 
             <li class="nav-item" hidden id="navSensorAvaiable">
@@ -183,7 +189,7 @@
           </h6>
           <ul class="nav flex-column mb-2">
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="user">
                 <span>
                   <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="512" height="512" x="0" y="0" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><path d="M256 0c-74.439 0-135 60.561-135 135s60.561 135 135 135 135-60.561 135-135S330.439 0 256 0zm0 240c-57.897 0-105-47.103-105-105S198.103 30 256 30s105 47.103 105 105-47.103 105-105 105zM423.966 358.195C387.006 320.667 338.009 300 286 300h-60c-52.008 0-101.006 20.667-137.966 58.195C51.255 395.539 31 444.833 31 497c0 8.284 6.716 15 15 15h420c8.284 0 15-6.716 15-15 0-52.167-20.255-101.461-57.034-138.805zM61.66 482c7.515-85.086 78.351-152 164.34-152h60c85.989 0 156.825 66.914 164.34 152H61.66z" fill="currentColor" data-original="#000000" class=""></path></g></svg>
                 </span>
@@ -205,14 +211,18 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
-                <span>
-                  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="512" height="512" x="0" y="0" viewBox="0 0 682.667 682.667" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><defs><clipPath id="b" clipPathUnits="userSpaceOnUse"><path d="M0 512h512V0H0Z" fill="currentColor" data-original="#000000" class=""></path></clipPath></defs><mask id="a"><rect width="100%" height="100%" fill="#ffffff" data-original="#ffffff" class=""></rect></mask><g mask="url(#a)"><g clip-path="url(#b)" transform="matrix(1.33333 0 0 -1.33333 0 682.667)"><path d="M0 0v-40c0-33.137-26.863-60-60-60h-201c-33.137 0-60 26.863-60 60v352c0 33.137 26.863 60 60 60h201c33.137 0 60-26.863 60-60v-40" style="stroke-width:40;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" transform="translate(341 120)" fill="none" stroke="currentColor" stroke-width="40" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-dasharray="none" stroke-opacity="" data-original="#000000" class=""></path><path d="M0 0h-271" style="stroke-width:40;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" transform="translate(487 255)" fill="none" stroke="currentColor" stroke-width="40" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-dasharray="none" stroke-opacity="" data-original="#000000" class=""></path><path d="m0 0 44.786 44.787c11.716 11.716 11.716 30.71 0 42.426L0 132" style="stroke-width:40;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" transform="translate(438.427 189)" fill="none" stroke="currentColor" stroke-width="40" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-dasharray="none" stroke-opacity="" data-original="#000000" class=""></path></g></g></g></svg>
-                </span>
-                Log out
-              </a>
+              <form action="keluar" method="post">
+                <a class="nav-link" href="keluar" onclick="parentNode.submit();">
+                  <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="512" height="512" x="0" y="0" viewBox="0 0 682.667 682.667" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><defs><clipPath id="b" clipPathUnits="userSpaceOnUse"><path d="M0 512h512V0H0Z" fill="currentColor" data-original="#000000" class=""></path></clipPath></defs><mask id="a"><rect width="100%" height="100%" fill="#ffffff" data-original="#ffffff" class=""></rect></mask><g mask="url(#a)"><g clip-path="url(#b)" transform="matrix(1.33333 0 0 -1.33333 0 682.667)"><path d="M0 0v-40c0-33.137-26.863-60-60-60h-201c-33.137 0-60 26.863-60 60v352c0 33.137 26.863 60 60 60h201c33.137 0 60-26.863 60-60v-40" style="stroke-width:40;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" transform="translate(341 120)" fill="none" stroke="currentColor" stroke-width="40" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-dasharray="none" stroke-opacity="" data-original="#000000" class=""></path><path d="M0 0h-271" style="stroke-width:40;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" transform="translate(487 255)" fill="none" stroke="currentColor" stroke-width="40" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-dasharray="none" stroke-opacity="" data-original="#000000" class=""></path><path d="m0 0 44.786 44.787c11.716 11.716 11.716 30.71 0 42.426L0 132" style="stroke-width:40;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" transform="translate(438.427 189)" fill="none" stroke="currentColor" stroke-width="40" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-dasharray="none" stroke-opacity="" data-original="#000000" class=""></path></g></g></g></svg>
+                  </span>
+                  Log out
+                </a>
+
+              </form>
             </li>
           </ul>
         </div>
       </nav>
-  @include("footer")
+
+  

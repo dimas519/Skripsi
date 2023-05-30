@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Prata&family=Rokkitt:wght@300;400;500;600;700;800&display=swap');
 
 *{
-    margin: 0px;
+    margin: 0px; 
     padding: 0px;
-    font-family: rokkitt;
+     font-family: rokkitt;
 }
 
 body{
@@ -15,7 +15,6 @@ body{
 
 .menuAtas {
     background-color: antiquewhite;
-
 }
 
 .debug{
@@ -24,13 +23,14 @@ body{
 
 #logo{
     margin: -5px 0px;
-    width: 80px;
+    height: 9vh;
 }
 
 #title{
     color: #555154;
-
+    
     line-height: 1.5;
     font-weight: 500;
     font-size: 38px;
+    height: 5vh;
 }

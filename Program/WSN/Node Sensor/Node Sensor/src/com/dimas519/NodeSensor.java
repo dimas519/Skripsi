@@ -1,11 +1,6 @@
 package com.dimas519;
 
-
-
-
-import com.dimas519.Radio.Misc;
-import com.dimas519.Radio.MyRadio;
-import com.dimas519.Radio.RadioInterface;
+import com.dimas519.Radio.*;
 import com.dimas519.Sensor.*;
 import com.virtenio.driver.i2c.I2C;
 import com.virtenio.driver.i2c.I2CException;

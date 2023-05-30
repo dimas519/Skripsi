@@ -16,7 +16,7 @@ from Controller.WSNController import WSNController
 
 # server 
 from ServerQueue import ServerQueue
-import ServerVariable
+# import ServerVariable
 
 
 # INITIALIZING
@@ -311,11 +311,17 @@ async def insertSensingdata(value: Request):
         start=data['start']
         end=data['end']
         interval=data['interval']
-        cleanning=data['cleaning']
     except :
         raiseWrongArguments()
+       
+    statistics=None; 
+    try:
+        statistics=data['stat']
+    except:
+        statistics='avg'
+        
 
-    result=wsnController.getData(databaseAPI,identifier,start,end,interval,cleanning)
+    result=wsnController.getData(databaseAPI,identifier,start,end,interval,statistics)
 
     return {"result":result}
 

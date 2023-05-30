@@ -1,11 +1,8 @@
-@include('layout',['menu'=> false ])
+@include('header',['menu'=> false ])
 <link rel="stylesheet" href="{{'css/login.css'}}">
 
 
 <div class="d-flex justify-content-end" style="margin: 30px 50px 0px 0px">
-
-
-
     <div class="card login" style="width: 18rem;">
         <div class="card-body">
             <div class="text-center">
@@ -30,7 +27,7 @@
                 <div>
                   Already have account? <a href="/">Login</a>
                 </div>
-                <button type="submit" class="btn btn-primary mt-3 ">Submit</button>
+                <button type="submit" class="btn btn-primary mt-3 ">Sign Up  </button>
               </form>
 
         </div>
