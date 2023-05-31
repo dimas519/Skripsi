@@ -50,4 +50,3 @@ class mysqlDB:
             return None
         finally:
             self.closeConnect()
-

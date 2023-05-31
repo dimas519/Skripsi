@@ -680,6 +680,10 @@
 	6		<init>(ILcom/virtenio/driver/spi/NativeSPI$1;)V
 	0		command(Lcom/virtenio/driver/spi/NativeSPI;I)I
 
+414		com/dimas519/Sensor/Accelerometer
+	251		run()Ljava/lang/String;
+	163		<init>()V
+
 413		java/util/StringTokenizer
 	216		nextToken()Ljava/lang/String;
 	62		countTokens()I
@@ -793,10 +797,6 @@
 	7		access$100(Lcom/dimas519/Radio/MyRadio;Ljava/lang/String;C)[Ljava/lang/String;
 	4		access$000(Lcom/dimas519/Radio/MyRadio;)Lcom/virtenio/radio/ieee_802_15_4/FrameIO;
 	4		access$200(Lcom/dimas519/Radio/MyRadio;)Lcom/dimas519/Radio/RadioInterface;
-
-284		com/dimas519/Sensor/Accelerometer
-	163		<init>()V
-	121		run()Ljava/lang/String;
 
 256		com/virtenio/driver/i2c/NativeI2C
 	32		getManager()Lcom/virtenio/driver/InstanceManager;

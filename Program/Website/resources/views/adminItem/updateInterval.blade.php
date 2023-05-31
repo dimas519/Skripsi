@@ -1,4 +1,5 @@
-<div>
+<div class="collapse partBox" id="updateInterval">
+  <h3> Update interval</h3>
     <form action="ganti" method="post">
       <div class="row">
         <div class="col-6">

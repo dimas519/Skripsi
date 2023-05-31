@@ -37,10 +37,10 @@ class DataBaseContoller:
         else :
             return True
 
-    def insertKota(self,namaKota,offsetHour,offsetMinutes):
-        sql="call insertKota('{}',{},{})".format(namaKota, offsetHour, offsetMinutes)
-        row=self.db.executeNonSelectQuery(sql)
-        return bool(row)
+    def insertKota(self,namaKota):
+        sql="call insertKota('{}')".format(namaKota)
+        row=self.db.executeSelectQuery(sql) #menggunakan execute select karena dia akan mengembalikan id
+        return {"result":bool(row),"id":row[0]["last_insert_id()"]}
 
     def getLocation(self):
         sql="call getKota()"
@@ -52,15 +52,15 @@ class DataBaseContoller:
     
     def insertLocation(self,nama,latitude,longtitude,indoor,fk):
         sql="CALL insertLocation('{}','{}','{}',{},{})".format(nama,latitude,longtitude,indoor,fk)
-        row=self.db.executeNonSelectQuery(sql)
-        return bool(row)
+        row=self.db.executeSelectQuery(sql)
+        return {"result":bool(row),"id":row[0]["last_insert_id()"]}
 
     def getBaseStasion(self,id):
         sql=None
         if (id >=0):
             sql="SELECT `identifier`, `token`, `addedTimeStamp`, `lastEditTimeStamp`,`interval` FROM `basestasion` WHERE `idLokasi`={}".format(id)
         else:
-            sql="SELECT `identifier`, `token`, `interval`, `lokasi`.`nama` as 'namaLokasi', `latitude`, `longtitude`, `indoor`, `kota`.`nama` as 'namaKota', `offsetHour`, `offsetMinutes`  FROM `basestasion` INNER JOIN `lokasi` ON `basestasion`.`idLokasi`=`lokasi`.`id` INNER JOIN `kota` ON `lokasi`.`idKota`=`kota`.`id`"
+            sql="SELECT `identifier`, `token`, `interval`, `lokasi`.`nama` as 'namaLokasi', `latitude`, `longtitude`, `indoor`, `kota`.`nama` as 'namaKota'  FROM `basestasion` INNER JOIN `lokasi` ON `basestasion`.`idLokasi`=`lokasi`.`id` INNER JOIN `kota` ON `lokasi`.`idKota`=`kota`.`id`"
         result=self.db.executeSelectQuery(sql)
         return result
 
@@ -141,7 +141,9 @@ class DataBaseContoller:
     def executeDb(self,query):
         return self.db.executeSelectQuery(query)
    
-
+    def updateInterval(self,identifier,interval):
+        query ="CALL updateInterval('{}',{})".format(identifier,interval)
+        return self.db.executeNonSelectQuery(query)
    
 
 

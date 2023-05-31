@@ -42,7 +42,6 @@ class WSNController:
         for sensor in allSensor:
             if(concate):
                 sql+=","
-
             if(sensor=="Suhu"):
                 sql+="`suhu` float NOT NULL"
                 concate=True
@@ -92,6 +91,11 @@ class WSNController:
         selectedWSN=self.__searchWSN(identifier)
         newID=dbController.insertQueue(identifier,command)
 
+        commandSplit=command.split(":")
+        if(commandSplit[0]=='setInterval'):
+            print("setNewInterval")
+            dbController.updateInterval(identifier,commandSplit[1])
+            selectedWSN.setInterval(commandSplit[1])
 
         if(selectedWSN.getQueue()==None):
 
@@ -133,10 +137,6 @@ class WSNController:
             else:
                 output=self.averageData(sensingData,interval)
                 
-            
-                                
-            
-            
             return output
         else:
             return False
@@ -397,4 +397,11 @@ class WSNController:
                 
         return output
     
+    def getRealTime(self, identifier):
+        selectedWSN=self.__searchWSN(identifier)
+        return selectedWSN.getLastData()
+    
+    def setRealTime(self, identifier,data):
+        selectedWSN=self.__searchWSN(identifier)
+        return selectedWSN.setLastData(data)
 

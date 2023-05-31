@@ -41,7 +41,6 @@ def initWSN(databaseControler):
                 queuedWSN=queue
 
         newWSN=WSN(identifier= currWSN['identifier'], token=currWSN["token"]
-                ,offsetHour=currWSN['offsetHour'], offsetMinutes=currWSN['offsetMinutes']
                 ,sensorType=listSensor, interval=currWSN['interval']
                 ,latitude=currWSN['latitude'], longtitude=currWSN["longtitude"]
                 ,kota=currWSN["namaKota"],queue=queuedWSN)

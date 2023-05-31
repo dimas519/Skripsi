@@ -167,12 +167,10 @@ async def insertKota(value: Request):
     data= await value.json()
     try:
         nama=data['nama']
-        offsetHour=data['offsetHour']
-        offsetMinutes=data['offsetMinutes']
     except:
         raiseWrongArguments()
 
-    result=databaseAPI.insertKota(nama, offsetHour, offsetMinutes)
+    result=databaseAPI.insertKota(nama)
     return {"result":result}
 
 
@@ -214,7 +212,7 @@ async def getBaseStasion(value: Request):
 async def insertBaseStasion(value: Request):
     data= await value.json()
     try:
-        identifier=data['identifier'].lower()
+        identifier=data['idBS'].lower()
         idLokasi=data['idLokasi']
         interval=data['interval']
     except:
@@ -286,7 +284,7 @@ async def insertSensingdata(value: Request):
         sensingData=data['result']
     except :
         raiseWrongArguments()
-
+    wsnController.setRealTime(identifier,data)  
     result=wsnController.sensingProcedure(databaseAPI,identifier,time,sensingData)
     
     return result
@@ -302,6 +300,8 @@ async def insertSensingdata(value: Request):
     result=wsnController.getInterval(identifier)
 
     return {"setInterval":result}
+
+
 
 @api.post("/data")
 async def insertSensingdata(value: Request):
@@ -319,9 +319,26 @@ async def insertSensingdata(value: Request):
         statistics=data['stat']
     except:
         statistics='avg'
-        
+          
 
     result=wsnController.getData(databaseAPI,identifier,start,end,interval,statistics)
+
+    return {"result":result}
+
+
+
+
+
+
+@api.get("/realTime")
+async def insertSensingdata(value: Request):
+    data= await value.json()
+    try:
+        identifier=data['idBS'].lower()
+    except :
+        raiseWrongArguments()
+       
+    result=wsnController.getRealTime(identifier)
 
     return {"result":result}
 

@@ -60,9 +60,22 @@ public class Accelerometer extends Sensor{
 	public String run() {
 		try {
 			short[] values = new short[3];
-			accelerationSensor.getValuesRaw(values, 0);
+			accelerationSensor.getValuesRaw(values, 0); //membaca xyz sensor berdasarkan offset (parameter kedua)
 
-			String result="\""+name+"\":"+Arrays.toString(values);
+
+			//perlu dibagi dengan typ (256), angka diperoleh dari dokumentasi sensor adxl345.
+			//typ merupakan angka mayoritas, jika lokasi suatu sumbu yang mengarah ke inti dibagi dengan 256 maka hasilnya mendekati 1g
+			double[] inG=new double[3];
+
+
+			inG[0]= Math.round(( values[0]/256.0) * 100.0) / 100.0;
+
+			inG[1]= Math.round(( values[1]/256.0) * 100.0) / 100.0;
+			inG[2]=Math.round(( values[2]/256.0) * 100.0) / 100.0;
+
+			String result="\""+name+"\":"+Arrays.toString(inG);
+
+
 			return result;
 		} catch (Exception e) {
 			System.err.println(name+" failed");

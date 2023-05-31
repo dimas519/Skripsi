@@ -1,15 +1,11 @@
 class WSN:
     def __init__(self, identifier:str, token:str 
-                 ,offsetHour:int, offsetMinutes:int 
                  ,sensorType:list, interval:int
                  ,latitude:str ,longtitude:str
                  , kota:str, queue:dict):
        
         self.identifier=identifier
         self.token=token
-
-        self.offsetHour=offsetHour
-        self.offsetMinutes=offsetMinutes
 
         self.sensorType=sensorType
         self.interval=interval;
@@ -19,6 +15,9 @@ class WSN:
 
         self.kota=kota
         self.queue=queue
+        
+        self.lastData={"time":"1970-00-00 00-00-00","idBS":self.identifier,"result":{"kelembapan":None,"tekanan":None,"suhu":None,"akselerasi":None}}
+        
         
         
     def setSensingTable(self, sensingTable):
@@ -31,18 +30,22 @@ class WSN:
     def addSensingTable(self,nameNewTable):
         self.sensingTable.append(nameNewTable)
 
+    def setLastData(self, data):
+        self.lastData=data;
+        
+    def setInterval(self,interval):
+        self.interval=interval;
+    
+    
+    
+    
+    
 
     def getIdentifier(self):
         return self.identifier
 
     def getToken(self):
         return self.token
-    
-    def getOffsetHour(self):
-        return self.offsetHour
-    
-    def getOffsetMinutes(self):
-        return self.offsetMinutes
     
     def getSensorType(self):
         return self.sensorType
@@ -64,3 +67,7 @@ class WSN:
     
     def getInterval(self):
         return self.interval
+    
+    def getLastData(self):
+        return self.lastData
+    

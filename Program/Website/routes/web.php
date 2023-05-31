@@ -76,3 +76,5 @@ Route::post('/data', [MainPages::class, 'data']);
 Route::post('/ganti', [AdminController::class, 'ganti']);
 
 Route::post('/kota', [AdminController::class, 'kota']);
+
+Route::post('/sensorBaru', [AdminController::class, 'addWSN']);

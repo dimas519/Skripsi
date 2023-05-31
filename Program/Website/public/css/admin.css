@@ -1,0 +1,19 @@
+.partBox{
+    background-color: antiquewhite;
+    padding:20px 10px;
+    border-radius: 10px;
+    margin: 10px 0px;
+}
+
+.conf{
+    height: 40px;
+    vertical-align: middle !important;
+}
+
+label.conf{
+    padding-top: 10px;
+}
+
+input[type=checkbox].indoor{
+    margin-top: 10px;
+}

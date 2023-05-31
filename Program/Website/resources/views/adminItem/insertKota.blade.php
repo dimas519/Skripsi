@@ -1,22 +1,21 @@
-<div>
+<div class="collapse partBox " id="tambahKota">
+  <h3> Tambah Kota</h3>
     <form action="kota" method="post">  
       <div class="row"> 
         <div class="col-1">
-          <label for="nama">Nama Kota</label>
-          <label for="latitude">offsetHour</label>
-          <label for="longtitude">offsetMinutes</label>
-    
+          <label for="nama" class="conf">Nama Kota</label>   
         </div>
 
         <div class="col-2">
-          <input type="text" class="form-control" placeholder="Nama Kota" name="nama">
-          <input type="number" class="form-control" placeholder="offsetHour" name="hour">
-          <input type="number" class="form-control" placeholder="offsetMinutes" name="minutes">
+          <input type="text" class="form-control conf" placeholder="Nama Kota" name="nama">
         </div>
       </div>
       
       <div class="row"> 
-        <button type="submit" class="btn btn-primary mt-2">Insert Kota Baru</button>
+        <div class="col-10
+        ">
+          <button type="submit" class="btn btn-primary mt-2">Insert Kota Baru</button>
+        </div>
       </div>
       
       </form>

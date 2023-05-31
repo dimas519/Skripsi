@@ -46,11 +46,11 @@ public class BaseStationControllerUSART {
 
         try {
             this.nodeHelper = new Preon32Helper("COM8",115200);
-            this.dataConnection = this.nodeHelper.runModule("autostart");
+            this.dataConnection = this.nodeHelper.runModule("dimasBS");
             bufferedInputStream = new BufferedInputStream(this.dataConnection.getInputStream());
 
         } catch (Exception e) {
-            System.out.println("failed open connection to preon32");
+            System.out.println("failed open connection to preon32"+e.getMessage());
         }
 
         this.queueNode=new ArrayList<>();
@@ -91,7 +91,7 @@ public class BaseStationControllerUSART {
 
                         break;
                     }
-
+                    System.out.println(usartMsg);
                     String[] msg=usartMsg.split(",",2);
                     String[] source=msg[0].split(":",2);
 
@@ -184,7 +184,7 @@ public class BaseStationControllerUSART {
             }
             System.out.println(responseBS);
 
-            this.dataConnection.write(writeToBytes(responseBS),0,64);
+            this.dataConnection.write(writeToBytes(responseBS),0,128);
             writing=false;
         } catch (IOException e) {
             System.out.println("failed api response");
@@ -194,7 +194,7 @@ public class BaseStationControllerUSART {
     }
 
     private byte[] writeToBytes(String msg){
-        byte[] result=new byte[64];
+        byte[] result=new byte[128];
         for(int i=0;i<msg.length();i++){
             result[i]= (byte) msg.charAt(i);
         }
