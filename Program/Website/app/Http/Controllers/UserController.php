@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 
-
+use App\Http\Controllers\GraphController;
 
 class UserController extends Controller
 {
@@ -28,13 +28,14 @@ class UserController extends Controller
 
         
 
-        if($result['result']==0){
+        if($result['result']==0){  
             Session::put('username',  $username);
             Session::put('token',  $token);
             Session::put('role',  0);
             return redirect('/main');
         }
         elseif($result['result']==1) {
+
             Session::put('username',  $username);
             Session::put('token',  $token);
             Session::put('role',  1);
@@ -71,8 +72,20 @@ class UserController extends Controller
         else{
             return redirect('/signUP?wrong=1');
         }
-
     }
+
+
+    public function viewUser(Request $request){
+        $mainPage=new GraphController();
+        $username=$request->session()->get('username');
+        return view('layout')
+        ->with('semuaKota',$mainPage->getCity())
+        ->with("semuaLokasi",$mainPage->getLocation())
+        ->with('menu',true)
+        ->with('location',true)
+        ->with('page','graphSelection');
+    }
+
 
    
 

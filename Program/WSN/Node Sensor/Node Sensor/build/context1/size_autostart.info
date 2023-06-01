@@ -584,6 +584,14 @@
 	6		getBytes()[B
 	3		size()I
 
+586		com/dimas519/NodeSensor
+	235		<init>()V
+	202		sensing()V
+	56		processMsg(J[Ljava/lang/String;)V
+	42		run()V
+	38		initializeTime()V
+	13		main([Ljava/lang/String;)V
+
 578		com/virtenio/vm/event/AsyncEvents
 	91		run()V
 	83		getFreeEventId()I
@@ -600,14 +608,6 @@
 	0		waitForEvent()I
 	0		getSourceCount()I
 	0		fire(I)V
-
-533		com/dimas519/NodeSensor
-	235		<init>()V
-	177		sensing()V
-	56		processMsg(J[Ljava/lang/String;)V
-	42		run()V
-	13		main([Ljava/lang/String;)V
-	10		initializeTime()V
 
 528		java/util/AbstractList$SubAbstractList
 	70		addAll(ILjava/util/Collection;)Z
@@ -773,6 +773,15 @@
 	118		initRadio()Lcom/virtenio/driver/device/at86rf231/AT86RF231;
 	37		prepareFrame(III)Lcom/virtenio/radio/ieee_802_15_4/Frame;
 
+335		com/dimas519/Radio/MyRadio
+	168		sendMSG(ILjava/lang/String;)V
+	85		<init>(Lcom/dimas519/Radio/RadioInterface;III)V
+	53		splitMSG(Ljava/lang/String;C)[Ljava/lang/String;
+	14		receive()V
+	7		access$100(Lcom/dimas519/Radio/MyRadio;Ljava/lang/String;C)[Ljava/lang/String;
+	4		access$000(Lcom/dimas519/Radio/MyRadio;)Lcom/virtenio/radio/ieee_802_15_4/FrameIO;
+	4		access$200(Lcom/dimas519/Radio/MyRadio;)Lcom/dimas519/Radio/RadioInterface;
+
 335		com/virtenio/misc/FixedFifo
 	132		remove(I)Ljava/lang/Object;
 	35		remove()Ljava/lang/Object;
@@ -788,15 +797,6 @@
 	4		access$000(Lcom/virtenio/misc/FixedFifo;)I
 	3		capacity()I
 	2		size()I
-
-316		com/dimas519/Radio/MyRadio
-	149		sendMSG(ILjava/lang/String;)V
-	85		<init>(Lcom/dimas519/Radio/RadioInterface;III)V
-	53		splitMSG(Ljava/lang/String;C)[Ljava/lang/String;
-	14		receive()V
-	7		access$100(Lcom/dimas519/Radio/MyRadio;Ljava/lang/String;C)[Ljava/lang/String;
-	4		access$000(Lcom/dimas519/Radio/MyRadio;)Lcom/virtenio/radio/ieee_802_15_4/FrameIO;
-	4		access$200(Lcom/dimas519/Radio/MyRadio;)Lcom/dimas519/Radio/RadioInterface;
 
 256		com/virtenio/driver/i2c/NativeI2C
 	32		getManager()Lcom/virtenio/driver/InstanceManager;

@@ -32,7 +32,7 @@ import com.virtenio.driver.i2c.NativeI2C;
  */
 public class Thermometer extends Sensor{
 	private ADT7410 temperatureSensor;
-	private String name="suhu";
+	private String name="T";
 
 	public Thermometer(NativeI2C i2c){
 		try {

@@ -33,7 +33,7 @@ import com.virtenio.driver.i2c.NativeI2C;
  */
 public class Hygrometer extends Sensor{
 	private SHT21 sht21;
-	private String name="kelembapan";
+	private String name="rh";
 
 	public Hygrometer(NativeI2C i2c){
 		try {

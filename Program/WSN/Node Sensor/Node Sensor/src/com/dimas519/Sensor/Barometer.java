@@ -35,7 +35,7 @@ import com.virtenio.driver.i2c.NativeI2C;
  */
 public class Barometer extends Sensor{
 	private MPL115A2 pressureSensor;
-	private String name="tekanan";
+	private String name="Pa";
 
 	public Barometer(NativeI2C i2c){
 		try {

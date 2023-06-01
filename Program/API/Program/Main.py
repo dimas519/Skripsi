@@ -298,6 +298,7 @@ async def insertSensingdata(value: Request):
         raiseWrongArguments()
 
     result=wsnController.getInterval(identifier)
+    print("haha"+str(result))
 
     return {"setInterval":result}
 
@@ -331,16 +332,13 @@ async def insertSensingdata(value: Request):
 
 
 @api.get("/realTime")
-async def insertSensingdata(value: Request):
-    data= await value.json()
-    try:
-        identifier=data['idBS'].lower()
-    except :
-        raiseWrongArguments()
-       
+async def insertSensingdata(idBS: str):
+
+    identifier=idBS.lower() 
+    print(identifier) 
     result=wsnController.getRealTime(identifier)
 
-    return {"result":result}
+    return result
 
 
     

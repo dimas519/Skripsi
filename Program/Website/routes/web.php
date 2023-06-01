@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\MainPages;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,15 +29,7 @@ Route::get('/signUP', function () {
 });
 
 
-Route::get('/main', function () {
-    $mainPage=new MainPages();
-    return view('layout')
-    ->with('semuaKota',$mainPage->getCity())
-    ->with("semuaLokasi",$mainPage->getLocation())
-    ->with('menu',true)
-    ->with('location',true)
-    ->with('page','graphSelection');
-});
+Route::get('/main',[ UserController::class , 'viewUser']);
 
 Route::get('/user', function () {
     return view('layout')

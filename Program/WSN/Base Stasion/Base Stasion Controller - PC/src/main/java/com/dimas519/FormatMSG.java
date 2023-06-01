@@ -18,8 +18,7 @@ public class FormatMSG {
         return java_date;
     }
 
-    public static  String formatToAPIFormat(String msg) {
-        String[] splitMSG = msg.split(",", 3);
+    public static  String formatToAPIFormat(String[] splitMSG) {
         String dateConverted = FormatMSG.timeFormat(splitMSG[0]);
         String result="{\"time\":\""+dateConverted+"\","+splitMSG[1]+",\"result\":{"+splitMSG[2]+"}}";
         return result;

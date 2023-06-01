@@ -14,7 +14,6 @@ public class BaseStationMain implements MainInterface {
 	private final int COMMON_PANID =0xCAFE;
 	private final int myAddress =0X0000;
 
-	int p=1;
 
 	public static void main(String[] args)  {
 
@@ -34,19 +33,22 @@ public class BaseStationMain implements MainInterface {
 
 	public void run() throws Exception  {
 		this.myRadio.receive();
-
+		this.myUsart.send("start");
 		this.myUsart.run();
+
 
 	}
 
 	@Override
 	public void processMsg(long address, String[] msg) {
 //		if(msg[0]!=null && msg[1]!= null) {
-			if (msg[0].equals("timeRequest")) {
+			if (msg[0].equals("bs")) { // kalau timeRequest cukup berikan waktu base stasion
 				this.setTime(address);
-			} else if (msg[0].equals("data")) {
+				this.myUsart.send("source:" + address + "," + msg[1]); //untuk minta interval				}
+			} else if (msg[0].equals("server") ) { //kalau dia data atau interval request(mau kom. dengan server(api atau db) maka usart.
 				this.myUsart.send("source:" + address + "," + msg[1]);
-			} else  {
+			}
+			else {
 				this.myRadio.send(address,msg[0]+":"+msg[1]);
 			}
 //		}

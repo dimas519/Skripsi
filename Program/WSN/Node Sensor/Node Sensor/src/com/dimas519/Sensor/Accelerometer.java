@@ -29,7 +29,7 @@ import com.virtenio.driver.spi.NativeSPI;
  */
 public class Accelerometer extends Sensor{
 	private ADXL345 accelerationSensor;
-	private String name="akselerasi";
+	private String name="a"; //nama disingkat karena max frame 802.15.4 itu 127 char
 
 	public Accelerometer(){
 		try {

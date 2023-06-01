@@ -8,7 +8,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
-
 public class RetrofitAPI{
     public static Retrofit getRetro(String API_url ) {
         Gson gson= new GsonBuilder().setLenient().create();

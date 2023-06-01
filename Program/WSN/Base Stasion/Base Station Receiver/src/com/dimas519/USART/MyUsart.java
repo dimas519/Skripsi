@@ -43,7 +43,7 @@ public class MyUsart {
         while (true) {
             try {
                 while (usart.available() > 0) {
-                    byte[] input = new byte[128];
+                    byte[] input = new byte[128]; //dibuat 128 karena max dari radio hanya 127
                     try {
                         usart.readFully(input,0,128);
                     } catch (USARTException e) {
@@ -91,6 +91,7 @@ public class MyUsart {
             while (isWriting) {
             }//tidak langsung writing karena satu siklus writing ditandai dengan response ok dari pc. dan pc tidak pernah mengkontak duluan
             isWriting = true;
+
             this.usart.write(msg.getBytes(), 0, msg.length());
             this.usart.flush();
 

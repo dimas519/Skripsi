@@ -46,7 +46,7 @@ public class BaseStationControllerUSART {
 
         try {
             this.nodeHelper = new Preon32Helper("COM8",115200);
-            this.dataConnection = this.nodeHelper.runModule("dimasBS");
+            this.dataConnection = this.nodeHelper.runModule("autostart");
             bufferedInputStream = new BufferedInputStream(this.dataConnection.getInputStream());
 
         } catch (Exception e) {
@@ -91,17 +91,54 @@ public class BaseStationControllerUSART {
 
                         break;
                     }
-                    System.out.println(usartMsg);
+                    System.out.println("FROM USART "+usartMsg);
                     String[] msg=usartMsg.split(",",2);
-                    String[] source=msg[0].split(":",2);
+                    String[] source=msg[0].split(":",3);
 
 
                     if(source[0].equals("source")){
-                        String format= FormatMSG.formatToAPIFormat(msg[1]);
-                        System.out.println(format);
-                        this.setApiResponse(source[1]);
-                        myApi.sendToServer(source[1],format);
+                        String msgToAPI=msg[1];
+                        boolean isSensing=false;
+                        String[] splitMSG = msgToAPI.split(",", 3);
 
+                        if(!splitMSG[0].equals("intervalRequest")){
+                            this.setApiResponse(source[1]);
+                            msgToAPI= FormatMSG.formatToAPIFormat(splitMSG); //kalau dia data sensing di format terlebih dahulu
+                            isSensing=true;
+                            myApi.sendToServer(source[1],msgToAPI,isSensing);
+                        }else {
+                            msgToAPI = "{" + splitMSG[1] + "}";
+                            myApi.sendToServer(source[1],msgToAPI,isSensing);
+
+                            //kode ini tidak dipakai karena terlalu banyak blocking, sehingga ada kemungkinan node lain tidak dapat masuk
+                            //solusi nya: biarkan saja, kekurangannya yaitu node yang baru aktif akan menjalankan sensing 1-2 kali(default sensing interval 1s)
+                            //keunggulanya tidak berdampak pada node lain (tidak blocking main thread)
+//                            boolean existNode = false;
+//                            while (!existNode){
+//                                for (NodeQueue nodeQueue : this.queueNode) {
+//                                    if (nodeQueue.getAddress() == Long.parseLong(source[1])) {
+//                                        existNode = true;
+//                                        while (nodeQueue.emptyQueue()) {
+//                                        }
+//                                    }
+//                                }
+//                            }
+                            this.setApiResponse(source[1]);
+
+
+                        }
+
+
+
+
+
+
+
+                    }
+
+
+                    else{
+                        this.setApiResponse("0");
                     }
 
                 }
@@ -182,7 +219,7 @@ public class BaseStationControllerUSART {
             if(!existNode){
                 responseBS =(source+":ok");
             }
-            System.out.println(responseBS);
+            System.out.println("TO USART "+responseBS);
 
             this.dataConnection.write(writeToBytes(responseBS),0,128);
             writing=false;

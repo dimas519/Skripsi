@@ -62,6 +62,7 @@ public class MyRadio {
 
 
 	public void sendMSG(int sendAddress, String msg)  {
+		Exception tempEx;
 		for (int i = 0; i < 9; i++) {
 				try {
 					// ///////////////////////////////////////////////////////////////////////
@@ -72,15 +73,17 @@ public class MyRadio {
 					frame.setDestAddr(sendAddress);
 					frame.setDestPanId(this.radio.getPANId());// karena untuk berkomunikasi dia butuh dalam satu pan(personal network)
 					frame.setPayload(msg.getBytes());
+					Thread.sleep(100);
 					this.frameIO.transmit(frame);
 					break;
 				} catch (Exception e) {
-
+					tempEx=e;
 				}
 
 				if(i==8){
 					System.out.println("**************************************************************");
-					System.out.println(" failed send msg to" + sendAddress );
+					System.out.println(" failed send msg to " + sendAddress );
+					tempEx.printStackTrace();
 					System.out.println("**************************************************************");
 				}
 
