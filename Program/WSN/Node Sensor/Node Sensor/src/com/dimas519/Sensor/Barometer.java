@@ -24,18 +24,13 @@ import com.virtenio.driver.gpio.NativeGPIO;
 import com.virtenio.driver.i2c.NativeI2C;
 
 /**
- * Test den Zugriff auf den Sensor MPL115A2 von Freescale �ber I2C.
- * 
- * <p/>
- * <b> Datenblatt des Sensors: </b> <a href=
- * "http://cache.freescale.com/files/sensors/doc/data_sheet/MPL115A2.pdf"
- * target="_blank">
- * http://cache.freescale.com/files/sensors/doc/data_sheet/MPL115A2.pdf</a>
- * (Stand: 24.08.2011)
+ *
+ * Kelas Baromter merupakan kelas yang bertugas untuk menginisalisasi barometer(alat ukur kelembapan) dan melakukan pembacaan tekanan udara dengan satuan kPa.
+ *
  */
 public class Barometer extends Sensor{
 	private MPL115A2 pressureSensor;
-	private String name="Pa";
+	private String name="Pa"; //nama disingkat karena max frame 802.15.4 itu 127 char
 
 	public Barometer(NativeI2C i2c){
 		try {
@@ -45,8 +40,8 @@ public class Barometer extends Sensor{
 		}
 
 	}
-
-	private void init(NativeI2C i2c) throws Exception {
+	@Override
+	 void init(NativeI2C i2c) throws Exception {
 
 		System.out.println("GPIO(Init)");
 		GPIO resetPin = NativeGPIO.getInstance(24);
@@ -61,6 +56,7 @@ public class Barometer extends Sensor{
 		System.out.println("Done(Init)");
 	}
 
+	@Override
 	public String run()  {
 		try {
 			pressureSensor.startBothConversion();

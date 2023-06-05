@@ -22,17 +22,13 @@ import com.virtenio.driver.device.ADT7410;
 import com.virtenio.driver.i2c.NativeI2C;
 
 /**
- * Test den Zugriff auf den Temperatursensor ADT7410 von Analog �ber I2C.
- * <p/>
- * <b> Datenblatt des Temperatursensors: </b> <a href=
- * "http://www.analog.com/static/imported-files/data_sheets/ADT7410.pdf"
- * target="_blank">
- * http://www.analog.com/static/imported-files/data_sheets/ADT7410.pdf</a>
- * (Stand: 29.03.2011)
+ *
+ * Kelas Thermometer merupakan kelas yang bertugas untuk menginisalisasi thermometer(alat ukur suhu) dan melakukan pembacaan tekanan udara dengan satuan celcius.
+ *
  */
 public class Thermometer extends Sensor{
 	private ADT7410 temperatureSensor;
-	private String name="T";
+	private String name="T"; //nama disingkat karena max frame 802.15.4 itu 127 char
 
 	public Thermometer(NativeI2C i2c){
 		try {
@@ -44,8 +40,8 @@ public class Thermometer extends Sensor{
 	}
 
 
-
-	private void init(NativeI2C i2c) throws Exception {
+	@Override
+	 void init(NativeI2C i2c) throws Exception {
 		System.out.println("ADT7410(Init)");
 		temperatureSensor = new ADT7410(i2c, ADT7410.ADDR_0, null, null);
 		temperatureSensor.open();
@@ -54,6 +50,7 @@ public class Thermometer extends Sensor{
 		System.out.println("Done(Init)");
 	}
 
+	@Override
 	public String run() {
 		try {
 			float celsius = temperatureSensor.getTemperatureCelsius();

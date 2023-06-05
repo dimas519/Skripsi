@@ -29,6 +29,8 @@ import com.virtenio.radio.ieee_802_15_4.RadioDriverFrameIO;
 
 /**
  * Einfaches Beispiel der Funk�bertragung mit Senden und Empfangen.
+ *
+ * Sebuah kelas objek radio yang berfungsi untuk menerima dan mengirimkan pesan ke bs
  */
 public class MyRadio {
 
@@ -39,6 +41,19 @@ public class MyRadio {
 	private final RadioInterface mainInterface;
 
 
+	/**
+	 *
+	 * method ini bertujuan untuk mengisisialisasi radio agar siap digunakan dalam bertukar pesan dengan bs
+	 *
+	 * @param mainInterface sebuah interface yang digunakan untuk berinteraksi dengan kelas untama node sensor(NodeSensor)
+	 *
+	 * @param resv alamat node ini
+	 *
+	 * @param panID personal area networks node ini
+	 *
+	 * @param channel channel node ini
+	 *
+	 */
 	public MyRadio(RadioInterface mainInterface, int resv, int panID, int channel){
 
 		this.mainInterface=mainInterface;
@@ -61,6 +76,15 @@ public class MyRadio {
 	}
 
 
+	/**
+	 *
+	 * Sebuah method yang berfungsi untuk mengirimkan pesan ke tujuan
+	 *
+	 * @param sendAddress alamat tujuan pesan
+	 *
+	 * @param msg isi pesannya
+	 *
+	 */
 	public void sendMSG(int sendAddress, String msg)  {
 		Exception tempEx;
 		for (int i = 0; i < 9; i++) {
@@ -73,14 +97,13 @@ public class MyRadio {
 					frame.setDestAddr(sendAddress);
 					frame.setDestPanId(this.radio.getPANId());// karena untuk berkomunikasi dia butuh dalam satu pan(personal network)
 					frame.setPayload(msg.getBytes());
-					Thread.sleep(100);
-					this.frameIO.transmit(frame);
+					this.frameIO.transmit(frame); //kirimkan framenya
 					break;
 				} catch (Exception e) {
 					tempEx=e;
 				}
 
-				if(i==8){
+				if(i==8){ //kalau sampai 8 kali gagal kemungkinan alamat tujuannya tidak aktif, diluar jangkauan atau salah.
 					System.out.println("**************************************************************");
 					System.out.println(" failed send msg to " + sendAddress );
 					tempEx.printStackTrace();
@@ -94,7 +117,15 @@ public class MyRadio {
 
 
 
-	/** Ein Programme, dass �ber das Startmenu aufgerufen werden kann */
+	/**
+	 * Ein Programme, dass �ber das Startmenu aufgerufen werden kann
+	 *
+	 * sebuah method yang bertugas untuk menemerima pesan yang ditujukan untuk node ini di thread miliknya sendiri.
+	 * kemudian akan memproses pesan tersebut/
+	 *
+	 *
+	 * */
+
 
 	public void receive() {
 		Thread receive = new Thread()  {
@@ -114,8 +145,8 @@ public class MyRadio {
 						long sourceAddress =  f.getSrcAddr(); //pengirimnya
 
 						System.out.println("Radio receive: "+msg);
-						String[] splittedMSG=splitMSG(msg,':');
-						mainInterface.processMsg(sourceAddress,splittedMSG);
+						String[] splittedMSG=splitMSG(msg,':'); //memisahkan perintah dan nilainya
+						mainInterface.processMsg(sourceAddress,splittedMSG); //memproses perintah
 
 					}
 				}
@@ -124,6 +155,17 @@ public class MyRadio {
 		receive.start();
 	}
 
+
+	/**
+	 *
+	 * sebuah method yang berfungsi untuk memisahkan perintah dan nilainya
+	 *
+	 * @param msg pesan yang belum dipisahkan
+	 *
+	 * @param regex karakter pemisah pesan dan nilai
+	 *
+	 * @return array string berukuran 2 dengan index 0 berupa perintah dan index 1 berupa nilainya
+	 */
 	private String[] splitMSG(String msg,char regex){
 		for (int i=0;i<msg.length();i++){
 			if(msg.charAt(i)==regex){

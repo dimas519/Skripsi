@@ -584,10 +584,10 @@
 	6		getBytes()[B
 	3		size()I
 
-586		com/dimas519/NodeSensor
+594		com/dimas519/NodeSensor
 	235		<init>()V
 	202		sensing()V
-	56		processMsg(J[Ljava/lang/String;)V
+	64		processMsg(J[Ljava/lang/String;)V
 	42		run()V
 	38		initializeTime()V
 	13		main([Ljava/lang/String;)V
@@ -680,10 +680,6 @@
 	6		<init>(ILcom/virtenio/driver/spi/NativeSPI$1;)V
 	0		command(Lcom/virtenio/driver/spi/NativeSPI;I)I
 
-414		com/dimas519/Sensor/Accelerometer
-	251		run()Ljava/lang/String;
-	163		<init>()V
-
 413		java/util/StringTokenizer
 	216		nextToken()Ljava/lang/String;
 	62		countTokens()I
@@ -773,15 +769,6 @@
 	118		initRadio()Lcom/virtenio/driver/device/at86rf231/AT86RF231;
 	37		prepareFrame(III)Lcom/virtenio/radio/ieee_802_15_4/Frame;
 
-335		com/dimas519/Radio/MyRadio
-	168		sendMSG(ILjava/lang/String;)V
-	85		<init>(Lcom/dimas519/Radio/RadioInterface;III)V
-	53		splitMSG(Ljava/lang/String;C)[Ljava/lang/String;
-	14		receive()V
-	7		access$100(Lcom/dimas519/Radio/MyRadio;Ljava/lang/String;C)[Ljava/lang/String;
-	4		access$000(Lcom/dimas519/Radio/MyRadio;)Lcom/virtenio/radio/ieee_802_15_4/FrameIO;
-	4		access$200(Lcom/dimas519/Radio/MyRadio;)Lcom/dimas519/Radio/RadioInterface;
-
 335		com/virtenio/misc/FixedFifo
 	132		remove(I)Ljava/lang/Object;
 	35		remove()Ljava/lang/Object;
@@ -797,6 +784,20 @@
 	4		access$000(Lcom/virtenio/misc/FixedFifo;)I
 	3		capacity()I
 	2		size()I
+
+322		com/dimas519/Radio/MyRadio
+	155		sendMSG(ILjava/lang/String;)V
+	85		<init>(Lcom/dimas519/Radio/RadioInterface;III)V
+	53		splitMSG(Ljava/lang/String;C)[Ljava/lang/String;
+	14		receive()V
+	7		access$100(Lcom/dimas519/Radio/MyRadio;Ljava/lang/String;C)[Ljava/lang/String;
+	4		access$000(Lcom/dimas519/Radio/MyRadio;)Lcom/virtenio/radio/ieee_802_15_4/FrameIO;
+	4		access$200(Lcom/dimas519/Radio/MyRadio;)Lcom/dimas519/Radio/RadioInterface;
+
+312		com/dimas519/Sensor/Accelerometer
+	155		run()Ljava/lang/String;
+	96		init(Lcom/virtenio/driver/i2c/NativeI2C;)V
+	61		<init>()V
 
 256		com/virtenio/driver/i2c/NativeI2C
 	32		getManager()Lcom/virtenio/driver/InstanceManager;
@@ -932,14 +933,6 @@
 	24		<init>(Ljava/util/AbstractList;)V
 	16		hasNext()Z
 
-168		com/dimas519/Radio/Misc
-	47		toString([B)Ljava/lang/String;
-	45		printFreeMemory()V
-	28		sleep(J)V
-	25		round(D)D
-	17		LedBlinker(Lcom/virtenio/driver/led/LED;JZ)V
-	6		<init>()V
-
 164		java/util/AbstractList$SubAbstractList$SubAbstractListIterator
 	26		<init>(Ljava/util/ListIterator;Ljava/util/AbstractList$SubAbstractList;II)V
 	21		next()Ljava/lang/Object;
@@ -1018,10 +1011,6 @@
 	30		write(I)V
 	10		<init>(Lcom/virtenio/driver/spi/SPI;)V
 
-70		com/dimas519/Radio/Misc$1
-	51		run()V
-	19		<init>(Lcom/virtenio/driver/led/LED;JZ)V
-
 68		com/virtenio/driver/InstanceManager
 	62		getInstance(I)Ljava/lang/Object;
 	6		<init>()V
@@ -1030,6 +1019,11 @@
 	29		read([BII)I
 	26		read()I
 	10		<init>(Lcom/virtenio/driver/spi/SPI;)V
+
+62		com/dimas519/Radio/Misc
+	28		sleep(J)V
+	28		round(D)D
+	6		<init>()V
 
 58		com/virtenio/driver/spi/SPIChipSelector
 	14		<init>(Lcom/virtenio/driver/spi/SPI;Lcom/virtenio/driver/gpio/GPIO;)V
@@ -1149,10 +1143,6 @@
 	6		<init>()V
 
 12		com/virtenio/driver/i2c/I2CException
-	6		<init>(I)V
-	6		<init>(Ljava/lang/Throwable;)V
-
-12		com/virtenio/driver/led/LEDException
 	6		<init>(I)V
 	6		<init>(Ljava/lang/Throwable;)V
 

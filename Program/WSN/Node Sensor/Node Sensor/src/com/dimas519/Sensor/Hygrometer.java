@@ -22,18 +22,13 @@ import com.virtenio.driver.device.SHT21;
 import com.virtenio.driver.i2c.NativeI2C;
 
 /**
- * Test den Zugriff auf den Sensor SHT21 von Sensirion �ber I2C.
  *
- * <p/>
- * <b> Datenblatt des Sensors: </b> <a href=
- * "http://www.sensirion.com/en/pdf/product_information/Datasheet-humidity-sensor-SHT21.pdf"
- * target="_blank">
- * http://www.sensirion.com/en/pdf/product_information/Datasheet
- * -humidity-sensor-SHT21.pdf</a> (Stand: 29.03.2011)
+ * Kelas Baromter merupakan kelas yang bertugas untuk menginisalisasi barometer(alat ukur tekanan) dan melakukan pembacaan tekanan udara dengan satuan kPa.
+ *
  */
 public class Hygrometer extends Sensor{
 	private SHT21 sht21;
-	private String name="rh";
+	private String name="rh"; //nama disingkat karena max frame 802.15.4 itu 127 char
 
 	public Hygrometer(NativeI2C i2c){
 		try {
@@ -43,7 +38,8 @@ public class Hygrometer extends Sensor{
 		}
 	}
 
-	private void init(NativeI2C i2c) throws Exception {
+	@Override
+	 void init(NativeI2C i2c) throws Exception {
 
 
 		System.out.println("SHT21(Init)");
@@ -56,6 +52,7 @@ public class Hygrometer extends Sensor{
 		System.out.println("Done(Init)");
 	}
 
+	@Override
 	public String run() {
 		try {
 			sht21.startRelativeHumidityConversion();
