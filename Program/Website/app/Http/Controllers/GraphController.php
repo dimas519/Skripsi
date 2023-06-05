@@ -53,10 +53,6 @@ class GraphController extends Controller
             $stat="avg";
         }
         
-        $type=$request->post('type');
-
-
-        
 
         $map = array();
         $map['idBS']=$idBS;
@@ -73,34 +69,29 @@ class GraphController extends Controller
         
 
         $waktu=array();
-        
+        $valueSuhu=array();
+        $valueKelembapan=array();
+        $valueTekanan=array();
 
-        if(strcmp($type,'akselerasi')==0){
-            
-            $arrX=array();
-            $arrY=array();
-            $arrZ=array();
-            foreach ($result as $row){
-                array_push($waktu,$row['timeStamp']);
-                array_push($arrX,$row[$type]['x']);
-                array_push($arrY,$row[$type]['y']);
-                array_push($arrZ,$row[$type]['z']);
-            }
-            $value=array("x"=>$arrX,"y"=>$arrY,"z"=>$arrZ);
-        }else{
-            $value=array();
-            foreach ($result as $row){
-                array_push($waktu,$row['timeStamp']);
-                array_push($value,$row[$type]);
-            }
+        $arrX=array();
+        $arrY=array();
+        $arrZ=array();
+
+        foreach ($result as $row){
+            array_push($waktu,$row['timeStamp']);
+            array_push($valueSuhu,$row['suhu']);
+            array_push($valueKelembapan,$row['kelembapan']);
+            array_push($valueTekanan,$row['tekanan']);
+            array_push($arrX,$row['akselerasi']['x']);
+            array_push($arrY,$row['akselerasi']['y']);
+            array_push($arrZ,$row['akselerasi']['z']);
+                
+
+            $resultPlain=array("time"=>$waktu, "suhu"=>$valueSuhu,
+            "kelembapan"=>$valueKelembapan, "tekanan"=>$valueTekanan,
+            "x"=>$arrX, "y"=>$arrY, "z"=>$arrZ);
         }
 
-
-
-
-        
-
-        $resultPlain=array("time"=>$waktu,"value"=>$value);
 
         $resultJson=json_encode($resultPlain);
 

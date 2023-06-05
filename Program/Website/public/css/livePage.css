@@ -6,3 +6,24 @@
 .aClean{
     color: black;
 }
+
+.liveData{
+    width: 300px;
+    height: 152px;
+    display:inline-block !important;
+}
+
+
+.liveDataTitle{
+    font-size: 18pt;
+}
+
+.liveDataText{
+    font-size: 16pt;
+    display:inline-block ;
+}
+
+.midData{
+    padding-left: 10px;
+
+}

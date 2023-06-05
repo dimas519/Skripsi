@@ -1,3 +1,5 @@
+
+from datetime import datetime
 class WSN:
     def __init__(self, identifier:str, token:str 
                  ,sensorType:list, interval:int
@@ -15,8 +17,9 @@ class WSN:
 
         self.kota=kota
         self.queue=queue
-        
-        self.lastData={"time":"1970-00-00 00-00-00","idBS":self.identifier,"result":{"kelembapan":None,"tekanan":None,"suhu":None,"akselerasi":None}}
+        self.offlineData={"time":"1970-01-01 00:00:00","idBS":self.identifier,"result":{"kelembapan":None,"tekanan":None,"suhu":None,"akselerasi":None}}
+
+        self.lastData=self.offlineData
         
         
         
@@ -37,9 +40,7 @@ class WSN:
         self.interval=interval;
     
     
-    
-    
-    
+
 
     def getIdentifier(self):
         return self.identifier
@@ -69,5 +70,13 @@ class WSN:
         return self.interval
     
     def getLastData(self):
-        return self.lastData
-    
+        timeLastData=self.lastData['time']
+        lastTime = datetime.strptime(timeLastData,"%Y-%m-%d %H:%M:%S")
+        timeNow= datetime.now()
+        deltaTime=((timeNow-lastTime).seconds)
+        deltaTime*=1000
+        if deltaTime> (self.interval*5):
+            return self.offlineData
+        else:
+            return self.lastData
+        

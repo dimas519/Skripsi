@@ -328,16 +328,10 @@ async def insertSensingdata(value: Request):
 
 
 
-
-
-
 @api.get("/realTime")
 async def insertSensingdata(idBS: str):
-
     identifier=idBS.lower() 
-    print(identifier) 
     result=wsnController.getRealTime(identifier)
-
     return result
 
 

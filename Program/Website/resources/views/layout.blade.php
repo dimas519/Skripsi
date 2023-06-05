@@ -6,7 +6,7 @@
 
 
 @include('header',['menu'=> $menu ])
-@include("navigation",['location'=>$location])
+@include("navigation")
 
 
 {{-- @if (!Route::is('/login') )
@@ -18,8 +18,8 @@
 
 
     <div class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-        {{-- @include($page) --}}
-        @include('live')
+        @include($page)
+        {{-- @include('live') --}}
    
     </div>
     @include("footer")

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\GraphController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +18,7 @@ use App\Http\Controllers\AdminController;
 
 Route::get('/', function () {
     
-    return view('login');
+    return redirect("login");
 });
 
 Route::get('/login', function () {
@@ -31,6 +32,8 @@ Route::get('/signUP', function () {
 
 Route::get('/main',[ UserController::class , 'viewUser']);
 
+Route::get('/realTime',[ UserController::class , 'realTimeCont']);
+
 Route::get('/user', function () {
     return view('layout')
     ->with('menu',true)
@@ -39,7 +42,7 @@ Route::get('/user', function () {
 });
 
 Route::get('/admin', function () {
-    $mainPage=new MainPages();
+    $mainPage=new GraphController();
     return view('layout')
     ->with('semuaKota',$mainPage->getCity())
     ->with("semuaLokasi",$mainPage->getLocation())
@@ -48,6 +51,7 @@ Route::get('/admin', function () {
     ->with('page','/admin');
 });
 
+Route::get('/table',[ UserController::class , 'viewTable']);
 
 
 /*
@@ -63,7 +67,7 @@ Route::get('/keluar', [UserController::class, 'logout']);
 
 Route::post('/daftar', [UserController::class, 'signup']);
 
-Route::post('/data', [MainPages::class, 'data']);
+Route::post('/data', [GraphController::class, 'data']);
 
 Route::post('/ganti', [AdminController::class, 'ganti']);
 

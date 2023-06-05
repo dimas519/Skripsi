@@ -82,11 +82,31 @@ class UserController extends Controller
         ->with('semuaKota',$mainPage->getCity())
         ->with("semuaLokasi",$mainPage->getLocation())
         ->with('menu',true)
-        ->with('location',true)
+        ->with('api', API::getURL())
         ->with('page','graphSelection');
     }
 
+    public function realTimeCont(Request $request){
+        $mainPage=new GraphController();
+        $username=$request->session()->get('username');
+        return view('layout')
+        ->with('semuaKota',$mainPage->getCity())
+        ->with("semuaLokasi",$mainPage->getLocation())
+        ->with('menu',true)
+        ->with('page','live')
+        ->with('api', API::getURL());
+    }
 
+    public function viewTable(Request $request){
+        $mainPage=new GraphController();
+        $username=$request->session()->get('username');
+        return view('layout')
+        ->with('semuaKota',$mainPage->getCity())
+        ->with("semuaLokasi",$mainPage->getLocation())
+        ->with('menu',true)
+        ->with('page','tabel')
+        ->with('api', API::getURL());
+    }
    
 
 

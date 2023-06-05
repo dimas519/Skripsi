@@ -1,20 +1,19 @@
+
+
 const ctx = document.getElementById('myChart');
-const listLokasi=document.getElementsByClassName("optLokasi");
-const optLokasi=document.getElementById('lokasiSelection')
 const navSensor=document.getElementById("navSensorAvaiable")
 const optType=document.getElementById("typeSelection")
-
-const startDate=document.getElementById("startDate")
-const startTime=document.getElementById("startTime")
-const endDate=document.getElementById("endDate")
-const endTime=document.getElementById("endTime")
-const intervalInput=document.getElementById("intervalInput")
+const chartDiv=document.getElementsByClassName("chart")
+const chartHeight=(document.getElementById('workSheet').offsetWidth/16)*9
 
 
+const optTypeAceleration=document.getElementById("typeSelectionAceleration")
+let sensorSelected=[true,false,false,false]
+let sensorOrder=['suhu','tekanan','kelembapan','akselerasi']
 
 let layout = {
   width: document.getElementById('workSheet').offsetWidth,
-  height: (document.getElementById('workSheet').offsetWidth/16)*9,
+  height: chartHeight,
   margin: {
     l: 75,
     r: 50,
@@ -70,6 +69,8 @@ function validInput(doAlert=true){
     return false;
   }else if(optType.value==1){
     doAlert ? alert('Pilih tipe grafik') : null
+  }else if(optTypeAceleration.value==1){
+    doAlert ? alert('Pilih tipe grafik') : null
   }
   return true;
 }
@@ -87,40 +88,67 @@ function labelsType(type){
   }
 }
 
-function show3D(jsonData,tipe,judul){
+function show3D(jsonData,judul){
   // labelData=labelsType(tipe)
-  layout.yaxis.title.text="Celcius"
-  layout.title.text=judul
+  layout.title.text=judul+"*"
+
+  let tipe=optTypeAceleration.value;
+
+
+  let x=[]
+  let y=[]
+  let z=[]
+  let time=[]
+
+  for(let i=0;i<jsonData.length;i++){
+    x.push(jsonData[i]['akselerasi']['x'])
+    y.push(jsonData[i]['akselerasi']['y'])
+    z.push(jsonData[i]['akselerasi']['z'])
+    time.push(jsonData[i]['timeStamp'])
+  }
 
   let data = [
     {
-      x: jsonData['value']['x'],
-      y: jsonData['value']['y'],
-      z:jsonData['value']['z'],
+      x: x,
+      y: y,
+      z:z,
       type: tipe
     }
   ];
 
 
-  Plotly.newPlot('myPlot', data, layout);
+  Plotly.newPlot('myPlotakselerasi', data, layout);
 }
 
 
-function show2D(jsonData,tipe,judul,jenisData){
+function show2D(jsonData,judul,jenisData){
   layout.yaxis.title.text=labelsType(jenisData)
   layout.title.text=judul
   
+  let tipe=optType.value;
+
+  let dataSensing=[]
+  let time=[]
+
+  for(let i=0;i<jsonData.length;i++){
+    dataSensing.push(jsonData[i][jenisData])
+    time.push(jsonData[i]['timeStamp'])
+  }
+
+
   if(tipe=='box'){
     return box(jsonData,tipe,judul)
   }
 
   let data = [
     {
-      x: jsonData['time'],
-      y: jsonData['value'],
+      x: time,
+      y: dataSensing,
       type: tipe
     }
   ];
+
+
 
   if(tipe=="scatter"){
     data[0].fill='tonexty'
@@ -128,7 +156,7 @@ function show2D(jsonData,tipe,judul,jenisData){
 
   
   
-  Plotly.newPlot('myPlot', data, layout);
+  Plotly.newPlot('myPlot'+jenisData, data, layout);
 }
 
 
@@ -147,7 +175,7 @@ function box(jsonData,tipe,judul){
       )
     }
     
-  Plotly.newPlot('myPlot', data, layout);
+  Plotly.newPlot('myPlot'+jenisData, data, layout);
 
 }
 
@@ -163,7 +191,7 @@ function show(doAlert=true){
   let start=`${startDate.value} ${startTime.value}`
   let end=`${endDate.value}-${endTime.value}`
   let bs=optLokasi.options[optLokasi.selectedIndex].text
-  let judul=`Grafik ${type} di ${bs} dari ${start} sampai ${end}`
+  
   let tipeGrafik=optType.value;
 
   let jsonString={
@@ -171,8 +199,7 @@ function show(doAlert=true){
     ,"start":`${start}:00`
     ,"end":`${end}:00`
     ,"interval":`${intervalInput.value}`
-    ,"type":type
-    ,"graph":tipeGrafik
+    ,"stat":"avg"
 }
 
     
@@ -181,11 +208,11 @@ function show(doAlert=true){
         ,"start":"2023-05-08 00:00:00"
         ,"end":"2023-05-08 23:55:00"
         ,interval:3600
-        ,"type":type
-        ,"graph":tipeGrafik
+        ,"stat":"avg"
     }
 
-    fetch(`${window.location.origin}/data`,{
+    // fetch(`${window.location.origin}/data`,{
+      fetch(`${urlAPI}/data`,{
         method: "POST",
         headers: {
             Accept: 'application.json',
@@ -195,14 +222,38 @@ function show(doAlert=true){
         }).then(response => response.json()) .then(response=>{
 
 
-            if(response['value']=='noData'){
+            
+            if(response['result']=='false'){
               alert("Data tidak ditemukan")
-            }else{
+            }else{ 
+              
+              responseResult=response['result']
+              let first=true
 
-              if(type=="akselerasi"){
-                show3D(response,tipeGrafik,judul)
-              }else{
-                show2D(response,tipeGrafik,judul,type)
+              console.log(responseResult)
+
+              for(let i=0;i<sensorSelected.length;i++){
+                if(sensorSelected[i]){
+                  if(!first){
+                  chartDiv[i].style.display="block"
+                  chartDiv[i].style.marginTop="750px"
+                  }
+                  first=false;
+
+                  type=sensorOrder[i]
+                  let judul=`Grafik ${type} di ${bs} dari ${start} sampai ${end}`
+                    if(type=="akselerasi"){
+                      accInfo.style.display="block"
+                      accInfo.style.marginTop="750px"
+                      show3D(responseResult,judul)
+                    }else{
+                      show2D(responseResult,judul,type)
+                    }
+                }else{
+
+
+
+                }
               }
 
             }
@@ -242,35 +293,41 @@ optLokasi.addEventListener("change",function(event) {
 function select(elem){
 
   //pindahin hightlight abu
-  let selectedBefore=document.getElementsByClassName("selected") // hapus yang sebelumnya sudah masuk
-  selectedBefore[0].classList.remove("selected")
-  elem.parentNode.classList.add("selected")
+  // let selectedBefore=document.getElementsByClassName("selected")
+
+  
+
+  // selectedBefore[0].classList.remove("selected")// hapus yang sebelumnya sudah masuk
+  elem.parentNode.classList.toggle("selected")
+  let index=elem.getAttribute("index")
+  sensorSelected[index]=!sensorSelected[index]
+  console.log(sensorSelected)
 
   //untuk memfilter tipe grafik yang tidak sesuai
-  let selectedTipe=elem.parentElement.getAttribute("box")
-  let opsiTipe=optType.children;
-  for(let i=0;i<opsiTipe.length ;i++){
+  // let selectedTipe=elem.parentElement.getAttribute("box")
+  // let opsiTipe=optType.children;
+  // for(let i=0;i<opsiTipe.length ;i++){
 
-    let tujuan=opsiTipe[i].getAttribute("for").split(" ");
+  //   let tujuan=opsiTipe[i].getAttribute("for").split(" ");
  
-    if( tujuan.includes(selectedTipe)){
-      opsiTipe[i].hidden=false;
-    }else{
-      opsiTipe[i].hidden=true;
-    }
-  }
+  //   if( tujuan.includes(selectedTipe)){
+  //     opsiTipe[i].hidden=false;
+  //   }else{
+  //     opsiTipe[i].hidden=true;
+  //   }
+  // }
 
-  if(selectedTipe=="akselerasi"){
-    optType.selectedIndex=4;
-  }else{
-    if(optType.selectedIndex>=4){
-      optType.selectedIndex=1;
-    }
-  }
+  // if(selectedTipe=="akselerasi"){
+  //   optType.selectedIndex=4;
+  // }else{
+  //   if(optType.selectedIndex>=4){
+  //     optType.selectedIndex=1;
+  //   }
+  // }
 
-  show(false)
+
 }
 
-optType.addEventListener("change",function(event) {
-  show(false)
-});
+// optType.addEventListener("change",function(event) {
+//   show(false)
+// });

@@ -13,6 +13,7 @@ import java.util.List;
 
 import com.virtenio.commander.toolsets.preon32.Preon32Helper;
 import com.virtenio.commander.io.DataConnection;
+import purejavacomm.PureJavaIllegalStateException;
 
 /**
  * args pada kelas ini
@@ -29,11 +30,12 @@ public class BaseStationControllerUSART {
     private DataConnection dataConnection;
     private BufferedInputStream bufferedInputStream;
     private volatile boolean writing=false;
-    private List<NodeQueue> queueNode;
+    List<NodeQueue> queueNode;
 
+    private String[] args;
     public BaseStationControllerUSART(String[] args){
         this.executeAtPreon("buildUser.xml","context.set.1");//ubah ke context 1, atau context yg berisikan ant build untuk preon
-
+        this.args=args;
 
 
         try{
@@ -45,8 +47,8 @@ public class BaseStationControllerUSART {
 
 
         try {
-            this.nodeHelper = new Preon32Helper("COM8",115200);
-            this.dataConnection = this.nodeHelper.runModule("autostart");
+            this.nodeHelper = new Preon32Helper(args[1],115200);
+            this.dataConnection = this.nodeHelper.runModule(args[2]);
             bufferedInputStream = new BufferedInputStream(this.dataConnection.getInputStream());
 
         } catch (Exception e) {
@@ -129,11 +131,6 @@ public class BaseStationControllerUSART {
                         }
 
 
-
-
-
-
-
                     }
 
 
@@ -143,7 +140,12 @@ public class BaseStationControllerUSART {
 
                 }
 
-            } catch (IOException e) {
+            }
+            catch(PureJavaIllegalStateException e){
+                BaseStationControllerUSART bs=new BaseStationControllerUSART(this.args);
+                bs.queueNode=this.queueNode;
+            }
+            catch (IOException e) {
                 System.out.println(e.getMessage());
             }
 

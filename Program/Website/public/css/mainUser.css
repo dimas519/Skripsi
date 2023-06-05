@@ -1,0 +1,16 @@
+#mainLayout{
+    margin-top: 20px;
+    background-color: white;
+    border: 1px solid red;
+
+    min-height: 200px;
+
+}
+
+.container{
+    margin-top: 1vh;
+}
+
+.waktu{
+    margin-top: 0.4vw;
+}

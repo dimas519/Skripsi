@@ -7,35 +7,29 @@
         <div class="position-sticky pt-3 "> 
           <ul class="nav flex-column">
             <li class="nav-item">
-              <a class="nav-link active " aria-current="page" href="main">
+              <a class="nav-link active " aria-current="page" href="realTime">
                 <span>
-                  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="512" height="512" x="0" y="0" viewBox="0 0 463.937 463.937" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><path d="m460.414 216.518-85.6-73.1c.1-.5.2-1 .3-1.6v-95.6c-.1-5.7-4.6-10.3-10.3-10.5h-47.8c-5.5 0-10 4.9-10 10.5v39.6l-68.5-58.4c-3.7-3.2-9.2-3.2-13 0l-221.9 189c-4.3 3.5-4.8 9.8-1.3 14.1s9.8 4.8 14.1 1.3l.2-.2 215.4-183.4 77.1 65.7 46.1 39.2 92.3 78.6c4.2 3.6 10.5 3.1 14.1-1.1 3.5-4.2 3-10.5-1.2-14.1zm-105.4-90-28-23.6v-47.1h28v70.7z" fill="currentColor" data-original="#000000"></path><path d="m416.314 236.718-28.1-24-149.7-127.9c-3.7-3.2-9.2-3.2-13 0l-149.7 127.9-28.1 24c-4.2 3.6-4.7 9.9-1.1 14.1 3.5 4.2 9.7 4.7 13.8 1.2l.1-.1 12.5-10.8v187.5c.1 5.6 4.7 10.2 10.3 10.3h297.3c5.6-.1 10.2-4.6 10.3-10.3v-187.5l12.5 10.8c1.8 1.5 4 2.4 6.4 2.4 2.9 0 5.7-1.3 7.6-3.5 3.7-4.3 3.1-10.6-1.1-14.1zm-144.3 182.1h-80v-108h80v108zm20 0v-117.7c0-5.5-4.1-10.3-9.6-10.3h-100.8c-5.5 0-9.6 4.8-9.6 10.3v117.7h-79v-194.8l139-118.4 139 118.4v194.8h-79z" fill="#\currentColor" data-original="#000000"></path></g></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="512" height="512" x="0" y="0" viewBox="0 0 64 64" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><path d="M20 51a12 12 0 0 0 20.944 8l-1.49-1.333A10 10 0 1 1 42 51c0 .31-.03.616-.058.923L40.8 50.4l-1.6 1.2 3 4a1 1 0 0 0 1.6 0l3-4-1.6-1.2-1.268 1.691c.032-.362.068-.725.068-1.091a12 12 0 0 0-24 0z" fill="currentColor" data-original="#000000" class=""></path><path d="m31 51.382-3.447 1.723.894 1.79 4-2A1 1 0 0 0 33 52v-8h-2zM49 50h14v2H49zM1 50h17v2H1zM13 48V26a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v22h2V27h6v21zM28 15h-8a1 1 0 0 0-1 1v26h2V17h6v20h2V16a1 1 0 0 0-1-1zM45 42V26a1 1 0 0 0-1-1h-8a1 1 0 0 0-1 1v11h2V27h6v15zM61 48V16a1 1 0 0 0-1-1h-8a1 1 0 0 0-1 1v32h2V17h6v31z" fill="currentColor" data-original="#000000" class=""></path><path d="M56 9a4 4 0 1 0-4-4 3.952 3.952 0 0 0 .2 1.2l-9.456 5.9a3.978 3.978 0 0 0-5.575.073L26.83 6.09A3.935 3.935 0 0 0 27 5a4 4 0 1 0-7.7 1.522l-9.818 7.366A3.96 3.96 0 0 0 7 13a4.009 4.009 0 1 0 3.7 2.478l9.822-7.366a3.956 3.956 0 0 0 5.313-.289L36.17 13.91A3.935 3.935 0 0 0 36 15a4 4 0 0 0 8 0 3.952 3.952 0 0 0-.2-1.2l9.456-5.9A3.978 3.978 0 0 0 56 9zm0-6a2 2 0 1 1-2 2 2 2 0 0 1 2-2zM7 19a2 2 0 1 1 2-2 2 2 0 0 1-2 2zM23 7a2 2 0 1 1 2-2 2 2 0 0 1-2 2zm17 10a2 2 0 1 1 2-2 2 2 0 0 1-2 2z" fill="currentColor" data-original="#000000" class=""></path></g></svg>
                 </span>
-                Dashboard
+                Real Time
               </a>
             </li>
-            @if (true)
-             <li class="nav-item" >
-              <span class=nonClick>
-                <span>
-                  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="512" height="512" x="0" y="0" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><path d="M341.476 338.285c54.483-85.493 47.634-74.827 49.204-77.056C410.516 233.251 421 200.322 421 166 421 74.98 347.139 0 256 0 165.158 0 91 74.832 91 166c0 34.3 10.704 68.091 31.19 96.446l48.332 75.84C118.847 346.227 31 369.892 31 422c0 18.995 12.398 46.065 71.462 67.159C143.704 503.888 198.231 512 256 512c108.025 0 225-30.472 225-90 0-52.117-87.744-75.757-139.524-83.715zm-194.227-92.34a15.57 15.57 0 0 0-.517-.758C129.685 221.735 121 193.941 121 166c0-75.018 60.406-136 135-136 74.439 0 135 61.009 135 136 0 27.986-8.521 54.837-24.646 77.671-1.445 1.906 6.094-9.806-110.354 172.918L147.249 245.945zM256 482c-117.994 0-195-34.683-195-60 0-17.016 39.568-44.995 127.248-55.901l55.102 86.463a14.998 14.998 0 0 0 25.298 0l55.101-86.463C411.431 377.005 451 404.984 451 422c0 25.102-76.313 60-195 60z" fill="currentColor" data-original="#000000" class=""></path><path d="M256 91c-41.355 0-75 33.645-75 75s33.645 75 75 75 75-33.645 75-75-33.645-75-75-75zm0 120c-24.813 0-45-20.187-45-45s20.187-45 45-45 45 20.187 45 45-20.187 45-45 45z" fill="currentColor" data-original="#000000" class=""></path></g></svg>
-                </span>
-                Location
-              </span>
-            </li>
-            @endif
-    
+
             
-
-
-            <li class="nav-item" hidden id="navSensorAvaiable">
-                <span class="nav-link">
+            <li class="nav-item">
+              <a class="nav-link active " aria-current="page" href="main">
+                <span>
                   <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="512" height="512" x="0" y="0" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><g><path d="m437.066 74.981c-5.857-5.858-15.355-5.858-21.213 0s-5.858 15.355 0 21.213c42.656 42.655 66.147 99.409 66.147 159.806s-23.491 117.151-66.147 159.806c-5.858 5.857-5.858 15.355 0 21.213 5.868 5.868 15.365 5.848 21.213 0 48.322-48.321 74.934-112.608 74.934-181.019s-26.612-132.698-74.934-181.019z" fill="currentColor" data-original="#000000" class=""></path><path d="m391.646 120.4c-5.858-5.857-15.356-5.857-21.213 0-5.857 5.858-5.857 15.355 0 21.213 30.533 30.531 47.349 71.155 47.349 114.387s-16.815 83.855-47.349 114.387c-5.858 5.858-5.858 15.355 0 21.213 5.856 5.856 15.353 5.859 21.213 0 36.2-36.198 56.136-84.355 56.136-135.601s-19.937-99.402-56.136-135.599z" fill="currentColor" data-original="#000000" class=""></path><path d="m346.193 165.852c-5.858-5.857-15.356-5.857-21.213 0-5.858 5.858-5.857 15.356 0 21.213 18.4 18.398 28.533 42.88 28.533 68.934s-10.133 50.536-28.533 68.934c-5.858 5.857-5.858 15.355 0 21.213 5.857 5.857 15.354 5.859 21.213 0 24.066-24.065 37.32-56.08 37.32-90.148s-13.254-66.081-37.32-90.146z" fill="currentColor" data-original="#000000" class=""></path><path d="m30 256c0-60.397 23.491-117.151 66.147-159.806 5.858-5.857 5.858-15.355 0-21.213-5.857-5.857-15.354-5.858-21.213 0-48.322 48.321-74.934 112.608-74.934 181.019s26.612 132.698 74.934 181.019c5.856 5.857 15.355 5.859 21.213 0 5.858-5.858 5.858-15.355 0-21.213-42.656-42.655-66.147-99.409-66.147-159.806z" fill="currentColor" data-original="#000000" class=""></path><path d="m94.219 256c0-43.232 16.815-83.855 47.349-114.387 5.858-5.858 5.858-15.355 0-21.213-5.857-5.858-15.355-5.857-21.213 0-36.2 36.197-56.136 84.355-56.136 135.6s19.936 99.403 56.136 135.601c5.866 5.865 15.363 5.85 21.213 0 5.857-5.858 5.857-15.355 0-21.213-30.534-30.532-47.349-71.156-47.349-114.388z" fill="currentColor" data-original="#000000" class=""></path><path d="m187.021 165.853c-5.857-5.858-15.355-5.858-21.213 0-24.066 24.065-37.32 56.08-37.32 90.148s13.254 66.083 37.32 90.148c5.866 5.865 15.363 5.85 21.213 0 5.858-5.858 5.857-15.356 0-21.213-18.4-18.398-28.533-42.88-28.533-68.934s10.133-50.536 28.533-68.934c5.857-5.859 5.857-15.357 0-21.215z" fill="currentColor" data-original="#000000" class=""></path><path d="m256 192.8c-34.849 0-63.2 28.352-63.2 63.2s28.352 63.2 63.2 63.2 63.2-28.352 63.2-63.2-28.351-63.2-63.2-63.2z" fill="currentColor" data-original="#000000" class=""></path></g></g></svg>
-                  Available  Sensor</span>
+    
+                </span>
+                History Data
+              </a>
+            </li>
+    
+            <li class="nav-item" id="navSensorAvaiable" hidden>
                   <ul>
-                    
                     <li class="selected" box="suhu">
-                      <a class="nav-link" aria-current="page" href="#" onclick="select(this);return false;">
+                      <a class="nav-link" aria-current="page" href="#" onclick="select(this);return false;" index=0>
                         <span>
                           <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 490 490" style="enable-background:new 0 0 490 490;" xml:space="preserve">
                             <g>
@@ -61,7 +55,7 @@
                     </li>
 
                     <li box="tekanan">
-                      <a class="nav-link" aria-current="page" href="#" onclick="select(this);return false;">
+                      <a class="nav-link" aria-current="page" href="#" onclick="select(this);return false;" index=1>
                         <span>
                           <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="1280.000000pt" height="1280.000000pt" viewBox="0 0 1280.000000 1280.000000" preserveAspectRatio="xMidYMid meet">
                             <metadata fill="currentColor">
@@ -79,7 +73,7 @@
                     </li>
 
                     <li box="kelembapan">
-                      <a class="nav-link" aria-current="page" href="#" onclick="select(this);return false;">
+                      <a class="nav-link" aria-current="page" href="#" onclick="select(this);return false;" index=2>
                         <span>
                           <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 328.611 328.611" style="enable-background:new 0 0 328.611 328.611;" xml:space="preserve">
                             <g>
@@ -95,7 +89,7 @@
                     </li>
 
                     <li box="akselerasi">
-                      <a class="nav-link" aria-current="page" href="#" onclick="select(this);return false;">
+                      <a class="nav-link" aria-current="page" href="#" onclick="select(this);return false;" index=3>
                         <span>
                           <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="700pt" height="700pt" version="1.1" viewBox="0 0 700 700">
                             <defs fill="currentColor">
@@ -175,8 +169,26 @@
                       </a>
                     </li>
 
+
+
+
+
                   </ul>
             </li>
+
+            <li class="nav-item">
+              <a class="nav-link active " aria-current="page" href="table">
+                <span>
+                  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="512" height="512" x="0" y="0" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><path d="M488.468 79.645H23.532c-8.854 0-16.032 7.178-16.032 16.032v320.645c0 8.854 7.178 16.032 16.032 16.032h464.935c8.854 0 16.032-7.178 16.032-16.032V95.677c.001-8.854-7.177-16.032-16.031-16.032zM127.742 111.71h256.516M440.371 143.774H7.5M504.5 143.774h-32.065" style="stroke-width:15;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" fill="none" stroke="currentColor" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" data-original="#000000" class=""></path><path d="M231.952 239.968h-64.129a8.016 8.016 0 0 1-8.016-8.016v-32.065a8.016 8.016 0 0 1 8.016-8.016h64.129a8.016 8.016 0 0 1 8.016 8.016v32.065a8.016 8.016 0 0 1-8.016 8.016zM167.823 288.065h64.129M167.823 336.161h64.129M167.823 384.258h64.129M344.177 239.968h-64.129a8.016 8.016 0 0 1-8.016-8.016v-32.065a8.016 8.016 0 0 1 8.016-8.016h64.129a8.016 8.016 0 0 1 8.016 8.016v32.065a8.015 8.015 0 0 1-8.016 8.016zM280.048 288.065h64.129M280.048 336.161h64.129M280.048 384.258h64.129M456.403 239.968h-64.129a8.016 8.016 0 0 1-8.016-8.016v-32.065a8.016 8.016 0 0 1 8.016-8.016h64.129a8.016 8.016 0 0 1 8.016 8.016v32.065a8.016 8.016 0 0 1-8.016 8.016zM392.274 288.065h64.129M392.274 336.161h64.129M392.274 384.258h64.129M55.597 239.968a8.016 8.016 0 0 1-8.016-8.016v-32.065a8.016 8.016 0 0 1 8.016-8.016h64.129a8.016 8.016 0 0 1 8.016 8.016v32.065a8.016 8.016 0 0 1-8.016 8.016H87.661M55.597 288.065h64.129M55.597 336.161h64.129M55.597 384.258h64.129" style="stroke-width:15;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" fill="none" stroke="currentColor" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" data-original="#000000" class=""></path></g></svg>
+    
+                </span>
+                Table Visualization
+              </a>
+            </li>
+
+
+
+
           </ul>
   
           <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
