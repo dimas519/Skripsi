@@ -62,7 +62,7 @@ public class Accelerometer extends Sensor{
 		accelerationSensor.open();
 		accelerationSensor.setDataFormat(ADXL345.DATA_FORMAT_RANGE_2G); //diset max pembacaan sensor 2g saja
  		accelerationSensor.setDataRate(ADXL345.DATA_RATE_50HZ);  //rate data 50hz, 50 data dalam 1 detik, pembacaan akan dilakukan dengan interval-min 1 detik sehingga dicari rate yang kecil agar battery lebih hemat daya
-		accelerationSensor.setPowerControl(ADXL345.POWER_CONTROL_AUTO_SLEEP); //auto sleep agar battery lebih hemat;
+		accelerationSensor.setPowerControl(ADXL345.POWER_CONTROL_MEASURE); 
 
 		System.out.println("Done(Init)");
 	}
@@ -77,9 +77,9 @@ public class Accelerometer extends Sensor{
 			//perlu dibagi dengan typ (256), angka diperoleh dari dokumentasi sensor adxl345.
 			//typ merupakan angka mayoritas, jika lokasi suatu sumbu yang mengarah ke inti dibagi dengan 256 maka hasilnya mendekati 1g
 			double[] inG=new double[3];
-			inG[0]= Misc.round( values[0]); //set agar dia desimal dengan presisi 2
-			inG[1]= Misc.round( values[1]);
-			inG[2]= Misc.round( values[2]);
+			inG[0]= Misc.round( (values[0]/256.0)); //set agar dia desimal dengan presisi 2
+			inG[1]= Misc.round( (values[1]/256.0));
+			inG[2]= Misc.round( (values[2]/256.0));
 
 
 			String result="\""+name+"\":"+Arrays.toString(inG); //mengubah array menjadi array

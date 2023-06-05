@@ -753,6 +753,11 @@
 	2		getChannel()I
 	2		available()I
 
+342		com/dimas519/Sensor/Accelerometer
+	185		run()Ljava/lang/String;
+	96		init(Lcom/virtenio/driver/i2c/NativeI2C;)V
+	61		<init>()V
+
 339		java/util/Arrays$ArrayList
 	67		contains(Ljava/lang/Object;)Z
 	61		get(I)Ljava/lang/Object;
@@ -793,11 +798,6 @@
 	7		access$100(Lcom/dimas519/Radio/MyRadio;Ljava/lang/String;C)[Ljava/lang/String;
 	4		access$000(Lcom/dimas519/Radio/MyRadio;)Lcom/virtenio/radio/ieee_802_15_4/FrameIO;
 	4		access$200(Lcom/dimas519/Radio/MyRadio;)Lcom/dimas519/Radio/RadioInterface;
-
-312		com/dimas519/Sensor/Accelerometer
-	155		run()Ljava/lang/String;
-	96		init(Lcom/virtenio/driver/i2c/NativeI2C;)V
-	61		<init>()V
 
 256		com/virtenio/driver/i2c/NativeI2C
 	32		getManager()Lcom/virtenio/driver/InstanceManager;

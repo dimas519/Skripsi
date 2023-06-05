@@ -53,7 +53,7 @@ public class Misc {
 	 */
 
 	public static double round(double value) {
-		return Math.round(( value * 100.0)) / 100.0;
+		return Math.round( value * 100.0) / 100.0;
 	}
 
 }
