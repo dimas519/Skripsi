@@ -298,7 +298,6 @@ async def insertSensingdata(value: Request):
         raiseWrongArguments()
 
     result=wsnController.getInterval(identifier)
-    print("haha"+str(result))
 
     return {"setInterval":result}
 

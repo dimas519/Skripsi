@@ -50,6 +50,7 @@ public class Thermometer extends Sensor{
 		System.out.println("Done(Init)");
 	}
 
+
 	@Override
 	public String run() {
 		try {

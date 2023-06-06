@@ -32,13 +32,13 @@ public class Barometer extends Sensor{
 	private MPL115A2 pressureSensor;
 	private String name="Pa"; //nama disingkat karena max frame 802.15.4 itu 127 char
 
+
 	public Barometer(NativeI2C i2c){
 		try {
 			init(i2c);
 		} catch (Exception e) {
 			System.err.println("Barometer failed initialize");
 		}
-
 	}
 	@Override
 	 void init(NativeI2C i2c) throws Exception {
@@ -55,6 +55,7 @@ public class Barometer extends Sensor{
 
 		System.out.println("Done(Init)");
 	}
+
 
 	@Override
 	public String run()  {
@@ -74,5 +75,4 @@ public class Barometer extends Sensor{
 		}
 
 	}
-
 }

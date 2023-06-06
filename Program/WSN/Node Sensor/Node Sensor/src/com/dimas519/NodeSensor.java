@@ -9,7 +9,7 @@ import com.virtenio.vm.Time;
 
 
 
-public class NodeSensor implements RadioInterface {
+public class NodeSensor implements MainInterface {
 	private final String identifier; //ini public identifier, wajib unique
 	private final int COMMON_CHANNEL; //channel node ini
 	private final int COMMON_PANID; //pan id node ini
@@ -51,7 +51,6 @@ public class NodeSensor implements RadioInterface {
 		this.sensors=new Sensor[4];
 
 		System.out.println("Variable initialized");
-
 
 
 
@@ -108,6 +107,7 @@ public class NodeSensor implements RadioInterface {
 		}
 	}
 
+
 	/**
 	 *
 	 * Sebuah method yang bertugas untuk melakukan meminta nilai-nilai lainnya yang dibutuhkan seperti waktu, interval, dll dari bs
@@ -121,6 +121,7 @@ public class NodeSensor implements RadioInterface {
 		System.out.println("getting time to Base Station done");
 		sensing();
 	}
+
 
 	/**
 	 *

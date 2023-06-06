@@ -31,6 +31,8 @@ import com.virtenio.radio.ieee_802_15_4.RadioDriverFrameIO;
 
 /**
  * Einfaches Beispiel der Funk�bertragung mit Senden und Empfangen.
+ *
+ *  * Sebuah kelas objek radio yang berfungsi untuk menerima dan mengirimkan pesan ke node
  */
 public class MyRadio {
 
@@ -41,6 +43,19 @@ public class MyRadio {
 	private final MainInterface mainInterface;
 
 
+	/**
+	 *
+	 * method ini bertujuan untuk mengisisialisasi radio agar siap digunakan dalam bertukar pesan dengan node-node
+	 *
+	 * @param mainInterface sebuah interface yang digunakan untuk berinteraksi dengan kelas utama base stasion(BaseStationMain)
+	 *
+	 * @param resv alamat base ini
+	 *
+	 * @param panID personal area networks base ini
+	 *
+	 * @param channel channel base ini
+	 *
+	 */
 	public MyRadio(MainInterface mainInterface, int resv, int panID, int channel){
 
 		this.mainInterface=mainInterface;
@@ -62,6 +77,15 @@ public class MyRadio {
 	}
 
 
+	/**
+	 *
+	 * Sebuah method yang berfungsi untuk mengirimkan pesan ke tujuan
+	 *
+	 * @param sendAddress alamat tujuan pesan
+	 *
+	 * @param msg isi pesannya
+	 *
+	 */
 	public void send(long sendAddress, String msg)  {
 		boolean isOK = false;
 		while (!isOK) {
@@ -85,7 +109,14 @@ public class MyRadio {
 
 
 
-	/** Ein Programme, dass �ber das Startmenu aufgerufen werden kann */
+	/**
+	 * Ein Programme, dass �ber das Startmenu aufgerufen werden kann
+	 *
+	 * sebuah method yang bertugas untuk menemerima pesan yang ditujukan untuk base ini di thread miliknya sendiri.
+	 * kemudian akan memproses pesan tersebut/
+	 *
+	 *
+	 * */
 
 	public void receive() throws Exception {
 
@@ -108,8 +139,8 @@ public class MyRadio {
 						new Thread() {
 							@Override
 							public void run() {
-								String[] splittedMSG=splitMSG(msg,':');
-								mainInterface.processMsg(sourceAddress,splittedMSG);
+								String[] splittedMSG=splitMSG(msg,':'); //memisahkan perintah atau permintaan dan nilainya
+								mainInterface.processMsg(sourceAddress,splittedMSG); //memproses perintah atau permintaan
 							}
 						}.start();
 
@@ -120,6 +151,17 @@ public class MyRadio {
 		receive.start();
 	}
 
+
+	/**
+	 *
+	 * sebuah method yang berfungsi untuk memisahkan perintah dan nilainya
+	 *
+	 * @param msg pesan yang belum dipisahkan
+	 *
+	 * @param regex karakter pemisah pesan dan nilai
+	 *
+	 * @return array string berukuran 2 dengan index 0 berupa perintah dan index 1 berupa nilainya
+	 */
 	private String[] splitMSG(String msg,char regex){
 		for (int i=0;i<msg.length();i++){
 			if(msg.charAt(i)==regex){

@@ -38,14 +38,14 @@ public class Accelerometer extends Sensor{
 	private String name="a"; //nama disingkat karena max frame 802.15.4 itu 127 char
 
 
-
 	public Accelerometer(){
 		try {
-			init(null); //cukup diset
+			init(null); //cukup diset null karena tidak pakai i2c
 		} catch (Exception e) {
 			System.err.println(name+" failed");
 		}
 	}
+
 
 	@Override
 	void init(NativeI2C i2c) throws Exception {
@@ -62,10 +62,11 @@ public class Accelerometer extends Sensor{
 		accelerationSensor.open();
 		accelerationSensor.setDataFormat(ADXL345.DATA_FORMAT_RANGE_2G); //diset max pembacaan sensor 2g saja
  		accelerationSensor.setDataRate(ADXL345.DATA_RATE_50HZ);  //rate data 50hz, 50 data dalam 1 detik, pembacaan akan dilakukan dengan interval-min 1 detik sehingga dicari rate yang kecil agar battery lebih hemat daya
-		accelerationSensor.setPowerControl(ADXL345.POWER_CONTROL_MEASURE); 
+		accelerationSensor.setPowerControl(ADXL345.POWER_CONTROL_MEASURE);
 
 		System.out.println("Done(Init)");
 	}
+
 
 	@Override
 	public String run() {
@@ -91,8 +92,4 @@ public class Accelerometer extends Sensor{
 		}
 
 	}
-
-
-
-
 }

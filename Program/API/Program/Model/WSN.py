@@ -34,13 +34,19 @@ class WSN:
         self.sensingTable.append(nameNewTable)
 
     def setLastData(self, data):
-        self.lastData=data;
+        timeLastData=self.lastData['time']
+        newDataTime=data['time']
+        
+        lastTime = datetime.strptime(timeLastData,"%Y-%m-%d %H:%M:%S")
+        newTime = datetime.strptime(newDataTime,"%Y-%m-%d %H:%M:%S")
+        
+        if(newTime>lastTime):
+            self.lastData=data;
+        
         
     def setInterval(self,interval):
-        self.interval=interval;
+        self.interval=int(interval);
     
-    
-
 
     def getIdentifier(self):
         return self.identifier

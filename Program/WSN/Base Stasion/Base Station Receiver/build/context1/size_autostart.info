@@ -564,13 +564,6 @@
 	6		<init>(ILcom/virtenio/driver/spi/NativeSPI$1;)V
 	0		command(Lcom/virtenio/driver/spi/NativeSPI;I)I
 
-424		com/dimas519/USART/MyUsart
-	209		run()V
-	68		splitMSG(Ljava/lang/String;C)[Ljava/lang/String;
-	54		send(Ljava/lang/String;)V
-	48		configUSART()Lcom/virtenio/driver/usart/USART;
-	45		<init>(Lcom/dimas519/MainInterface;)V
-
 413		java/util/StringTokenizer
 	216		nextToken()Ljava/lang/String;
 	62		countTokens()I
@@ -581,6 +574,13 @@
 	8		<init>(Ljava/lang/String;Ljava/lang/String;)V
 	5		hasMoreElements()Z
 	5		nextElement()Ljava/lang/Object;
+
+409		com/dimas519/USART/MyUsart
+	209		run()V
+	54		send(Ljava/lang/String;)V
+	53		splitMSG(Ljava/lang/String;C)[Ljava/lang/String;
+	48		configUSART()Lcom/virtenio/driver/usart/USART;
+	45		<init>(Lcom/dimas519/MainInterface;)V
 
 395		com/virtenio/preon32/node/Node
 	141		getInstance()Lcom/virtenio/preon32/node/Node;

@@ -51,7 +51,7 @@
       <div>
         <select class="mt-2" name="b" id="typeSelection">
           <option value="1" for="suhu tekanan kelembapan">Select city and location</option>
-          <option value="line" for="suhu tekanan kelembapan">Line Chart</option>
+          <option value="lines" for="suhu tekanan kelembapan">Line Chart</option>
           <option value="scatter" for="suhu tekanan kelembapan">Area Chart</option>
           <option value="box" for="suhu tekanan kelembapan">Box Plot</option>
         </select>
@@ -60,8 +60,9 @@
       <div>
         <select class="mt-2" name="a" id="typeSelectionAceleration">
           <option value="1" for="suhu tekanan kelembapan">Select city and location</option>
-          <option value="scatter3d" for="akselerasi">Line chart for acceleration</option>
-          <option value="mesh3d" for="akselerasi">Scatter 3d (only for acceleration)</option>
+          <option value="lines" for="suhu tekanan kelembapan">Line Chart for Acceleration</option>
+          <option value="scatter3d" for="akselerasi">Line Chart 3d for acceleration</option>
+          {{-- <option value="mesh3d" for="akselerasi">Scatter 3d for acceleration</option> --}}
           
           
         </select>

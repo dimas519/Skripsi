@@ -107,14 +107,38 @@ function show3D(jsonData,judul){
     time.push(jsonData[i]['timeStamp'])
   }
 
-  let data = [
-    {
-      x: x,
+  let data;
+  if (tipe!="lines"){
+    data = [
+      {
+        x: x,
+        y: y,
+        z: z,
+        type: "tipe"
+      }
+    ];
+  }else{
+    let Xtrace = {
+      x: time,
+      y: x,
+      type: 'scatter'
+    };
+
+    let Ytrace = {
+      x: time,
       y: y,
-      z:z,
-      type: tipe
-    }
-  ];
+      type: 'scatter'
+    };
+
+    let Ztrace = {
+      x: time,
+      y: z,
+      type: 'scatter'
+    };
+
+    data=[Xtrace, Ytrace, Ztrace]
+
+  }
 
 
   Plotly.newPlot('myPlotakselerasi', data, layout);
@@ -137,7 +161,7 @@ function show2D(jsonData,judul,jenisData){
 
 
   if(tipe=='box'){
-    return box(jsonData,tipe,judul)
+    return box(dataSensing,time,jenisData,judul)
   }
 
   let data = [
@@ -160,17 +184,16 @@ function show2D(jsonData,judul,jenisData){
 }
 
 
-function box(jsonData,tipe,judul){
-  let value=jsonData['value']
-  let date=jsonData['time']
+function box(dataSensing,time,jenisData,judul){
+
   let data = [];
 
-    for(let i=0;i<value.length;i++){
+    for(let i=0;i<dataSensing.length;i++){
       data.push(
         {
-          y: value[i],
+          y: dataSensing[i],
           type: "box",
-          name: date[i]
+          name: time[i]
         },
       )
     }
@@ -191,8 +214,8 @@ function show(doAlert=true){
   let start=`${startDate.value} ${startTime.value}`
   let end=`${endDate.value}-${endTime.value}`
   let bs=optLokasi.options[optLokasi.selectedIndex].text
-  
-  let tipeGrafik=optType.value;
+  let tipe=optType.value;
+
 
   let jsonString={
     "idBS":`${optLokasi.value}`
@@ -202,6 +225,8 @@ function show(doAlert=true){
     ,"stat":"avg"
 }
 
+
+
     
   jsonString={ //debugger
         "idBS":"AAAb"
@@ -210,6 +235,13 @@ function show(doAlert=true){
         ,interval:3600
         ,"stat":"avg"
     }
+
+
+    //khusus untuk boxplot dia raw tidak di aggregasi
+if(tipe=='box'){
+    jsonString.stat="raw"
+  }
+  
 
     // fetch(`${window.location.origin}/data`,{
       fetch(`${urlAPI}/data`,{

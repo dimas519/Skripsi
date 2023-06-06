@@ -128,26 +128,4 @@ public class RadioInit {
 		radio.setState(AT86RF231.STATE_RX_AACK_ON);
 		return radio;
 	}
-
-	/**
-	 * @param addrSRC
-	 *            Addresse des Senders
-	 * @param panID
-	 *            Gruppenaddresse von Sender und Empf�nger
-	 * @param addrDST
-	 *            Addresse des Empf�nger
-	 * 
-	 * @return Gibt ein vorkonfiguriertes Frame zur�ck
-	 */
-
-	public static Frame prepareFrame(int addrSRC, int panID, int addrDST) {
-		Frame frame = new Frame(Frame.TYPE_DATA | Frame.ACK_REQUEST | Frame.DST_ADDR_16
-				| Frame.INTRA_PAN | Frame.SRC_ADDR_16);
-		frame.setSrcAddr(addrSRC);
-		frame.setSrcPanId(panID);
-		frame.setDestAddr(addrDST);
-		frame.setDestPanId(panID);
-		return frame;
-	}
-
 }

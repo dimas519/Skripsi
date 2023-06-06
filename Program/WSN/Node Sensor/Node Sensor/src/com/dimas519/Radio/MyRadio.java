@@ -38,14 +38,14 @@ public class MyRadio {
 
 	private  FrameIO frameIO;
 	private  AT86RF231 radio;
-	private final RadioInterface mainInterface;
+	private final MainInterface mainInterface;
 
 
 	/**
 	 *
 	 * method ini bertujuan untuk mengisisialisasi radio agar siap digunakan dalam bertukar pesan dengan bs
 	 *
-	 * @param mainInterface sebuah interface yang digunakan untuk berinteraksi dengan kelas untama node sensor(NodeSensor)
+	 * @param mainInterface sebuah interface yang digunakan untuk berinteraksi dengan kelas utama node sensor(NodeSensor)
 	 *
 	 * @param resv alamat node ini
 	 *
@@ -54,7 +54,7 @@ public class MyRadio {
 	 * @param channel channel node ini
 	 *
 	 */
-	public MyRadio(RadioInterface mainInterface, int resv, int panID, int channel){
+	public MyRadio(MainInterface mainInterface, int resv, int panID, int channel){
 
 		this.mainInterface=mainInterface;
 
@@ -115,8 +115,6 @@ public class MyRadio {
 	}
 
 
-
-
 	/**
 	 * Ein Programme, dass �ber das Startmenu aufgerufen werden kann
 	 *
@@ -125,8 +123,6 @@ public class MyRadio {
 	 *
 	 *
 	 * */
-
-
 	public void receive() {
 		Thread receive = new Thread()  {
 			@Override
@@ -178,5 +174,5 @@ public class MyRadio {
 		return null;
 
 	}
-
+	
 }

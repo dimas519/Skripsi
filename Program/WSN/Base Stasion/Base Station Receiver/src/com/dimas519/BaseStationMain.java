@@ -7,14 +7,20 @@ import com.virtenio.vm.Time;
 
 public class BaseStationMain implements MainInterface {
 
-	private final MyUsart myUsart;
-	private final MyRadio myRadio;
+	private final MyUsart myUsart; //objek usart, untuk berkomunikasi dengan laptop/ pc
+	private final MyRadio myRadio; //objeck radio, untuk berkomunikasi dengan ns
 
+
+	//konfigurasi radio
 	private final int COMMON_CHANNEL =24;
 	private final int COMMON_PANID =0xCAFE;
 	private final int myAddress =0X0000;
 
 
+	/**
+	 * Method yang pertama akan dijalankan
+	 * @param args
+	 */
 	public static void main(String[] args)  {
 
 		try {
@@ -42,10 +48,10 @@ public class BaseStationMain implements MainInterface {
 	@Override
 	public void processMsg(long address, String[] msg) {
 //		if(msg[0]!=null && msg[1]!= null) {
-			if (msg[0].equals("bs")) { // kalau timeRequest cukup berikan waktu base stasion
-				this.setTime(address);
+			if (msg[0].equals("bs")) { // kalau prefix nya bs,  artinya request sesuatu ke base stasion
+				this.setTime(address); //pada saat ini feature hanya setTime dan request interval saja
 				this.myUsart.send("source:" + address + "," + msg[1]); //untuk minta interval				}
-			} else if (msg[0].equals("server") ) { //kalau dia data atau interval request(mau kom. dengan server(api atau db) maka usart.
+			} else if (msg[0].equals("server") ) { // kaalau prefix nya bs artinya request sesuatu ke base stasion
 				this.myUsart.send("source:" + address + "," + msg[1]);
 			}
 			else {
@@ -59,7 +65,7 @@ public class BaseStationMain implements MainInterface {
 
 	private void setTime(long address) {
 		String msg="setTime:"+ Time.currentTimeMillis();
-		this.myRadio.send(address,msg);
+		this.myRadio.send(address,msg);//mengirimkan kembali perintah settime dan valuenya
 	}
 
 

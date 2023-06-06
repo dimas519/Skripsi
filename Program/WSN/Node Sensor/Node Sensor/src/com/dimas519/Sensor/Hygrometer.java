@@ -27,7 +27,7 @@ import com.virtenio.driver.i2c.NativeI2C;
  *
  */
 public class Hygrometer extends Sensor{
-	private SHT21 sht21;
+	private SHT21 humiditySensor;
 	private String name="rh"; //nama disingkat karena max frame 802.15.4 itu 127 char
 
 	public Hygrometer(NativeI2C i2c){
@@ -38,26 +38,26 @@ public class Hygrometer extends Sensor{
 		}
 	}
 
+
 	@Override
 	 void init(NativeI2C i2c) throws Exception {
 
-
 		System.out.println("SHT21(Init)");
-		sht21 = new SHT21(i2c);
-		sht21.open();
-		sht21.setResolution(SHT21.RESOLUTION_RH12_T14);
-		sht21.reset();
-
+		humiditySensor = new SHT21(i2c);
+		humiditySensor.open();
+		humiditySensor.setResolution(SHT21.RESOLUTION_RH12_T14);
+		humiditySensor.reset();
 
 		System.out.println("Done(Init)");
 	}
 
+
 	@Override
 	public String run() {
 		try {
-			sht21.startRelativeHumidityConversion();
+			humiditySensor.startRelativeHumidityConversion();
 			Thread.sleep(100);
-			int rawRH = sht21.getRelativeHumidityRaw();
+			int rawRH = humiditySensor.getRelativeHumidityRaw();
 			float rh = SHT21.convertRawRHToRHw(rawRH);
 
 			String result="\""+name+"\":"+ Misc.round(rh);
