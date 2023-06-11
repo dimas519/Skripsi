@@ -87,51 +87,13 @@ allow_headers=['Content-Type, Authorization, Content-Length, X-Requested-With, A
 
 def raiseWrongArguments():
     raise HTTPException(
-        status_code=status.HTTP_400_BAD_REQUEST,
+        status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
         detail="wrong arguments",
         )
 
-
-
-
-
-
-
-
-
-
-@api.get("/")
-async def Test():
-    from fastapi.responses import HTMLResponse
-#     a= """
-#     <!DOCTYPE html>
-# <html>
-# <body>
-
-# <h1>The template Element</h1>
-
-# <p>Click the button below to display the hidden content from the template element.</p>
-
-# <button onclick="showContent()">Show hidden content</button>
-
-# <template>
-#   <h2>Flower</h2>
-#   <img src="img_white_flower.jpg" width="214" height="204">
-# </template>
-
-# <script>
-# function showContent() {
-#   var temp = document.getElementsByTagName("template")[0];
-#   var clon = temp.content.cloneNode(true);
-#   document.body.appendChild(clon);
-# }
-# </script>
-
-# </body>
-# </html>
-#     """
-#     return HTMLResponse(content=a, status_code=200)
-    return {"Hello": "World"}
+# @api.get("/")
+# async def Test():
+#     from fastapi.responses import HTMLResponse
 
 
 @api.post("/login")
@@ -174,54 +136,60 @@ async def insertKota(value: Request):
     return {"result":result}
 
 
-@api.get("/lokasi")
-async def getLocation(value: Request):
-    result=databaseAPI.getLocation()
+#mengambil semua informasi bs (node sensor,kota)
+@api.get("/bs") 
+async def getBS():
+    result=databaseAPI.getBaseStasion()
     return {"result":result}
 
-
-@api.post("/lokasi")
-async def insertLocation(value: Request):
+#menginput base stasion baru
+@api.post("/bs")
+async def insertBS(value: Request):
     data= await value.json()
     try:
         nama=data['nama']
         latitude=data['latitude']
         longtitude=data['longtitude']
-        indoor=data['indoor']
         idKota=data['idKota']
     except:
         raiseWrongArguments()
 
-    result=databaseAPI.insertLocation(nama,latitude,longtitude,indoor,idKota)
+    result=databaseAPI.insertBaseStation(nama,latitude,longtitude,idKota)
     return {"result":result}
 
 
-@api.get("/bs")
+#mengambil node sensor 
+@api.get("/node")
 async def getBaseStasion(value: Request):
     data= await value.json()
     try:
-        idLokasi=data['idLokasi']
+        idBS=data['idBS']
     except:
         raiseWrongArguments()
 
-    result=databaseAPI.getBaseStasion(idLokasi)
+    result=databaseAPI.getNodeSensor(idBS)
     return {"result":result}
 
-
-@api.post("/bs")
+#menginputkan node baru
+@api.post("/node")
 async def insertBaseStasion(value: Request):
     data= await value.json()
     try:
-        identifier=data['idBS'].lower()
-        idLokasi=data['idLokasi']
-        interval=data['interval']
+        identifier=data['identifier'].lower()
+        idBS=data['idBS']
+        nama=data['nama']
+        indoor=int(data['indoor'])
+        interval=int(data['interval'])
     except:
         raiseWrongArguments()
+        
+    if(interval<1000):
+        raiseWrongArguments()
+        return None    
     
-    result=databaseAPI.insertBaseStasion(identifier,idLokasi,interval)
+    result=databaseAPI.insertNodeSensor(identifier, nama, indoor, interval, idBS)
 
-    
-    if(result):
+    if(result[0]):
         res={
             "success":True,
             "token":result[1]
@@ -243,7 +211,7 @@ async def getNode(value: Request):
     return {"result":result}
 
 
-@api.post("/node")
+@api.post("/tipe")
 async def insertNodeSensor(value: Request):
     data= await value.json()
     try :
@@ -253,7 +221,7 @@ async def insertNodeSensor(value: Request):
         raiseWrongArguments()    
 
 
-    result=databaseAPI.insertNodeSensor(tipeSensor,identifier)
+    result=databaseAPI.insertTipe(tipeSensor,identifier)
     return {"result":result}
 
 
@@ -276,7 +244,7 @@ async def insertNodeSensor(value: Request):
 
 
 @api.post("/sensing")
-async def insertSensingdata(value: Request):
+async def sensing(value: Request):
     data= await value.json()
     try:
         identifier=data['idBS'].lower()
@@ -290,7 +258,7 @@ async def insertSensingdata(value: Request):
     return result
     
 @api.post("/interval")
-async def insertSensingdata(value: Request):
+async def changeInterval(value: Request):
     data= await value.json()
     try:
         identifier=data['idBS'].lower()
@@ -304,13 +272,13 @@ async def insertSensingdata(value: Request):
 
 
 @api.post("/data")
-async def insertSensingdata(value: Request):
+async def getData(value: Request):
     data= await value.json()
     try:
-        identifier=data['idBS'].lower()
+        identifier=data['idBS']
         start=data['start']
         end=data['end']
-        interval=data['interval']
+        interval=int(data['interval'])
     except :
         raiseWrongArguments()
        
@@ -328,7 +296,7 @@ async def insertSensingdata(value: Request):
 
 
 @api.get("/realTime")
-async def insertSensingdata(idBS: str):
+async def getDataRealTime(idBS: str):
     identifier=idBS.lower() 
     result=wsnController.getRealTime(identifier)
     return result

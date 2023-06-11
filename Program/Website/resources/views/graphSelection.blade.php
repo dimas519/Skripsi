@@ -32,9 +32,9 @@
       <div class="pt-3">Interval </div>
     </div>
     <div class="col-3">
-      <input type="date" id="startDate" class="mt-2">
-      <input type="time" id="startTime" class="mt-2">
-      <input type="number" placeholder="second" class="mt-2" id="intervalInput">
+      <input type="date" id="startDate" class="mt-2" value="2023-06-06">
+      <input type="time" id="startTime" class="mt-2" value="23:00">
+      <input type="number" placeholder="second" class="mt-2" id="intervalInput" value=60>
     </div>
 
     <div class="col-2">
@@ -45,21 +45,22 @@
 
     <div class="col-3">
       <div>
-        <input type="date" id="endDate" class="mt-2">
-        <input type="time" id="endTime" class="mt-2">
+        <input type="date" id="endDate" class="mt-2" value="2023-06-07">
+        <input type="time" id="endTime" class="mt-2" value="00:00">
       </div>
       <div>
         <select class="mt-2" name="b" id="typeSelection">
-          <option value="1" for="suhu tekanan kelembapan">Select city and location</option>
-          <option value="lines" for="suhu tekanan kelembapan">Line Chart</option>
-          <option value="scatter" for="suhu tekanan kelembapan">Area Chart</option>
+          <option value="1" for="suhu tekanan kelembapan">Pilih Diagram</option>
+          <option value="lines" for="suhu tekanan kelembapan">Diagram Garis</option>
+          <option value="scatter" for="suhu tekanan kelembapan">Diagram Luas</option>
+          <option value="bar" for="suhu tekanan kelembapan"> Diagram Batang</option>
           <option value="box" for="suhu tekanan kelembapan">Box Plot</option>
         </select>
       </div>
 
       <div>
         <select class="mt-2" name="a" id="typeSelectionAceleration">
-          <option value="1" for="suhu tekanan kelembapan">Select city and location</option>
+          <option value="1" for="suhu tekanan kelembapan">Pilih Diagram Akelserasi  </option>
           <option value="lines" for="suhu tekanan kelembapan">Line Chart for Acceleration</option>
           <option value="scatter3d" for="akselerasi">Line Chart 3d for acceleration</option>
           {{-- <option value="mesh3d" for="akselerasi">Scatter 3d for acceleration</option> --}}
@@ -75,9 +76,17 @@
     </div>
   </div>
 
+  <br>
+<div class="alert alert-secondary" role="alert" style="display: block">
+Lokasi dipilih:
+@foreach ($semuaLokasi as $lokasi)
+{{-- <option hidden class="optLokasi" value="{{$lokasi['identifier']}}" city="{{$lokasi['idKota']}}">{{$lokasi['nama']}}</option> --}}
+<button type="button" hidden class="btn btn-secondary selectedLokasi" onclick="removeSelected(this)" value="{{$lokasi['identifier']}}">{{$lokasi['nama']}}</button>
+@endforeach
+
+</div>
 
   <div id="myPlot" style="width:100%; height: 30px;"></div>
-  <br><br>
 
   
   <div id="myPlotsuhu" class="chart" style="width:100%; height: 30px;"></div>

@@ -3,15 +3,15 @@ import bcrypt
 
 
 class DataBaseContoller:
-    def __init__(self,ip,port,database,username,password) :
-        self.db=mysqlDB(ip,port,database,username,password)
+    def __init__(self, ip, port, database, username, password) :
+        self.db=mysqlDB(ip, port, database, username, password)
         
     def getTables(self):
         sql = "CALL `getAllTables`"
-        result=self.db.executeSelectQuery(sql,dictionary=False)
+        result=self.db.executeSelectQuery(sql, dictionary=False)
         return result
 
-    def Login(self,username, password, token):
+    def Login(self, username, password, token):
         sql = "CALL login('{}')".format(username)
         result=self.db.executeSelectQuery(sql)
         if(len (result)==0):
@@ -21,13 +21,13 @@ class DataBaseContoller:
         if(not truePassword):
             return -9;
         else :
-            sql = "CALL loginSuccess('{}','{}')".format(token,username)
+            sql = "CALL loginSuccess('{}','{}')".format(token, username)
             self.db.executeNonSelectQuery(sql)
             return result[0]['role']
 
-    def signUP(self,username, password,email,role=0):
+    def signUP(self, username, password, email, role=0):
         hashedPassword = bcrypt.hashpw(password.encode(), bcrypt.gensalt())
-        sql = "CALL signUp('{}','{}','{}',{})".format(username,hashedPassword.decode(),email,role)
+        sql = "CALL signUp('{}','{}','{}',{})".format(username, hashedPassword.decode(), email, role)
         try: 
             result=self.db.executeNonSelectQuery(sql)
         except:
@@ -37,35 +37,30 @@ class DataBaseContoller:
         else :
             return True
 
-    def insertKota(self,namaKota):
+    def insertKota(self, namaKota):
         sql="call insertKota('{}')".format(namaKota)
         row=self.db.executeSelectQuery(sql) #menggunakan execute select karena dia akan mengembalikan id
         return {"result":bool(row),"id":row[0]["last_insert_id()"]}
 
-    def getLocation(self):
-        sql="call getKota()"
-        resultKota=self.db.executeSelectQuery(sql)
-        
-        sql="CALL getLocation()";
+    def getBaseStasion(self):
+        sql="CALL getBaseStasion()";
         resultLokasi=self.db.executeSelectQuery(sql)
-        return {'kota':resultKota,"lokasi":resultLokasi}
+        return resultLokasi
     
-    def insertLocation(self,nama,latitude,longtitude,indoor,fk):
-        sql="CALL insertLocation('{}','{}','{}',{},{})".format(nama,latitude,longtitude,indoor,fk)
+    def insertBaseStation(self, nama, latitude, longtitude, fk):
+        sql="CALL insertBaseStation('{}','{}','{}',{})".format(nama, latitude, longtitude, fk)
         row=self.db.executeSelectQuery(sql)
-        return {"result":bool(row),"id":row[0]["last_insert_id()"]}
-
-    def getBaseStasion(self,id):
-        sql=None
-        if (id >=0):
-            sql="SELECT `identifier`, `token`, `addedTimeStamp`, `lastEditTimeStamp`,`interval` FROM `basestasion` WHERE `idLokasi`={}".format(id)
+        if(row ==False):
+            return row
         else:
-            sql="SELECT `identifier`, `token`, `interval`, `lokasi`.`nama` as 'namaLokasi', `latitude`, `longtitude`, `indoor`, `kota`.`nama` as 'namaKota'  FROM `basestasion` INNER JOIN `lokasi` ON `basestasion`.`idLokasi`=`lokasi`.`id` INNER JOIN `kota` ON `lokasi`.`idKota`=`kota`.`id`"
+            return {"result":bool(row),"id":row[0]["last_insert_id()"]}
+    
+    def getNodeSensor(self, id):
+        sql="CALL getNodeSensor({})".format(id);
         result=self.db.executeSelectQuery(sql)
         return result
 
-
-    def insertBaseStasion(self,identifier,idLokasi,interval):
+    def insertNodeSensor(self, identifier, nama, indoor, interval, idBS):
         import random
         token=""
         avaiableCharacter="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
@@ -73,30 +68,19 @@ class DataBaseContoller:
         for i in range(0,10):
             num=random.randint(0,numOfAvaiableCharacter)
             token+=avaiableCharacter[num]
-
-
         
-        sql="INSERT INTO `basestasion`(`identifier`,`token`,`idLokasi`,`interval`) VALUES('{}','{}',{},{})".format(identifier,token,idLokasi,interval)
-        row=self.db.executeNonSelectQuery(sql)
-        if(not bool(row)):
-            return False
-        else:
-            return True,token
+        sql="CALL insertNodeSensor('{}','{}','{}',{},{},'{}')".format(identifier, nama, token, indoor, interval, idBS)
+        row=self.db.executeSelectQuery(sql,dictionary=False)
+        return row,token
 
-
-
-    def getNodeSensor(self,id):
-        sql=None
-        if (not id == None):
-            sql="SELECT `tipeSensor` FROM `nodesensor` WHERE `identifier`='{}'".format(id) 
-        else:
-            sql="SELECT * FROM `nodesensor`"
+    def getSensorType(self,id):
+        sql="CALL getTipeSensor({})".format(id)
         result=self.db.executeSelectQuery(sql)
         return result
 
 
-    def insertNodeSensor(self,tipeSensor,idBaseStasion):
-        sql="INSERT INTO `nodesensor`(`tipeSensor`,`identifier`) VALUES"
+    def insertTipe(self,tipeSensor,idBaseStasion):
+        sql="INSERT INTO `tipesensor`(`tipeSensor`,`identifier`) VALUES"
 
         for i in range(0,len(tipeSensor),1):
             if(i!=0):
@@ -104,20 +88,19 @@ class DataBaseContoller:
             sql+="('{}','{}')".format(tipeSensor[i],idBaseStasion)
         row=self.db.executeNonSelectQuery(sql)
         return bool(row)
-        
-
-    def insertSensing(self,time,identifier,result):
+    
+    def insertSensing(self,time,identifier,data):
         tahun=time[2:4]
         bulan=time[5:7]
-        sql="INSERT INTO `{}`(`timeStamp`,`suhu`,`kelembapan`,`tekanan`,`akselerasi`,`idBS`) VALUES".format(str(identifier)+"-"+bulan+"-"+tahun)
-        sql+="('{}',{},{},{},'{}','{}')".format(time,result['T'],result['rh'],result['Pa'],result['a'],identifier)
+        sql="INSERT INTO `{}`(`timeStamp`,`suhu`,`kelembapan`,`tekanan`,`akselerasi`) VALUES".format(str(identifier)+"-"+bulan+"-"+tahun)
+        sql+="('{}',{},{},{},'{}')".format(time,data['T'],data['rh'],data['Pa'],data['a'])
 
         row=self.db.executeNonSelectQuery(sql)
         return bool(row)
 
 
     def getQueue(self):
-        sql="SELECT `id`,`command`,`idBS` FROM `queue_update`"
+        sql="CALL getQueue()"
         result=self.db.executeSelectQuery(sql,True)
         return result
     
@@ -134,6 +117,7 @@ class DataBaseContoller:
         
     def getSensingData(self,namaTable,start,end):      
         sql="SELECT * FROM `{}` WHERE `timeStamp`>='{}' AND `timeStamp`<='{}' ORDER BY `timeStamp` ASC".format(namaTable,start,end)
+        print(sql)
         # return sql
         return self.db.executeSelectQuery(sql)
 

@@ -18,44 +18,51 @@ def initDatabase(Config):
 def initWSN(databaseControler):
     wsnRegisterd=[]
     print("load WSN")
-    allWSN=databaseControler.getBaseStasion(-1) #-1 tidak spesifik lokasi (ambil semua)
+    allNodes=databaseControler.getNodeSensor(-1) #-1 tidak spesifik lokasi (ambil semua)
     allQueue=databaseControler.getQueue()
-    allSensor=databaseControler.getNodeSensor(None)
+    allSensor=databaseControler.getSensorType(-1)
     allSensingTable=databaseControler.getTables()
     
-    
-    print(str(len(allWSN))+" WSN load")
-    for i in range(0,len(allWSN)):
-        currWSN=allWSN[i]
+
+  
+    print(str(len(allNodes))+" WSN load")
+
+    for i in range(0,len(allNodes)):
+        currNodes=allNodes[i]
         listSensor=[]
+        
+
 
         for sensor in allSensor:
-            if(sensor['identifier']==currWSN['identifier']):
+            if(sensor['identifier']==currNodes['identifier']):
                 listSensor.append(sensor['tipeSensor'])
-
-
+            
         queuedWSN=None;
         for queue in allQueue:
 
-            if queue['idBS']==currWSN['identifier']:
+            if queue['idBS']==currNodes['identifier']:
                 queuedWSN=queue
 
-        newWSN=WSN(identifier= currWSN['identifier'], token=currWSN["token"]
-                ,sensorType=listSensor, interval=currWSN['interval']
-                ,latitude=currWSN['latitude'], longtitude=currWSN["longtitude"]
-                ,kota=currWSN["namaKota"],queue=queuedWSN)
+        newWSN=WSN(identifier= currNodes['identifier']
+                ,sensorType=listSensor, interval=currNodes['interval']
+                ,latitude=currNodes['latitude'], longtitude=currNodes["longtitude"]
+                ,kota=currNodes["namaKota"],queue=queuedWSN)
 
 
         wsnSensingTable=[]
         
         for sensingTable in allSensingTable:
-            if(sensingTable[0].split("-")[0]==currWSN['identifier']):
+            if(sensingTable[0].split("-")[2]==currNodes['identifier']   or sensingTable[0].split("-")[0]==currNodes['identifier']):
                 wsnSensingTable.append(sensingTable[0])
+                
+
 
         newWSN.setSensingTable(wsnSensingTable)
+        
+        
         wsnRegisterd.append(newWSN)
-        print("wsn "+str(i+1)+" loaded")
-    print(str(len(allWSN))+" WSN loaded")
+        print(str(i+1)+". wsn "+currNodes['identifier']+" loaded")
+    print(str(len(allNodes))+" WSN loaded")
     return wsnRegisterd
 
         

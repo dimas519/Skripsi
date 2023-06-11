@@ -59,10 +59,6 @@ public class BaseStationControllerUSART {
         this.myApi=new API(args[0],this.queueNode);
 
         this.runBaseStasionPC();
-
-
-
-
     }
 
     private void runBaseStasionPC(){
@@ -194,24 +190,24 @@ public class BaseStationControllerUSART {
     }
 
 
-    public void setApiResponse(String source) {
+    public void setApiResponse(String nodeAddress) {
         try {
             while (writing){} // karena proses push data sensing ke server dilakukan secara async (multi thread) maka ada kemungkinan 2 thread menulis secara bersamaan
             writing=true;
             String responseBS="";
-            Long nodeAddess=Long.parseLong(source);
+            Long nodeAddess=Long.parseLong(nodeAddress);
             boolean existNode=false;
             for (NodeQueue nodeQueue: this.queueNode){
                 if(nodeQueue.getAddress()==nodeAddess){
                     existNode=true;
                     if(nodeQueue.emptyQueue()){
-                        responseBS =(source+":ok");
+                        responseBS =(nodeAddress+":ok");
                     }else {
                         String queueMsg=nodeQueue.getQueue();
                         queueMsg=queueMsg.replace("{","");
                         queueMsg=queueMsg.replace("}","");
                         queueMsg=queueMsg.replace("\"","");
-                        queueMsg=source+":"+queueMsg;
+                        queueMsg=nodeAddress+":"+queueMsg;
                         responseBS=queueMsg;
                     }
                     break;
@@ -219,7 +215,7 @@ public class BaseStationControllerUSART {
             }
 
             if(!existNode){
-                responseBS =(source+":ok");
+                responseBS =(nodeAddress+":ok");
             }
             System.out.println("TO USART "+responseBS);
 

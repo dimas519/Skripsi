@@ -9,11 +9,11 @@ class WSNController:
                 return wsn
         return None
     
-    def __nameTable(self,identifier,time,selectedWSN):
+    def __nameTable(self,identifier,time,newFormat=False):
         tahun=time[2:4]
         bulan=time[5:7]
         namaTabel=(str(identifier)+"-"+str(bulan)+"-"+str(tahun))
-        print(namaTabel)
+
         return namaTabel
     
     def __isTableCreated(self, namaTabel,selectedWSN):
@@ -28,12 +28,7 @@ class WSNController:
     
     def __createTable(self, allSensor, identifier, time):
         
-
-        tahun=time[2:4]
-        bulan=time[5:7]
-        namaTabel=(str(identifier)+"-"+str(bulan)+"-"+str(tahun))
-
-
+        namaTabel=self.__nameTable(identifier,time)
 
 
         sql="""CREATE TABLE `{}` (
@@ -56,21 +51,21 @@ class WSNController:
                 concate=True
     
 
-        sql+=""",`idBS` VARCHAR(4) NOT NULL,
-            PRIMARY KEY(`timeStamp`)
-            )"""
-
+        sql+=",PRIMARY KEY(`timeStamp`))"
         return sql
     
     def sensingProcedure(self, dbController, identifier, time, sensingData):
         selectedWSN=self.__searchWSN(identifier)
         # time=ServerVariable.getTime(selectedWSN.getOffsetHour(), selectedWSN.getOffsetMinutes())
-        nameTable=self.__nameTable(identifier,time,selectedWSN)
+        nameTable=self.__nameTable(identifier,time)
         isCreated=self.__isTableCreated(nameTable,selectedWSN)
+   
         if(not isCreated):
+            
             sql=self.__createTable(selectedWSN.getSensorType(), identifier,time)
             dbController.executeDb(sql)
             selectedWSN.addSensingTable(nameTable)
+        
         
         result=dbController.insertSensing(time,identifier,sensingData)
 
@@ -118,28 +113,43 @@ class WSNController:
         return selectedWSN.getInterval()
         
     def getData(self, dbController,identifier,start,end,interval,statistics):
-        selectedWSN=self.__searchWSN(identifier)
-        
-        nameTable=self.__nameTable(identifier,start,selectedWSN)
-        isCreated=self.__isTableCreated(nameTable,selectedWSN)
-        
-        if isCreated:
-            intervalWsn=selectedWSN.getInterval()
-            sensingData=dbController.getSensingData(nameTable,start,end)
+        if (type(identifier)==list):
+            result={}
+            for bs in identifier:
+                bsData=self.getData(dbController,bs,start,end,interval,statistics)
+                result[bs]=bsData
             
-            if(len(sensingData)==0): #mengembalikan false kalau dia kosong
+            
+            
+            return result
+        else:
+            identifier=identifier.lower()
+            selectedWSN=self.__searchWSN(identifier)
+            if (selectedWSN==None):
                 return False
             
-            if(statistics=='raw'):
-                output=self.rawData(sensingData,interval)
-            elif (statistics=='median'):
-                output=self.medianData(sensingData,interval)
-            else:
-                output=self.averageData(sensingData,interval)
+            nameTable=self.__nameTable(identifier,start)
+            isCreated=self.__isTableCreated(nameTable,selectedWSN)
+        
+            if isCreated:
+                sensingData=dbController.getSensingData(nameTable,start,end)
+            
+                if(len(sensingData)==0): #mengembalikan false kalau dia kosong
+                    return False
+            
+                if(statistics=='raw'):
+                    output=self.rawData(sensingData,interval)
+                elif (statistics=='median'):
+                    output=self.medianData(sensingData,interval)
+                else:
+                    output=self.averageData(sensingData,interval)
                 
-            return output
-        else:
-            return False
+                return output
+            else:
+                return False
+        
+        
+        
         
         
         
@@ -159,9 +169,9 @@ class WSNController:
         akselerasiData=akselerasiData.replace("]","")
         
         splitAkselerasi=akselerasiData.split(",")
-        tempX=[int(splitAkselerasi[0])]
-        tempY=[int(splitAkselerasi[1])]
-        tempZ=[int(splitAkselerasi[2])]
+        tempX=[float(splitAkselerasi[0])]
+        tempY=[float(splitAkselerasi[1])]
+        tempZ=[float(splitAkselerasi[2])]
 
         # tempAkselerasi=[sensingData[0]['alse;erasi']]
         for i in range(1,len(sensingData)):
@@ -198,9 +208,9 @@ class WSNController:
                 
                 splitAkselerasi=akselerasiData.split(",")
                 
-                tempX=[int(splitAkselerasi[0])]
-                tempY=[int(splitAkselerasi[1])]
-                tempZ=[int(splitAkselerasi[2])]
+                tempX=[float(splitAkselerasi[0])]
+                tempY=[float(splitAkselerasi[1])]
+                tempZ=[float(splitAkselerasi[2])]
                 
             else:
                 tempTime.append(currData['timeStamp'])
@@ -214,9 +224,9 @@ class WSNController:
                 
                 splitAkselerasi=akselerasiData.split(",")
                 
-                tempX.append(int(splitAkselerasi[0]))
-                tempY.append(int(splitAkselerasi[1]))
-                tempZ.append(int(splitAkselerasi[2]))
+                tempX.append(float(splitAkselerasi[0]))
+                tempY.append(float(splitAkselerasi[1]))
+                tempZ.append(float(splitAkselerasi[2]))
                 
         return output
     
@@ -235,9 +245,9 @@ class WSNController:
         akselerasiData=akselerasiData.replace("]","")
         
         splitAkselerasi=akselerasiData.split(",")
-        tempX=[int(splitAkselerasi[0])]
-        tempY=[int(splitAkselerasi[1])]
-        tempZ=[int(splitAkselerasi[2])]
+        tempX=[float(splitAkselerasi[0])]
+        tempY=[float(splitAkselerasi[1])]
+        tempZ=[float(splitAkselerasi[2])]
 
         # tempAkselerasi=[sensingData[0]['alse;erasi']]
         for i in range(1,len(sensingData)):
@@ -255,7 +265,7 @@ class WSNController:
                 cell={};
                 medPos=(int)(round((len(tempSuhu)+1)/2,0)) #kalau dia .5 maka +1
                 
-                print(medPos)
+
                 medSuhu=tempSuhu[medPos]
                 medKelembapan=tempkelembapan[medPos]
                 medTekanan=tempTekanan[medPos]
@@ -296,9 +306,9 @@ class WSNController:
                 
                 splitAkselerasi=akselerasiData.split(",")
                 
-                tempX=[int(splitAkselerasi[0])]
-                tempY=[int(splitAkselerasi[1])]
-                tempZ=[int(splitAkselerasi[2])]
+                tempX=[float(splitAkselerasi[0])]
+                tempY=[float(splitAkselerasi[1])]
+                tempZ=[float(splitAkselerasi[2])]
                 
             else:
                 tempTime.append(currData['timeStamp'])
@@ -312,9 +322,9 @@ class WSNController:
                 
                 splitAkselerasi=akselerasiData.split(",")
                 
-                tempX.append(int(splitAkselerasi[0]))
-                tempY.append(int(splitAkselerasi[1]))
-                tempZ.append(int(splitAkselerasi[2]))
+                tempX.append(float(splitAkselerasi[0]))
+                tempY.append(float(splitAkselerasi[1]))
+                tempZ.append(float(splitAkselerasi[2]))
                 
         return output
     
@@ -334,9 +344,9 @@ class WSNController:
         akselerasiData=akselerasiData.replace("]","")
         
         splitAkselerasi=akselerasiData.split(",")
-        tempX=[int(splitAkselerasi[0])]
-        tempY=[int(splitAkselerasi[1])]
-        tempZ=[int(splitAkselerasi[2])]
+        tempX=[float(splitAkselerasi[0])]
+        tempY=[float(splitAkselerasi[1])]
+        tempZ=[float(splitAkselerasi[2])]
 
         # tempAkselerasi=[sensingData[0]['alse;erasi']]
         for i in range(1,len(sensingData)):
@@ -375,9 +385,9 @@ class WSNController:
                 
                 splitAkselerasi=akselerasiData.split(",")
                 
-                tempX=[int(splitAkselerasi[0])]
-                tempY=[int(splitAkselerasi[1])]
-                tempZ=[int(splitAkselerasi[2])]
+                tempX=[float(splitAkselerasi[0])]
+                tempY=[float(splitAkselerasi[1])]
+                tempZ=[float(splitAkselerasi[2])]
                 
             else:
                 tempTime.append(currData['timeStamp'])
@@ -391,9 +401,9 @@ class WSNController:
                 
                 splitAkselerasi=akselerasiData.split(",")
                 
-                tempX.append(int(splitAkselerasi[0]))
-                tempY.append(int(splitAkselerasi[1]))
-                tempZ.append(int(splitAkselerasi[2]))
+                tempX.append(float(splitAkselerasi[0]))
+                tempY.append(float(splitAkselerasi[1]))
+                tempZ.append(float(splitAkselerasi[2]))
                 
         return output
     

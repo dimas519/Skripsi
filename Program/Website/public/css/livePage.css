@@ -27,3 +27,11 @@
     padding-left: 10px;
 
 }
+
+.liveSelection{
+    height: 100px !important;
+}
+
+#suhuSelection,#kelembapanSelection,#tekananSelection,#akselerasiSelection{
+    min-width: 250px !important;
+}

@@ -1,14 +1,13 @@
 
 from datetime import datetime
 class WSN:
-    def __init__(self, identifier:str, token:str 
+    def __init__(self, identifier:str
                  ,sensorType:list, interval:int
                  ,latitude:str ,longtitude:str
                  , kota:str, queue:dict):
        
         self.identifier=identifier
-        self.token=token
-
+        
         self.sensorType=sensorType
         self.interval=interval;
 
@@ -50,9 +49,6 @@ class WSN:
 
     def getIdentifier(self):
         return self.identifier
-
-    def getToken(self):
-        return self.token
     
     def getSensorType(self):
         return self.sensorType

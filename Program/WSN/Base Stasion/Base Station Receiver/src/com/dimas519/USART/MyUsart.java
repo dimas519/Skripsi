@@ -47,7 +47,7 @@ public class MyUsart {
 
     /**
      *
-     * Sebuah method yang digunakan untuk menerima masukan dari pc menggunalkan usart
+     * Sebuah method yang digunakan untuk menerima masukan dari pc menggunakan usart
      *
      */
     public void run()  {

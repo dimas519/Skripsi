@@ -10,6 +10,9 @@ const chartHeight=(document.getElementById('workSheet').offsetWidth/16)*9
 const optTypeAceleration=document.getElementById("typeSelectionAceleration")
 let sensorSelected=[true,false,false,false]
 let sensorOrder=['suhu','tekanan','kelembapan','akselerasi']
+const selectedLokasi=document.getElementsByClassName("selectedLokasi")
+let selectedKota=[]
+let selectedKotaName=[]
 
 let layout = {
   width: document.getElementById('workSheet').offsetWidth,
@@ -31,6 +34,7 @@ let layout = {
     xref: 'paper',
   },
   yaxis: {
+    tickangle: -45,
     title: {
       font: {
         family: 'Courier New, monospace',
@@ -95,82 +99,131 @@ function show3D(jsonData,judul){
   let tipe=optTypeAceleration.value;
 
 
-  let x=[]
-  let y=[]
-  let z=[]
-  let time=[]
+  
 
-  for(let i=0;i<jsonData.length;i++){
-    x.push(jsonData[i]['akselerasi']['x'])
-    y.push(jsonData[i]['akselerasi']['y'])
-    z.push(jsonData[i]['akselerasi']['z'])
-    time.push(jsonData[i]['timeStamp'])
-  }
 
-  let data;
-  if (tipe!="lines"){
-    data = [
-      {
-        x: x,
+  let data=[]
+  for (let a=0;a<selectedKota.length;a++){
+    let dataSensing=[]
+    let time=[]
+    let bs=selectedKota[a];
+    let bsData=jsonData[bs]
+
+    let x=[]
+    let y=[]
+    let z=[]
+
+
+
+    for(let i=0;i<bsData.length;i++){
+      x.push(bsData[i]['akselerasi']['x'])
+      y.push(bsData[i]['akselerasi']['y'])
+      z.push(bsData[i]['akselerasi']['z'])
+      time.push(bsData[i]['timeStamp'])
+    }
+
+
+    if (tipe!="lines"){
+      data.push ( 
+        {
+          x: x,
+          y: y,
+          z: z,
+          type: tipe
+          ,name:selectedKotaName[a]
+        })
+    }else{
+      let Xtrace = {
+        x: time,
+        y: x,
+        name:"X"+selectedKotaName[a],
+        type: 'lines'
+      };
+
+      let Ytrace = {
+        x: time,
         y: y,
-        z: z,
-        type: "tipe"
-      }
-    ];
-  }else{
-    let Xtrace = {
-      x: time,
-      y: x,
-      type: 'scatter'
-    };
+        name:"Y"+selectedKotaName[a],
+        type: 'lines'
+      };
 
-    let Ytrace = {
-      x: time,
-      y: y,
-      type: 'scatter'
-    };
+      let Ztrace = {
+        x: time,
+        y: z,
+        name:"Z"+selectedKotaName[a],
+        type: 'lines'
+      };
 
-    let Ztrace = {
-      x: time,
-      y: z,
-      type: 'scatter'
-    };
+      data.push(Xtrace,Ytrace,Ztrace)
+      // dataSensing=[Xtrace, Ytrace, Ztrace]
+    }
 
-    data=[Xtrace, Ytrace, Ztrace]
+    // data.push(data)
 
   }
+
+  console.log(data)
+
+  // for (let x=0;x<selectedKota.length;x++){
+  //   let dataSensing=[]
+  //   let time=[]
+  //   let bs=selectedKota[x];
+  //   let bsData=jsonData[bs]
+  //   console.log(bsData)
+  //   for(let i=0;i<bsData.length;i++){
+  //     dataSensing.push(bsData[i][jenisData])
+  //     time.push(bsData[i]['timeStamp'])
+  //   }
+
+
+  //   data.push({x:time,y:dataSensing,type:tipe, name:selectedKotaName[x]})
+
+  // }
+
+
+
+if(tipe=="scatter"){
+  data[0].fill='tonexty'
+}
+
+
+
 
 
   Plotly.newPlot('myPlotakselerasi', data, layout);
 }
 
 
-function show2D(jsonData,judul,jenisData){
+function show2D(jsonData,judul,jenisData,SelectedKota){
   layout.yaxis.title.text=labelsType(jenisData)
   layout.title.text=judul
   
   let tipe=optType.value;
 
-  let dataSensing=[]
-  let time=[]
-
-  for(let i=0;i<jsonData.length;i++){
-    dataSensing.push(jsonData[i][jenisData])
-    time.push(jsonData[i]['timeStamp'])
-  }
+  
+  
 
 
   if(tipe=='box'){
-    return box(dataSensing,time,jenisData,judul)
+    return box(jsonData,jenisData)
   }
 
-  let data = [
-    {
-      x: time,
-      y: dataSensing,
-      type: tipe
+    let data=[]
+
+    for (let x=0;x<selectedKota.length;x++){
+      let dataSensing=[]
+      let time=[]
+      let bs=selectedKota[x];
+      let bsData=jsonData[bs]
+
+      for(let i=0;i<bsData.length;i++){
+        dataSensing.push(bsData[i][jenisData])
+        time.push(bsData[i]['timeStamp'])
+      }
+
+      data.push({x:time,y:dataSensing,type:tipe, name:selectedKotaName[x]})
+
     }
-  ];
 
 
 
@@ -178,26 +231,48 @@ function show2D(jsonData,judul,jenisData){
     data[0].fill='tonexty'
   }
 
-  
-  
-  Plotly.newPlot('myPlot'+jenisData, data, layout);
+  let newLayout={...layout}; //cara copy objek, karena layoutlive merupakan layout utama, sedangkan yang ini akan berubah ubah sesuai tipe data
+        
+  newLayout["bargap"]=0.1
+
+
+  Plotly.newPlot('myPlot'+jenisData, data, newLayout);
 }
 
 
-function box(dataSensing,time,jenisData,judul){
+function box(jsonData,jenisData){
 
   let data = [];
 
-    for(let i=0;i<dataSensing.length;i++){
+  for (let x=0;x<selectedKota.length;x++){
+    let dataSensing=[]
+    let time=[]
+    let bs=selectedKota[x];
+    let bsData=jsonData[bs]
+  
+
+
+    for(let i=0;i<bsData.length;i++){
+      let sense=bsData[i][jenisData]
+
+      for (let u=0;u<sense.length;u++){
+        dataSensing.push(bsData[i][jenisData][u])
+      }
+   
+      for (let u=0;u<sense.length;u++){
+        time.push(bsData[i]['timeStamp'])
+      }
+    
+    }
       data.push(
         {
-          y: dataSensing[i],
-          type: "box",
-          name: time[i]
-        },
+          y: dataSensing,
+          x: time,
+          name: selectedKotaName[x],
+          type: "box"
+        }
       )
-    }
-    
+  }
   Plotly.newPlot('myPlot'+jenisData, data, layout);
 
 }
@@ -212,38 +287,36 @@ function show(doAlert=true){
 
   let type=document.getElementsByClassName("selected")[0].getAttribute("box")
   let start=`${startDate.value} ${startTime.value}`
-  let end=`${endDate.value}-${endTime.value}`
+  let end=`${endDate.value} ${endTime.value}`
   let bs=optLokasi.options[optLokasi.selectedIndex].text
   let tipe=optType.value;
 
 
   let jsonString={
-    "idBS":`${optLokasi.value}`
+    "idBS":selectedKota
     ,"start":`${start}:00`
     ,"end":`${end}:00`
-    ,"interval":`${intervalInput.value}`
+    ,"interval":intervalInput.value
     ,"stat":"avg"
 }
 
 
+// if(selectedKota.length==1){
+  // jsonString.idBS=selectedKota[0]
+
+// }
+
+
+
+
 
     
-  jsonString={ //debugger
-        "idBS":"AAAb"
-        ,"start":"2023-05-08 00:00:00"
-        ,"end":"2023-05-08 23:55:00"
-        ,interval:3600
-        ,"stat":"avg"
-    }
-
 
     //khusus untuk boxplot dia raw tidak di aggregasi
 if(tipe=='box'){
     jsonString.stat="raw"
   }
   
-
-    // fetch(`${window.location.origin}/data`,{
       fetch(`${urlAPI}/data`,{
         method: "POST",
         headers: {
@@ -262,10 +335,12 @@ if(tipe=='box'){
               responseResult=response['result']
               let first=true
 
-              console.log(responseResult)
+
 
               for(let i=0;i<sensorSelected.length;i++){
                 if(sensorSelected[i]){
+
+                  
                   if(!first){
                   chartDiv[i].style.display="block"
                   chartDiv[i].style.marginTop="750px"
@@ -274,6 +349,7 @@ if(tipe=='box'){
 
                   type=sensorOrder[i]
                   let judul=`Grafik ${type} di ${bs} dari ${start} sampai ${end}`
+                  
                     if(type=="akselerasi"){
                       accInfo.style.display="block"
                       accInfo.style.marginTop="750px"
@@ -316,9 +392,57 @@ document.getElementById('kotaSelection').addEventListener("change",function(even
     navSensor.hidden=true
 
 });
+
+
 optLokasi.addEventListener("change",function(event) {
   navSensor.hidden=false
+  let lokasi=event.target.value
+  
+  selectedKota.push(lokasi)
+
+  for (let i=0;i<selectedLokasi.length;i++){
+    if(selectedLokasi[i].value==lokasi){
+      selectedLokasi[i].hidden=false;
+      selectedKotaName.push(selectedLokasi[i].textContent)
+    }
+  }
+
+  for (let i=0;i<listLokasi.length;i++){
+    if(listLokasi[i].value==lokasi){
+      listLokasi[i].hidden=true;
+    }
+  }
+
+  optLokasi.value=-1
+  
+
+console.log(selectedKotaName)
 });
+
+function removeSelected(elem){
+  let lokasi=elem.value
+  let index = selectedKota.indexOf(lokasi);
+  if (index !== -1) {
+    selectedKota.splice(index, 1);
+    selectedKotaName.splice(index,1)
+  }
+
+  for (let i=0;i<selectedLokasi.length;i++){
+    if(selectedLokasi[i].value==lokasi){
+      selectedLokasi[i].hidden=true;
+    }
+  }
+
+
+  for (let i=0;i<listLokasi.length;i++){
+    if(listLokasi[i].value==lokasi){
+      listLokasi[i].hidden=false;
+    }
+  }
+
+  console.log(selectedKotaName)
+}
+
 
 
 //untuk auto show kalau ganti sensor
