@@ -3,6 +3,7 @@
 
 
 <div class="d-flex justify-content-end" style="margin: 30px 50px 0px 0px">
+  <img src="{{'assets/img/Cloud_blue_graf.png'}}" id="gambar" alt="">
     <div class="card login" style="width: 18rem;">
         <div class="card-body">
             <div class="text-center">

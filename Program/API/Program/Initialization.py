@@ -43,7 +43,9 @@ def initWSN(databaseControler):
             if queue['idBS']==currNodes['identifier']:
                 queuedWSN=queue
 
-        newWSN=WSN(identifier= currNodes['identifier']
+
+
+        newWSN=WSN(identifier= currNodes['identifier'], token= currNodes['token']
                 ,sensorType=listSensor, interval=currNodes['interval']
                 ,latitude=currNodes['latitude'], longtitude=currNodes["longtitude"]
                 ,kota=currNodes["namaKota"],queue=queuedWSN)

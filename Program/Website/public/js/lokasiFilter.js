@@ -23,9 +23,22 @@ document.getElementById('kotaSelection').addEventListener("change",function(even
       }
     }
     optLokasi.value=-1
-    navSensor.hidden=true
+    // navSensor.hidden=true
 
 });
 optLokasi.addEventListener("change",function(event) {
-  navSensor.hidden=false
+  // navSensor.hidden=false
 });
+
+function labelsType(type){
+  
+  if(type=='suhu'){
+    return 'Celcius'
+  }else if(type=='kelembapan'){
+    return '%'
+  }else if(type=='tekanan'){
+    return 'kPa'
+  }else if(type=='akselerasi'){
+    return 'g'
+  }
+}

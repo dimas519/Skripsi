@@ -41,7 +41,12 @@ class DataBaseContoller:
         sql="call insertKota('{}')".format(namaKota)
         row=self.db.executeSelectQuery(sql) #menggunakan execute select karena dia akan mengembalikan id
         return {"result":bool(row),"id":row[0]["last_insert_id()"]}
-
+    
+    def getKota(self):
+        sql="CALL getKota()";
+        result=self.db.executeSelectQuery(sql)
+        return result
+    
     def getBaseStasion(self):
         sql="CALL getBaseStasion()";
         resultLokasi=self.db.executeSelectQuery(sql)
@@ -60,18 +65,11 @@ class DataBaseContoller:
         result=self.db.executeSelectQuery(sql)
         return result
 
-    def insertNodeSensor(self, identifier, nama, indoor, interval, idBS):
-        import random
-        token=""
-        avaiableCharacter="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
-        numOfAvaiableCharacter=len(avaiableCharacter)-1
-        for i in range(0,10):
-            num=random.randint(0,numOfAvaiableCharacter)
-            token+=avaiableCharacter[num]
+    def insertNodeSensor(self, identifier, nama, token, indoor, interval, idBS):
         
         sql="CALL insertNodeSensor('{}','{}','{}',{},{},'{}')".format(identifier, nama, token, indoor, interval, idBS)
-        row=self.db.executeSelectQuery(sql,dictionary=False)
-        return row,token
+        row=self.db.executeSelectQuery(sql)
+        return row
 
     def getSensorType(self,id):
         sql="CALL getTipeSensor({})".format(id)
@@ -79,13 +77,13 @@ class DataBaseContoller:
         return result
 
 
-    def insertTipe(self,tipeSensor,idBaseStasion):
+    def insertTipe(self,tipeSensor,idNode):
         sql="INSERT INTO `tipesensor`(`tipeSensor`,`identifier`) VALUES"
 
         for i in range(0,len(tipeSensor),1):
             if(i!=0):
                 sql+=","
-            sql+="('{}','{}')".format(tipeSensor[i],idBaseStasion)
+            sql+="('{}','{}')".format(tipeSensor[i],idNode)
         row=self.db.executeNonSelectQuery(sql)
         return bool(row)
     
@@ -117,8 +115,8 @@ class DataBaseContoller:
         
     def getSensingData(self,namaTable,start,end):      
         sql="SELECT * FROM `{}` WHERE `timeStamp`>='{}' AND `timeStamp`<='{}' ORDER BY `timeStamp` ASC".format(namaTable,start,end)
-        print(sql)
         # return sql
+
         return self.db.executeSelectQuery(sql)
 
 

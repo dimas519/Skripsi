@@ -26,7 +26,6 @@ public class MyUsart {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
     }
 
     private USART configUSART() throws Exception {

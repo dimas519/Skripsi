@@ -3,12 +3,15 @@
 
 
 <div class="d-flex justify-content-end" style="margin: 30px 50px 0px 0px">
+
+  <img src="{{'assets/img/Cloud_blue_graf.png'}}" id="gambar" alt="">
+
     <div class="card login" style="width: 18rem;">
         <div class="card-body">
             <div class="text-center">
                 <img class="text-center" src="assets/img/logo.png" width="75px" alt="logo app">
             </div>
-            <h3>LOGIN</h3>
+            <h3>MASUK</h3>
             <form class="form-signin" action="/masuk" method="post">
               @csrf 
               {{-- frame work laravel yang membantu mengenerate token --}}
@@ -21,14 +24,10 @@
                   <label >Password</label>
                   <input type="password" class="form-control" id="password" placeholder="Password" name="password">
                 </div>
-                <div class="form-check mt-2">
-                  <input type="checkbox" class="form-check-input" id="exampleCheck1" name="signIn">
-                  <label class="form-check-label" for="exampleCheck1">Keep Sign in</label>
-                </div>
                 <div>
-                  Dont have account? <a href="/signUP">Create one</a>
+                Tidak punya akun? <a href="/signUP">Buat akun</a>
                 </div>
-                <button type="submit" class="btn btn-primary mt-3 ">Login</button>
+                <button type="submit" class="btn btn-primary mt-3 ">Masuk</button>
               </form>
 
         </div>

@@ -57,48 +57,58 @@ const config = {responsive: true}
 
 function validInput(doAlert=true){
   if(startDate.value == ''){
-    doAlert ? alert('Select start date') : null
+    doAlert ? alert('Pilih Tanggal Mulai') : null
     return false;
   }else if(startTime.value == ''){
-    doAlert ? alert('Select start time') : null
+    doAlert ? alert('Pilih Waktu Mulai') : null
     return false;
   }else if(endDate.value == ''){
-    doAlert ? alert('Select end date') : null
+    doAlert ? alert('Pilih Tanggal Akhir') : null
     return false;
   }else if(endTime.value == ''){
-    doAlert ? alert('Select end time') : null
+    doAlert ? alert('Pilih Waktu Akhir') : null
+    return false;
+  }else if(selectedKota.length==0){
+    doAlert ? alert('Pilih Lokasi lebih dahulu'):null
     return false;
   }else if(intervalInput.value == ''){
-    doAlert ? alert('Select interval') : null
+    doAlert ? alert('Pilih interval') : null
     return false;
   }else if(optType.value==1){
     doAlert ? alert('Pilih tipe grafik') : null
-  }else if(optTypeAceleration.value==1){
-    doAlert ? alert('Pilih tipe grafik') : null
+    return false;
+  }else if(sensorSelected[3]==true && optTypeAceleration.value==1){
+    doAlert ? alert('Pilih tipe grafik untuk akselerasi') : null
+    return false;
   }
+
+
+  if (startDate.value > endDate.value){
+    doAlert ? alert('Tanggal Selesai Harus Sesudah Tanggal Mulai') : null
+  }else if(startDate.value == endDate.value){
+    if(startTime.value >= endTime.value ){
+      doAlert ? alert('Waktu Selesai Harus Sesudah Waktu Mulai') : null
+    }
+  }
+
+
+
   return true;
 }
 
-function labelsType(type){
-  
-  if(type=='suhu'){
-    return 'Celcius'
-  }else if(type=='kelembapan'){
-    return '%'
-  }else if(type=='tekanan'){
-    return 'kPa'
-  }else if(type=='akselerasi'){
-    return 'g'
-  }
-}
+
 
 function show3D(jsonData,judul){
-  // labelData=labelsType(tipe)
+  layout.yaxis.title.text="g"
   layout.title.text=judul+"*"
 
   let tipe=optTypeAceleration.value;
 
-
+  
+  if (optType.value=='box'){
+    alert("Akselerasi tidak dapat ditampilkan jika pemilihan visualisasi lainnya boxplot")
+    return null;
+  }
   
 
 
@@ -155,11 +165,8 @@ function show3D(jsonData,judul){
       };
 
       data.push(Xtrace,Ytrace,Ztrace)
-      // dataSensing=[Xtrace, Ytrace, Ztrace]
+
     }
-
-    // data.push(data)
-
   }
 
   console.log(data)
@@ -179,7 +186,6 @@ function show3D(jsonData,judul){
   //   data.push({x:time,y:dataSensing,type:tipe, name:selectedKotaName[x]})
 
   // }
-
 
 
 if(tipe=="scatter"){
@@ -225,65 +231,28 @@ function show2D(jsonData,judul,jenisData,SelectedKota){
 
     }
 
-
-
   if(tipe=="scatter"){
-    data[0].fill='tonexty'
+    for (let x=0;x<data.length;x++){
+      data[x].fill='tozeroy'
+    }
   }
 
   let newLayout={...layout}; //cara copy objek, karena layoutlive merupakan layout utama, sedangkan yang ini akan berubah ubah sesuai tipe data
         
-  newLayout["bargap"]=0.1
+
 
 
   Plotly.newPlot('myPlot'+jenisData, data, newLayout);
 }
 
 
-function box(jsonData,jenisData){
-
-  let data = [];
-
-  for (let x=0;x<selectedKota.length;x++){
-    let dataSensing=[]
-    let time=[]
-    let bs=selectedKota[x];
-    let bsData=jsonData[bs]
-  
-
-
-    for(let i=0;i<bsData.length;i++){
-      let sense=bsData[i][jenisData]
-
-      for (let u=0;u<sense.length;u++){
-        dataSensing.push(bsData[i][jenisData][u])
-      }
-   
-      for (let u=0;u<sense.length;u++){
-        time.push(bsData[i]['timeStamp'])
-      }
-    
-    }
-      data.push(
-        {
-          y: dataSensing,
-          x: time,
-          name: selectedKotaName[x],
-          type: "box"
-        }
-      )
-  }
-  Plotly.newPlot('myPlot'+jenisData, data, layout);
-
-}
-
 
 
 
 function show(doAlert=true){
-// if (!validInput(doAlert)){ 
-  //   return null;
-  // }
+if (!validInput(doAlert)){ 
+    return null;
+  }
 
   let type=document.getElementsByClassName("selected")[0].getAttribute("box")
   let start=`${startDate.value} ${startTime.value}`
@@ -293,7 +262,7 @@ function show(doAlert=true){
 
 
   let jsonString={
-    "idBS":selectedKota
+    "node":selectedKota
     ,"start":`${start}:00`
     ,"end":`${end}:00`
     ,"interval":intervalInput.value
@@ -348,7 +317,7 @@ if(tipe=='box'){
                   first=false;
 
                   type=sensorOrder[i]
-                  let judul=`Grafik ${type} di ${bs} dari ${start} sampai ${end}`
+                  let judul=`Grafik ${type} dari ${start} sampai ${end}`
                   
                     if(type=="akselerasi"){
                       accInfo.style.display="block"

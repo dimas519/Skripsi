@@ -1,12 +1,13 @@
 
 from datetime import datetime
 class WSN:
-    def __init__(self, identifier:str
+    def __init__(self, identifier:str, token:str
                  ,sensorType:list, interval:int
                  ,latitude:str ,longtitude:str
                  , kota:str, queue:dict):
        
         self.identifier=identifier
+        self.token=token
         
         self.sensorType=sensorType
         self.interval=interval;
@@ -19,8 +20,7 @@ class WSN:
         self.offlineData={"time":"1970-01-01 00:00:00","idBS":self.identifier,"result":{"kelembapan":None,"tekanan":None,"suhu":None,"akselerasi":None}}
 
         self.lastData=self.offlineData
-        
-        
+            
         
     def setSensingTable(self, sensingTable):
         self.sensingTable=sensingTable
@@ -49,6 +49,9 @@ class WSN:
 
     def getIdentifier(self):
         return self.identifier
+    
+    def getToken(self):
+        return self.token
     
     def getSensorType(self):
         return self.sensorType

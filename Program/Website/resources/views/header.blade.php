@@ -18,7 +18,7 @@
             <div class="d-flex flex-row menuAtas">
                     @php
                     if($menu){
-                        echo "<button type='button'  class='btn btn-link mx-2' >
+                        echo "<button type='button'  class='btn btn-link mx-2' data-bs-toggle='collapse' href='#navigation' aria-expanded='false' aria-controls='collapseExample' >
                                 <img src='assets/img/menu.png' height='25vh;' />
                             </button>";
                     }

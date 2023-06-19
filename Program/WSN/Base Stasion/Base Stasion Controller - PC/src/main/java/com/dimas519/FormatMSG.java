@@ -20,7 +20,8 @@ public class FormatMSG {
 
     public static  String formatToAPIFormat(String[] splitMSG) {
         String dateConverted = FormatMSG.timeFormat(splitMSG[0]);
-        String result="{\"time\":\""+dateConverted+"\","+splitMSG[1]+",\"result\":{"+splitMSG[2]+"}}";
+
+        String result="{\"time\":\""+dateConverted+"\","+splitMSG[1]+","+splitMSG[2]+",\"result\":{"+splitMSG[3]+"}}";
         return result;
 
 

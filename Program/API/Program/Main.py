@@ -3,7 +3,6 @@ import uvicorn
 from fastapi import FastAPI ,Request, status, HTTPException
 from starlette.middleware.cors import CORSMiddleware
 from fastapi import FastAPI
-from fastapi.security import OAuth2PasswordBearer
 
 
 
@@ -69,12 +68,9 @@ if __name__ == "__main__":
 api=FastAPI()
 
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 serverAlowed=[
 "*"
-,"http://www.google.com"
-,"http://dimas519.com"
 ]
 
 api.add_middleware(
@@ -89,6 +85,12 @@ def raiseWrongArguments():
     raise HTTPException(
         status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
         detail="wrong arguments",
+        )
+    
+def raiseUnAuth():
+    raise HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Key missmatch",
         )
 
 # @api.get("/")
@@ -135,6 +137,13 @@ async def insertKota(value: Request):
     result=databaseAPI.insertKota(nama)
     return {"result":result}
 
+@api.get("/kota")
+async def getBaseStasion():
+    result=databaseAPI.getKota()
+    return {"result":result}
+
+
+
 
 #mengambil semua informasi bs (node sensor,kota)
 @api.get("/bs") 
@@ -160,11 +169,14 @@ async def insertBS(value: Request):
 
 #mengambil node sensor 
 @api.get("/node")
-async def getBaseStasion(value: Request):
-    data= await value.json()
-    try:
-        idBS=data['idBS']
-    except:
+async def getNodeSensor(idBS: str):
+    # data= await value.json()
+    # try:
+    #     idBS=data['idBS']
+    # except:
+    #     raiseWrongArguments()
+    
+    if(idBS==None):
         raiseWrongArguments()
 
     result=databaseAPI.getNodeSensor(idBS)
@@ -172,7 +184,7 @@ async def getBaseStasion(value: Request):
 
 #menginputkan node baru
 @api.post("/node")
-async def insertBaseStasion(value: Request):
+async def insertNodeSensor(value: Request):
     data= await value.json()
     try:
         identifier=data['identifier'].lower()
@@ -180,35 +192,26 @@ async def insertBaseStasion(value: Request):
         nama=data['nama']
         indoor=int(data['indoor'])
         interval=int(data['interval'])
+        tipeSensor=data['tipeSensor']
     except:
         raiseWrongArguments()
         
     if(interval<1000):
         raiseWrongArguments()
-        return None    
+        return None
     
-    result=databaseAPI.insertNodeSensor(identifier, nama, indoor, interval, idBS)
-
+    result=wsnController.insertNewWSN(databaseAPI,identifier, nama, indoor, interval, tipeSensor, idBS)
+    
+    # return True
     if(result[0]):
         res={
             "success":True,
-            "token":result[1]
+            "key":result[1]
         }
         return {"result":res}
     else:
         return {"result":False}
 
-
-@api.get("/node")
-async def getNode(value: Request):
-    data= await value.json()
-    try:
-        identifier=data['idBS'].lower()
-    except:
-        raiseWrongArguments()
-
-    result=databaseAPI.getNodeSensor(identifier)
-    return {"result":result}
 
 
 @api.post("/tipe")
@@ -216,7 +219,7 @@ async def insertNodeSensor(value: Request):
     data= await value.json()
     try :
         tipeSensor=data['tipeSensor']
-        identifier=data['idBS'].lower()
+        identifier=data['node'].lower()
     except:
         raiseWrongArguments()    
 
@@ -232,7 +235,7 @@ async def insertNodeSensor(value: Request):
 async def insertNodeSensor(value: Request):
     data= await value.json()
     try:
-        identifier=data['idBS'].lower()
+        identifier=data['node'].lower()
         command=data['command']
     except:
         raiseWrongArguments()
@@ -247,25 +250,24 @@ async def insertNodeSensor(value: Request):
 async def sensing(value: Request):
     data= await value.json()
     try:
-        identifier=data['idBS'].lower()
+        identifier=data['id'].lower()
         time=data['time']
         sensingData=data['result']
+        token=data['key']
     except :
         raiseWrongArguments()
-    wsnController.setRealTime(identifier,data)  
-    result=wsnController.sensingProcedure(databaseAPI,identifier,time,sensingData)
     
-    return result
+    result=wsnController.sensingProcedure(databaseAPI,identifier, token,time,sensingData, data)
     
-@api.post("/interval")
-async def changeInterval(value: Request):
-    data= await value.json()
-    try:
-        identifier=data['idBS'].lower()
-    except :
-        raiseWrongArguments()
-
-    result=wsnController.getInterval(identifier)
+    if(result==401):
+        raiseUnAuth()
+    else:
+        return result
+    
+@api.get("/interval")
+async def changeInterval(node: str):
+    node=node.lower()
+    result=wsnController.getInterval(node)
 
     return {"setInterval":result}
 
@@ -275,7 +277,7 @@ async def changeInterval(value: Request):
 async def getData(value: Request):
     data= await value.json()
     try:
-        identifier=data['idBS']
+        identifier=data['node']
         start=data['start']
         end=data['end']
         interval=int(data['interval'])
@@ -296,8 +298,8 @@ async def getData(value: Request):
 
 
 @api.get("/realTime")
-async def getDataRealTime(idBS: str):
-    identifier=idBS.lower() 
+async def getDataRealTime(node: str):
+    identifier=node.lower() 
     result=wsnController.getRealTime(identifier)
     return result
 

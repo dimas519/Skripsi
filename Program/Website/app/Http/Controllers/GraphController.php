@@ -16,21 +16,22 @@ class GraphController extends Controller
 
     public function __construct()
     {
-        $data=$this->getData()['result'];
-        $this->setCity($data);
-        $this->setLocation($data);
+        $this->setCity();
+        $this->setLocation();
+        $this->setBS();
     }
 
-    private function getData(){
-        return API::get('lokasi','');
+
+    private function setCity(){
+        $this->city=API::get('kota',"")['result'];
     }
 
-    private function setCity($data){
-        $this->city=$data['kota'];
+    private function setLocation(){
+        $this->location=API::get('node',"idBS=-1")['result'];
     }
 
-    private function setLocation($data){
-        $this->location=$data['lokasi'];
+    private function setBS(){
+        $this->bs=API::get('bs',"")['result'];
     }
 
     public function getCity(){
@@ -39,6 +40,10 @@ class GraphController extends Controller
 
     public function getLocation(){
         return $this->location;
+    }
+
+    public function getBS(){
+        return $this->bs;
     }
 
     public function data(Request $request){

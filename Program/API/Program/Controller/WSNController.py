@@ -1,4 +1,7 @@
-import  ServerVariable
+
+import numpy as np
+from Model.WSN import WSN
+
 class WSNController:
     def __init__(self,allWSN) :
         self.allWSN=allWSN
@@ -54,8 +57,18 @@ class WSNController:
         sql+=",PRIMARY KEY(`timeStamp`))"
         return sql
     
-    def sensingProcedure(self, dbController, identifier, time, sensingData):
+   
+    
+    def sensingProcedure(self, dbController, identifier, token, time, sensingData, dataJSON):
         selectedWSN=self.__searchWSN(identifier)
+        
+        if(selectedWSN==None):
+            return 401
+        
+        if not (selectedWSN.getToken()==token):
+            return 401
+      
+        selectedWSN.setLastData(dataJSON)
         # time=ServerVariable.getTime(selectedWSN.getOffsetHour(), selectedWSN.getOffsetMinutes())
         nameTable=self.__nameTable(identifier,time)
         isCreated=self.__isTableCreated(nameTable,selectedWSN)
@@ -141,6 +154,21 @@ class WSNController:
                     output=self.rawData(sensingData,interval)
                 elif (statistics=='median'):
                     output=self.medianData(sensingData,interval)
+                    
+                elif(statistics=="inQ"):
+                    output=self.statDataQuartile(sensingData)
+                elif("split" in statistics):
+                    stat=statistics.split("-")
+                    if(len(stat)==0):
+                        return False
+                    try:
+                        interval=int(stat[1])
+                        output=self.statDataRange(sensingData,interval)    
+                    except:
+                        return False
+
+                   
+                    
                 else:
                     output=self.averageData(sensingData,interval)
                 
@@ -182,11 +210,12 @@ class WSNController:
 
             currTime=currData['timeStamp']
 
-            if(currIntervalLeft <=0 ): #kalau habis
+            if(currIntervalLeft <=0): #kalau habis
                 
                 currIntervalLeft=interval
                 cell={};
-                cell['timeStamp']= tempTime[0]  
+                lengthData=len(tempSuhu)
+                cell['timeStamp']= tempTime[int(lengthData/2)]  
                 cell['suhu']= round(sum(tempSuhu)/len(tempSuhu) ,2)
                 cell['kelembapan']=round( sum(tempkelembapan)/len(tempkelembapan) ,2)
                 cell['tekanan']= round (sum(tempTekanan)/len(tempTekanan),2)
@@ -227,6 +256,22 @@ class WSNController:
                 tempX.append(float(splitAkselerasi[0]))
                 tempY.append(float(splitAkselerasi[1]))
                 tempZ.append(float(splitAkselerasi[2]))
+         
+         
+        if(len(tempSuhu)>0): 
+            cell={};
+            lengthData=len(tempSuhu)
+            cell['timeStamp']= tempTime[int(lengthData/2)]    
+            cell['suhu']= round(sum(tempSuhu)/len(tempSuhu) ,2)
+            cell['kelembapan']=round( sum(tempkelembapan)/len(tempkelembapan) ,2)
+            cell['tekanan']= round (sum(tempTekanan)/len(tempTekanan),2)
+            cell['akselerasi']={
+                    "x":round(sum(tempX)/len(tempX),2),
+                    "y":round(sum(tempY)/len(tempY),2),
+                    "z":round(sum(tempZ)/len(tempZ),2)
+                }
+                    
+            output.append(cell)       
                 
         return output
     
@@ -284,7 +329,7 @@ class WSNController:
                     medZ+=tempZ[medPos]
                         
                 
-                cell['timeStamp']= tempTime[0]  
+                cell['timeStamp']= tempTime[medPos]  
                 cell['suhu']= medSuhu
                 cell['kelembapan']=medKelembapan
                 cell['tekanan']= medTekanan
@@ -326,7 +371,42 @@ class WSNController:
                 tempY.append(float(splitAkselerasi[1]))
                 tempZ.append(float(splitAkselerasi[2]))
                 
+                
+        if(len(tempSuhu)>0): 
+            medSuhu=tempSuhu[medPos]
+            medKelembapan=tempkelembapan[medPos]
+            medTekanan=tempTekanan[medPos]
+            medX=tempX[medPos]
+            medY=tempY[medPos]
+            medZ=tempZ[medPos]
+                
+            if(len(tempSuhu)%2==1):
+                medPos=(int)(len(tempSuhu)/2)
+                    
+                medSuhu+=tempSuhu[medPos]
+                medKelembapan+=tempkelembapan[medPos]
+                medTekanan+=tempTekanan[medPos]
+                medX+=tempX[medPos]
+                medY+=tempY[medPos]
+                medZ+=tempZ[medPos]
+                        
+                
+                cell['timeStamp']= tempTime[medPos]  
+                cell['suhu']= medSuhu
+                cell['kelembapan']=medKelembapan
+                cell['tekanan']= medTekanan
+                cell['akselerasi']={
+                    "x":medX,
+                    "y":medY,
+                    "z":medZ
+                }
+                
+                output.append(cell)
+                
+                
         return output
+    
+    
     
 
     def rawData(self,sensingData,interval):
@@ -362,8 +442,8 @@ class WSNController:
                 
                 currIntervalLeft=interval
                 cell={};
-                
-                cell['timeStamp']= str(tempTime[0])  
+                lengthData=len(tempSuhu)
+                cell['timeStamp']= str(tempTime[int(lengthData/2)])  
                 cell['suhu']= tempSuhu
                 cell['kelembapan']=tempkelembapan
                 cell['tekanan']= tempTekanan
@@ -405,13 +485,115 @@ class WSNController:
                 tempY.append(float(splitAkselerasi[1]))
                 tempZ.append(float(splitAkselerasi[2]))
                 
+        if(len(tempSuhu)>0): 
+            lengthData=len(tempSuhu)
+            cell={}; 
+            cell['timeStamp']= str(tempTime[int(lengthData/2)])   
+            cell['suhu']= tempSuhu
+            cell['kelembapan']=tempkelembapan
+            cell['tekanan']= tempTekanan
+            cell['akselerasi']={
+                "x":tempX,
+                "y":tempY,
+                "z":tempZ
+            }
+                    
+            output.append(cell)  
+            
+            
         return output
+    
+    def statDataQuartile(self,sensingData):
+        result={};
+        sensors=['suhu',"kelembapan","tekanan"]
+        data={"suhu":[],"kelembapan":[],"tekanan":[]}
+        for i in range(0,len(sensingData)):
+            for sensor in sensors:
+                data[sensor].append(sensingData[i][sensor])
+  
+        for sensor in sensors: 
+            dataSensor=data[sensor]
+            q3 = np.percentile(dataSensor, 75)
+            q1 = np.percentile(dataSensor, 25)
+            jumlahQ3=0;
+            jumlahQ1=0;
+            for i in range(0,len(data)):
+                if(dataSensor[i]>=q3):
+                    jumlahQ3+=1
+                elif(dataSensor[i]<=q1):
+                    jumlahQ1+=1
+            jumlahQ2=len(dataSensor)-(jumlahQ3+jumlahQ1)
+            result[sensor]={
+                "Q3":q3
+                ,"Q1":q1
+                ,"numQ1":jumlahQ1
+                ,"numQ2":jumlahQ2
+                ,"numQ3":jumlahQ3
+            }
+        return result
+    
+    def count_range(self, data, start, end):
+        count = 0
+        for num in data:
+            if start <= num < end:
+                count += 1
+        return count 
+    
+    def statDataRange(self, sensingData, span):
+        result={"suhu":[],"kelembapan":[],"tekanan":[]}
+
+        sensors=['suhu',"kelembapan","tekanan"]
+        data={"suhu":[],"kelembapan":[],"tekanan":[]}
+        for i in range(0,len(sensingData)):
+            for sensor in sensors:
+                data[sensor].append(sensingData[i][sensor])
+        
+        jumlahData=(100/span)
+        print (jumlahData)
+        for sensor in sensors:
+            startNum=1
+            for p in range(int(jumlahData)):
+                end=startNum+span
+                jumlah=self.count_range( data[sensor],    startNum,end)
+                
+                result[sensor].append(jumlah)
+                startNum=startNum+span
+  
+
+        return result        
+        
     
     def getRealTime(self, identifier):
         selectedWSN=self.__searchWSN(identifier)
         return selectedWSN.getLastData()
     
-    def setRealTime(self, identifier,data):
-        selectedWSN=self.__searchWSN(identifier)
-        return selectedWSN.setLastData(data)
+    
 
+    def insertNewWSN(self,dbController, identifier, nama, indoor, interval, tipeSensor, idBS):
+        import random
+        token=""
+        avaiableCharacter="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+        numOfAvaiableCharacter=len(avaiableCharacter)-1
+        for i in range(0,10):
+            num=random.randint(0,numOfAvaiableCharacter)
+            token+=avaiableCharacter[num]
+        result=dbController.insertNodeSensor(identifier, nama, token, indoor, interval, idBS)
+        
+        if(not result):
+            return False,False
+        
+        dbController.insertTipe(tipeSensor,identifier)
+        
+        latitude=result[0]['latitude']
+        longtitude=result[0]['longtitude']
+        kota=result[0]['namaKota']
+           
+        insertedWSN=WSN(identifier=identifier, sensorType=tipeSensor,
+                        interval=interval,latitude=latitude,
+                        longtitude=longtitude,kota=kota,
+                        queue=None,token=token)
+        self.allWSN.append(insertedWSN)
+        return True,token
+        
+        
+    

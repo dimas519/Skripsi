@@ -3,9 +3,26 @@
 
 <div class="container-fluid" > 
    <div class="row">
-      <nav id="sidebarMenu" class=" col-lg-2 d-md-block" style="min-height: 92vh;">
-        <div class="position-sticky pt-3 "> 
-          <ul class="nav flex-column">
+  
+      <div  class="col-lg-2" id=navigation style="diplay:none !important;">
+        <div class="pt-3" style="height: 92vh;"> 
+          <ul class="nav flex-column"
+            
+
+            @if (session('role')==1)
+            <li class="nav-item">
+              <a class="nav-link active " aria-current="page" href="admin">
+                <span>
+                  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="512" height="512" x="0" y="0" viewBox="0 0 36 36" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><circle cx="18" cy="13.72" r="2.86" fill="currentColor" data-original="#000000" class=""></circle><path fill-rule="evenodd" d="M27.87 6.11A9.14 9.14 0 0 1 23.5 5L18 2l-5.5 3a9.14 9.14 0 0 1-4.37 1.11H4.06V18.8a13.71 13.71 0 0 0 8 12.46L18 34l5.95-2.73a13.71 13.71 0 0 0 8-12.46V6.11zM18 8.57a5.14 5.14 0 1 1-5.14 5.14A5.15 5.15 0 0 1 18 8.57zm4.57 16.57a2.29 2.29 0 0 0-2.29-2.29h-4.57a2.28 2.28 0 0 0-2.28 2.28h-2.29a4.57 4.57 0 0 1 4.57-4.57h4.57a4.58 4.58 0 0 1 4.57 4.57z" fill="currentColor" data-original="#000000" class=""></path></g></svg>
+                </span>
+                Admin
+              </a>
+            </li>
+
+            @endif
+
+
+
             <li class="nav-item">
               <a class="nav-link active " aria-current="page" href="realTime">
                 <span>
@@ -22,7 +39,7 @@
                   <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="512" height="512" x="0" y="0" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><g><path d="m437.066 74.981c-5.857-5.858-15.355-5.858-21.213 0s-5.858 15.355 0 21.213c42.656 42.655 66.147 99.409 66.147 159.806s-23.491 117.151-66.147 159.806c-5.858 5.857-5.858 15.355 0 21.213 5.868 5.868 15.365 5.848 21.213 0 48.322-48.321 74.934-112.608 74.934-181.019s-26.612-132.698-74.934-181.019z" fill="currentColor" data-original="#000000" class=""></path><path d="m391.646 120.4c-5.858-5.857-15.356-5.857-21.213 0-5.857 5.858-5.857 15.355 0 21.213 30.533 30.531 47.349 71.155 47.349 114.387s-16.815 83.855-47.349 114.387c-5.858 5.858-5.858 15.355 0 21.213 5.856 5.856 15.353 5.859 21.213 0 36.2-36.198 56.136-84.355 56.136-135.601s-19.937-99.402-56.136-135.599z" fill="currentColor" data-original="#000000" class=""></path><path d="m346.193 165.852c-5.858-5.857-15.356-5.857-21.213 0-5.858 5.858-5.857 15.356 0 21.213 18.4 18.398 28.533 42.88 28.533 68.934s-10.133 50.536-28.533 68.934c-5.858 5.857-5.858 15.355 0 21.213 5.857 5.857 15.354 5.859 21.213 0 24.066-24.065 37.32-56.08 37.32-90.148s-13.254-66.081-37.32-90.146z" fill="currentColor" data-original="#000000" class=""></path><path d="m30 256c0-60.397 23.491-117.151 66.147-159.806 5.858-5.857 5.858-15.355 0-21.213-5.857-5.857-15.354-5.858-21.213 0-48.322 48.321-74.934 112.608-74.934 181.019s26.612 132.698 74.934 181.019c5.856 5.857 15.355 5.859 21.213 0 5.858-5.858 5.858-15.355 0-21.213-42.656-42.655-66.147-99.409-66.147-159.806z" fill="currentColor" data-original="#000000" class=""></path><path d="m94.219 256c0-43.232 16.815-83.855 47.349-114.387 5.858-5.858 5.858-15.355 0-21.213-5.857-5.858-15.355-5.857-21.213 0-36.2 36.197-56.136 84.355-56.136 135.6s19.936 99.403 56.136 135.601c5.866 5.865 15.363 5.85 21.213 0 5.857-5.858 5.857-15.355 0-21.213-30.534-30.532-47.349-71.156-47.349-114.388z" fill="currentColor" data-original="#000000" class=""></path><path d="m187.021 165.853c-5.857-5.858-15.355-5.858-21.213 0-24.066 24.065-37.32 56.08-37.32 90.148s13.254 66.083 37.32 90.148c5.866 5.865 15.363 5.85 21.213 0 5.858-5.858 5.857-15.356 0-21.213-18.4-18.398-28.533-42.88-28.533-68.934s10.133-50.536 28.533-68.934c5.857-5.859 5.857-15.357 0-21.215z" fill="currentColor" data-original="#000000" class=""></path><path d="m256 192.8c-34.849 0-63.2 28.352-63.2 63.2s28.352 63.2 63.2 63.2 63.2-28.352 63.2-63.2-28.351-63.2-63.2-63.2z" fill="currentColor" data-original="#000000" class=""></path></g></g></svg>
     
                 </span>
-                History Data
+                Data History
               </a>
             </li>
     
@@ -182,7 +199,17 @@
                   <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="512" height="512" x="0" y="0" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><path d="M488.468 79.645H23.532c-8.854 0-16.032 7.178-16.032 16.032v320.645c0 8.854 7.178 16.032 16.032 16.032h464.935c8.854 0 16.032-7.178 16.032-16.032V95.677c.001-8.854-7.177-16.032-16.031-16.032zM127.742 111.71h256.516M440.371 143.774H7.5M504.5 143.774h-32.065" style="stroke-width:15;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" fill="none" stroke="currentColor" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" data-original="#000000" class=""></path><path d="M231.952 239.968h-64.129a8.016 8.016 0 0 1-8.016-8.016v-32.065a8.016 8.016 0 0 1 8.016-8.016h64.129a8.016 8.016 0 0 1 8.016 8.016v32.065a8.016 8.016 0 0 1-8.016 8.016zM167.823 288.065h64.129M167.823 336.161h64.129M167.823 384.258h64.129M344.177 239.968h-64.129a8.016 8.016 0 0 1-8.016-8.016v-32.065a8.016 8.016 0 0 1 8.016-8.016h64.129a8.016 8.016 0 0 1 8.016 8.016v32.065a8.015 8.015 0 0 1-8.016 8.016zM280.048 288.065h64.129M280.048 336.161h64.129M280.048 384.258h64.129M456.403 239.968h-64.129a8.016 8.016 0 0 1-8.016-8.016v-32.065a8.016 8.016 0 0 1 8.016-8.016h64.129a8.016 8.016 0 0 1 8.016 8.016v32.065a8.016 8.016 0 0 1-8.016 8.016zM392.274 288.065h64.129M392.274 336.161h64.129M392.274 384.258h64.129M55.597 239.968a8.016 8.016 0 0 1-8.016-8.016v-32.065a8.016 8.016 0 0 1 8.016-8.016h64.129a8.016 8.016 0 0 1 8.016 8.016v32.065a8.016 8.016 0 0 1-8.016 8.016H87.661M55.597 288.065h64.129M55.597 336.161h64.129M55.597 384.258h64.129" style="stroke-width:15;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" fill="none" stroke="currentColor" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" data-original="#000000" class=""></path></g></svg>
     
                 </span>
-                Table Visualization
+                Visualisasi Tabel
+              </a>
+            </li>
+
+
+            <li class="nav-item">
+              <a class="nav-link active " aria-current="page" href="statistic">
+                <span>
+                  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="512" height="512" x="0" y="0" viewBox="0 0 128 128" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><path d="M126.25 115.046h-2.609V37.418a1.75 1.75 0 0 0-1.75-1.75h-15.782a1.75 1.75 0 0 0-1.75 1.75v77.628h-5.718V47.418a1.75 1.75 0 0 0-1.75-1.75H81.109a1.75 1.75 0 0 0-1.75 1.75v67.628h-5.718V77.418a1.75 1.75 0 0 0-1.75-1.75H56.109a1.75 1.75 0 0 0-1.75 1.75v37.628h-5.718V57.418a1.75 1.75 0 0 0-1.75-1.75H31.109a1.75 1.75 0 0 0-1.75 1.75v57.628h-5.718V97.418a1.75 1.75 0 0 0-1.75-1.75H6.109a1.75 1.75 0 0 0-1.75 1.75v17.628H1.75A1.749 1.749 0 0 0 0 116.8v9.451A1.749 1.749 0 0 0 1.75 128h124.5a1.749 1.749 0 0 0 1.75-1.75v-9.45a1.749 1.749 0 0 0-1.75-1.754Zm-18.391-75.878h12.282v75.878h-12.282Zm-25 10h12.282v65.878H82.859Zm-25 30h12.282v35.878H57.859Zm-25-20h12.282v55.878H32.859Zm-25 40h12.282v15.878H7.859ZM124.5 124.5H3.5v-5.951h121Z" fill="currentColor" data-original="#000000" class=""></path><path d="M13.827 50.034a8.451 8.451 0 0 0 7.086-13.075l12.121-12.121a8.431 8.431 0 0 0 9.538-.027l14.363 14.363a8.461 8.461 0 1 0 15.074 1.181l36.418-25.7A8.42 8.42 0 1 0 106.4 11.8L70.046 37.458a8.422 8.422 0 0 0-10.723-.846L44.981 22.271a8.463 8.463 0 1 0-14.368.039L18.438 34.485a8.459 8.459 0 1 0-4.611 15.549ZM114.173 3.5a4.963 4.963 0 1 1-4.963 4.96 4.969 4.969 0 0 1 4.963-4.96ZM69.136 43.537a4.963 4.963 0 1 1-4.963-4.963 4.969 4.969 0 0 1 4.963 4.963Zm-31.351-30.66a4.963 4.963 0 1 1-4.963 4.963 4.969 4.969 0 0 1 4.963-4.963ZM13.827 36.608a4.963 4.963 0 1 1-4.963 4.963 4.969 4.969 0 0 1 4.963-4.963Z" fill="currentColor" data-original="#currentColor" class=""></path></g></svg>    
+                </span>
+                Statistik
               </a>
             </li>
 
@@ -212,14 +239,14 @@
                 About us
               </a>
             </li> --}}
-            <li class="nav-item">
+            {{-- <li class="nav-item">
               <a class="nav-link" href="#">
                 <span>
                   <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="512" height="512" x="0" y="0" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><path d="M256 0C114.509 0 0 114.496 0 256c0 141.489 114.496 256 256 256 141.491 0 256-114.496 256-256C512 114.509 397.504 0 256 0zm0 476.279c-121.462 0-220.279-98.816-220.279-220.279S134.538 35.721 256 35.721c121.463 0 220.279 98.816 220.279 220.279S377.463 476.279 256 476.279z" fill="currentColor" data-original="#000000" class=""></path><path d="M248.425 323.924c-14.153 0-25.61 11.794-25.61 25.946 0 13.817 11.12 25.948 25.61 25.948s25.946-12.131 25.946-25.948c0-14.152-11.794-25.946-25.946-25.946zM252.805 127.469c-45.492 0-66.384 26.959-66.384 45.155 0 13.142 11.12 19.208 20.218 19.208 18.197 0 10.784-25.948 45.155-25.948 16.848 0 30.328 7.414 30.328 22.915 0 18.196-18.871 28.642-29.991 38.077-9.773 8.423-22.577 22.24-22.577 51.22 0 17.522 4.718 22.577 18.533 22.577 16.511 0 19.881-7.413 19.881-13.817 0-17.522.337-27.631 18.871-42.121 9.098-7.076 37.74-29.991 37.74-61.666s-28.642-55.6-71.774-55.6z" fill="currentColor" data-original="#000000" class=""></path></g></svg>
                 </span>
                 Help
               </a>
-            </li>
+            </li> --}}
             <li class="nav-item">
               <form action="keluar" method="post">
                 <a class="nav-link" href="keluar" onclick="parentNode.submit();">
@@ -233,6 +260,6 @@
             </li>
           </ul>
         </div>
-      </nav>
+      </div>
 
   

@@ -19,7 +19,7 @@ public class NodeSensor implements MainInterface {
 	private final Sensor[] sensors; //array objek sensor yang terdapat pada sensor init
 	private final MyRadio myRadio; //variabel objek radio, radio ini digunakan untuk berkomunikasi dengan bs
 	private boolean timeSync=false; //variabel yang digunakan agar sensor menunggu waktu dari bs terlebih dahulu
-
+	private String token; //variabel yang digunakan sebagai authentikasi
 	/**
 	 *
 	 * Sebuah method yang akan dijalankan pada saat pertama kali node sensor aktif
@@ -41,14 +41,16 @@ public class NodeSensor implements MainInterface {
 
 		System.out.println("Variable initialization");
 		this.identifier="AAAc"; //ini public identifier, wajib unique
+
 		this.COMMON_CHANNEL =24;
 		this.COMMON_PANID =0xCAFE;
-		this.myAddress =0X0001;
+		this.myAddress =0X0002;
 		this.myBSAddress=0x0000;
 //		this.interval=300000;
 		this.interval=1000;
 //		this.interval=200;
 		this.sensors=new Sensor[4];
+		this.token="0eO2khwvgj";
 
 		System.out.println("Variable initialized");
 
@@ -88,7 +90,7 @@ public class NodeSensor implements MainInterface {
 		long start, end,processTime;
 		while (true){
 			start=Time.currentTimeMillis();
-			sensing = "server:\"time\":" + Time.currentTimeMillis() + ",\"idBS\":\"" + this.identifier + "\"";
+			sensing = "server:\"time\":" + Time.currentTimeMillis() + ",\"key\":\""+this.token+"\",\"id\":\"" + this.identifier + "\"";
 			for (Sensor sensor : this.sensors) {
 				sensing += ",";
 				sensing += sensor.run();
@@ -129,7 +131,7 @@ public class NodeSensor implements MainInterface {
 	 *
 	 */
 	private void initializeTime(){
-		this.myRadio.sendMSG(this.myBSAddress,"bs:intervalRequest,\"idBS\":\""+this.identifier+"\"");
+		this.myRadio.sendMSG(this.myBSAddress,"bs:intervalRequest,\"node\":\""+this.identifier+"\"");
 	}
 
 
@@ -151,7 +153,13 @@ public class NodeSensor implements MainInterface {
 				this.timeSync = true;
 
 			} else if (msg[0].equals("setInterval")) {
-				this.interval = Integer.parseInt(msg[1]);
+				int inputInterval=Integer.parseInt(msg[1]);
+				if(inputInterval>=1000){
+					this.interval = Integer.parseInt(msg[1]);
+				}else{
+					System.out.println("Interval not updated because lower than 1ms");
+				}
+
 			}
 		}
 	}

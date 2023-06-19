@@ -5,14 +5,20 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Models\API;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+
 
 
 use App\Http\Controllers\GraphController;
 
 class UserController extends Controller
 {
+
+    public function __construct()
+        {
+            // Session::startSession();
+            
+        }
 
     public function login(Request $request){
         $token=$request->post('_token');
@@ -24,32 +30,34 @@ class UserController extends Controller
         $map['username']=$username;
         $map['password']=$password;
         $map['token']=$token;
+
+
+
         $result=API::POST('login',$map);
 
         
+
 
         if($result['result']==0){  
             Session::put('username',  $username);
             Session::put('token',  $token);
             Session::put('role',  0);
-            return redirect('/main');
+            return redirect( 'user' );
         }
         elseif($result['result']==1) {
-
             Session::put('username',  $username);
             Session::put('token',  $token);
             Session::put('role',  1);
-            return redirect('/admin');
+            return redirect('admin');
         }
         else{
-            return redirect('/?wrong=1');
+            return redirect('/login?wrong=1');
         }
 
     }
 
     public function logout(){
         Session::flush();
-        Auth::logout();
         return redirect('login');
     }
 
@@ -107,7 +115,24 @@ class UserController extends Controller
         ->with('page','tabel')
         ->with('api', API::getURL());
     }
-   
 
+    public function viewStatistik(Request $request){
+        $mainPage=new GraphController();
+        $username=$request->session()->get('username');
+        return view('layout')
+        ->with('semuaKota',$mainPage->getCity())
+        ->with("semuaLokasi",$mainPage->getLocation())
+        ->with('menu',true)
+        ->with('page','statistik')
+        ->with('api', API::getURL());
+    }
+
+    public function viewUserProfile(Request $request ){
+
+        return view('layout')
+        ->with('menu',true)
+        ->with('location',false)
+        ->with('page','userSetting');
+    }
 
 }

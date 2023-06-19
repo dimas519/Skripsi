@@ -16,7 +16,7 @@ const urlAPI='{{$api}}'
 <div class="row">
     <div class="col-10">
         <Select class="form-select" id="kotaSelection">
-            <option value="-1">Filter berdasarkan Kota</option>
+            <option value="-1">Filter berdasarkan kota</option>
             @foreach ($semuaKota as $kota)
             <option value="{{$kota['id']}}">{{$kota['nama']}}</option>
             @endforeach
@@ -27,31 +27,31 @@ const urlAPI='{{$api}}'
                 <h5 class="card-title">Pilih Diagram</h5>
                 <div>
                     <div class="card-text border liveData align-text-bottom liveSelection text-center">
-                        <p class="liveDataTitle">Kelembapan </p>
+                        <p class="liveDataTitle">Kelembapan (%) </p>
                         <select class="mt-2" name="b" id="kelembapanSelection">
                             <option value="simpleText" >Teks Sederhana</option>
                             <option value="lines" >Diagram Garis</option>
                             <option value="scatter" >Diagram Area</option>
-                            <option value="bar"> Diagram Batang</option>
+                            {{-- <option value="bar"> Diagram Batang</option> --}}
                             <option value="gauge">Gauge </option>
                         </select>
 
                     </div> 
                     <div class="card-text border liveData align-text-bottom liveSelection text-center">
-                        <p class="liveDataTitle">Suhu </p>
+                        <p class="liveDataTitle">Suhu (°C) </p>
                         <select class="mt-2" name="b" id="suhuSelection">
                             <option value="simpleText" >Teks Sederhana</option>
                             <option value="lines" >Line Chart</option>
-                            <option value="bar"> Diagram Batang</option>
+                            {{-- <option value="bar"> Diagram Batang</option> --}}
                             <option value="scatter">Area Chart</option>
                         </select>
                     </div> 
                     <div class="card-text border liveData align-text-bottom liveSelection text-center" >
-                        <p class="liveDataTitle">Tekanan </p>
+                        <p class="liveDataTitle">Tekanan  (kPa) </p>
                         <select class="mt-2" name="b" id="tekananSelection">
                             <option value="simpleText" >Teks Sederhana</option>
                             <option value="lines">Line Chart</option>
-                            <option value="bar"> Diagram Batang</option>
+                            {{-- <option value="bar"> Diagram Batang</option> --}}
                             <option value="scatter">Area Chart</option>
                         </select>
                     </div>
@@ -60,7 +60,7 @@ const urlAPI='{{$api}}'
                         <select class="mt-2" name="b" id="akselerasiSelection">
                             <option value="simpleText" >Teks Sederhana</option>
                             <option value="lines">Line Chart</option>
-                            <option value="bar"> Diagram Batang</option
+                            {{-- <option value="bar"> Diagram Batang</option> --}}
                             <option value="scatter">Area Chart</option>
                             {{-- <option value="scatter3d">Area Chart</option> --}}
                         </select>
@@ -73,7 +73,7 @@ const urlAPI='{{$api}}'
         @foreach ($semuaLokasi as $lokasi)
         <div class="card collapse my-1" id="{{$lokasi['identifier']}}" >
             <div class="card-body">
-                <h5 class="card-title">{{$lokasi['nama']}}</h5>
+                <h5 class="card-title">{{$lokasi['namaLokasi']}}</h5>
                 <h6 id="timeText{{$lokasi['identifier']}}" class="card-text"></h6>
                 <div>
                     <div id="myPlotkelembapan{{$lokasi['identifier']}}" class="" style="display:inline-block"></div>
@@ -141,7 +141,7 @@ const urlAPI='{{$api}}'
             type="checkbox" id="select{{$lokasi['identifier']}}" >
             <label 
             data-bs-toggle="collapse" href="#{{$lokasi['identifier']}}" aria-expanded="false" 
-            aria-controls="collapseExample" class="form-check-label" for="select{{$lokasi['identifier']}}">{{$lokasi['nama']}}</label>
+            aria-controls="collapseExample" class="form-check-label" for="select{{$lokasi['identifier']}}">{{$lokasi['namaLokasi']}}</label>
 
             <br><br>
         </div>

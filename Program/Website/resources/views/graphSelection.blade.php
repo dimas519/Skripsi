@@ -1,5 +1,8 @@
 <script>
   const urlAPI='{{$api}}'
+
+  console.log('{{session("nama")}}')
+
   </script>
 <link rel="stylesheet" href="{{'css/mainUser.css'}}">
 <script src="https://cdn.plot.ly/plotly-2.23.2.min.js" charset="utf-8"></script>
@@ -23,7 +26,7 @@
       <Select class="form-select" id="lokasiSelection"  >
         <option value="-1">Pilih Lokasi</option>
         @foreach ($semuaLokasi as $lokasi)
-        <option hidden class="optLokasi" value="{{$lokasi['identifier']}}" city="{{$lokasi['idKota']}}">{{$lokasi['nama']}}</option>
+        <option hidden class="optLokasi" value="{{$lokasi['identifier']}}" city="{{$lokasi['idKota']}}">{{$lokasi['namaLokasi']}} {{$lokasi['indoor']==1?"- Indoor":""}} {{"(lat: ".$lokasi['latitude']." ,long: ".$lokasi['longtitude'].")"}}</option>
         @endforeach
       </Select>
     </div>
@@ -51,10 +54,10 @@
       <div>
         <select class="mt-2" name="b" id="typeSelection">
           <option value="1" for="suhu tekanan kelembapan">Pilih Diagram</option>
-          <option value="lines" for="suhu tekanan kelembapan">Diagram Garis</option>
-          <option value="scatter" for="suhu tekanan kelembapan">Diagram Luas</option>
+          <option value="scatter" for="suhu tekanan kelembapan">Diagram Luas (Rekomendasi)</option>
+          <option value="lines" for="suhu tekanan kelembapan">Diagram Garis</option>       
           <option value="bar" for="suhu tekanan kelembapan"> Diagram Batang</option>
-          <option value="box" for="suhu tekanan kelembapan">Box Plot</option>
+          {{-- <option value="box" for="suhu tekanan kelembapan">Box Plot</option> --}}
         </select>
       </div>
 
@@ -81,7 +84,7 @@
 Lokasi dipilih:
 @foreach ($semuaLokasi as $lokasi)
 {{-- <option hidden class="optLokasi" value="{{$lokasi['identifier']}}" city="{{$lokasi['idKota']}}">{{$lokasi['nama']}}</option> --}}
-<button type="button" hidden class="btn btn-secondary selectedLokasi" onclick="removeSelected(this)" value="{{$lokasi['identifier']}}">{{$lokasi['nama']}}</button>
+<button type="button" hidden class="btn btn-secondary selectedLokasi my-1" onclick="removeSelected(this)" value="{{$lokasi['identifier']}}">{{$lokasi['namaLokasi']}}</button>
 @endforeach
 
 </div>

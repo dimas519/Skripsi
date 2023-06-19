@@ -2,32 +2,47 @@
 const tabel=document.getElementById('tabeldump')
 
 function validInput(doAlert=true){
-    if(startDate.value == ''){
-      doAlert ? alert('Select start date') : null
-      return false;
+  if(startDate.value == ''){
+    doAlert ? alert('Pilih Tanggal Mulai') : null
+    return false;
     }else if(startTime.value == ''){
-      doAlert ? alert('Select start time') : null
+      doAlert ? alert('Pilih Waktu Mulai') : null
       return false;
     }else if(endDate.value == ''){
-      doAlert ? alert('Select end date') : null
+      doAlert ? alert('Pilih Tanggal Akhir') : null
       return false;
     }else if(endTime.value == ''){
-      doAlert ? alert('Select end time') : null
+      doAlert ? alert('Pilih Waktu Akhir') : null
       return false;
     }else if(intervalInput.value == ''){
-      doAlert ? alert('Select interval') : null
+      doAlert ? alert('Pilih interval') : null
+      return false;
+    }else if(optLokasi.value == ''){
+      doAlert ? alert('Pilih Lokasi') : null
       return false;
     }
+
+    if (startDate.value > endDate.value){
+      doAlert ? alert('Tanggal Selesai Harus Sesudah Tanggal Mulai') : null
+    }else if(startDate.value == endDate.value){
+      if(startTime.value >= endTime.value ){
+        doAlert ? alert('Waktu Selesai Harus Sesudah Waktu Mulai') : null
+      }
+    }
+
+
     return true;
   }
   
 
 
 
+var bodytable=undefined;
+
 function show(doAlert=true){
-    // if (!validInput(doAlert)){ 
-      //   return null;
-      // }
+    if (!validInput(doAlert)){ 
+        return null;
+      }
     
       let start=`${startDate.value} ${startTime.value}`
       let end=`${endDate.value}-${endTime.value}`
@@ -35,19 +50,16 @@ function show(doAlert=true){
       
     
       let jsonString={
-        "idBS":`${optLokasi.value}`
+        "node":`${optLokasi.value}`
         ,"start":`${start}:00`
         ,"end":`${end}:00`
         ,"interval":`${intervalInput.value}`
+        ,'stat':"avg"
     }
     
+
         
-      jsonString={ //debugger
-            "idBS":"AAAb"
-            ,"start":"2023-05-08 00:00:00"
-            ,"end":"2023-05-08 23:55:00"
-            ,interval:1000
-        }
+
     
         fetch(`${urlAPI}/data`,{
             method: "POST",
@@ -63,10 +75,15 @@ function show(doAlert=true){
                   alert("Data tidak ditemukan")
                 }else{ 
                     //buang yang sudah ada
-                
-                    document.getElementsByTagName("tbody").remove
 
-                    let bodyTable=document.createElement("tbody")
+                    if(bodytable!=undefined){
+                      bodytable.remove()
+                    }
+              
+                    
+
+                    bodytable=document.createElement("tbody")
+                    
                 
                     tabel.parentElement.style.display="block"
 
@@ -101,10 +118,10 @@ function show(doAlert=true){
                         akselerasi.classList.add("tabelData")
                         row.appendChild(akselerasi)
 
-                        bodyTable.appendChild(row)
+                        bodytable.appendChild(row)
                     }
 
-                    tabel.append(bodyTable)
+                    tabel.append(bodytable)
 
                     // tabel
     

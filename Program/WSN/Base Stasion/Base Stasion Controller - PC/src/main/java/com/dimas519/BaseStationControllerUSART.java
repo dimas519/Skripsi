@@ -97,7 +97,7 @@ public class BaseStationControllerUSART {
                     if(source[0].equals("source")){
                         String msgToAPI=msg[1];
                         boolean isSensing=false;
-                        String[] splitMSG = msgToAPI.split(",", 3);
+                        String[] splitMSG = msgToAPI.split(",", 4);
 
                         if(!splitMSG[0].equals("intervalRequest")){
                             this.setApiResponse(source[1]);
@@ -105,8 +105,9 @@ public class BaseStationControllerUSART {
                             isSensing=true;
                             myApi.sendToServer(source[1],msgToAPI,isSensing);
                         }else {
-                            msgToAPI = "{" + splitMSG[1] + "}";
-                            myApi.sendToServer(source[1],msgToAPI,isSensing);
+                            String idNode = splitMSG[1].split(":",2)[1];
+                            idNode=idNode.replace("\"","");
+                            myApi.sendToServer(source[1],idNode,isSensing);
 
                             //kode ini tidak dipakai karena terlalu banyak blocking, sehingga ada kemungkinan node lain tidak dapat masuk
                             //solusi nya: biarkan saja, kekurangannya yaitu node yang baru aktif akan menjalankan sensing 1-2 kali(default sensing interval 1s)

@@ -34,26 +34,14 @@ Route::get('/main',[ UserController::class , 'viewUser']);
 
 Route::get('/realTime',[ UserController::class , 'realTimeCont']);
 
-Route::get('/user', function () {
-    return view('layout')
-    ->with('menu',true)
-    ->with('location',false)
-    ->with('page','userSetting');
-});
+Route::get('user',[UserController::class,'viewUserProfile']);
 
-Route::get('/admin', function () {
-    $mainPage=new GraphController();
-    return view('layout')
-    ->with('semuaKota',$mainPage->getCity())
-    ->with("semuaLokasi",$mainPage->getLocation())
-    ->with('menu',true)
-    ->with('location',false)
-    ->with('page','/admin');
-});
+Route::get('/admin', [AdminController::class, "adminView"]);
+    
 
 Route::get('/table',[ UserController::class , 'viewTable']);
 
-
+Route::get('/statistic',[ UserController::class , 'viewStatistik']);
 /*
 |--------------------------------------------------------------------------
 | POST ROUTE
@@ -74,3 +62,5 @@ Route::post('/ganti', [AdminController::class, 'ganti']);
 Route::post('/kota', [AdminController::class, 'kota']);
 
 Route::post('/sensorBaru', [AdminController::class, 'addWSN']);
+
+Route::post('/baseBaru', [AdminController::class, 'addBase']);

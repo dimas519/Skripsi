@@ -134,13 +134,14 @@ class Live{
                     this.kelembapanFirstValue=true;// agar dia reset kalau yg berubah dari scatter
                     this.kelembapanType='lines'
                 }
-                
+                value=value==-1?0:value
 
                 this.showLines(plotName,this.kelembapanFirstValue,value,'Kelembapan',"lines")
                 this.visibilityText(this.kelembapan,false,plotName)
                 this.kelembapanFirstValue=false;
                 break;
             case "simpleText":
+                value=value==-1?"Offline":value
                 this.kelembapanType=undefined
                 this.visibilityText(this.kelembapan,true,plotName)
                 this.showSimpleText(this.kelembapan,value)
@@ -153,7 +154,7 @@ class Live{
                     this.kelembapanType='scatter'
                 }
                 
-
+                value=value==-1?0:value
                 this.showLines(plotName,this.kelembapanFirstValue,value,'Kelembapan',"area")
                 this.visibilityText(this.kelembapan,false,plotName)
                 this.kelembapanFirstValue=false;
@@ -163,13 +164,13 @@ class Live{
                     this.kelembapanFirstValue=true;// agar dia reset kalau yg berubah dari lines
                     this.kelembapanType="gauge"
                 }
-                
+                value=value==-1?0:value
                 this.showGauge(value)
                 this.visibilityText(this.kelembapan,false,plotName)
                 this.kelembapanFirstValue=false;
                 break;
             case "bar":
-
+                value=value==-1?0:value
                 if(this.kelembapanType!='bar'){
                     this.kelembapanFirstValue=true;// agar dia reset kalau yg berubah dari lines
                     this.kelembapanType='bar'
@@ -379,7 +380,7 @@ class Live{
                 }
                 
                 if(response['result']['rh']==undefined){
-                    this.showHumidity(0)
+                    this.showHumidity(-1)
                 }else{
                     this.showHumidity(response['result']['rh'])
                 }
@@ -418,7 +419,7 @@ class Live{
 
 function initNewLive(idBS,interval){
 
-    let live=new Live(`${urlAPI}/realTime?idBS=`,idBS);
+    let live=new Live(`${urlAPI}/realTime?node=`,idBS);
     setInterval(function(){live.getData()},1000);
 
 

@@ -1,4 +1,10 @@
 .login{
     width: 30% !important;
+}
 
+#gambar{
+    width: 40vw;
+    position: absolute;
+    left: 80px;
+    bottom:25vh;
 }

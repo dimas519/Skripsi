@@ -26,5 +26,22 @@ document.getElementById('kotaSelection').addEventListener("change",function(even
 
 });
 
+const optLokasi2=document.getElementById('lokasiSelection2')
+const listLokasi2=document.getElementsByClassName("optLokasi2");
+
+document.getElementById('kotaSelection2').addEventListener("change",function(event) {
+    let selectedCity=event.target.value
+    for (let i=0;i<listLokasi2.length;i++) {
+        if(listLokasi2[i].getAttribute('city')!=selectedCity){
+            listLokasi2[i].hidden=true
+        }else{
+            listLokasi2[i].hidden=false
+        }
+      }
+      optLokasi2.value=-1
+     
+  
+  });
+
 
 

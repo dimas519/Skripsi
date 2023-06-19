@@ -6,7 +6,9 @@
 <script src="{{asset('js/table.js')}}" defer></script>
 
 <div class="container" id="workSheet">
+  <br>
     <div class="row">
+      
       <div class="col-6">
         <Select class="form-select" id="kotaSelection">
           <option value="-1">Pilih Kota</option>
@@ -19,7 +21,7 @@
         <Select class="form-select" id="lokasiSelection"  >
           <option value="-1">Pilih Lokasi</option>
           @foreach ($semuaLokasi as $lokasi)
-          <option hidden class="optLokasi" value="{{$lokasi['identifier']}}" city="{{$lokasi['idKota']}}">{{$lokasi['nama']}}</option>
+          <option hidden class="optLokasi" value="{{$lokasi['identifier']}}" city="{{$lokasi['idKota']}}">{{$lokasi['namaLokasi']}}</option>
           @endforeach
         </Select>
       </div>

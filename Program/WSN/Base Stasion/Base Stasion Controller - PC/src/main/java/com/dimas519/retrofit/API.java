@@ -10,19 +10,19 @@ import java.util.List;
 
 
 public class API {
-    private final String endpoint;
+    private final String endPoint;
     private List<NodeQueue> queueNode;
 
 
-    public API(String endpoint, List<NodeQueue> queueNode){
+    public API(String endPoint, List<NodeQueue> queueNode){
 
-        this.endpoint=endpoint;
+        this.endPoint=endPoint;
         this.queueNode=queueNode;
     }
 
     public void sendToServer(String source,String msg,boolean sensing) {
         System.out.println("TO API "+msg);
-        IRequest ireq = RetrofitAPI.getRetro(this.endpoint).create(IRequest.class);
+        IRequest ireq = RetrofitAPI.getRetro(this.endPoint).create(IRequest.class);
         Call<String> cl;
         if(sensing) {
             cl = ireq.sensing(msg);

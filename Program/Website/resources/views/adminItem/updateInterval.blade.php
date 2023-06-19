@@ -15,7 +15,7 @@
           <Select class="form-select" id="lokasiSelection" name="bs"  >
             <option value="-1">Pilih Lokasi</option>
             @foreach ($semuaLokasi as $lokasi)
-            <option hidden class="optLokasi" value="{{$lokasi['identifier']}}" city="{{$lokasi['idKota']}}">{{$lokasi['nama']}}</option>
+            <option hidden class="optLokasi" value="{{$lokasi['identifier']}}" city="{{$lokasi['idKota']}}">{{$lokasi['namaLokasi']}}</option>
             @endforeach
           </Select>
         </div>

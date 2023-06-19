@@ -11,7 +11,8 @@ use Illuminate\Support\Facades\Http;
 class API extends Model
 {
     use HasFactory;
-    protected static $apiAddreses="http://127.0.0.1:5000";
+    // protected static $apiAddreses="http://192.168.101.95:5000";
+    protected static $apiAddreses="http://localhost:5000";
 
     public static function GET($endpoint, $parameter){
         $url=API::$apiAddreses;
