@@ -1,0 +1,473 @@
+{
+	"info": {
+		"_postman_id": "8d8e1f92-c49e-4d2d-96af-bcaf7ccc8bcc",
+		"name": "Skripsi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18770991",
+		"_collection_link": "https://solar-zodiac-370270.postman.co/workspace/Skripsi~88ced6d4-050d-4dd4-bab1-e9c5876036ad/collection/18770991-8d8e1f92-c49e-4d2d-96af-bcaf7ccc8bcc?action=share&source=collection_link&creator=18770991"
+	},
+	"item": [
+		{
+			"name": "signup",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"coba\"\r\n    ,\"password\":\"coba\"\r\n    ,\"email\":\"example5@mail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}:{{port}}/signup",
+					"host": [
+						"{{base_url}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"protocolProfileBehavior": {
+				"followRedirects": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"dimas\"\r\n    ,\"password\":\"dimas1\",\r\n    \"token\":\"POSTMAN-TOKEN\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}:{{port}}/login",
+					"host": [
+						"{{base_url}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "insertKota",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nama\":\"Depok\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}:{{port}}/kota",
+					"host": [
+						"{{base_url}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"kota"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getKota",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}:{{port}}/kota",
+					"host": [
+						"{{base_url}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"kota"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "insertBaseStation",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nama\":\"UNPAR\",\r\n    \"latitude\":\"6.875213\",\r\n    \"longtitude\":\"107.60502\",\r\n    \"idKota\":4\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}:{{port}}/bs",
+					"host": [
+						"{{base_url}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"bs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getBaseStasion",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "// {\r\n//     \"idLokasi\":-1\r\n// }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}:{{port}}/bs",
+					"host": [
+						"{{base_url}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"bs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "insertNodeSensor",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"identifier\":\"AArt\"\r\n    ,\"idBS\":39\r\n    ,\"nama\":\"Lt.6 R01\"\r\n    ,\"indoor\": 0\r\n    ,\"interval\":3000\r\n    ,\"tipeSensor\":[\"Suhu\",\"Kelembapan\",\"Tekanan\",\"Akselerasi\"]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}:{{port}}/node",
+					"host": [
+						"{{base_url}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"node"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getNodeStasion",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    // \"idBS\":-1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}:{{port}}/node?idBS=-1",
+					"host": [
+						"{{base_url}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"node"
+					],
+					"query": [
+						{
+							"key": "idBS",
+							"value": "-1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sensing",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"time\":\"2023-06-19 17:23:21\",\r\n    \"id\":\"AAAc\",\r\n    \"key\":\"0eO2khwvgj\",\r\n    \"result\":{\r\n        \"rh\":80,\r\n        \"T\":-33,\r\n        \"Pa\":-23,\r\n        \"a\":[9.80,9.80,9.80]\r\n        }\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}:{{port}}/sensing",
+					"host": [
+						"{{base_url}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"sensing"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateConfig",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"node\":\"AAAc\",\r\n    \"command\":\"setInterval:3000\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}:{{port}}/update",
+					"host": [
+						"{{base_url}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "interval",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}:{{port}}/interval?node=aaac",
+					"host": [
+						"{{base_url}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"interval"
+					],
+					"query": [
+						{
+							"key": "node",
+							"value": "aaac"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getData",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \r\n    \"node\":\"aaac\"\r\n    ,\"start\":\"2023-06-06 23:00:00\"\r\n    ,\"end\":\"2023-06-07 00:00:00\"\r\n    ,\"interval\":60\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}:{{port}}/data",
+					"host": [
+						"{{base_url}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"data"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "getData",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n    \"idBS\":[\"AAAx\",\"AAAc\",\"aaad\"]\r\n    ,\"start\":\"2023-06-08 00:00:00\"\r\n    ,\"end\":\"2023-06-08 23:55:00\"\r\n    ,\"interval\":300\r\n    ,\"stat\":\"avg\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}:{{port}}/data",
+							"host": [
+								"{{base_url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"data"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "date",
+							"value": "Thu, 08 Jun 2023 15:46:14 GMT"
+						},
+						{
+							"key": "server",
+							"value": "uvicorn"
+						},
+						{
+							"key": "content-length",
+							"value": "18730"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"result\": {\n        \"AAAx\": false,\n        \"AAAc\": [\n            {\n                \"timeStamp\": \"2023-06-08T00:47:37\",\n                \"suhu\": 29.53,\n                \"kelembapan\": 72.15,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T00:52:38\",\n                \"suhu\": 31.02,\n                \"kelembapan\": 68.48,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T00:57:38\",\n                \"suhu\": 31.07,\n                \"kelembapan\": 66.68,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T01:02:38\",\n                \"suhu\": 30.15,\n                \"kelembapan\": 66.72,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T01:07:38\",\n                \"suhu\": 30.25,\n                \"kelembapan\": 67,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T01:12:38\",\n                \"suhu\": 30.19,\n                \"kelembapan\": 67.91,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T01:17:38\",\n                \"suhu\": 30.57,\n                \"kelembapan\": 67.17,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T01:22:38\",\n                \"suhu\": 30.68,\n                \"kelembapan\": 66.91,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T01:27:38\",\n                \"suhu\": 30.35,\n                \"kelembapan\": 67,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T01:32:38\",\n                \"suhu\": 29.84,\n                \"kelembapan\": 67.79,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T01:37:38\",\n                \"suhu\": 29.55,\n                \"kelembapan\": 68.05,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T01:42:38\",\n                \"suhu\": 29.47,\n                \"kelembapan\": 68.94,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T01:47:38\",\n                \"suhu\": 29.52,\n                \"kelembapan\": 68,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T01:52:38\",\n                \"suhu\": 29.42,\n                \"kelembapan\": 68.82,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T01:57:38\",\n                \"suhu\": 29.58,\n                \"kelembapan\": 69.11,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T02:13:12\",\n                \"suhu\": 28.71,\n                \"kelembapan\": 71.21,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T02:18:12\",\n                \"suhu\": 29.5,\n                \"kelembapan\": 69.71,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.01,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T02:23:12\",\n                \"suhu\": 30.05,\n                \"kelembapan\": 68.05,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.01,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T02:28:12\",\n                \"suhu\": 30.13,\n                \"kelembapan\": 67.9,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.03,\n                    \"z\": 0.91\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T02:33:12\",\n                \"suhu\": 29.98,\n                \"kelembapan\": 68.38,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": -0.01,\n                    \"y\": -0.04,\n                    \"z\": 0.91\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T02:38:12\",\n                \"suhu\": 29.76,\n                \"kelembapan\": 67.85,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": -0.02,\n                    \"y\": -0.05,\n                    \"z\": 0.91\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T02:43:12\",\n                \"suhu\": 29.54,\n                \"kelembapan\": 68.29,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": -0.02,\n                    \"y\": -0.06,\n                    \"z\": 0.91\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T02:48:12\",\n                \"suhu\": 29.33,\n                \"kelembapan\": 68.86,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": -0.03,\n                    \"y\": -0.07,\n                    \"z\": 0.91\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T02:53:12\",\n                \"suhu\": 27.01,\n                \"kelembapan\": 69.02,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": -0.04,\n                    \"y\": -0.08,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T02:59:14\",\n                \"suhu\": 30.21,\n                \"kelembapan\": 67.6,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T03:04:14\",\n                \"suhu\": 31.8,\n                \"kelembapan\": 64.07,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T03:09:14\",\n                \"suhu\": 32.33,\n                \"kelembapan\": 63.14,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T03:14:14\",\n                \"suhu\": 32.27,\n                \"kelembapan\": 63.08,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T03:19:14\",\n                \"suhu\": 32.11,\n                \"kelembapan\": 63.11,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T03:24:14\",\n                \"suhu\": 31.97,\n                \"kelembapan\": 63.34,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T03:29:14\",\n                \"suhu\": 32,\n                \"kelembapan\": 63.11,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T03:34:14\",\n                \"suhu\": 31.85,\n                \"kelembapan\": 63.36,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T03:39:14\",\n                \"suhu\": 31.59,\n                \"kelembapan\": 63.45,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T03:44:14\",\n                \"suhu\": 31.01,\n                \"kelembapan\": 64.14,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T03:49:14\",\n                \"suhu\": 30.94,\n                \"kelembapan\": 64.95,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T03:54:14\",\n                \"suhu\": 31.33,\n                \"kelembapan\": 64.23,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T03:59:14\",\n                \"suhu\": 31.45,\n                \"kelembapan\": 64,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T04:04:14\",\n                \"suhu\": 31.67,\n                \"kelembapan\": 63.64,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T04:09:14\",\n                \"suhu\": 31.18,\n                \"kelembapan\": 64.18,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T04:18:44\",\n                \"suhu\": 29.8,\n                \"kelembapan\": 67.44,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T04:23:44\",\n                \"suhu\": 31.3,\n                \"kelembapan\": 64.24,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T04:28:44\",\n                \"suhu\": 31.52,\n                \"kelembapan\": 63.74,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T12:24:19\",\n                \"suhu\": 30.31,\n                \"kelembapan\": 69.83,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T12:29:19\",\n                \"suhu\": 31.89,\n                \"kelembapan\": 65,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T12:34:19\",\n                \"suhu\": 32.1,\n                \"kelembapan\": 64,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T12:39:19\",\n                \"suhu\": 32.08,\n                \"kelembapan\": 63.98,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T12:44:19\",\n                \"suhu\": 32.14,\n                \"kelembapan\": 64,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T12:49:19\",\n                \"suhu\": 32.25,\n                \"kelembapan\": 62.9,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T12:54:19\",\n                \"suhu\": 32.17,\n                \"kelembapan\": 63,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T12:59:19\",\n                \"suhu\": 32.05,\n                \"kelembapan\": 62.96,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T13:04:19\",\n                \"suhu\": 31.75,\n                \"kelembapan\": 63.33,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T13:09:19\",\n                \"suhu\": 31.57,\n                \"kelembapan\": 63.77,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T13:14:19\",\n                \"suhu\": 31.53,\n                \"kelembapan\": 63.73,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T13:19:19\",\n                \"suhu\": 31.52,\n                \"kelembapan\": 63.02,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T13:24:19\",\n                \"suhu\": 31.18,\n                \"kelembapan\": 64.06,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T13:29:19\",\n                \"suhu\": 31.23,\n                \"kelembapan\": 65.41,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T13:34:19\",\n                \"suhu\": 31.89,\n                \"kelembapan\": 63.72,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T13:39:19\",\n                \"suhu\": 32.01,\n                \"kelembapan\": 63.3,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T13:44:19\",\n                \"suhu\": 31.98,\n                \"kelembapan\": 63.46,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T13:49:19\",\n                \"suhu\": 32,\n                \"kelembapan\": 63.48,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T13:54:19\",\n                \"suhu\": 32.05,\n                \"kelembapan\": 62.91,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T13:59:19\",\n                \"suhu\": 32.07,\n                \"kelembapan\": 62.55,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T14:04:19\",\n                \"suhu\": 32.15,\n                \"kelembapan\": 62.1,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.91\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T14:09:19\",\n                \"suhu\": 32.15,\n                \"kelembapan\": 62,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.91\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T14:14:19\",\n                \"suhu\": 32.09,\n                \"kelembapan\": 61.95,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T14:19:19\",\n                \"suhu\": 32.37,\n                \"kelembapan\": 61.11,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.91\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T14:24:19\",\n                \"suhu\": 32.43,\n                \"kelembapan\": 61.52,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.91\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T14:29:19\",\n                \"suhu\": 32.25,\n                \"kelembapan\": 61.67,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.91\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T14:34:19\",\n                \"suhu\": 32.1,\n                \"kelembapan\": 62.53,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0.02,\n                    \"y\": 0,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T14:39:19\",\n                \"suhu\": 32.16,\n                \"kelembapan\": 62.67,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0.01,\n                    \"y\": -0.01,\n                    \"z\": 0.91\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T14:44:19\",\n                \"suhu\": 32.09,\n                \"kelembapan\": 62.78,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0.06,\n                    \"y\": 0.05,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T14:49:19\",\n                \"suhu\": 31.97,\n                \"kelembapan\": 63.34,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0.02,\n                    \"y\": 0,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T14:54:19\",\n                \"suhu\": 31.71,\n                \"kelembapan\": 63.98,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.01,\n                    \"z\": 0.91\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T14:59:19\",\n                \"suhu\": 31.84,\n                \"kelembapan\": 63.71,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0.02,\n                    \"y\": 0.01,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T15:04:19\",\n                \"suhu\": 31.77,\n                \"kelembapan\": 64,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0.02,\n                    \"y\": 0.01,\n                    \"z\": 0.91\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T15:09:19\",\n                \"suhu\": 31.72,\n                \"kelembapan\": 63.57,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0.02,\n                    \"y\": 0.01,\n                    \"z\": 0.91\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T15:14:19\",\n                \"suhu\": 31.63,\n                \"kelembapan\": 63.95,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0.02,\n                    \"y\": 0.01,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T15:19:19\",\n                \"suhu\": 31.46,\n                \"kelembapan\": 64,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0.02,\n                    \"y\": 0.01,\n                    \"z\": 0.91\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T15:24:19\",\n                \"suhu\": 31.33,\n                \"kelembapan\": 64,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0.02,\n                    \"y\": 0.01,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T15:29:19\",\n                \"suhu\": 31.19,\n                \"kelembapan\": 63.99,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0.02,\n                    \"y\": 0.01,\n                    \"z\": 0.91\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T15:34:19\",\n                \"suhu\": 31.08,\n                \"kelembapan\": 64,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0.02,\n                    \"y\": 0.01,\n                    \"z\": 0.91\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T15:39:19\",\n                \"suhu\": 30.98,\n                \"kelembapan\": 64.19,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0.02,\n                    \"y\": 0.01,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T15:44:19\",\n                \"suhu\": 30.92,\n                \"kelembapan\": 64.05,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0.02,\n                    \"y\": 0.01,\n                    \"z\": 0.91\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T15:49:19\",\n                \"suhu\": 30.87,\n                \"kelembapan\": 64,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0.02,\n                    \"y\": 0.01,\n                    \"z\": 0.91\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T15:54:19\",\n                \"suhu\": 30.8,\n                \"kelembapan\": 64.39,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0.02,\n                    \"y\": 0.01,\n                    \"z\": 0.91\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T15:59:19\",\n                \"suhu\": 30.73,\n                \"kelembapan\": 64.32,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0.02,\n                    \"y\": 0,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T16:04:19\",\n                \"suhu\": 30.34,\n                \"kelembapan\": 65.61,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0.02,\n                    \"y\": 0,\n                    \"z\": 0.91\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T16:09:19\",\n                \"suhu\": 30.19,\n                \"kelembapan\": 66.33,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0.02,\n                    \"y\": 0,\n                    \"z\": 0.91\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T16:14:19\",\n                \"suhu\": 30.65,\n                \"kelembapan\": 66.65,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.03,\n                    \"z\": 0.91\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T16:19:19\",\n                \"suhu\": 30.82,\n                \"kelembapan\": 66.02,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.04,\n                    \"z\": 0.91\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T16:24:19\",\n                \"suhu\": 30.73,\n                \"kelembapan\": 66.46,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": -0.01,\n                    \"y\": -0.06,\n                    \"z\": 0.91\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T16:29:19\",\n                \"suhu\": 30.49,\n                \"kelembapan\": 66.61,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": -0.02,\n                    \"y\": -0.07,\n                    \"z\": 0.91\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T16:34:19\",\n                \"suhu\": 29.76,\n                \"kelembapan\": 66.83,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": -0.03,\n                    \"y\": -0.08,\n                    \"z\": 0.91\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T16:39:22\",\n                \"suhu\": 0,\n                \"kelembapan\": 68,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": -0.03,\n                    \"y\": -0.09,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T16:45:43\",\n                \"suhu\": 31.15,\n                \"kelembapan\": 64.94,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T16:50:43\",\n                \"suhu\": 30.72,\n                \"kelembapan\": 63.81,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T16:55:43\",\n                \"suhu\": 30.04,\n                \"kelembapan\": 65.33,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T17:00:43\",\n                \"suhu\": 30.3,\n                \"kelembapan\": 64.48,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.91\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T17:05:43\",\n                \"suhu\": 30.2,\n                \"kelembapan\": 63.87,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.91\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T17:10:43\",\n                \"suhu\": 31.13,\n                \"kelembapan\": 62.91,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.91\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T17:15:43\",\n                \"suhu\": 31.67,\n                \"kelembapan\": 62.44,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.9\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T17:20:43\",\n                \"suhu\": 30.52,\n                \"kelembapan\": 62.98,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.91\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T17:25:43\",\n                \"suhu\": 30.72,\n                \"kelembapan\": 64.05,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.91\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T17:30:43\",\n                \"suhu\": 31.67,\n                \"kelembapan\": 62.68,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.91\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T17:35:43\",\n                \"suhu\": 31.47,\n                \"kelembapan\": 62.56,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.91\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T17:40:43\",\n                \"suhu\": 31.71,\n                \"kelembapan\": 62.15,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.91\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T17:45:43\",\n                \"suhu\": 31.84,\n                \"kelembapan\": 61.53,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.91\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T17:50:43\",\n                \"suhu\": 32.01,\n                \"kelembapan\": 61.62,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.91\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T17:55:43\",\n                \"suhu\": 32.11,\n                \"kelembapan\": 61.52,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": -0.04,\n                    \"y\": -0.04,\n                    \"z\": 0.85\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T18:00:43\",\n                \"suhu\": 31.9,\n                \"kelembapan\": 61.38,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": -0.01,\n                    \"y\": -0.03,\n                    \"z\": 0.87\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T18:05:43\",\n                \"suhu\": 31.64,\n                \"kelembapan\": 62.33,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": -0.02,\n                    \"y\": -0.02,\n                    \"z\": 0.85\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T18:10:43\",\n                \"suhu\": 31.47,\n                \"kelembapan\": 61.85,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.91\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T18:15:43\",\n                \"suhu\": 31.31,\n                \"kelembapan\": 62.13,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0,\n                    \"y\": -0.02,\n                    \"z\": 0.91\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T18:20:43\",\n                \"suhu\": 31.54,\n                \"kelembapan\": 62.69,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0.84,\n                    \"y\": -0.04,\n                    \"z\": 0.26\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T18:25:43\",\n                \"suhu\": 31.97,\n                \"kelembapan\": 61.36,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0.98,\n                    \"y\": -0.04,\n                    \"z\": 0.15\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T18:30:43\",\n                \"suhu\": 32.17,\n                \"kelembapan\": 60.8,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0.92,\n                    \"y\": -0.04,\n                    \"z\": -0.5\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T18:35:43\",\n                \"suhu\": 32.58,\n                \"kelembapan\": 59.55,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0.92,\n                    \"y\": -0.04,\n                    \"z\": -0.5\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T18:40:43\",\n                \"suhu\": 32.63,\n                \"kelembapan\": 58.53,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0.92,\n                    \"y\": -0.04,\n                    \"z\": -0.5\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T18:45:43\",\n                \"suhu\": 32.62,\n                \"kelembapan\": 58.97,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0.92,\n                    \"y\": -0.04,\n                    \"z\": -0.5\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T18:50:43\",\n                \"suhu\": 32.55,\n                \"kelembapan\": 58.93,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0.92,\n                    \"y\": -0.04,\n                    \"z\": -0.5\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T18:55:43\",\n                \"suhu\": 32.46,\n                \"kelembapan\": 59,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0.92,\n                    \"y\": -0.04,\n                    \"z\": -0.5\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T19:00:43\",\n                \"suhu\": 32.35,\n                \"kelembapan\": 59,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0.92,\n                    \"y\": -0.04,\n                    \"z\": -0.5\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T19:05:43\",\n                \"suhu\": 32.29,\n                \"kelembapan\": 59,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0.92,\n                    \"y\": -0.04,\n                    \"z\": -0.5\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T19:10:43\",\n                \"suhu\": 32.27,\n                \"kelembapan\": 59,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0.92,\n                    \"y\": -0.04,\n                    \"z\": -0.5\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T19:15:43\",\n                \"suhu\": 32.22,\n                \"kelembapan\": 59,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0.92,\n                    \"y\": -0.04,\n                    \"z\": -0.5\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T19:20:43\",\n                \"suhu\": 32.13,\n                \"kelembapan\": 59.22,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0.92,\n                    \"y\": -0.04,\n                    \"z\": -0.5\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T19:25:43\",\n                \"suhu\": 32.02,\n                \"kelembapan\": 59.6,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0.92,\n                    \"y\": -0.04,\n                    \"z\": -0.5\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T19:30:43\",\n                \"suhu\": 31.95,\n                \"kelembapan\": 60,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0.92,\n                    \"y\": -0.04,\n                    \"z\": -0.5\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T19:35:43\",\n                \"suhu\": 31.88,\n                \"kelembapan\": 60,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0.92,\n                    \"y\": -0.04,\n                    \"z\": -0.5\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T19:40:43\",\n                \"suhu\": 31.85,\n                \"kelembapan\": 60,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0.92,\n                    \"y\": -0.04,\n                    \"z\": -0.5\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T19:45:43\",\n                \"suhu\": 31.78,\n                \"kelembapan\": 60.25,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0.92,\n                    \"y\": -0.04,\n                    \"z\": -0.5\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T19:50:43\",\n                \"suhu\": 31.71,\n                \"kelembapan\": 60.99,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0.92,\n                    \"y\": -0.04,\n                    \"z\": -0.5\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T19:55:43\",\n                \"suhu\": 31.65,\n                \"kelembapan\": 61,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0.92,\n                    \"y\": -0.04,\n                    \"z\": -0.5\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T20:00:43\",\n                \"suhu\": 31.59,\n                \"kelembapan\": 61,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0.92,\n                    \"y\": -0.04,\n                    \"z\": -0.5\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T20:05:43\",\n                \"suhu\": 31.55,\n                \"kelembapan\": 61,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0.92,\n                    \"y\": -0.04,\n                    \"z\": -0.5\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T20:10:43\",\n                \"suhu\": 31.55,\n                \"kelembapan\": 61,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0.92,\n                    \"y\": -0.04,\n                    \"z\": -0.5\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T20:15:43\",\n                \"suhu\": 31.63,\n                \"kelembapan\": 61.01,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0.92,\n                    \"y\": -0.04,\n                    \"z\": -0.5\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T20:20:43\",\n                \"suhu\": 31.64,\n                \"kelembapan\": 61,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0.92,\n                    \"y\": -0.04,\n                    \"z\": -0.5\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T20:25:43\",\n                \"suhu\": 31.55,\n                \"kelembapan\": 61.11,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0.92,\n                    \"y\": -0.04,\n                    \"z\": -0.5\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T20:30:43\",\n                \"suhu\": 31.48,\n                \"kelembapan\": 62,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0.92,\n                    \"y\": -0.04,\n                    \"z\": -0.5\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T20:55:38\",\n                \"suhu\": 29.9,\n                \"kelembapan\": 67.66,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0.92,\n                    \"y\": -0.04,\n                    \"z\": -0.5\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T21:00:38\",\n                \"suhu\": 31.53,\n                \"kelembapan\": 63.3,\n                \"tekanan\": 92.01,\n                \"akselerasi\": {\n                    \"x\": 0.92,\n                    \"y\": -0.04,\n                    \"z\": -0.5\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T21:05:38\",\n                \"suhu\": 31.95,\n                \"kelembapan\": 63,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0.92,\n                    \"y\": -0.04,\n                    \"z\": -0.5\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T21:10:38\",\n                \"suhu\": 31.99,\n                \"kelembapan\": 63,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0.92,\n                    \"y\": -0.04,\n                    \"z\": -0.5\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T21:15:38\",\n                \"suhu\": 31.92,\n                \"kelembapan\": 63.05,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0.92,\n                    \"y\": -0.04,\n                    \"z\": -0.5\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T22:02:17\",\n                \"suhu\": 28.93,\n                \"kelembapan\": 71.5,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0.92,\n                    \"y\": -0.04,\n                    \"z\": -0.5\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T22:07:39\",\n                \"suhu\": 30.16,\n                \"kelembapan\": 68.21,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0.92,\n                    \"y\": -0.04,\n                    \"z\": -0.5\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T22:12:44\",\n                \"suhu\": 31.65,\n                \"kelembapan\": 64.6,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0.92,\n                    \"y\": -0.04,\n                    \"z\": -0.5\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T22:17:44\",\n                \"suhu\": 32.02,\n                \"kelembapan\": 63.56,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0.92,\n                    \"y\": -0.04,\n                    \"z\": -0.5\n                }\n            },\n            {\n                \"timeStamp\": \"2023-06-08T22:22:44\",\n                \"suhu\": 32.06,\n                \"kelembapan\": 63,\n                \"tekanan\": 92,\n                \"akselerasi\": {\n                    \"x\": 0.92,\n                    \"y\": -0.04,\n                    \"z\": -0.5\n                }\n            }\n        ],\n        \"aaad\": false\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "live",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{base_url}}:{{port}}/realTime?idBS=aaac",
+					"host": [
+						"{{base_url}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"realTime"
+					],
+					"query": [
+						{
+							"key": "idBS",
+							"value": "aaac"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "localhost"
+		},
+		{
+			"key": "port",
+			"value": "5000"
+		}
+	]
+}
