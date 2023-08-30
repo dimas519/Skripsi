@@ -12,6 +12,7 @@ const supportedSensor=['suhu','kelembapan','tekanan'];
 const summaryConf=document.getElementById("summary")
 const summaryType=document.getElementById("summaryType")
 const summaryGraph=document.getElementById("summaryGraph")
+
 let graph=document.getElementsByClassName("chart");
 let selectedKota=[]
 let selectedKotaName=[]
@@ -640,6 +641,7 @@ function show(doAlert=true){
     optType.addEventListener("change",function(event) {
         console.log(event.target.value)
         scatterConf.hidden=true
+        summaryConf.hidden=true
         switch (event.target.value){
             case "scatter":
                 scatterConf.hidden=false

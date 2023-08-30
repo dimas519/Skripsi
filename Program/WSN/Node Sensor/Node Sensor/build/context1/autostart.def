@@ -55648,127 +55648,127 @@ strings [
 	}
 	{
 		index 4
-		string Location:
+		string X1IEO7gxAc
 	}
 	{
 		index 5
-		string "Missing property: "
+		string Location:
 	}
 	{
 		index 6
-		string "TracStatus: "
+		string "Missing property: "
 	}
 	{
 		index 7
-		string radio.long_address
+		string "TracStatus: "
 	}
 	{
 		index 8
-		string "failed radio"
+		string radio.long_address
 	}
 	{
 		index 9
-		string GPIO(Init)
+		string "failed radio"
 	}
 	{
 		index 10
-		string radio.short_address
+		string GPIO(Init)
 	}
 	{
 		index 11
-		string setTime
+		string radio.short_address
 	}
 	{
 		index 12
-		string " "
+		string setTime
 	}
 	{
 		index 13
-		string "Radio receive: "
+		string " "
 	}
 	{
 		index 14
-		string "\""
+		string "Radio receive: "
 	}
 	{
 		index 15
-		string "Humidity failed initialize"
+		string "\""
 	}
 	{
 		index 16
-		string "0X"
+		string "Humidity failed initialize"
 	}
 	{
 		index 17
-		string ","
+		string "0X"
 	}
 	{
 		index 18
-		string ADXL345(Init)
+		string ","
 	}
 	{
 		index 19
-		string "."
+		string ADXL345(Init)
 	}
 	{
 		index 20
-		string "0"
+		string "."
 	}
 	{
 		index 21
-		string ", end="
+		string "0"
 	}
 	{
 		index 22
-		string ADT7410(Init)
+		string ", end="
 	}
 	{
 		index 23
-		string rh
+		string ADT7410(Init)
 	}
 	{
 		index 24
-		string ", len="
+		string rh
 	}
 	{
 		index 25
-		string "Base Radio Station ready"
+		string ", len="
 	}
 	{
 		index 26
-		string cmd
+		string "Base Radio Station ready"
 	}
 	{
 		index 27
-		string "="
+		string cmd
 	}
 	{
 		index 28
-		string "?"
+		string "="
 	}
 	{
 		index 29
-		string "getting time to Base Station done"
+		string "?"
 	}
 	{
 		index 30
-		string "; "
+		string "getting time to Base Station done"
 	}
 	{
 		index 31
-		string "0x"
+		string "; "
 	}
 	{
 		index 32
-		string "Interval not updated because lower than 1ms"
+		string "0x"
 	}
 	{
 		index 33
-		string T
+		string "Interval not updated because lower than 1ms"
 	}
 	{
 		index 34
-		string "0eO2khwvgj"
+		string T
 	}
 	{
 		index 35
@@ -55848,11 +55848,11 @@ strings [
 	}
 	{
 		index 54
-		string "==================================="
+		string AAAe
 	}
 	{
 		index 55
-		string AAAc
+		string "==================================="
 	}
 	{
 		index 56

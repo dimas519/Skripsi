@@ -33,9 +33,9 @@
         <div class="pt-3">Interval </div>
       </div>
       <div class="col-3">
-        <input type="date" id="startDate" class="mt-2" value="2023-06-06">
-        <input type="time" id="startTime" class="mt-2" value="23:00">
-        <input type="number" placeholder="second" class="mt-2" id="intervalInput" value=60>
+        <input type="date" id="startDate" class="mt-2" >
+        <input type="time" id="startTime" class="mt-2" >
+        <input type="number" placeholder="second" class="mt-2" id="intervalInput">
       </div>
   
       <div class="col-2">
@@ -45,8 +45,8 @@
   
       <div class="col-3">
         <div>
-          <input type="date" id="endDate" class="mt-2" value="2023-06-07">
-          <input type="time" id="endTime" class="mt-2" value="00:00">
+          <input type="date" id="endDate" class="mt-2">
+          <input type="time" id="endTime" class="mt-2">
         </div>
         <div>
           <select class="mt-2" name="b" id="typeSelection">

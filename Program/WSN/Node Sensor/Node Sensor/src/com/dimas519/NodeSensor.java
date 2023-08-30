@@ -40,17 +40,17 @@ public class NodeSensor implements MainInterface {
 
 
 		System.out.println("Variable initialization");
-		this.identifier="AAAc"; //ini public identifier, wajib unique
+		this.identifier="AAAe"; //ini public identifier, wajib unique
 
 		this.COMMON_CHANNEL =24;
 		this.COMMON_PANID =0xCAFE;
-		this.myAddress =0X0002;
+		this.myAddress =0X0005;
 		this.myBSAddress=0x0000;
 //		this.interval=300000;
 		this.interval=1000;
 //		this.interval=200;
 		this.sensors=new Sensor[4];
-		this.token="0eO2khwvgj";
+		this.token="X1IEO7gxAc";
 
 		System.out.println("Variable initialized");
 

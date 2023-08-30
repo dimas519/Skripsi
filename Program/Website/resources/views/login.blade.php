@@ -27,6 +27,14 @@
                 <div>
                 Tidak punya akun? <a href="/signUP">Buat akun</a>
                 </div>
+                @if (app('request')->has('wrong')==1)
+                <br>
+                <div class="alert alert-danger" role="alert">
+                  Username dan password salah
+                </div>
+                @endif
+
+
                 <button type="submit" class="btn btn-primary mt-3 ">Masuk</button>
               </form>
 

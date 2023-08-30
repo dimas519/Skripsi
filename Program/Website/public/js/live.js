@@ -58,7 +58,7 @@ class Live{
                 }
                 
 
-                this.showLines(plotName,this.suhuFirstValue,value,'Suhu',"lines")
+                this.showLines(plotName,this.suhuFirstValue,value,'Suhu (C)',"lines")
                 this.visibilityText(this.suhu,false,plotName)
                 this.suhuFirstValue=false;
                 break;
@@ -95,7 +95,7 @@ class Live{
                     this.tekananType='lines'
                 }           
 
-                this.showLines(plotName,this.tekananFirstValue,value,'Tekanan',"lines")
+                this.showLines(plotName,this.tekananFirstValue,value,'Tekanan (kPa)',"lines")
                 this.visibilityText(this.tekanan,false,plotName)
                 this.tekananFirstValue=false;
 
@@ -136,7 +136,7 @@ class Live{
                 }
                 value=value==-1?0:value
 
-                this.showLines(plotName,this.kelembapanFirstValue,value,'Kelembapan',"lines")
+                this.showLines(plotName,this.kelembapanFirstValue,value,'Kelembapan Relatif (%)',"lines")
                 this.visibilityText(this.kelembapan,false,plotName)
                 this.kelembapanFirstValue=false;
                 break;
@@ -196,7 +196,7 @@ class Live{
                     this.akselerasiType='lines'
                 }
 
-                this.showLines3D(plotName,this.akselerasiFirstValue,value,'Akselerasi',"lines")
+                this.showLines3D(plotName,this.akselerasiFirstValue,value,'Akselerasi (g)',"lines")
                 this.visibilityText(this.akselerasi,false,plotName)
                 this.akselerasiFirstValue=false;
 

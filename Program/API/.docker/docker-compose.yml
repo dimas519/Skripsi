@@ -16,7 +16,8 @@ services:
     container_name: skripsi-phpmyadmin
     restart: always
     environment:
-      PMA_HOST: db
+      UPLOAD_LIMIT: 1G
+      PMA_HOST: db 
       PMA_USER: root
       PMA_PASSWORD: root
     ports:

@@ -97,6 +97,11 @@ def raiseUnAuth():
 # async def Test():
 #     from fastapi.responses import HTMLResponse
 
+# source:2,"time":1688456482563,"key":"0eO2khwvgj","id":"AAAc","T":28.39,"rh":51.92,"Pa":92.0,"a":[-0.14, 0.39, -0.97]
+
+
+
+
 
 @api.post("/login")
 async def login(value: Request):
@@ -138,7 +143,7 @@ async def insertKota(value: Request):
     return {"result":result}
 
 @api.get("/kota")
-async def getBaseStasion():
+async def getKota():
     result=databaseAPI.getKota()
     return {"result":result}
 
@@ -215,7 +220,7 @@ async def insertNodeSensor(value: Request):
 
 
 @api.post("/tipe")
-async def insertNodeSensor(value: Request):
+async def insertTipeSensor(value: Request):
     data= await value.json()
     try :
         tipeSensor=data['tipeSensor']
@@ -232,7 +237,7 @@ async def insertNodeSensor(value: Request):
 
 
 @api.post("/update")
-async def insertNodeSensor(value: Request):
+async def update(value: Request):
     data= await value.json()
     try:
         identifier=data['node'].lower()
@@ -265,7 +270,7 @@ async def sensing(value: Request):
         return result
     
 @api.get("/interval")
-async def changeInterval(node: str):
+async def getInterval(node: str):
     node=node.lower()
     result=wsnController.getInterval(node)
 

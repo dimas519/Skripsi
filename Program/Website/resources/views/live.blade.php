@@ -78,7 +78,7 @@ const urlAPI='{{$api}}'
                 <div>
                     <div id="myPlotkelembapan{{$lokasi['identifier']}}" class="" style="display:inline-block"></div>
                     <div class="card-text border liveData align-text-bottom">
-                        <p class="liveDataTitle text-center">Kelembapan </p>
+                        <p class="liveDataTitle text-center">Kelembapan Relatif (%) </p>
                         <div class="text-center text-center">
                             <p id="kelembapanText{{$lokasi['identifier']}}" class="liveDataText"></p>
                             <p class="liveDataText" hidden>%</p>
@@ -88,7 +88,7 @@ const urlAPI='{{$api}}'
 
                     <div id="myPlotsuhu{{$lokasi['identifier']}}" style="display:inline-block"></div>
                     <div class="card-text border liveData align-text-bottom">
-                        <p class="liveDataTitle text-center">Suhu </p>
+                        <p class="liveDataTitle text-center">Suhu (C) </p>
                         <div class="text-center text-center">
                             <p id="suhuText{{$lokasi['identifier']}}" class="liveDataText"></p>
                             <p class="liveDataText" hidden>°C</p>
@@ -98,7 +98,7 @@ const urlAPI='{{$api}}'
 
                     <div id="myPlottekanan{{$lokasi['identifier']}}" style="display:inline-block"></div>
                     <div class="card-text border liveData align-text-bottom" >
-                        <p class="liveDataTitle text-center">Tekanan </p>
+                        <p class="liveDataTitle text-center">Tekanan (kPa) </p>
                         <div class="text-center">
                             <p id="tekananText{{$lokasi['identifier']}}" class="liveDataText"></p>
                             <p class="liveDataText" hidden>kPa</p>
@@ -108,7 +108,7 @@ const urlAPI='{{$api}}'
 
                     <div id="myPlotakselerasi{{$lokasi['identifier']}}" style="display:inline-block"></div>
                     <div class="card-text border liveData align-text-bottom">
-                        <p class="liveDataTitle text-center">Akselerasi (x,y,z)</p>
+                        <p class="liveDataTitle text-center">Akselerasi (x,y,z) (g)</p>
                         <div class="text-center">
                             <p id="akselerasiText{{$lokasi['identifier']}}" class="liveDataText"></p>
                             <p class="liveDataText" hidden>g</p>
