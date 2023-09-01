@@ -1,0 +1,11 @@
+1. Aktifkan API terlebih dahulu, untuk mengaktifkan api dapat membuat container docker. docker container dapat dibuat dengan dengan mengeksekusi shell script/ batch file pada .Program\API\createDocker.bat
+
+2. Konfigurasi wsn
+	-Instalasi driver, untuk bagian ini silahkan tanyakan kepada pak Eli.
+	- pada folder \Program\WSN\Jar terdapat 2 folder lagi yaitu base dan node
+	- untuk kedua folder tersebut atur comport pada .\config\context1.properties
+	- kemudian jalankan run.bat atau run.sh
+3. jalankan website yang terdapat pada folder website dengan perintah sebagai berikut
+	php artisan serve
+
+NOTE: api wajib aktif terlebih dahulu
