@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: DB-mysql-myAdmin
+  labels:
+    type: database
+  annotations:
+    technology: mysql-myadmin
+spec:
+  ports:
+    - name: "9927"
+      port: 9927
+      targetPort: 80
+  selector:
+    io.kompose.service: phpmyadmin

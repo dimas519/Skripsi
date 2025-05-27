@@ -1,0 +1,114 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: db-mysql-myadmin
+  namespace: testing-api
+  labels:
+    type: database
+  annotations:
+    tech: 9927mysql-myadmin
+
+
+spec:
+  serviceName: mysdb-mysql-myadminql
+  replicas: 1
+  selector:
+    matchLabels:
+      name: db_pods ##samain sama replicated
+  template:
+    metadata:
+      name: db_pods #replica name
+      # namespace: TestingGo ##willnot work
+
+      labels:
+        name: db_pods ##samain sama replicated
+      
+      annotations:
+      # dynatrace.com/inject: "false"
+        dynatrace: enabled
+    spec:
+      containers:
+        - name: skripsi-db
+          image: mysql:8.0
+          env:
+            - name: MYSQL_DATABASE
+              value: skripsi
+            - name: MYSQL_PASSWORD
+              value: skripsi123
+            - name: MYSQL_ROOT_PASSWORD
+              value: root
+            - name: MYSQL_USER
+              value: skripsiDimas
+          ports:
+            - containerPort: 3306
+              # hostPort: 3306
+              name: mysql-port
+              protocol: TCP
+          volumeMounts:
+            - name: mysql-data-pvc
+              mountPath: /var/lib/mysql
+          resources:
+            requests:
+              cpu: 500m
+              memory: 512Mi
+            limits:
+              cpu: 2000m
+              memory: 4Gi
+        - name: skripsi-phpmyadmin
+          image: phpmyadmin/phpmyadmin:5.1.3  
+          env:
+            - name: PMA_HOST
+              value: 127.0.0.1 #wajib gini
+            - name: PMA_PASSWORD
+              value: root
+            - name: PMA_USER
+              value: root
+            - name: UPLOAD_LIMIT
+              value: 1G
+          ports:
+          - containerPort: 80
+            protocol: TCP
+            name: pma-port
+          resources:
+            requests:
+              cpu: 500m
+              memory: 512Mi
+            limits:
+              cpu: 1000m
+              memory: 800Mi
+          # readinessProbe:
+          #   exec:
+          #     command:
+          #       - bash
+          #       - -c
+          #       - 'mysqladmin ping -h 127.0.0.1 -uroot -proot'
+          #   initialDelaySeconds: 10
+          #   periodSeconds: 5
+      restartPolicy: Always
+  volumeClaimTemplates:
+    - metadata:
+        name: mysql-data-pvc
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 3Gi
+
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: testing-api-db-service
+  namespace: testing-api
+spec:
+  type: LoadBalancer
+  selector:
+    name: db_pods
+  ports:
+    - port: 30002 ##ini yang penting untuk keluar (dari browser)
+      targetPort: 3306
+      # nodePort: 30002
+

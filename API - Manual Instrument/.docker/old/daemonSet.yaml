@@ -1,0 +1,75 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: database
+  namespace: skripsi
+
+spec:
+  selector:
+    matchLabels:
+      name: dbskripsi
+
+
+  template:
+    metadata:
+      name: dbskripsi #replica name
+      # namespace: TestingGo ##willnot work
+      labels:
+        name: dbskripsi
+      annotations:
+        dynatrace: enabled
+    spec:
+      containers:
+        - image: mysql:8.0
+          name: skripsi-db
+          env:
+            - name: MYSQL_DATABASE
+              value: skripsi
+            - name: MYSQL_PASSWORD
+              value: skripsi123
+            - name: MYSQL_ROOT_PASSWORD
+              value: root
+            - name: MYSQL_USER
+              value: skripsiDimas
+          
+          ports:
+            - containerPort: 3306
+              name: mysql-port
+              protocol: TCP
+          volumeMounts:
+            - name: mysql-data
+              mountPath: /var/lib/mysql
+        - image: phpmyadmin/phpmyadmin:5.1.3
+          name: skripsi-phpmyadmin
+          env:
+            - name: PMA_HOST
+              value: 127.0.0.1
+            - name: PMA_PASSWORD
+              value: root
+            - name: PMA_USER
+              value: root
+            - name: UPLOAD_LIMIT
+              value: 1G
+          ports:
+            - containerPort: 80
+              protocol: TCP
+              name: pma-port
+      restartPolicy: Always
+      volumes:
+        - name: mysql-data
+          emptyDir: {}  # Gunakan PVC untuk produksi
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: dbskripsi-service
+spec:
+  type: NodePort
+  selector:
+    name: dbskripsi
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 30001

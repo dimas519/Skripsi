@@ -1,0 +1,24 @@
+version: '3.3'
+services:
+  db:
+    image: mysql:8.0
+    container_name: skripsi-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: skripsi
+      MYSQL_USER: skripsiDimas
+      MYSQL_PASSWORD: skripsi123
+    ports:
+      - "9926:3306"
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:5.1.3
+    container_name: skripsi-phpmyadmin
+    restart: always
+    environment:
+      UPLOAD_LIMIT: 1G
+      PMA_HOST: db 
+      PMA_USER: root
+      PMA_PASSWORD: root
+    ports:
+      - "9927:80"

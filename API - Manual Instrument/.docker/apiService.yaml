@@ -1,0 +1,84 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-api
+  namespace: testing-api
+  labels:
+    type: database
+  annotations:
+    tech: piton
+
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: api-pods ##samain sama replicated
+  template:
+    metadata:
+      name: api-pods #replica name
+      # namespace: TestingGo ##willnot work
+
+      labels:
+        name: api-pods ##samain sama replicated
+      
+      annotations:
+        # dynatrace.com/inject: "false"
+        dynatrace: enabled
+    spec:
+      containers:
+        - name: main-api
+          image: skripsi_api:otel_instumentation
+          env:
+          #un-comment for override value
+            - name: DBiPAddress
+              value: "testing-api-db-service.testing-api.svc.cluster.local"
+            - name: DBPort
+              value: "30002"
+            # - name: DBName
+              # value: "skripsi"
+            # - name: DBusername
+              # value: "skripsiDimas"
+            # - name: DBpassword
+              # value: "skripsi123"
+
+            # - name: ApiPAddress
+            #   value: "127.0.0.1"
+            - name: ApiPort
+              value: "5000"
+            # - name: ApiReload
+              # value: "False"
+            # - name: ApiWorker
+              # value: "50"
+
+
+          ports:
+            - containerPort: 5000
+          resources:
+            requests:
+              cpu: 1000m
+              memory: 1Gi
+            limits:
+              cpu: 2000m
+              memory: 2Gi
+    
+
+
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: testing-api-api-service
+  namespace: testing-api
+spec:
+  type: LoadBalancer
+  selector:
+    name: api-pods
+  ports:
+    - port: 30000 ##ini yang penting
+      targetPort: 5000 ##port container
+      # nodePort: 30099 ##kalau node 
+

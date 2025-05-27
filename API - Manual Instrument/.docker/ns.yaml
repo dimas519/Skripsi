@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: testing-api
+
+#   Error from server (BadRequest): error when creating ".\\ns.yaml": Namespace in version "v1" cannot be handled as a Namespace: strict decoding error: unknown field "labels"
+# labels:
+#   dynatrace: enabled
+
+
+  ##Error from server (BadRequest): error when creating ".\\ns.yaml": Namespace in version "v1" cannot be handled as a Namespace: strict decoding error: unknown field "annotations"
+# annotations:   
+#dynatrace: enabled
+
